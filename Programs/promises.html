@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Promises Example</title>
+    <h1>welcome</h1>
+</head>
+<body>
+    <script>
+        console.log("Promises");
+
+        async function promi()
+        {
+            console.log("Inside method");
+            const responce=await fetch("https://api.github.com/users");
+
+            console.log("before response");
+
+            const users=await responce.json();
+            console.log("user resolved"+ users);
+        }
+
+        let a=promi();
+
+        console.log("Outside method");
+        console.log(a);
+
+        a.then(data=> console.log(data));
+
+        console.log("End Line");
+    </script>
+    
+</body>
+</html>

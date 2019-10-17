@@ -1,0 +1,77 @@
+<html>
+    <head>
+        <script>
+            function addition()
+            {
+                var fn=parseInt(document.getElementById("fnumber").value);
+                var sn=parseInt(document.getElementById("snumber").value);
+                var ans=document.getElementById("answer").value=fn+sn;
+              
+            }     
+        </script>
+        <style>
+            *{
+                margin: auto;
+            }
+            table
+            {
+                padding: 100px;
+                border: 5px dotted;
+                margin: auto;
+        
+            }
+            th
+            {
+                text-align: left;
+                color:maroon;
+            }
+            input
+            {
+                background-color: aliceblue;
+                block-size: 20px;
+            }
+            
+        </style>
+    </head>
+        <title> simple example</title>
+            <body bgcolor="silver">
+                <table>
+                    
+                    <tr>
+                        <th>
+                                First Number
+                        </th>
+                        <th>
+                                : <input type="number" name="firstNumber" id="fnumber">
+                        </th>
+
+                    </tr>
+                    <tr>
+                            <th>
+                                    Second Number
+                            </th>
+                            <th>
+                                    : <input type="number" name="secondNumber" id="snumber">
+                            </th>
+    
+                     </tr>
+                     <tr>
+                         <th colspan="2">
+                            
+                            <input type="button" onclick="addition()" name="Submit" value="Submit">
+                       
+                        </th>
+                     </tr>
+
+               <tr>
+                            <th>
+                                    Answer
+                            </th>
+                            <th>
+                                    : <input type="text" name="answer" id="answer">
+                            </th>
+    
+                     </tr>
+            </table>
+            </body>
+</html>
