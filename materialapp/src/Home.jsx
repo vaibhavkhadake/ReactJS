@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import Button from "@material-ui/core/Button";
 import {Link} from 'react-router-dom'
 import ListDemo from './ListDemo';
-import Calculator from './Component/Calculator';
+// import Calculator from './Component/Calculator';
+import TemperatureInput from './Component/TemperatureInput';
 
 var array=[1,2,3,4,5,6,7];
 
@@ -24,7 +25,8 @@ class Home extends Component {
           <h4>Login Successfully</h4>
           <Button variant="contained" color="secondary" onClick={this.logout} >Logout</Button>
           <ListDemo menuitems={array} />
-          <Calculator/>
+          {/* <Calculator/> */}
+          <TemperatureInput />
         </div>
     );
   }

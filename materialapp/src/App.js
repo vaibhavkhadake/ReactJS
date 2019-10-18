@@ -5,24 +5,28 @@ import Register from './Register';
 import Home from './Home';
 import Login from './Login';
 import Calculator from './Component/Calculator';
+import NameProps from './Component/NameProps';
+import NameClassProps from './Component/NameClassProps';
 
 
 function App() {
    return (
 
-      <Router>
-      <div>
+      <NameClassProps name="Amit"/>
+     
+   //    <Router>
+   //    <div>
 
       
-     <Switch>
-        <Route path="/" component={Register}  exact={true} />
-        <Route path="/Home" component={Home} />
-        <Route path="/Login" component={Login} />
-        <Route path="/Component/Calculator" component={Calculator}/>
-      </Switch>
+   //   <Switch>
+   //      <Route path="/" component={Register}  exact={true} />
+   //      <Route path="/Home" component={Home} />
+   //      <Route path="/Login" component={Login} />
+   //      <Route path="/Component/Calculator" component={Calculator}/>
+   //    </Switch>
       
-         </div>
-    </Router>
+   //       </div>
+   //  </Router>
 
 
    );

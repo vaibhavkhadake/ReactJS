@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from "@material-ui/core/Button";
 import {Link} from 'react-router-dom'
-
+import './Register.css'
 class Register extends Component {
     constructor(props) {
         super(props)
@@ -101,7 +101,6 @@ class Register extends Component {
 
         return (
             <div>
-               
 
                 <h2>Registration Form </h2>
                 <form method="get" name="registerForm">

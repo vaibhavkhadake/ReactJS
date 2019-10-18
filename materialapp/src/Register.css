@@ -1,0 +1,12 @@
+*
+{
+    margin: auto;
+    padding: 5px;
+    
+}
+.ErrorMessage{
+    color: red;
+}
+.registerForm{
+    color: aqua;
+}
