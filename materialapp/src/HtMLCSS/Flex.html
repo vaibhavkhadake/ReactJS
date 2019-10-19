@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        @media(min-width: 768px)
+        {
+            .container
+    {
+        display: flex;
+        margin: 10px;
+       
+    }
+    .container2
+    {
+        display: flex;
+        flex-direction: column;
+        border: solid;
+        margin: 5px;
+        
+       
+    }
+
+        }
+    
+    .container div,.container2 div
+    {
+        border: solid;
+        
+    }
+    
+    .box1
+    {
+        flex: 2;
+        order: 2;
+        color: darkcyan;
+        font-family: 'Times New Roman', Times, serif;
+        align-items: flex-end;
+        /* width: 250px; */
+        font-size: 30px;
+        margin: 10px;
+       
+    }
+    .box2
+    {
+        flex: 2;
+        order:1;
+        color: darkblue;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        align-items: center;
+        height: 100px;
+       
+        
+    }
+    .box3
+    {
+        flex: 1;
+        order:3;
+        font-size: larger;
+        align-items: flex-end;
+        height: 180px;
+    }
+    
+    </style>
+    <title>Flex examples</title>
+</head>
+<body>
+    <div class="container">
+        <div class="box1">
+            <h2>Box 1</h2>
+            <p >This is Box Number 1
+                    Box is a secure, cloud-based, commercial file storage, sharing, and collaboration service. ... Because Penn State is a member of Internet2, the University can take advantage of enterprise Box accounts.
+            </p>
+        </div>
+        <div class="box2">
+                <h2>Box 2</h2>
+                <p>This is Box Number 2</p>
+            </div>
+
+        <div class="box3">
+                    <h2>Box 3</h2>
+                    <p>This is Box Number 3</p>
+                </div>
+
+
+
+    </div>
+
+    <div class="container2">
+            <div class="box4">
+                <h2>Box 1</h2>
+                <p style="color:lightcoral" >This is Box Number 1
+                        Box is a secure, cloud-based, commercial file storage, sharing, and collaboration service. ... Because Penn State is a member of Internet2, the University can take advantage of enterprise Box accounts.
+                </p>
+            </div>
+            <div class="box5">
+                    <h2>Box 2</h2>
+                    <p>This is Box Number 2</p>
+                </div>
+    
+            <div class="box6">
+                        <h2>Box 3</h2>
+                        <p>This is Box Number 3</p>
+                    </div>
+    
+    
+    
+        </div>
+
+    
+</body>
+</html>

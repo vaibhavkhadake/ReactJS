@@ -12,7 +12,7 @@ class StateClass extends Component
              newmessaage: this.props.nmessage
          })
     }
-  
+    
     render()
     {
         return(
