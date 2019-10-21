@@ -12,6 +12,9 @@ import MouseHover from './Component/MouseHover';
 import ClickCounter2 from './Component/ClickCounter2';
 import MouseHover2 from './Component/MouseHovor2';
 import RenderProps from './Component/RenderProps';
+import Ref from './Component/Ref';
+import FocusInputRef from './Component/FocusInputRef';
+import ForwordParentComponentRef from './Component/ForwordParentComponebtRef';
 
 
 function App() {
@@ -24,7 +27,7 @@ function App() {
       <MouseHover2/> */}
       {/* <RenderProps render={(isLoggedIn)=>isLoggedIn ? 'Vaibhav' : 'Guest' }/> */}
 
-      <RenderProps 
+      {/* <RenderProps 
       render={
          (count , incrementCount)=>
          (
@@ -39,7 +42,11 @@ function App() {
             <MouseHover2 count={count} incrementCount={incrementCount} />
          )
       }
-      />
+      /> */}
+
+      {/* <Ref/> */}
+      {/* <FocusInputRef/> */}
+      <ForwordParentComponentRef />
       </div>
      
    //    <Router>
