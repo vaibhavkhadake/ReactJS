@@ -80,8 +80,8 @@ class GooglePassword extends Component
                     />
                      <div className="ErrorMessage">{this.state.error.password}</div>
                     <br />
-                    { <Link to={'/ForgetPassword'} className="nav-link">Forget Password </Link> } <br /> <br />
-                     <Button className="registerButton"  variant="contained" color="primary" onClick={this.submitForm} > Next</Button>
+                    { <Link to={'/GoogleForgetPassword'} className="nav-link">Forget Password </Link> } <br /> <br />
+                     <Button className="registerButton"  variant="contained" color="primary" onClick={this.submitForm} > Next </Button>
 
              </div>
         )

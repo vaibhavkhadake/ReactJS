@@ -9,51 +9,62 @@ class GoogleLogin extends Component
     constructor(props) {
         super(props)
         this.state = {
-           mobileNumber: '',
-           error:{}
+            field: {},
+            error: {}
         }
-        // this.handleChange = this.handleChange.bind(this);
-        // this.submitForm = this.submitForm.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.submitForm = this.submitForm.bind(this);
     };
-   handleChange=(event)=>{
-       this.setState(
-           {
-               mobileNumber:event.target.value
-           }
-       )
-   }
-   submitForm=(event)=>{
+    
 
-    event.preventDefault();
-    if (this.isValid()) {
-        let field = {};
-        
-        field["mobileNumber"] = "";
-        this.setState({ mobileNumber: field})
-        this.props.history.push('/GooglePassword')
-   }
-}
-
-   isValid()
-   {
-    let field = this.state.mobileNumber;
-    let error = {};
-    let isVal = true;
-
-    if (!field["mobileNumber"]) {
-        isVal = false;
-        error["mobileNumber"] = "Please enter mobile Number";
+    handleChange(event) {
+        let field = this.state.field;
+        field[event.target.name] = event.target.value;
+        this.setState({ field })
     }
-    if (typeof field["mobileNumber"] !== "undefined") {
-        if (!field["mobileNumber"].match(/^[789][0-9]{9}$/)) {
-            isVal = false;
-            error["mobileNumber"] = "Please enter valid mobile number ";
+
+    submitForm(event) {
+        event.preventDefault();
+        if (this.isValid()) {
+            let field = {};
+            
+            field["mobileNumber"] = "";
+           
+            this.setState({ field: field})
+            console.log(field);
+
+
+            this.props.history.push('/GooglePassword')
         }
-    }
-    return isVal;
+
     }
 
+    isValid() {
+        let field = this.state.field;
+        let error = {};
 
+        let isVal = true;
+
+        
+
+        if (!field["mobileNumber"]) {
+            isVal = false;
+            error["mobileNumber"] = "Please enter mobile Number";
+        }
+        if (typeof field["mobileNumber"] !== "undefined") {
+            if (!field["mobileNumber"].match(/^[789][0-9]{9}$/)) {
+                isVal = false;
+                error["mobileNumber"] = "Please enter valid mobile number ";
+            }
+        }
+
+        
+
+        this.setState({
+            error: error
+        })
+        return isVal;
+    }
 
 
 
@@ -89,12 +100,12 @@ render()
                     <div className="ErrorMessage">{this.state.error.mobileNumber}</div>
 
                    <br/><br/>
-                    <h5>Not your computer? Use Guest mode to sign in privately.</h5>
+                    <h4>Not your computer? Use Guest mode to sign in privately.</h4>
                     { <Link to={'/LearnMore'} className="nav-link">Learn More </Link> }<br/><br/><br/><br/>
 
                     { <Link to={'/CreateAccount'} className="createAccount" > Create Account </Link> }
 
-                    <Button className="registerButton"  variant="contained" color="primary" onClick={this.submitForm} > Next</Button>
+                    <Button className="registerButton"  variant="contained" color="primary" onClick={this.submitForm} > Next </Button>
                     <br/>
 
 

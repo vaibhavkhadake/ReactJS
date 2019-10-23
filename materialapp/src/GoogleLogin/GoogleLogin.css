@@ -6,7 +6,7 @@
     top: 10%;
     left:30%;
     background-color: white;
-    border: 5px silver solid;
+    border: 2px silver solid;
     height: 80%;
     width:35%;
    
@@ -21,12 +21,13 @@
     padding: 10px;
    
 }
-.registerButton
+.registerButton1
 {
 
     float: right;
     right: 100px;
     font-size: 20px;
     margin: 10px;
-    padding: 10px;
+    width: 500px;
+    /* padding: 10px; */
 }
