@@ -1,0 +1,16 @@
+h1{
+     text-align: center;
+     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+     font-size: 25px;
+     color:blue;
+     font-weight: 700;
+}
+.header{
+    background-color: #708090;
+    border: 2px red solid;
+    border-top-style: dotted;;
+   
+}
+body{
+background-color:mistyrose;
+}

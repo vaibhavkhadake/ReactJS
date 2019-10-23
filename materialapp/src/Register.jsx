@@ -3,6 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from "@material-ui/core/Button";
 import {Link} from 'react-router-dom'
 import './Register.css'
+
 class Register extends Component {
     constructor(props) {
         super(props)
@@ -100,7 +101,8 @@ class Register extends Component {
     render() {
 
         return (
-            <div>
+            <div className="container">
+            <div className="register">
 
                 <h2>Registration Form </h2>
                 <form method="get" name="registerForm">
@@ -156,13 +158,13 @@ class Register extends Component {
                     <br/>
                     <br/>
 
-                    <Link to={'/Login'} className="nav-link"> Already Register Click here to Login</Link>
+                    <Link to={'/Login'} className="nav-link"> Already Register?  Click here </Link>
           
 
                 </form>
             </div>
 
-
+            </div>
         )
     }
 }

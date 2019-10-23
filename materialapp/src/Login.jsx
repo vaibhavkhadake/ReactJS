@@ -2,6 +2,7 @@ import React ,{Component} from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from "@material-ui/core/Button";
 import {Link} from 'react-router-dom'
+import './login.css'
 class Login extends Component
 {
     constructor(props) {
@@ -75,8 +76,10 @@ class Login extends Component
     render()
     {
         return(
-            <div>
-
+            <body>
+           <div class="container">
+                <div className="loginForm">
+                    
                 <h2>Login Form</h2>
         <TextField required
         //id="standard-required"
@@ -105,12 +108,16 @@ class Login extends Component
       <div className="ErrorMessage">{this.state.error.password}</div>
        <br/>
 
-      <Button variant="contained" color="inherit" onClick={this.submitForm} >Login</Button>
+      <Button style={{color:"blue"}} variant="contained" color="inherit" onClick={this.submitForm} >Login</Button>
       <br/>
       <br/>
+      <Link to={'/ForgetPassword'} className="nav-link"> Forgot Password </Link><br/><br/>
       <Link to={'/'} className="nav-link"> Click here to Register New User </Link>
             </div>
 
+
+     </div> 
+     </body>    
 
         )
     }

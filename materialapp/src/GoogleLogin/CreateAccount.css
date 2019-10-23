@@ -1,0 +1,22 @@
+.container
+{
+    
+    position: absolute;
+    text-align: left;
+    top: 10%;
+    left:15%;
+    background-color: white;
+    border: 5px silver solid;
+    height: 80%;
+    width:70%;
+   
+
+}
+.registerButton
+{
+    left: 50px;
+    font-size: 20px;
+    margin: 10px;
+    padding: 10px;
+    float: left;
+}
