@@ -83,25 +83,29 @@ render()
     return(
         <div className="main">
         <div className="forgot">
+        <h2 ><span style={{color:'blue'}}>G</span>
+                <span style={{color:'red'}}>O</span>
+                <span style={{color:'goldenrod'}}>O</span>
+                <span style={{color:'blue'}}>G</span>
+                <span style={{color:'green'}}>L</span>
+                <span style={{color:'red'}}>E</span></h2>
+                <br/>
             <h2 style={{color:"red"}}>Change Password</h2>
              <TextField required
-                        //id="standard-password-input"
-                        label="Password"
-                        //className={classes.textField}
+                       
                         type="password"
                         placeholder="Enter Password"
-                        autoComplete="current-password"
                         name="password"
                         value={this.state.field.password}
                         onChange={this.handleChange}
-                        margin="normal"
+                        margin="dense"
+                        variant="outlined"
+                        fullWidth="10px"
                     />
                     <div className="ErrorMessage">{this.state.error.password}</div>
                     <br />
                     <TextField required
-                        //id="standard-password-input"
-                        label="RePassword"
-                        //className={classes.textField}
+                        
                         type="password"
                         placeholder="Enter RePassword"
                         autoComplete="current-password"

@@ -111,106 +111,110 @@ class CreateAccount extends Component{
     render()
     {
         return(
-            <div className="mainContainer">
-                 <div className="container">
-                <h2 align="center" ><span style={{color:'blue'}}>G</span>
+            <div className="mainContainer10">
+                 <div className="container10">
+                <h2 align="left" ><span style={{color:'blue'}}>G</span>
                 <span style={{color:'red'}}>O</span>
                 <span style={{color:'yellow'}}>O</span>
                 <span style={{color:'blue'}}>G</span>
                 <span style={{color:'green'}}>L</span>
                 <span style={{color:'red'}}>E</span></h2>
                 <br/>
-                <h2 style={{color:'brown'}} align="center">Create your Google Account</h2>
-
-                <div className="name">
+                <br/>
+                <h2 style={{color:'brown'}} align="left">Create your Google Account</h2>
+                <br/>
+                <br/>
+              
+                    <div className="fname10">
+                    <TextField
+                        placeholder="Enter First Name"
+                        name="firstName"
+                        value={this.state.field.firstName}
+                        onChange={this.handleChange}
+                        margin="dense"
+                        variant="outlined"
+                       
+                    />
+                    <br/>
+                     <span className="ErrorMessage">{this.state.error.firstName}</span>
+       
+                    </div>
                     
-                <TextField
-        id="outlined-name"
-        label="First Name"
-        placeholder="Enter First Name"
-        name="firstName"
-        value={this.state.field.firstName}
-        onChange={this.handleChange}
-        margin="normal"
-        variant="outlined"
-        
-      />
-       
-     
-     <TextField
-        id="outlined-name"
-        label="Last Name"
-                        name="lastName"
-                        placeholder="Enter Last Name"
-                        value={this.state.field.lastName}
-                        onChange={this.handleChange}
-                        margin="normal"
-        variant="outlined"
-    
-      />
-      <span className="ErrorMessage">{this.state.error.firstName}</span>
-      <span className="ErrorMessage">{this.state.error.lastName}</span>
-      
-      </div>
-      
-        <div className="mobileNumberwidth">
-      <TextField
-        id="outlined-name"
-        label="Mobile Number"
-                        name="mobileNumber"
-                        placeholder="Enter Mobile Number "
-                        value={this.state.field.mobileNumber}
-                        onChange={this.handleChange}
-        margin="normal"
-        variant="outlined"
-         fullWidth="5px"
-      />
-       <span className="ErrorMessage">{this.state.error.mobileNumber}</span>
-      </div>
-     
-      
-     <div className="password">
-     
-     <TextField
-        id="outlined-password-input"
-        label="Password"
-       
-        type="password"
-        name="password"
-        value={this.state.field.password}
-        onChange={this.handleChange}
-        margin="normal"
-        variant="outlined"
-      />
-         <TextField
-        id="outlined-password-input"
-        label="Re-Type-Password"
-       
-        type="password"
-        name="repassword"
-        value={this.state.field.repassword}
-        onChange={this.handleChange}
-        autoComplete="current-password"
-        margin="normal" 
-        variant="outlined"
-      />
-       <span className="ErrorMessage">{this.state.error.password}</span>
-       <span className="ErrorMessage">{this.state.error.repassword}</span>
-               </div>     
-                 
-     
-     <div  className="registerButton2" >
+                <div className="lname10">
+                    <TextField
+                    
+                    name="lastName"
+                    placeholder="Enter Last Name"
+                    value={this.state.field.lastName}
+                    onChange={this.handleChange}
+                    margin="dense"
+                    variant="outlined"
+                     />
+                     <br/>
+                      <span className="ErrorMessage">{this.state.error.lastName}</span>
+                </div>
 
-<Button variant="contained" color="primary" onClick={this.submitForm} > Submit </Button>
-</div> 
- </div>
-            <div className="image">
+                
+                
+      
+      
+        <div className="mobileNumberwidth10">
+                <TextField
+                    name="mobileNumber"
+                    placeholder="Enter Mobile Number "
+                    value={this.state.field.mobileNumber}
+                    onChange={this.handleChange}
+                    margin="dense"
+                    variant="outlined"
+                    fullWidth="5px"
+                />
+                <br/>
+                <span className="ErrorMessage">{this.state.error.mobileNumber}</span>
+        </div>
+        
+      
+         <div className="password10">
+     
+                <TextField
+                    type="password"
+                    placeholder="Enter Password "
+                    name="password"
+                    value={this.state.field.password}
+                    onChange={this.handleChange}
+                    margin="dense"
+                    variant="outlined"
+                />
+                 <br/>
+                 <span className="ErrorMessage">{this.state.error.password}</span>
+           </div>
+            <div className="repassword10">
+                <TextField
+                type="password"
+                placeholder="Enter Re-Password "
+                name="repassword"
+                value={this.state.field.repassword}
+                onChange={this.handleChange}
+                margin="dense" 
+                variant="outlined"
+             />
+           <br/>
+            <span className="ErrorMessage">{this.state.error.repassword}</span>
+         </div>     
+         
+              
+     <div  className="registerButton20" >
+
+        <Button variant="contained" color="primary" onClick={this.submitForm} > Submit </Button>
+         </div> 
+     </div> 
+            <div className="image10">
                 
                 <img src={Account} alt="Smiley face" height="75%" width="150%"/>
+                <pre align="center"> One account. 
+                All of Google working for you.</pre>
             </div>
 
-</div>
- 
+    </div>
      
         )
     }

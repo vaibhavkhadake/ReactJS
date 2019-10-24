@@ -62,7 +62,15 @@ class GooglePassword extends Component
     {
         return(
             <div className="container2">
-                 <h2 style={{color:'red'}}>Google</h2>
+                <br/>
+             
+                <h2><span style={{color:'blue'}}>G</span>
+                <span style={{color:'red'}}>O</span>
+                <span style={{color:'goldenrod'}}>O</span>
+                <span style={{color:'blue'}}>G</span>
+                <span style={{color:'green'}}>L</span>
+                <span style={{color:'red'}}>E</span></h2>
+                
                 <br/>
                 <h1>Welcome</h1>
                 <br/>
@@ -75,7 +83,10 @@ class GooglePassword extends Component
                         name="password"
                         value={this.state.field.password}
                         onChange={this.handleChange}
-                        margin="normal"
+                        margin="dense"
+                        variant="outlined"
+                        fullWidth="10px"
+                        
                         
                     />
                      <div className="ErrorMessage">{this.state.error.password}</div>

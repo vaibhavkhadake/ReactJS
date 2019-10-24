@@ -12,6 +12,9 @@ import GooglePassword from './GoogleLogin/GooglePassword';
 import CreateAccount from './GoogleLogin/CreateAccount';
 import ForgetPassword from './GoogleLogin/ForgetPassword';
 import GoogleForgetPassword from './GoogleLogin/GoogleForgetPassword';
+import DashboardHome from './Dashboard/DashboardHome';
+import Demo from './GoogleLogin/Demo';
+
 // import NameProps from './Component/NameProps';
 // import NameClassProps from './Component/NameClassProps';
 // import ClickCounter from './Component/ClickCounter';
@@ -77,22 +80,22 @@ function App() {
       </div> 
     </Router>  */}
 
-
-    <Router>
-       <div>
-
-{/* <GoogleForgetPassword/> */}
-          <switch>
-          <Route path="/GoogleLogin" component={GoogleLogin}  exact={true} />
-          <Route path="/LearnMore" component={LearnMore} />
-          <Route path="/GooglePassword" component={GooglePassword} />
-          <Route path="/CreateAccount" component={CreateAccount} />
+ <Router>
+        <div>
+           <switch>
+           <Route path="/GoogleLogin" component={GoogleLogin}  exact={true} />
+           <Route path="/LearnMore" component={LearnMore} />
+        <Route path="/GooglePassword" component={GooglePassword} />
+           <Route path="/CreateAccount" component={CreateAccount} />
           <Route path="./ForgetPassword" component={ForgetPassword}/>
-          <Route path="./GoogleForgetPassword" component={GoogleForgetPassword}/>
+           <Route path="./GoogleForgetPassword" component={GoogleForgetPassword}/>
           </switch>
-       </div>
+        </div>
       
-    </Router>
+  </Router>
+     
+
+   {/* <Demo/> */}
 
 </div>
    );
