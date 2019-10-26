@@ -1,3 +1,5 @@
+@media(min-width: 768px)
+{
 .container1
 {
     
@@ -62,4 +64,5 @@
     display: flex;
     
    
+}
 }
