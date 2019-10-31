@@ -1,52 +1,35 @@
 import React, { Component } from 'react'
-import { makeStyles } from '@material-ui/core/styles';
+
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu'
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-  },
-}));
+import './Dashboard.css'
 
 class DashboardHome extends Component {
-  constructor() {
-    super()
-    this.state = {
-
-    }
-  }
-
-
+ 
   render() {
-    const classes = useStyles();
+    
     return (
 
-      <div className={classes.root}>
-
-        <AppBar position="static">
-          <Toolbar>
-            <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+      <div >
+        <div className="dashboard">
+        <AppBar position="static" >
+          <Toolbar className="button">
+            <IconButton color="inherit" >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" className={classes.title}>
-              News
-              </Typography>
-            <Button color="inherit">Login</Button>
+            <h2 className="news">News</h2>
+            <Button className="button" color="inherit">Login</Button>
           </Toolbar>
-        </AppBar>
+        </AppBar >
+        <button className="button">DemoButton</button>
+      </div>
       </div>
     )
   }
 }
 export default DashboardHome
+// 8726348652

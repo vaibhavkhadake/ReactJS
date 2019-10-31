@@ -5,7 +5,6 @@ import Register from './Register';
 import Home from './Home';
 import Login from './Login';
 import Calculator from './Component/Calculator';
-
 import GoogleLogin from './GoogleLogin/GoogleLogin';
 import LearnMore from './GoogleLogin/LearnMore';
 import GooglePassword from './GoogleLogin/GooglePassword';
@@ -82,20 +81,20 @@ function App() {
 
  <Router>
         <div>
-           <switch>
+           <Switch>
            <Route path="/GoogleLogin" component={GoogleLogin}  exact={true} />
            <Route path="/LearnMore" component={LearnMore} />
-        <Route path="/GooglePassword" component={GooglePassword} />
+            <Route path="/GooglePassword" component={GooglePassword} />
            <Route path="/CreateAccount" component={CreateAccount} />
-          <Route path="./ForgetPassword" component={ForgetPassword}/>
-           <Route path="./GoogleForgetPassword" component={GoogleForgetPassword}/>
-          </switch>
+          {/* <Route path="./ForgetPassword" component={ForgetPassword}/> */}
+           <Route path="/GoogleForgetPassword" component={GoogleForgetPassword}/>
+          </Switch>
         </div>
       
   </Router>
      
 
-   {/* <Demo/> */}
+  {/* <DashboardHome/> */}
 
 </div>
    );

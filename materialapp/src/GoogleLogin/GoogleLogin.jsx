@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from "@material-ui/core/Button";
 import {Link} from 'react-router-dom'
 
+
 class GoogleLogin extends Component
 {
     constructor(props) {
@@ -20,11 +21,15 @@ class GoogleLogin extends Component
     handleChange(event) {
         let field = this.state.field;
         field[event.target.name] = event.target.value;
+       
         this.setState({ field })
+       // console.log(field);
+        
     }
 
     submitForm(event) {
         event.preventDefault();
+          console.log("Login page",this.state.field);
         if (this.isValid()) {
             let field = {};
             
@@ -32,8 +37,6 @@ class GoogleLogin extends Component
            
             this.setState({ field: field})
             console.log(field);
-
-
             this.props.history.push('/GooglePassword')
         }
 

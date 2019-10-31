@@ -1,12 +1,12 @@
-@media(min-width: 768px) {
-
+@media screen and (min-width: 786px)  {
+ 
     .mainContainer10
     {
         
         position: absolute;
         text-align: left;
         top: 5%;
-        left:15%;
+        left:13%;
         right: 15%;
         background-color:white;
         border: 2px silver solid;
@@ -16,6 +16,7 @@
         margin: 0;
         flex-wrap: wrap;
     }
+
     .container10
     {
         
@@ -37,6 +38,7 @@
         margin-right: 20px;
         
     }
+   
     .image10 
     {
         height:80%;
@@ -47,6 +49,7 @@
         padding-right:10% ;
        
     }
+
     .registerButton10
     {
         font-size: 20px;
@@ -84,9 +87,10 @@
         margin-right: 20px;
     }
     
+}
+
     
     
     
     
-    
-    }
+  

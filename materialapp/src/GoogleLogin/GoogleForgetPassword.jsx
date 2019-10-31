@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React,{Component} from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from "@material-ui/core/Button";
-import './forgetPassword.css'
-import {Link} from 'react-router-dom'
+import './GoogleForgetPassword.css'
+
 
 class GoogleForgetPassword extends Component
 {
@@ -12,6 +12,7 @@ class GoogleForgetPassword extends Component
             field: {},
             error: {}
         }
+        console.log("hii");
         this.handleChange = this.handleChange.bind(this);
         this.submitForm = this.submitForm.bind(this);
     };
@@ -31,7 +32,8 @@ class GoogleForgetPassword extends Component
             
             this.setState({ field: field})
             console.log(field);
-            this.props.history.push('/GoogleLogin')
+            this.props.history.push('/GoogleLogin');
+
         }
 
     }
@@ -53,13 +55,17 @@ class GoogleForgetPassword extends Component
         }
         if (!field["repassword"]) {
             isVal = false;
-            error["repassword"] = "Please enter Password";
+            error["repassword"] = "Please enter Re-Password";
         }
         if (typeof field["repassword"] !== "undefined") {
             if (!field["repassword"].match(/^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\w!@#$%^&*]{7,20}$/)) {
                 isVal = false;
                 error["repassword"] = "Please enter proper password minimum 8 digits";
             }
+        }
+        if ( field["password"] !== field["repassword"]) {
+            isVal=false;
+            error["repassword"]="Password and Repassword not matched "
         }
 
         this.setState({
@@ -73,7 +79,8 @@ render()
     return(
         
             
-                 <div className="container">
+                 <div className="containerforgot">
+
                 <h2 align="center" ><span style={{color:'blue'}}>G</span>
                 <span style={{color:'red'}}>O</span>
                 <span style={{color:'yellow'}}>O</span>
@@ -86,43 +93,44 @@ render()
                
      
       
-     <div className="password">
+     <div className="forgetpassword">
      
      <TextField
-        id="outlined-password-input"
-        label="Password"
-       
         type="password"
         name="password"
+        placeholder="Enter Password"
         value={this.state.field.password}
         onChange={this.handleChange}
         margin="normal"
         variant="outlined"
       />
+      <br/>
+      <span className="ErrorMessage">{this.state.error.password}</span>
+      <br/>
          <TextField
-        id="outlined-password-input"
-        label="Re-Type-Password"
-       
         type="password"
         name="repassword"
+        placeholder="Enter Re-Password"
         value={this.state.field.repassword}
         onChange={this.handleChange}
         autoComplete="current-password"
         margin="normal" 
         variant="outlined"
       />
-       <span className="ErrorMessage">{this.state.error.password}</span>
+      <br/>
        <span className="ErrorMessage">{this.state.error.repassword}</span>
-               </div>     
+              
                  
      
      <div  className="registerButton2" >
 
-<Button variant="contained" color="primary" onClick={this.submitForm} > Submit </Button>
-</div> 
+        <Button variant="contained" color="primary" onClick={this.submitForm} > Submit </Button>
+        </div> 
+        </div>     
+
  </div>
 
     )
 }
 }
-export default GoogleForgetPassword
+export default GoogleForgetPassword;

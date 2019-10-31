@@ -1,0 +1,67 @@
+.loginbutton{
+    float: right;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px; 
+}
+.searchIcon {    
+    /* height:100px; */
+    float: left;
+}
+  .search{
+     
+      background-color: white;
+      font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+      font-size: 15px;
+      margin-left:150px ;
+      width: 240px;
+      border: 2px silver;
+  }  
+ 
+
+    
+
+.appBar{
+    padding:0;
+    margin:0;
+}
+
+.refreshIcon
+{
+    margin-left: 400px;
+    margin-right: 20px;  
+  
+}
+.dragHandleIcon
+{
+    margin-right: 20px;  
+    margin-left: 20px;
+ }
+ .settingsIcon
+ {
+    margin-left: 20px;
+ }
+ .appsIcon{
+     margin-left: 50px;
+     margin-right: 20px;
+ }
+
+ .accountCircle{
+     
+    margin-left:30px ;
+    
+}
+
+/* .lebels
+{
+    padding: 20px;
+    float: left;
+    
+} */
+
+.drawer
+{
+    margin:10px;
+    width: 100px;
+    display: flex;
+    flex-direction: column;
+}

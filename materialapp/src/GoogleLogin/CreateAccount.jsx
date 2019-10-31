@@ -1,7 +1,8 @@
 import React,{Component} from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from "@material-ui/core/Button";
-import Account from './account.svg'
+import Account from './account.svg';
+import axios from 'axios';
 
 import './CreateAccount.css'
 
@@ -35,7 +36,20 @@ class CreateAccount extends Component{
             field["repassword"] = "";
             
             this.setState({ field: field})
-            console.log(field);
+            let data={
+                "username":"9503359498",
+                "password":"Vaibhav@1234"
+            }
+            console.log(data);
+            axios
+            .post('http://fundoonotes.incubation.bridgelabz.com/api/user/login',data)
+            .then(response=>{
+                console.log(response)
+            })
+            .catch(err=>
+                {
+                    console.log("Error in CreateAccount",err);
+                })
             this.props.history.push('/GoogleLogin')
         }
 
@@ -186,6 +200,9 @@ class CreateAccount extends Component{
                 />
                  <br/>
                  <span className="ErrorMessage">{this.state.error.password}</span>
+                 
+                 <br/>
+
            </div>
             <div className="repassword10">
                 <TextField
@@ -209,7 +226,7 @@ class CreateAccount extends Component{
      </div> 
             <div className="image10">
                 
-                <img src={Account} alt="Smiley face" height="75%" width="150%"/>
+                <img src={Account} alt="Smiley face" height="75%" width="100%"/>
                 <pre align="center"> One account. 
                 All of Google working for you.</pre>
             </div>
