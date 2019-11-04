@@ -1,128 +1,181 @@
 import React,{Component} from 'react'
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import Tooltip from '@material-ui/core/Tooltip';
 import AppsIcon from '@material-ui/icons/Apps';
 import RefreshIcon from '@material-ui/icons/Refresh';
-import SettingsIcon from '@material-ui/icons/Settings';
+import { Paper} from '@material-ui/core'
 import DragHandleIcon from '@material-ui/icons/DragHandle';
-import CreateIcon from '@material-ui/icons/Create';
-import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
+import DragIndicatorSharpIcon from '@material-ui/icons/DragIndicatorSharp';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import CloudDoneIcon from '@material-ui/icons/CloudDone';
 import './Dashboard.css';
 import Keep from "./keep_48dp.png";
+import Drawer2 from './Drawer2';
+import ImageLogo from './ImageLogo';
+import { createMuiTheme } from '@material-ui/core/styles';
+import {MuiThemeProvider} from '@material-ui/core';
+import TakeANote from './TakeANote';
 
-import Drawer from '@material-ui/core/Drawer';
+
+  const theme = createMuiTheme({
+  overrides:{
+    MuiExpansionPanelSummary:{ 
+      content:{
+        margin:'0',
+        padding:'0',
+        color:'silver'
+
+  }},
+  MuiAppBar:{
+    colorDefault: {
+      backgroundColor:'white'
+    }
+  }
+}
+});
 
 
 
-import List from '@material-ui/core/List';
-
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
-
-const drawerWidth = 240;
 class Dashboard extends Component
 {
+  constructor(props){
+    super(props)
+    this.state={
+      open:true,
+      list:true,
+      refreshIcon:true,
+       settingIcon:false,
+       imagelogo:false,
+       note:true
+    }
+  }
+
+  handleImageLogo=()=>{
+
+    this.setState({ note: !this.state.note });
+
+  }
+  handleRefreshIcon=()=>{
+
+    this.setState({ refreshIcon: !this.state.refreshIcon });
+
+  }
+  handleListView=()=>{
+
+    this.setState({ list: !this.state.list });
+
+  }
+  handlesettingIcon=()=>{
+    console.log("dashbpard setting");
+    
+
+    this.setState({ settingIcon: !this.state.settingIcon });
+
+  }
   
+
+
+  handleDrawerOpen() {    
+    this.setState({ open: !this.state.open });
+  }
     
     render()
     {
-     
         return(
           <div>
+           
                 <div className="appBar">
+                <MuiThemeProvider theme={theme}>
                 <AppBar position="fixed" color="default" >
                   <Toolbar>
-                  <IconButton edge="start"  color="inherit" aria-label="menu"> 
+                  <Drawer2 open={this.state.open}/>
+                  <IconButton edge="start"  color="inherit" aria-label="menu" onClick={()=>this.handleDrawerOpen()} > 
                   <MenuIcon />
                   </IconButton>
+                  <div className="keepimage">
                   <img src={Keep} alt="smiely face "/>
-                            <h2> Keep </h2>
-            
+                  </div>
+                  <div className="textkeep">
+                  <h2> Keep </h2>
+                  </div>
+                            
+                  <Paper fullWidth="" style={{float:'right'}}> 
                       <div className="search">
-                      <SearchIcon className="searchIcon"/>
-                      <InputBase placeholder="search" fullWidth="">
+
+                      <div className="searchIcon">
+                       
+                     <SearchIcon className="searchIcon"/>
+                          
+                      <InputBase placeholder="search" fullWidth="" />
                       
-                      </InputBase>
                       </div>
-
+                      </div>
+                      </Paper>
            
-
+                      
                       <div className="refreshIcon">
-                      <RefreshIcon/><br/>
+                      <Tooltip  title="Refresh">
+                      <IconButton onClick={this.handleRefreshIcon}>
+                      <ListItemIcon>{this.state.refreshIcon === true ? <RefreshIcon/> : <CloudDoneIcon />}</ListItemIcon>
+                      </IconButton>
+                      </Tooltip>
                       </div>
 
                       <div className="dragHandleIcon">
-                      <DragHandleIcon/>
+                      <Tooltip  title="View">
+                      <IconButton onClick={this.handleListView}>
+                      <ListItemIcon>{this.state.list === true ? <DragHandleIcon /> : <DragIndicatorSharpIcon />}</ListItemIcon>
+                      </IconButton>
+                      </Tooltip>
                       </div>
 
                       <div className="settingsIcon">
-                      <SettingsIcon/>
+                       
+                      {/* <SettingsIcon /> */}
+                     
+                        {/* <SettingDrawer settingIcon={this.state.settingIcon}/>
+                        <IconButton edge="start"  color="inherit" aria-label="menu" onClick={()=>this.handlesettingIcon()} >
+                        <SettingsIcon />
+                        </IconButton> */}
+                        
+                      
                       </div>    
 
                       <div className="appsIcon">
-                      <AppsIcon/>
+                      <Tooltip  title="Applications">
+                      <IconButton >
+                      <AppsIcon />
+                      </IconButton>
+                      </Tooltip>
                       </div>
 
                       <div className="accountCircle">
-                      <AccountCircleIcon />
+                        <ImageLogo props={this.props}/>
+                        
                       </div>
 
               </Toolbar> 
               </AppBar>
-              </div>
+              </MuiThemeProvider>
+            
+           <div className="search2">
+           <MuiThemeProvider theme={theme}>
+            
+             <TakeANote />
+             
+           
+           </MuiThemeProvider>
+           </div>
 
 
-{/* <div className="lebels"> */}
-
-{/* <NotificationsNoneIcon/> Reminders <br/>
-Labels<br/>
-<CreateIcon/>
-<label> Edit Label </label> */}
-<div  className="drawer" >
-<Drawer variant="permanent">
-    
-        <List>
-          {['Notes', 'Reminder'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {['Edit labels'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-          </List>
-           <Divider />
-        <List>
-          {['Archive','Bin'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-      </Drawer>
-      </div>
-{/* </div> */}
-
-
+              
+</div>
+   
         </div>
         )
     }

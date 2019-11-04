@@ -1,67 +1,116 @@
-.loginbutton{
-    float: right;
-    font-family: 'Times New Roman', Times, serif;
-    font-size: 20px; 
-}
-.searchIcon {    
-    /* height:100px; */
-    float: left;
-}
-  .search{
-     
-      background-color: white;
-      font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-      font-size: 15px;
-      margin-left:150px ;
-      width: 240px;
-      border: 2px silver;
-  }  
- 
+@media all and (min-width: 768px) 
+{
 
+    .appBar
+    {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content:space-between;
+        flex-direction: column;
+    }
+    .keepimage
+    {
+        padding: 5px;
+        padding-right: 10px;
+        
+    }
+    .textkeep
+    {
+        
+        margin-right: 100px;
+    }
+
+ .searchIcon {    
     
+    float: left; 
+ } 
+  .search{
 
-.appBar{
-    padding:0;
-    margin:0;
-}
+     display: flex;
+      
+      background-color:'silver';
+      font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+      width: 500px;
+      
+      border: 2px silver;
+      height: 45px;
+      padding: 2px;
+  }  
 
 .refreshIcon
 {
-    margin-left: 400px;
+    display: flex;
+    justify-content: center;
+    margin-left: 200px;
     margin-right: 20px;  
-  
-}
+} 
 .dragHandleIcon
 {
-    margin-right: 20px;  
-    margin-left: 20px;
+    display: flex;
+    justify-content: space-between;
+    /* margin-right: 10px;  
+    margin-left: 20px; */
+       
  }
- .settingsIcon
+ /* .settingsIcon
  {
-    margin-left: 20px;
- }
- .appsIcon{
-     margin-left: 50px;
-     margin-right: 20px;
+    margin-left: 10px;
+ } */
+  .appsIcon{
+    display: flex;
+    justify-content:space-between;
+     /* margin-left: 50px;
+     margin-right: 20px; */
  }
 
  .accountCircle{
-     
+    display: flex;
+    justify-content: space-between;
     margin-left:30px ;
-    
-}
+} 
 
-/* .lebels
+ .lebels
 {
+    display: flex;
     padding: 20px;
     float: left;
-    
-} */
+}
 
 .drawer
 {
-    margin:10px;
-    width: 100px;
+    margin:50px;
+    padding: 50px;
+    top:50px;
+    width: 500px;
     display: flex;
-    flex-direction: column;
 }
+.search2{
+    display: flex;
+    /* background-color :silver;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; */
+    font-size: 15px;
+    margin-top: 125px;
+    margin-left:450px ;
+    margin-right:200px ;
+    /* width: 400px;
+    border: 2px black; */
+    /* height: 70px; */
+    /* padding:2px; */
+}
+.signoutButton
+{
+    display: flex;
+   font-size: 15px;
+   margin-left: 30px;
+   margin-top: 10px;
+   margin-bottom: 10px;
+   width: 120px;
+  
+   justify-content: center;
+}
+
+
+}
+
+
+

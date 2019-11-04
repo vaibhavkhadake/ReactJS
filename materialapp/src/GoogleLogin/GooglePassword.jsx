@@ -7,7 +7,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 // import SnackbarContent from '@material-ui/core/SnackbarContent';
 // import WarningIcon from '@material-ui/icons/Warning';
 import IconButton from "@material-ui/core/IconButton";
-import axios from 'axios'
+import axios from 'axios';
 
 class GooglePassword extends Component
 {
@@ -60,7 +60,7 @@ class GooglePassword extends Component
                     this.setState({snackbaropen:true ,snackbarmessage:'failed'})
                 })
 
-            this.props.history.push('/LearnMore')
+            // this.props.history.push('/LearnMore')
         }
     }
     isValid() {

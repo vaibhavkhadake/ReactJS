@@ -1,0 +1,21 @@
+.noteMain
+{
+    display: flex;
+    flex-direction: column;
+    width:100%;
+    color: silver;
+}
+.noteLogo
+{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content:space-around;
+}
+.addNote
+{
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+
+}
