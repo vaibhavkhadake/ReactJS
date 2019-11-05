@@ -4,6 +4,9 @@
     flex-direction: column;
     width:100%;
     color: silver;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    padding: 10px;
+    margin: 10px;
 }
 .noteLogo
 {

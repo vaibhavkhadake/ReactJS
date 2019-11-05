@@ -7,6 +7,7 @@ import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Divider from '@material-ui/core/Divider';
 import './ImageLogo.css';
+import { Tooltip } from '@material-ui/core';
 
 class ImageLogo extends Component{
     constructor(props)
@@ -50,8 +51,9 @@ render()
           } >
           <div>
                     <IconButton onClick={(event)=>this.handleClick(event)}>
-                    
+                        <Tooltip title='Image'>
                     <AccountCircleIcon />
+                    </Tooltip>
                     </IconButton>
                     <Card>
                     <Popper open={this.state.open} anchorEl={this.state.anchorEl}>

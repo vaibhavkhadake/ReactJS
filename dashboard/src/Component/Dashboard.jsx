@@ -39,8 +39,6 @@ import TakeANote from './TakeANote';
 }
 });
 
-
-
 class Dashboard extends Component
 {
   constructor(props){
@@ -56,14 +54,11 @@ class Dashboard extends Component
   }
 
   handleImageLogo=()=>{
-
     this.setState({ note: !this.state.note });
-
   }
   handleRefreshIcon=()=>{
 
     this.setState({ refreshIcon: !this.state.refreshIcon });
-
   }
   handleListView=()=>{
 
@@ -72,14 +67,9 @@ class Dashboard extends Component
   }
   handlesettingIcon=()=>{
     console.log("dashbpard setting");
-    
-
     this.setState({ settingIcon: !this.state.settingIcon });
-
   }
   
-
-
   handleDrawerOpen() {    
     this.setState({ open: !this.state.open });
   }
@@ -88,36 +78,30 @@ class Dashboard extends Component
     {
         return(
           <div>
-           
                 <div className="appBar">
                 <MuiThemeProvider theme={theme}>
                 <AppBar position="fixed" color="default" >
                   <Toolbar>
                   <Drawer2 open={this.state.open}/>
-                  <IconButton edge="start"  color="inherit" aria-label="menu" onClick={()=>this.handleDrawerOpen()} > 
+                  <IconButton edge="start"  color="inherit"  onClick={()=>this.handleDrawerOpen()} > 
+                 <Tooltip title="Drawer">
                   <MenuIcon />
+                  </Tooltip>
                   </IconButton>
                   <div className="keepimage">
                   <img src={Keep} alt="smiely face "/>
                   </div>
                   <div className="textkeep">
                   <h2> Keep </h2>
-                  </div>
-                            
+                  </div>       
                   <Paper fullWidth="" style={{float:'right'}}> 
                       <div className="search">
-
-                      <div className="searchIcon">
-                       
-                     <SearchIcon className="searchIcon"/>
-                          
-                      <InputBase placeholder="search" fullWidth="" />
-                      
+                          <div className="searchIcon">
+                            <SearchIcon className="searchIcon"/>
+                             <InputBase placeholder="search" fullWidth="" />
                       </div>
                       </div>
                       </Paper>
-           
-                      
                       <div className="refreshIcon">
                       <Tooltip  title="Refresh">
                       <IconButton onClick={this.handleRefreshIcon}>
@@ -155,20 +139,18 @@ class Dashboard extends Component
                       </div>
 
                       <div className="accountCircle">
-                        <ImageLogo props={this.props}/>
+                        <ImageLogo props={this.props} />
                         
                       </div>
 
               </Toolbar> 
+              
               </AppBar>
               </MuiThemeProvider>
             
            <div className="search2">
            <MuiThemeProvider theme={theme}>
-            
              <TakeANote />
-             
-           
            </MuiThemeProvider>
            </div>
 

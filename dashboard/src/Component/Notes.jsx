@@ -1,43 +1,60 @@
 import React, { Component } from 'react'
 import './Notes.css';
-import { Paper, InputBase,IconButton} from '@material-ui/core'
+import { Paper, InputBase,IconButton, ClickAwayListener} from '@material-ui/core'
 import Tooltip from '@material-ui/core/Tooltip';
-import AddAlertTwoToneIcon from '@material-ui/icons/AddAlertTwoTone';
 import ImageIcon from '@material-ui/icons/Image';
 import UndoIcon from '@material-ui/icons/Undo';
 import RedoIcon from '@material-ui/icons/Redo';
 import PaletteIcon from '@material-ui/icons/Palette';
-import ArchiveIcon from '@material-ui/icons/Archive';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Button from '@material-ui/core/Button';
+import Reminder from './Reminder';
+import Archive from './Archive';
+import More from './More';
+
+// import TakeANote from './TakeANote';
+// import ListItemIcon from '@material-ui/core/ListItemIcon';
 
 
 class Notes extends Component
 {
-    onClickSubmit(){
-        
-        this.props.history.push('/TakeANote');
+    constructor(props)
+    {
+        super(props)
+        this.state={
+            createNote:true
+
+        }
+        this.onClickSubmit=this.onClickSubmit.bind(this);
     }
+    onClickSubmit=()=>{
+
+        this.setState({ createNote: !this.state.createNote });
+        console.log("close button",this.state.createNote);
+        //  this.props.history.push('/TakeANote');
+    }
+    onOutsideclick()
+    {
+    this.setState({
+    createNote: true
+     })
+}
 render()
 {
     return(
+        < ClickAwayListener onClickAway = {
+            () => this.onOutsideclick()
+          } >
         <div className="noteMain">
            
-                <Paper >
+                <Paper>
                     <paper>
                     <InputBase placeholder="Title"/>    
                     </paper>
                     <br/>
                     <InputBase placeholder="Take a note ..." />
                     <br/>
-
                         <div className="noteLogo">
-                        <Tooltip title="Remind Me">
-                            <IconButton onClick={this.props.open}>
-                               <AddAlertTwoToneIcon />
-                            </IconButton>
-                         </Tooltip>
-
+                            <Reminder/>
                          <Tooltip title="Change color">
                             <IconButton>
                                 <PaletteIcon/>
@@ -50,17 +67,9 @@ render()
                             </IconButton>
                          </Tooltip>
 
-                         <Tooltip title="Archive">
-                            <IconButton>
-                                 <ArchiveIcon/>
-                            </IconButton>
-                         </Tooltip>
+                        <Archive/>
 
-                         <Tooltip title="More">
-                            <IconButton>
-                                 <MoreVertIcon/>
-                            </IconButton>
-                         </Tooltip>
+                         <More/>
 
                          <Tooltip title="Undo">
                             <IconButton>
@@ -72,24 +81,21 @@ render()
                             <IconButton>
                                 <RedoIcon/>
                             </IconButton>
-                         </Tooltip>        
+                         </Tooltip>    
+
                         <Button variant="text"  onClick={this.onClickSubmit}>
                           Close
+                          {/* <ListItemIcon>{this.state.refreshIcon === true ? <PaletteIcon/> : <TakeANote />}</ListItemIcon> */}
                         </Button>
-
                         </div>
                 </Paper>
-           
         </div>
+        </ ClickAwayListener>
     )
 }
-}
-
-export default Notes;
 
 
-
-{/* <card>
+/* <card>
             <ExpansionPanel>
                 <ExpansionPanelSummary>
 
@@ -178,4 +184,10 @@ export default Notes;
                         </card>
                 </ExpansionPanelDetails>
             </ExpansionPanel> 
-            </card> */}
+            </card> */
+}
+
+export default Notes;
+
+
+
