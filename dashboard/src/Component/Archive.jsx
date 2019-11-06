@@ -35,9 +35,10 @@ class Archive extends Component{
                          </Tooltip> 
 
                 <Snackbar open={this.state.open}
-                 autoHideDuration={4000}
+                 autoHideDuration={2000}
                 onClose={this.handleClose}
                 message={<span>Note archived</span>}
+                anchorOrigin={{vertical:'bottom' ,horizontal:'left'}}
                 action={[
                     <Button  color="secondary" size="small" onClick={this.handleClose}>
                       UNDO

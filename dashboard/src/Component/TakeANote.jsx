@@ -30,27 +30,20 @@ class TakeANote extends Component {
             <div>
                 {!this.state.open   ?
                     <div className="noteMain">
-
                         <Paper >
                             <paper>
-                                <InputBase placeholder="Title" onClick={this.handleClick}>
-                                    {/* <ListItemIcon>  <TakeANote /></ListItemIcon> */}
-                                    {/* <ListItemIcon>{this.state.open === true ? <ImageIcon /> : <ImageIcon />}</ListItemIcon> */}
+                                <InputBase placeholder="Take a note" onClick={this.handleClick}>
                                 </InputBase>
-
-
                                 <Tooltip title="Add image" style={{ float: "right" }}>
                                     <IconButton>
                                         <ImageIcon />
                                     </IconButton>
                                 </Tooltip>
-
                                 <Tooltip title="Drawing" style={{ float: "right" }}>
                                     <IconButton>
                                         <BrushIcon />
                                     </IconButton>
                                 </Tooltip>
-
                                 <Tooltip title="New List" style={{ float: "right" }}>
                                     <IconButton>
                                         <AddBoxIcon />
@@ -58,7 +51,6 @@ class TakeANote extends Component {
                                 </Tooltip>
                             </paper>
                         </Paper>
-
                     </div> : (
                         <Notes />
                     )

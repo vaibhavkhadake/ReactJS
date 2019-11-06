@@ -25,16 +25,12 @@ const theme = createMuiTheme({
   width:'280px',
   color:'#1D1818',
   fontFamily:'Verdana, Geneva, Tahoma, sans-serif',
- 
-  
- 
   }
 },
 MuiList:{
   padding:{
     paddingTop:'0px',
     paddingBottom:'0px'
- 
   }
 }  
 }
@@ -53,13 +49,9 @@ colorChange(){
   this.setState( {color : !this.state.color });
 
 }
-  
-  
  render()
  {
    console.log("this.props.openn"+this.props.open);
-   
-  
      return(
       <div>
       <MuiThemeProvider theme={theme}>
@@ -93,7 +85,6 @@ colorChange(){
         </List>
       </Drawer>     */}
       
-
       <Drawer variant="persistent" open={this.props.open}>
         <List>
             <ListItem button >
