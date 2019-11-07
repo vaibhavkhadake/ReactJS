@@ -1,6 +1,5 @@
 import React ,{Component} from 'react';
 import {MuiThemeProvider} from '@material-ui/core';
-
 import List from '@material-ui/core/List';
 import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
@@ -8,12 +7,14 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
-// import MailIcon from '@material-ui/icons/Mail';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 import { createMuiTheme } from '@material-ui/core/styles';
 import ArchiveIcon from '@material-ui/icons/Archive';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import EmojiObjectsOutlinedIcon from '@material-ui/icons/EmojiObjectsOutlined';
+import DisplayAllNotes from './DisplayAllNotes';
+
+const displayAllNotes=new DisplayAllNotes()
 
 
 const theme = createMuiTheme({
@@ -42,57 +43,35 @@ constructor(props)
 {
   super(props)
   this.state={
-    color:true
+    color:true,
+    note:true
   }
 }
 colorChange(){
   this.setState( {color : !this.state.color });
-
 }
+
+handleNote=()=>{
+  console.log("WE ARE IN DRAWER Component ");
+  this.setState( {note : this.state.note });
+  displayAllNotes.handleNote();
+}
+  
  render()
  {
-   console.log("this.props.openn"+this.props.open);
+  //  console.log("this.props.open"+this.props.open);
      return(
       <div>
       <MuiThemeProvider theme={theme}>
-
-      {/* <Drawer variant="persistent" open={this.props.open}>
-        <List>
-          {['Notes', 'Reminder'].map((text, index) => (
-            <ListItem button key={text} >
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {['Edit labels'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-          </List>
-           <Divider />
-        <List>
-          {['Archive','Bin'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-      </Drawer>     */}
-      
       <Drawer variant="persistent" open={this.props.open}>
-        <List>
-            <ListItem button >
-              <ListItemIcon >
-                   <EmojiObjectsOutlinedIcon /> 
-              </ListItemIcon>
-              <ListItemText > Notes </ListItemText>
-          </ListItem>
+        <List >
+          {/* <ListItem button noteClick={this.props.noteClick} > */}
+          <ListItem button onClick={this.handleNote} >
+          <ListItemIcon >
+               <EmojiObjectsOutlinedIcon /> 
+          </ListItemIcon>
+          <ListItemText > Notes </ListItemText>
+         </ListItem>  
         </List>
 
         <List>
@@ -106,7 +85,7 @@ colorChange(){
         <Divider/>
 
         <List>
-          <label style={{fontSize:'15px', color:'silver',marginLeft:'15px'}}>
+          <label style={{fontSize:'15px',color:'silver',marginLeft:'15px'}}>
             Labels
           </label>
             <ListItem button>
@@ -132,10 +111,9 @@ colorChange(){
               <ListItemIcon >
                    <DeleteForeverIcon /> 
               </ListItemIcon>
-              <ListItemText>  Trash </ListItemText>
+              <ListItemText> Trash </ListItemText>
           </ListItem>
         </List>
-
         <Divider/>
       </Drawer>
       </MuiThemeProvider>

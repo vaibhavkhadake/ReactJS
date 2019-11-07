@@ -58,14 +58,14 @@ class GooglePassword extends Component
                 console.log(token);
                 localStorage.setItem('token',token);
                 this.setState({snackbaropen:true ,snackbarmessage:'success'})
+                this.props.history.push('/')
             })
             .catch(err=>
                 {
                     console.log("Error in login",err);
-                    this.setState({snackbaropen:true ,snackbarmessage:'failed'})
+                    this.setState({snackbaropen:true ,snackbarmessage:'Login Failed '})
                 })
 
-              this.props.history.push('/')
         }
     }
     isValid() {
@@ -74,17 +74,28 @@ class GooglePassword extends Component
 
         let isVal = true;
 
-        // if (!field["password"]) {
-        //     isVal = false;
-        //     error["password"] = "Please Enter Password";
-        // }
-        // if (typeof field["password"] !== "undefined") {
-        //     if (!field["password"].match(/^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\w!@#$%^&*]{7,20}$/)) {
-        //         // console.log(field["password"]);
-        //         isVal = false;
-        //         error["password"] = "Please enter proper password minimum 8 digits";
-        //     }
-        // }
+        if (!field["password"]) {
+            isVal = false;
+            error["password"] = "Please Enter Password";
+        }
+        if (typeof field["password"] !== "undefined") {
+            if (!field["password"].match(/^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\w!@#$%^&*]{7,20}$/)) {
+                // console.log(field["password"]);
+                isVal = false;
+                error["password"] = "Please enter proper password minimum 8 digits";
+            }
+        }
+
+        if (!field["username"]) {
+            isVal = false;
+            error["username"] = "Please enter username";
+        }
+        if (typeof field["firstName"] !== "undefined") {
+            if (!field["username"].match(/^[a-zA-Z]*$/)) {
+                isVal = false;
+                error["username"] = "Please Enter valid username ";
+            }
+        }
         this.setState({
             error: error
         })
@@ -104,7 +115,7 @@ class GooglePassword extends Component
                 anchorOrigin={{vertical:'bottom' ,horizontal:'left'}}
                 
                 autoHideDuration={4000}
-                onClose={this.state.snackbarclose}
+                onClose={this.snackbarclose}
                 message={<span>{this.state.snackbarmessage}</span>}
                 action={
                     [
@@ -114,7 +125,6 @@ class GooglePassword extends Component
                             color="inherit"
                             onClick={this.snackbarclose}
                        />
-                       
                     ]
                 }
                 />
@@ -156,6 +166,10 @@ class GooglePassword extends Component
                         variant="outlined"
                         fullWidth="10px"  
                     />
+                     </div> 
+            <div className="ErrorMessage">{this.state.error.password}</div>
+            <div>
+            
                     
             </div>
 

@@ -12,12 +12,11 @@ export function creteNoteService(data,token)
             }
         }
         )
-       
     }
 
     export function getAllNote(data,token){
 
-//       return  axios.get('http://fundoonotes.incubation.bridgelabz.com/api/notes/getNotesList')
+//    return  axios.get('http://fundoonotes.incubation.bridgelabz.com/api/notes/getNotesList')
 //   .then(response => {
 
 //   })
@@ -27,14 +26,12 @@ export function creteNoteService(data,token)
 
 
         console.log("get note in service===>",data,token);
-        return axios.get('http://fundoonotes.incubation.bridgelabz.com/api/notes/getNotesList',data,
+        return axios.get('http://fundoonotes.incubation.bridgelabz.com/api/notes/getNotesList'+data,
+        
         {
             headers:{token:token}
         })
         }
+        
 
     
-// export function creteNoteService(data) {
-//         console.log("FRONT END LOGIN DATA==>", data);
-//         return axios.post('http://fundoonotes.incubation.bridgelabz.com/api/notes/addNotes', data)
-//         }    

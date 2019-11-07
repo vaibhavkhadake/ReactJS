@@ -8,6 +8,8 @@ import TakeANode from './Component/TakeANote';
 import GoogleLogin from './GoogleLogin/GoogleLogin';
 import GooglePassword from './GoogleLogin/GooglePassword';
 import CreateAccount from './GoogleLogin/CreateAccount';
+import DisplayAllNotes from './Component/DisplayAllNotes';
+
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
            <Route path="/GoogleLogin" component={GoogleLogin}/>
            <Route path="/GooglePassword" component={GooglePassword}/>
            <Route path="/CreateAccount" component={CreateAccount}/>
+           <Route path="/DisplayAllNotes" component={DisplayAllNotes}/>
+           
           </Switch>
         </div>
       

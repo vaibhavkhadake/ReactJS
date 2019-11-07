@@ -1,0 +1,16 @@
+.allNotesMain
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding-right: 10px;
+}
+.allNote
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    
+
+
+}

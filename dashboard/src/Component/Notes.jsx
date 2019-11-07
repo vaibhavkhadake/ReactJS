@@ -12,10 +12,6 @@ import Archive from './Archive';
 import More from './More';  
 import TakeANote from './TakeANote';
 import { creteNoteService } from '../UserServices/UserServices';
-import { getAllNote } from '../UserServices/UserServices';
- 
-// import TakeANote from './TakeANote';
-// import ListItemIcon from '@material-ui/core/ListItemIcon';
 
 
 class Notes extends Component
@@ -26,7 +22,8 @@ class Notes extends Component
         this.state={
             createNote:false,
             title:null,
-            description:null
+            description:null,
+            getNotes:[]
         }
         this.onClickSubmit=this.onClickSubmit.bind(this);
     }
@@ -39,6 +36,7 @@ class Notes extends Component
         noteData.description="";
         console.log("close button event",noteData);
     }
+
                 onOutsideclick()
                 {
                 this.setState({
@@ -47,6 +45,8 @@ class Notes extends Component
                  }
 
             handleChangeTitle=(event)=>{
+                console.log("Modiified===>",this.props.noteValue);
+                
                 this.setState( {[event.target.name]: event.target.value} )
             }
             handleChangeDescription=(event)=>{
@@ -55,32 +55,16 @@ class Notes extends Component
             console.log("desciptionchange",description);
 
             }
-            // This handler for get all notes
-                handleNote = () => {
-                let loginToken = localStorage.getItem('token')
-                console.log("GET TOKEN FROM LOCAL STORAGE===>", loginToken);
-               // let param = "isTrashed=false&isArchieved=false"
-                getAllNote( loginToken)
-                .then(data => {
-                console.log("NOTE DATA======>", data.data.data);
-                this.setState({createNote:data.data.data})
-                })
-                .catch(err => {
-                console.log("NOTE DATA ERROR=========>", err);
-
-                })
-                }
-
+            
             handleCreateNote=()=>
             {
                 this.setState({ createNote: !this.state.createNote });
 
-                 let loginToken=localStorage.getItem('token');
+                let loginToken=localStorage.getItem('token');
                 let nodeObject={};
                 nodeObject.title=this.state.title;
-                nodeObject.description=this.state.description;
+                nodeObject.description=this.state.description;   
 
-            
                 creteNoteService(nodeObject,loginToken)
                 .then(data=>{
                     console.log("created node data",data.data);
@@ -98,7 +82,8 @@ render()
         < ClickAwayListener onClickAway = {
             () => this.onOutsideclick()
           } >
-              {!this.state.createNote ?
+              {
+                  !this.state.createNote ?
 
                <div className="noteMain">
            
@@ -141,8 +126,8 @@ render()
                                <RedoIcon/>
                            </IconButton>
                         </Tooltip>    
-                       <Button variant="text"  onClick={this.handleNote}>
-                           {/* onClick={this.handleCreateNote} */}
+                       <Button variant="text"  onClick={this.handleCreateNote}>
+                           
                          Close
                        </Button>
                        </div>

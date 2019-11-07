@@ -20,7 +20,7 @@ import ImageLogo from './ImageLogo';
 import { createMuiTheme } from '@material-ui/core/styles';
 import {MuiThemeProvider} from '@material-ui/core';
 import TakeANote from './TakeANote';
-
+import DisplayAllNotes from './DisplayAllNotes';
 
   const theme = createMuiTheme({
   overrides:{
@@ -49,7 +49,8 @@ class Dashboard extends Component
       refreshIcon:true,
        settingIcon:false,
        imagelogo:false,
-       note:true
+       note:true,
+       noteClick:false
     }
   }
 
@@ -72,6 +73,12 @@ class Dashboard extends Component
   
   handleDrawerOpen() {    
     this.setState({ open: !this.state.open });
+  }
+
+  handleNoteClick()
+  {
+    console.log("note props click",this.state.noteClick)
+    this.setState({ noteClick: !this.state.noteClick });
   }
     
     render()
@@ -151,7 +158,10 @@ class Dashboard extends Component
            <div className="search2">
            <MuiThemeProvider theme={theme}>
              <TakeANote />
+             <br/>
+             <DisplayAllNotes noteClick={this.state.noteClick} onClick={this.handleNoteClick} />
            </MuiThemeProvider>
+           
            </div>
 
 
