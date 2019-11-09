@@ -45,7 +45,6 @@ class Reminder extends Component{
                         <Popper open={this.state.open} anchorEl={this.state.anchorEl}>
                         <Card style={{height:'130px' ,width:'200px'}}>
                         <List>
-                                
                                 <ListItem style={{fontSize:'15px'}}>Reminder</ListItem>
                                 <Divider/>
                                 <ListItem button style={{fontSize:'12px'}}>later</ListItem>

@@ -5,10 +5,11 @@ import TextField from '@material-ui/core/TextField';
 import './DisplayAllNotes.css';
 import Reminder from './Reminder';
 import More from './More';
-// import { Tooltip, IconButton } from '@material-ui/core';
+import DialogBox from './DialogBox'
+ import { Tooltip, IconButton } from '@material-ui/core';
 import Archive from './Archive';
-// import ImageIcon from '@material-ui/icons/Image';
-// import PaletteIcon from '@material-ui/icons/Palette';
+import ColorPalette from './ColorPalette';
+import ArchiveNote from './ArchiveNote';
 
 const notesService = new NoteService()
 
@@ -17,13 +18,29 @@ class DisplayAllNotes extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            noteArray: []
+            open: false,
+        noteArray: [],
+        uniqueNote:{}
         }
     }
     componentDidMount(){
         this.handleNote()
     }
-    //This handler for get all notes
+
+    handleDialog = (note) => {
+        console.log("dialog cliked", this.state.open);
+        console.log("UNIQUE NOTE VALUE NOTE",this.state.uniqueNote );
+        
+        this.setState({ open: !this.state.open,
+                        uniqueNote:note
+                    })
+    }
+
+
+     handleDialogBoxClose=()=>{
+        this.setState({open:!this.state.open})
+    }
+    
          handleNote = () => {
          notesService.getAllNoteService()
             .then(response => {
@@ -37,25 +54,32 @@ class DisplayAllNotes extends Component {
             })
     }
 
+    handleNoteSave=(note)=>{
+        this.setState({ open: !this.state.open,
+             uniqueNote:note
+        })
+    }
     render() {
         
         return (
-
             <div className="allNotesMain">
                 {this.state.noteArray.map((text) => (
-
                     <div className="allNotes">
-                        <Card>
+                        <Card className="displayNotes" style={{backgroundColor:text.color}}>
                             <div>
-                            <TextField
-                                disabled
+                            <TextField  onClick={()=>this.handleNoteSave(text)}
+                                InputProps={{
+                                    disableUnderline: true
+                                }}
                                 value={text.title}
                                 margin='normal'
                                 placeholder='Title' 
                             />
                             <br/>
-                            <TextField
-                                disabled
+                            <TextField onClick={()=>this.handleNoteSave(text)}
+                                InputProps={{
+                                    disableUnderline: true
+                                }}
                                 value={text.description}
                                 margin='normal'
                                 placeholder='Description'
@@ -64,33 +88,26 @@ class DisplayAllNotes extends Component {
                             <div>
                             <div className="noteLogo">
                            <Reminder/>
-                        {/* <Tooltip title="Change color">
-                           <IconButton>
-                               <PaletteIcon/>
-                           </IconButton>
+                        <Tooltip title="Change color">
+                         {/* Passing particular note id */}
+                        <ColorPalette
+                          colorNoteId={text.id}
+                         />
                         </Tooltip>
-                        <Tooltip title="Add image">
-                           <IconButton>
-                               <ImageIcon />
-                           </IconButton>
-                        </Tooltip> */}
                        <Archive/>
                         <More/>
-                       </div>
-                                
+                       </div>        
                             </div>
-                        
                         </Card>
                         <br/>
                     </div>
                 ))}
-                {/* <Notes noteValue={this.state.noteArray}/> */}
+                 <DialogBox dialogOpen={this.state.open} singleNote={this.state.uniqueNote} dialogBoxClose={this.handleDialogBoxClose} />
+                <ArchiveNote singleNote={this.state.uniqueNote}/>
+                
             </div>
-
-
         )
     }
 
 }
-
 export default DisplayAllNotes

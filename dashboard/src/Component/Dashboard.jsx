@@ -1,4 +1,4 @@
-import React,{Component} from 'react'
+import React, { Component } from 'react'
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -8,7 +8,7 @@ import InputBase from '@material-ui/core/InputBase';
 import Tooltip from '@material-ui/core/Tooltip';
 import AppsIcon from '@material-ui/icons/Apps';
 import RefreshIcon from '@material-ui/icons/Refresh';
-import { Paper} from '@material-ui/core'
+import { Paper } from '@material-ui/core'
 import DragHandleIcon from '@material-ui/icons/DragHandle';
 import DragIndicatorSharpIcon from '@material-ui/icons/DragIndicatorSharp';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -18,158 +18,163 @@ import Keep from "./keep_48dp.png";
 import Drawer2 from './Drawer2';
 import ImageLogo from './ImageLogo';
 import { createMuiTheme } from '@material-ui/core/styles';
-import {MuiThemeProvider} from '@material-ui/core';
+import { MuiThemeProvider } from '@material-ui/core';
 import TakeANote from './TakeANote';
 import DisplayAllNotes from './DisplayAllNotes';
 
-  const theme = createMuiTheme({
-  overrides:{
-    MuiExpansionPanelSummary:{ 
-      content:{
-        margin:'0',
-        padding:'0',
-        color:'silver'
 
-  }},
-  MuiAppBar:{
-    colorDefault: {
-      backgroundColor:'white'
+const theme = createMuiTheme({
+  overrides: {
+    MuiExpansionPanelSummary: {
+      content: {
+        margin: '0',
+        padding: '0',
+        color: 'silver'
+
+      }
+    },
+    MuiAppBar: {
+      colorDefault: {
+        backgroundColor: 'white'
+      }
     }
   }
-}
 });
 
-class Dashboard extends Component
-{
-  constructor(props){
+class Dashboard extends Component {
+  constructor(props) {
     super(props)
-    this.state={
-      open:true,
-      list:true,
-      refreshIcon:true,
-       settingIcon:false,
-       imagelogo:false,
-       note:true,
-       noteClick:false
+    this.state = {
+      open: true,
+      list: true,
+      refreshIcon: true,
+      settingIcon: false,
+      imagelogo: false,
+      note: true,
+      noteOpen: true,
+      reminder: false
+     
     }
   }
 
-  handleImageLogo=()=>{
+  handleImageLogo = () => {
     this.setState({ note: !this.state.note });
   }
-  handleRefreshIcon=()=>{
+  handleRefreshIcon = () => {
 
     this.setState({ refreshIcon: !this.state.refreshIcon });
   }
-  handleListView=()=>{
+  handleListView = () => {
 
     this.setState({ list: !this.state.list });
 
   }
-  handlesettingIcon=()=>{
+  handlesettingIcon = () => {
     console.log("dashbpard setting");
     this.setState({ settingIcon: !this.state.settingIcon });
   }
-  
-  handleDrawerOpen() {    
+
+  handleDrawerOpen() {
     this.setState({ open: !this.state.open });
   }
 
-  handleNoteClick()
-  {
-    console.log("note props click",this.state.noteClick)
-    this.setState({ noteClick: !this.state.noteClick });
+  handleNoteOpen = () => {
+    console.log("note open click", this.state.noteOpen)
+    this.setState({ noteOpen: !this.state.noteOpen });
   }
-    
-    render()
-    {
-        return(
-          <div>
-                <div className="appBar">
-                <MuiThemeProvider theme={theme}>
-                <AppBar position="fixed" color="default" >
-                  <Toolbar>
-                  <Drawer2 open={this.state.open}/>
-                  <IconButton edge="start"  color="inherit"  onClick={()=>this.handleDrawerOpen()} > 
-                 <Tooltip title="Drawer">
-                  <MenuIcon />
+
+
+  render() {
+    // const demo=this.state.reminder;
+
+    return (
+      <div>
+        <div className="appBar">
+          <MuiThemeProvider theme={theme}>
+            <AppBar position="fixed" color="default" >
+              <Toolbar>
+                <Drawer2 open={this.state.open} clickedEvent={this.clickedEventHandle}
+                // noteCall={this.notesManagement} 
+                />
+                <IconButton edge="start" color="inherit" onClick={() => this.handleDrawerOpen()} >
+                  <Tooltip title="Drawer">
+                    <MenuIcon />
                   </Tooltip>
-                  </IconButton>
-                  <div className="keepimage">
-                  <img src={Keep} alt="smiely face "/>
-                  </div>
-                  <div className="textkeep">
+
+                </IconButton>
+                <div className="keepimage">
+                  <img src={Keep} alt="smiely face " />
+                </div>
+                <div className="textkeep">
                   <h2> Keep </h2>
-                  </div>       
-                  <Paper fullWidth="" style={{float:'right'}}> 
-                      <div className="search">
-                          <div className="searchIcon">
-                            <SearchIcon className="searchIcon"/>
-                             <InputBase placeholder="search" fullWidth="" />
-                      </div>
-                      </div>
-                      </Paper>
-                      <div className="refreshIcon">
-                      <Tooltip  title="Refresh">
-                      <IconButton onClick={this.handleRefreshIcon}>
-                      <ListItemIcon>{this.state.refreshIcon === true ? <RefreshIcon/> : <CloudDoneIcon />}</ListItemIcon>
-                      </IconButton>
-                      </Tooltip>
-                      </div>
+                </div>
+                <Paper style={{ float: 'right' }}>
+                  <div className="search">
+                    <div className="searchIcon">
+                      <SearchIcon className="searchIcon" />
+                      <InputBase placeholder="search" />
+                    </div>
+                  </div>
+                </Paper>
+                <div className="refreshIcon">
+                  <Tooltip title="Refresh">
+                    <IconButton onClick={this.handleRefreshIcon}>
+                      <ListItemIcon>{this.state.refreshIcon === true ? <RefreshIcon /> : <CloudDoneIcon />}</ListItemIcon>
+                    </IconButton>
+                  </Tooltip>
+                </div>
 
-                      <div className="dragHandleIcon">
-                      <Tooltip  title="View">
-                      <IconButton onClick={this.handleListView}>
+                <div className="dragHandleIcon">
+                  <Tooltip title="View">
+                    <IconButton onClick={this.handleListView}>
                       <ListItemIcon>{this.state.list === true ? <DragHandleIcon /> : <DragIndicatorSharpIcon />}</ListItemIcon>
-                      </IconButton>
-                      </Tooltip>
-                      </div>
+                    </IconButton>
+                  </Tooltip>
+                </div>
 
-                      <div className="settingsIcon">
-                       
-                      {/* <SettingsIcon /> */}
-                     
-                        {/* <SettingDrawer settingIcon={this.state.settingIcon}/>
+                <div className="settingsIcon">
+
+                  {/* <SettingsIcon /> */}
+
+                  {/* <SettingDrawer settingIcon={this.state.settingIcon}/>
                         <IconButton edge="start"  color="inherit" aria-label="menu" onClick={()=>this.handlesettingIcon()} >
                         <SettingsIcon />
-                        </IconButton> */}
-                        
-                      
-                      </div>    
+                    </IconButton> */}
 
-                      <div className="appsIcon">
-                      <Tooltip  title="Applications">
-                      <IconButton >
+                </div>
+                <div className="appsIcon">
+                  <Tooltip title="Applications">
+                    <IconButton >
                       <AppsIcon />
-                      </IconButton>
-                      </Tooltip>
-                      </div>
+                    </IconButton>
+                  </Tooltip>
+                </div>
 
-                      <div className="accountCircle">
-                        <ImageLogo props={this.props} />
-                        
-                      </div>
+                <div className="accountCircle">
+                  <ImageLogo props={this.props} />
+                </div>
 
-              </Toolbar> 
-              
-              </AppBar>
-              </MuiThemeProvider>
-            
-           <div className="search2">
-           <MuiThemeProvider theme={theme}>
-             <TakeANote />
-             <br/>
-             <DisplayAllNotes noteClick={this.state.noteClick} onClick={this.handleNoteClick} />
-           </MuiThemeProvider>
-           
-           </div>
+              </Toolbar>
 
+            </AppBar>
+          </MuiThemeProvider>
 
-              
-</div>
-   
+          <div className="search2">
+            <MuiThemeProvider theme={theme}>
+              <TakeANote />
+              <br />
+
+              {/* {
+               demo ? <DisplayAllNotes reminder={this.state.reminder}/> : <Reminder reminder={this.state.reminder}/>
+             }  */}
+
+              <DisplayAllNotes  func={this.handleNoteOpen}  />
+
+            </MuiThemeProvider>
+          </div>
         </div>
-        )
-    }
+      </div>
+    )
+  }
 }
 export default Dashboard;

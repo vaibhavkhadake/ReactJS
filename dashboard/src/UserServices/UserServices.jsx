@@ -32,6 +32,21 @@ export function creteNoteService(data,token)
             headers:{token:token}
         })
         }
+
+        export function creteLabelService(data,token)
+    {
+        console.log("data and token ",data,token);
+        return axios.post('http://fundoonotes.incubation.bridgelabz.com/api/notes/addNotes',data,
+        {
+            headers:
+            {
+                'Content-type': 'application/json; charset=utf-8',
+                'Authorization':token
+            }
+        }
+        )
+    }
+
         
 
     

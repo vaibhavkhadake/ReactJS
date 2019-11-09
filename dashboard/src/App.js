@@ -11,6 +11,7 @@ import CreateAccount from './GoogleLogin/CreateAccount';
 import DisplayAllNotes from './Component/DisplayAllNotes';
 
 
+
 function App() {
   return (
     <div className="App">
@@ -25,15 +26,12 @@ function App() {
            <Route path="/GooglePassword" component={GooglePassword}/>
            <Route path="/CreateAccount" component={CreateAccount}/>
            <Route path="/DisplayAllNotes" component={DisplayAllNotes}/>
-           
           </Switch>
-        </div>
-      
+        </div> 
   </Router>
 
-     
-
     </div>
+  
   );
 }
 

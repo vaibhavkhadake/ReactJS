@@ -23,14 +23,14 @@ class Notes extends Component
             createNote:false,
             title:null,
             description:null,
-            getNotes:[]
+            // getNotes:[]
         }
         this.onClickSubmit=this.onClickSubmit.bind(this);
     }
 
     onClickSubmit=(event)=>{
         event.preventDefault();
-        this.setState({ createNote: !this.state.createNote });
+        // this.setState({ createNote: !this.state.createNote });
         let noteData={};
         noteData.title="";
         noteData.description="";
@@ -44,22 +44,21 @@ class Notes extends Component
                 })
                  }
 
-            handleChangeTitle=(event)=>{
+            handleChangeTitle=(event)=>
+            {
                 console.log("Modiified===>",this.props.noteValue);
-                
                 this.setState( {[event.target.name]: event.target.value} )
             }
-            handleChangeDescription=(event)=>{
+            handleChangeDescription=(event)=>
+            {
             let description=event.target.value;
             this.setState({description})
             console.log("desciptionchange",description);
-
             }
             
             handleCreateNote=()=>
             {
                 this.setState({ createNote: !this.state.createNote });
-
                 let loginToken=localStorage.getItem('token');
                 let nodeObject={};
                 nodeObject.title=this.state.title;
@@ -67,11 +66,11 @@ class Notes extends Component
 
                 creteNoteService(nodeObject,loginToken)
                 .then(data=>{
-                    console.log("created node data",data.data);
+                    console.log("created note data",data.data);
                 }
                     )
                 .catch(error=>{
-                    console.log("created node Error",error);
+                    console.log("created note Error",error);
                 })
 
             }
@@ -88,13 +87,13 @@ render()
                <div className="noteMain">
            
                <Paper>
-                   <paper>
+                   
                    <InputBase placeholder="Title"
                    name="title"
                    value={this.state.title}
                    onChange={this.handleChangeTitle}
                    />    
-                   </paper>
+                   
                    <br/>
                    <InputBase placeholder="Description"
                    name="description"
@@ -127,7 +126,6 @@ render()
                            </IconButton>
                         </Tooltip>    
                        <Button variant="text"  onClick={this.handleCreateNote}>
-                           
                          Close
                        </Button>
                        </div>
@@ -138,8 +136,6 @@ render()
         </ ClickAwayListener>
     )
 }
-
-
 /* <card>
             <ExpansionPanel>
                 <ExpansionPanelSummary>

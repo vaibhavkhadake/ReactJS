@@ -8,15 +8,13 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
-import { createMuiTheme } from '@material-ui/core/styles';
+import {createMuiTheme } from '@material-ui/core/styles';
 import ArchiveIcon from '@material-ui/icons/Archive';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import EmojiObjectsOutlinedIcon from '@material-ui/icons/EmojiObjectsOutlined';
 import DisplayAllNotes from './DisplayAllNotes';
 
 const displayAllNotes=new DisplayAllNotes()
-
-
 const theme = createMuiTheme({
   overrides:{
   MuiDrawer:{ 
@@ -44,18 +42,42 @@ constructor(props)
   super(props)
   this.state={
     color:true,
-    note:true
+    note:true,
+    reminder:false
   }
 }
-colorChange(){
+// handleNoteOpen=(bool)=>
+// {
+//   console.log("calling notes ...")
+//   this.props.noteCall(bool)
+// }
+
+colorChange=()=>{
   this.setState( {color : !this.state.color });
 }
 
-handleNote=()=>{
-  console.log("WE ARE IN DRAWER Component ");
-  this.setState( {note : this.state.note });
-  displayAllNotes.handleNote();
+
+handleReminder=()=>{
+
+  // console.log("PARENT==>",this.props.clickedEvent)
+  this.setState( {reminder : !this.state.reminder });
+    console.log("Remminder ###########",this.state.reminder)
+
+  // console.log("Called in dashboard component",this.props.reminder);
+  let event="reminder"
+    this.props.clickedEvent(event);
 }
+
+
+handleNote=()=>{
+  let event="allNote"
+    this.props.clickedEvent(event);
+    // this.props.func
+  // console.log("WE ARE IN DRAWER Component ",this.state.note);
+   this.setState( {note : !this.state.note });
+   displayAllNotes.handleNote();
+//   this.props.history.push('/DisplayAllNotes')
+ }
   
  render()
  {
@@ -64,18 +86,26 @@ handleNote=()=>{
       <div>
       <MuiThemeProvider theme={theme}>
       <Drawer variant="persistent" open={this.props.open}>
+
         <List >
-          {/* <ListItem button noteClick={this.props.noteClick} > */}
-          <ListItem button onClick={this.handleNote} >
+        {/* <ListItem button onClick={this.handleNote}  > */}
+        <ListItem button onClick={()=>this.props.func}  >
+       
+
+            {/* <ListItem button  */}
+            {/* onClick={this.handleNoteOpen(true) */}
+          
           <ListItemIcon >
                <EmojiObjectsOutlinedIcon /> 
           </ListItemIcon>
-          <ListItemText > Notes </ListItemText>
+          <ListItemText> Notes </ListItemText>
          </ListItem>  
         </List>
 
         <List>
-            <ListItem button>
+            <ListItem button
+            value={this.state.reminder}
+            onClick={this.handleReminder}>
               <ListItemIcon >
                    <NotificationsNoneIcon /> 
               </ListItemIcon>

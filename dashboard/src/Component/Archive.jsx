@@ -4,6 +4,8 @@ import ArchiveIcon from '@material-ui/icons/Archive';
 import Button from '@material-ui/core/Button';
 
 import CloseIcon from '@material-ui/icons/Close';
+import { ArchiveNotes } from '../UserServices/noteService';
+import ArchiveNote from './ArchiveNote';
 
 
 
@@ -29,9 +31,11 @@ class Archive extends Component{
          <div>
 
                     <Tooltip title="Archive">
-                            <IconButton onClick={this.handleClick}>
-                                 <ArchiveIcon/>
-                            </IconButton>
+                            {/* <IconButton onClick={this.handleClick}> */}
+                                 {/* <ArchiveIcon/> */}
+                                 <ArchiveNote/>
+                                
+                            {/* </IconButton> */}
                          </Tooltip> 
 
                 <Snackbar open={this.state.open}
@@ -49,8 +53,6 @@ class Archive extends Component{
                   ]}
 
                 >
-                       
-
              </Snackbar>
          </div>
      )
