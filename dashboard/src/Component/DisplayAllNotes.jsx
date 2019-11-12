@@ -6,10 +6,11 @@ import './DisplayAllNotes.css';
 import Reminder from './Reminder';
 import More from './More';
 import DialogBox from './DialogBox'
- import { Tooltip, IconButton } from '@material-ui/core';
-import Archive from './Archive';
+import { Tooltip} from '@material-ui/core';
+//  import Archive from './Archive';
 import ColorPalette from './ColorPalette';
 import ArchiveNote from './ArchiveNote';
+import TrashNote from './TrashNote';
 
 const notesService = new NoteService()
 
@@ -18,9 +19,10 @@ class DisplayAllNotes extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            open: false,
+        open: false,
         noteArray: [],
-        uniqueNote:{}
+        uniqueNote:{},
+       
         }
     }
     componentDidMount(){
@@ -35,8 +37,7 @@ class DisplayAllNotes extends Component {
                         uniqueNote:note
                     })
     }
-
-
+    
      handleDialogBoxClose=()=>{
         this.setState({open:!this.state.open})
     }
@@ -74,6 +75,7 @@ class DisplayAllNotes extends Component {
                                 value={text.title}
                                 margin='normal'
                                 placeholder='Title' 
+                                style={{ paddingLeft: "15px" }}
                             />
                             <br/>
                             <TextField onClick={()=>this.handleNoteSave(text)}
@@ -83,6 +85,7 @@ class DisplayAllNotes extends Component {
                                 value={text.description}
                                 margin='normal'
                                 placeholder='Description'
+                                style={{ paddingLeft: "15px" }}
                             />
                             </div>
                             <div>
@@ -94,8 +97,10 @@ class DisplayAllNotes extends Component {
                           colorNoteId={text.id}
                          />
                         </Tooltip>
-                       <Archive/>
+                        <ArchiveNote archiveNoteId={text.id}/>
                         <More/>
+                        
+                        <TrashNote trashNoteId={text.id} />
                        </div>        
                             </div>
                         </Card>
@@ -103,7 +108,7 @@ class DisplayAllNotes extends Component {
                     </div>
                 ))}
                  <DialogBox dialogOpen={this.state.open} singleNote={this.state.uniqueNote} dialogBoxClose={this.handleDialogBoxClose} />
-                <ArchiveNote singleNote={this.state.uniqueNote}/>
+                
                 
             </div>
         )

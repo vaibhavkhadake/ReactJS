@@ -3,10 +3,12 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    align-content: center;
     align-items: center;
-    top:90px;
+    top:70px;
     margin:20px;
-    padding:20px;
+    padding:50px; 
     border: 2px;
     
 
@@ -14,4 +16,10 @@
 .accountCircleLogo
 {
     justify-content: center;
+}
+.profilePic{
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }

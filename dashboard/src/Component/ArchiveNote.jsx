@@ -12,31 +12,29 @@ class ArchiveNote extends Component
             archieveButton: false
         }
     }
-
+   
     handleArchieve = () => {
+
         console.log("Archieve button  click", this.state.archieveButton);
         this.setState({ archieveButton: !this.state.archieveButton })
 
         let loginToken = localStorage.getItem('token');
-        console.log("Note Id=->",this.props.archieveNoteId);
-        console.log("Note Id=->",this.props.singleNote);
+
+        console.log("Archived Note Id=->",this.props.archiveNoteId);
         let noteObject={}
         
-        noteObject.id=this.props.archieveNoteId;
-       
+        //noteObject.id=this.props.archieveNoteId;
+
+        noteObject.noteIdList = [this.props.archiveNoteId];
         noteObject.isArchived=true;
         
        ArchiveNotes(noteObject,loginToken)
         .then(data=>{
             console.log("ArchieveNote DATA==>",data);
-            // this.props.refreshedNotesProps();
         })
         .catch(err=>{
             console.log("Archieve note ERROR==>",err);
-            // toaster.notify("Error while archieve note", {
-            //     position: "top", 
-            //     autoClose: 8000,
-            // })
+            
         })
     }
     render() {

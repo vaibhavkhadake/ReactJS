@@ -32,9 +32,9 @@ class TakeANote extends Component {
                     <div className="noteMain">
                         <Paper >
                             
-                                <InputBase placeholder="Take a note" onClick={this.handleClick}>
+                                <InputBase placeholder="Take a note" style={{ padding: "10px" }} onClick={this.handleClick}>
                                 </InputBase>
-                                <Tooltip title="Add image" style={{ float: "right" }}>
+                                <Tooltip title="Add image"  style={{ float: "right" }}>
                                     <IconButton>
                                         <ImageIcon />
                                     </IconButton>

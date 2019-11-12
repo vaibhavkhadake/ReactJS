@@ -90,10 +90,9 @@ class ColorPalette extends Component {
     //color contain "colorName" and "colorCode"
     handleAddColor = (color) => {
         console.log(" color in handle ", color.colorCode);
-
         console.log("Note 97 info==============>", this.props.colorNoteId);
-        let loginToken = localStorage.getItem('token');
 
+        let loginToken = localStorage.getItem('token');
         let noteObject = {};
         noteObject.noteIdList = [this.props.colorNoteId];
         noteObject.color = color.colorCode;
@@ -101,14 +100,11 @@ class ColorPalette extends Component {
         ChangeColorNotes(noteObject, loginToken)
             .then(data => {
                 console.log("Added color successfully",data);
-
                 //After selecting color popover of color should close
                 this.setState({ colorOpen: !this.state.colorOpen })
-
             })
             .catch(err => {
                 console.log(" error in response");
-                
                 console.log("Error in Adding color", err);
             })
     }
@@ -123,7 +119,6 @@ class ColorPalette extends Component {
                             <PaletteIcon/>
                         </IconButton>
                     </Tooltip>
-
                     <Popover
                         open={this.state.colorOpen}
                         // "anchorEl" will check your position from state where you clicked
@@ -137,7 +132,7 @@ class ColorPalette extends Component {
                             vertical: 'center',
                             horizontal: 'center',
                         }}
-                        style={{ width: '30%' }}
+                        style={{ width: '25%'}}
                     >
                         {colorsPallete.map((color, index) => (
                             <IconButton style={{ backgroundColor: color.colorCode }} 

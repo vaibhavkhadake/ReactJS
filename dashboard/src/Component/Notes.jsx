@@ -23,14 +23,14 @@ class Notes extends Component
             createNote:false,
             title:null,
             description:null,
-            // getNotes:[]
+             getNotes:[]
         }
         this.onClickSubmit=this.onClickSubmit.bind(this);
     }
 
     onClickSubmit=(event)=>{
         event.preventDefault();
-        // this.setState({ createNote: !this.state.createNote });
+         this.setState({ createNote: !this.state.createNote });
         let noteData={};
         noteData.title="";
         noteData.description="";
@@ -59,6 +59,7 @@ class Notes extends Component
             handleCreateNote=()=>
             {
                 this.setState({ createNote: !this.state.createNote });
+                
                 let loginToken=localStorage.getItem('token');
                 let nodeObject={};
                 nodeObject.title=this.state.title;
@@ -89,6 +90,7 @@ render()
                <Paper>
                    
                    <InputBase placeholder="Title"
+                   style={{ paddingLeft: "15px" }}
                    name="title"
                    value={this.state.title}
                    onChange={this.handleChangeTitle}
@@ -96,6 +98,7 @@ render()
                    
                    <br/>
                    <InputBase placeholder="Description"
+                   style={{ paddingLeft: "15px" }}
                    name="description"
                    value={this.state.description}
                    onChange={this.handleChangeDescription}
@@ -124,7 +127,8 @@ render()
                            <IconButton>
                                <RedoIcon/>
                            </IconButton>
-                        </Tooltip>    
+                        </Tooltip> 
+                       
                        <Button variant="text"  onClick={this.handleCreateNote}>
                          Close
                        </Button>

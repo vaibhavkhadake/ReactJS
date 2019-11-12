@@ -1,5 +1,12 @@
 @media all and (min-width: 768px) 
 {
+    .onlyAppBar{
+
+        display: flex;
+        flex-wrap: wrap;
+        justify-content:space-between;
+        flex-direction: row;
+    }
 
     .appBar
     {
@@ -12,11 +19,10 @@
     {
         padding: 5px;
         padding-right: 10px;
-        
+ 
     }
     .textkeep
     {
-        
         margin-right: 100px;
     }
 
@@ -27,14 +33,13 @@
   .search{
 
      display: flex;
-      
+     align-content: center; 
       background-color:'silver';
       font-family: Verdana, Geneva, Tahoma, sans-serif;
       width: 500px;
-      
       border: 2px silver;
       height: 45px;
-      padding: 2px;
+      padding-top: 5px;
   }  
 
 .refreshIcon
@@ -48,8 +53,8 @@
 {
     display: flex;
     justify-content: space-between;
-    /* margin-right: 10px;  
-    margin-left: 20px; */
+    margin-right: 10px;  
+    margin-left: 20px; 
        
  }
  /* .settingsIcon
@@ -59,14 +64,14 @@
   .appsIcon{
     display: flex;
     justify-content:space-between;
-     /* margin-left: 50px;
-     margin-right: 20px; */
+     margin-left: 20px;
+     margin-right: 20px;
  }
 
  .accountCircle{
     display: flex;
     justify-content: space-between;
-    margin-left:30px ;
+    margin-left:0px ;
 } 
 
  .lebels
@@ -88,27 +93,28 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    /* background-color :silver;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; */
     font-size: 15px;
     margin-top: 125px;
     margin-left:450px ;
     margin-right:200px ;
-    /* width: 400px;
-    border: 2px black; */
-    /* height: 70px; */
     padding:20px;
 }
 .signoutButton
 {
     display: flex;
    font-size: 15px;
-   margin-left: 30px;
+   margin-left: 20px;
    margin-top: 10px;
    margin-bottom: 10px;
    width: 120px;
   
    justify-content: center;
+}
+.appIcon2
+{
+    display: flex;
+    justify-content: flex-end;
+    
 }
 
 

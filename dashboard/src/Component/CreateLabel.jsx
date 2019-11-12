@@ -18,7 +18,7 @@ class CreateLabel extends Component{
         let labelData={};
         noteData.label="";
       
-        console.log("close button event",labelData);
+        console.log("close button event in label",labelData);
     }
 
     handleLabel=()=>

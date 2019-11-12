@@ -21,6 +21,9 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import { MuiThemeProvider } from '@material-ui/core';
 import TakeANote from './TakeANote';
 import DisplayAllNotes from './DisplayAllNotes';
+import DisplayTrashNotes from './DisplayTrashNotes';
+import DisplayAllArchiveNotes from './DisplayAllArchiveNotes';
+import Masonry from 'react-masonry-component';
 
 
 const theme = createMuiTheme({
@@ -30,7 +33,6 @@ const theme = createMuiTheme({
         margin: '0',
         padding: '0',
         color: 'silver'
-
       }
     },
     MuiAppBar: {
@@ -85,16 +87,15 @@ class Dashboard extends Component {
 
 
   render() {
-    // const demo=this.state.reminder;
-
     return (
       <div>
         <div className="appBar">
           <MuiThemeProvider theme={theme}>
-            <AppBar position="fixed" color="default" >
+            <AppBar position="fixed" color="default" className="onlyAppBar">
               <Toolbar>
-                <Drawer2 open={this.state.open} clickedEvent={this.clickedEventHandle}
-                // noteCall={this.notesManagement} 
+                
+                <Drawer2 open={this.state.open} 
+                // clickedEvent={this.clickedEventHandle}
                 />
                 <IconButton edge="start" color="inherit" onClick={() => this.handleDrawerOpen()} >
                   <Tooltip title="Drawer">
@@ -108,26 +109,31 @@ class Dashboard extends Component {
                 <div className="textkeep">
                   <h2> Keep </h2>
                 </div>
-                <Paper style={{ float: 'right' }}>
+                <Paper >
                   <div className="search">
                     <div className="searchIcon">
-                      <SearchIcon className="searchIcon" />
-                      <InputBase placeholder="search" />
+                      <SearchIcon className="searchIcon" style={{paddingLeft:'15px'}}/>
+                     
+                      <InputBase placeholder="search" style={{paddingLeft:'15px'}}/>
                     </div>
                   </div>
                 </Paper>
+
+                <div className="appIcon2">
                 <div className="refreshIcon">
                   <Tooltip title="Refresh">
-                    <IconButton onClick={this.handleRefreshIcon}>
-                      <ListItemIcon>{this.state.refreshIcon === true ? <RefreshIcon /> : <CloudDoneIcon />}</ListItemIcon>
+                    <IconButton onClick={this.handleRefreshIcon} >
+                     {this.state.refreshIcon === true ? <RefreshIcon /> : <CloudDoneIcon />}
                     </IconButton>
                   </Tooltip>
                 </div>
 
                 <div className="dragHandleIcon">
                   <Tooltip title="View">
-                    <IconButton onClick={this.handleListView}>
-                      <ListItemIcon>{this.state.list === true ? <DragHandleIcon /> : <DragIndicatorSharpIcon />}</ListItemIcon>
+                    <IconButton onClick={this.handleListView} >
+                     
+                        {this.state.list === true ? <DragHandleIcon /> : <DragIndicatorSharpIcon />}
+                  
                     </IconButton>
                   </Tooltip>
                 </div>
@@ -144,7 +150,7 @@ class Dashboard extends Component {
                 </div>
                 <div className="appsIcon">
                   <Tooltip title="Applications">
-                    <IconButton >
+                    <IconButton  >
                       <AppsIcon />
                     </IconButton>
                   </Tooltip>
@@ -153,6 +159,8 @@ class Dashboard extends Component {
                 <div className="accountCircle">
                   <ImageLogo props={this.props} />
                 </div>
+                </div>
+              
 
               </Toolbar>
 
@@ -163,13 +171,24 @@ class Dashboard extends Component {
             <MuiThemeProvider theme={theme}>
               <TakeANote />
               <br />
-
               {/* {
                demo ? <DisplayAllNotes reminder={this.state.reminder}/> : <Reminder reminder={this.state.reminder}/>
              }  */}
+             <Masonry>
+              <DisplayAllNotes notes={this.props.notes}
+              //  func={this.handleNoteOpen} 
+                />
+                </Masonry>
+            <h5>trash</h5>
+            <Masonry>
+              <DisplayTrashNotes trash={this.props.trash}/>
+              </Masonry>
 
-              <DisplayAllNotes  func={this.handleNoteOpen}  />
-
+              <h5>Archive</h5>
+              <Masonry>
+              <DisplayAllArchiveNotes archive={this.props.archive} />
+              </Masonry>
+              
             </MuiThemeProvider>
           </div>
         </div>

@@ -28,16 +28,40 @@ export function creteLabel(data,token)
         }
         )
     }
+export function getAllTrashNotes()
+{
+    return axios.get(`http://fundoonotes.incubation.bridgelabz.com/api/notes/getTrashNotesList`,
+    {
+        headers:
+        {
+            'Authorization': token
+        }
+    })
+}
+
+export function getAllArchiveNotes()
+{
+    return axios.get(`http://fundoonotes.incubation.bridgelabz.com/api/notes/getArchiveNotesList`,
+    {
+        headers:
+        {
+            'Authorization': token
+        }
+    })
+}
+
 
 export function getAllLabels()
 {
-    return axios.get(`http://fundoonotes.incubation.bridgelabz.com/api/noteLabels/getNoteLabelList`),{
+    return axios.get(`http://fundoonotes.incubation.bridgelabz.com/api/noteLabels/getNoteLabelList`,
+    {
         headers:
         {
             'Authorization': token
 
         }
     }
+    )
 }
 
 export function UpdateNotes(data,token)
@@ -85,7 +109,7 @@ export function UpdateNotes(data,token)
     export function ArchiveNotes(data,token)
     {
         console.log("data and token ",data,token);
-        return axios.post('http://fundoonotes.incubation.bridgelabz.com/api/notes/notes/archiveNotes',data,
+        return axios.post('http://fundoonotes.incubation.bridgelabz.com/api/notes/archiveNotes',data,
         {
             headers:
             {
@@ -94,4 +118,21 @@ export function UpdateNotes(data,token)
             }
         }
         )
+
+    }
+
+
+    export function ProfilePic(data,token)
+    {
+        console.log("data and token ",data,token);
+        return axios.post('http://fundoonotes.incubation.bridgelabz.com/api/user/uploadProfileImage',data,
+        {
+            headers:
+            {
+                'Content-type': 'application/json; charset=utf-8',
+                'Authorization':token
+            }
+        }
+        )
+        
     }

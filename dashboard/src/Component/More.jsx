@@ -28,6 +28,10 @@ class More extends Component
     open: false
      })
 }
+handleCreateLabel=()=>
+{
+
+}
 
 render()
 {

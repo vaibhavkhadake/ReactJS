@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { Snackbar,IconButton,Tooltip } from '@material-ui/core'
-import ArchiveIcon from '@material-ui/icons/Archive';
+
 import Button from '@material-ui/core/Button';
 
 import CloseIcon from '@material-ui/icons/Close';
-import { ArchiveNotes } from '../UserServices/noteService';
+
 import ArchiveNote from './ArchiveNote';
 
 
@@ -33,7 +33,7 @@ class Archive extends Component{
                     <Tooltip title="Archive">
                             {/* <IconButton onClick={this.handleClick}> */}
                                  {/* <ArchiveIcon/> */}
-                                 <ArchiveNote/>
+                                 <ArchiveNote />
                                 
                             {/* </IconButton> */}
                          </Tooltip> 

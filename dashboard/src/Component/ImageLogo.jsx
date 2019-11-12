@@ -8,6 +8,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Divider from '@material-ui/core/Divider';
 import './ImageLogo.css';
 import { Tooltip } from '@material-ui/core';
+import Keep from "./keep_48dp.png";
 
 class ImageLogo extends Component{
     constructor(props)
@@ -20,12 +21,9 @@ class ImageLogo extends Component{
     this.onClickSubmit = this.onClickSubmit.bind(this);
     }
     onClickSubmit(){
-        
-         this.props.props.history.push('/Logout');
+         this.props.props.history.push('/GooglePassword');
     }
     
-
-   
     handleClick=event=>{
 
         const { currentTarget } = event;
@@ -50,26 +48,29 @@ render()
             () => this.onOutsideclick()
           } >
           <div>
+             
                     <IconButton onClick={(event)=>this.handleClick(event)}>
-                        <Tooltip title='Image'>
-                    <AccountCircleIcon />
+                        <Tooltip title='ProfilePic'>
+                        <img src={Keep} alt="smiely face " />
+                    {/* <AccountCircleIcon /> */}
                     </Tooltip>
                     </IconButton>
                     <Card>
                     <Popper open={this.state.open} anchorEl={this.state.anchorEl}>
                     <div className="imageLogo">
                             <Paper>
-                            <br/>
-
-                                    {/* <IconButton className="accountCircleLogo" onClick={(event)=>this.handleClick(event)}>
-                                    <AccountCircleIcon />
-                                    </IconButton>
-                   
-                                    <Divider/> */}
+                                <div className="profilePic">
+                                        <IconButton style={{justifyContent:'center'}} onClick={(event)=>this.handleClick(event)}>
+                                        <Tooltip title='ProfilePic'>
+                                         <img src={Keep} alt="smiely face " />
+                                         </Tooltip>
+                                     </IconButton>
+                                </div>   
+                                    <Divider/> 
                                     <h4 style={{textAlign:'center'}}> Vaibhav Khadake </h4>
-                                    <p style={{textAlign:'center'}}> vaibhavkhadake@gmail.com </p>
+                                    <p style={{textAlign:'center'}}> vaibhavkhadake12@gmail.com </p>
                                     <Divider/>
-                                    <button className="signoutButton" style={{textAlign:'center'}} onClick={this.onClickSubmit} > Signout </button>
+                                    <button className="signoutButton"  onClick={this.onClickSubmit} > Signout </button>
                           
                             </Paper>
                             </div>
