@@ -5,9 +5,8 @@ import TextField from '@material-ui/core/TextField';
 import './DisplayAllNotes.css';
 import Reminder from './Reminder';
 import More from './More';
-import DialogBox from './DialogBox'
  import { Tooltip} from '@material-ui/core';
-//  import Archive from './Archive';
+//import Archive from './Archive';
 import ColorPalette from './ColorPalette';
 import ArchiveNote from './ArchiveNote';
 import TrashNote from './TrashNote';
@@ -34,8 +33,6 @@ class DisplayAllArchiveNotes extends Component{
                         uniqueNote:note
                     })
     }
-
-
      handleDialogBoxClose=()=>{
         this.setState({open:!this.state.open})
     }
@@ -96,7 +93,6 @@ class DisplayAllArchiveNotes extends Component{
                     </Tooltip>
                     <ArchiveNote archiveNoteId={text.id}/>
                     <More/>
-                    
                     <TrashNote trashNoteId={text.id} />
                    </div>        
                         </div>

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ListItem from '@material-ui/core/ListItem';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import { TrashNotes } from '../UserServices/noteService'
 import Tooltip from '@material-ui/core/Tooltip';
@@ -23,9 +22,7 @@ class TrashNote extends Component
 
         console.log("delete Note Id=->",this.props.trashNoteId);
         let noteObject={}
-        
         //noteObject.id=this.props.archieveNoteId;
-
         noteObject.noteIdList = [this.props.trashNoteId];
         noteObject.isDeleted=true;
         

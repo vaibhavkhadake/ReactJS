@@ -11,7 +11,6 @@ import RefreshIcon from '@material-ui/icons/Refresh';
 import { Paper } from '@material-ui/core'
 import DragHandleIcon from '@material-ui/icons/DragHandle';
 import DragIndicatorSharpIcon from '@material-ui/icons/DragIndicatorSharp';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import CloudDoneIcon from '@material-ui/icons/CloudDone';
 import './Dashboard.css';
 import Keep from "./keep_48dp.png";
@@ -23,7 +22,6 @@ import TakeANote from './TakeANote';
 import DisplayAllNotes from './DisplayAllNotes';
 import DisplayTrashNotes from './DisplayTrashNotes';
 import DisplayAllArchiveNotes from './DisplayAllArchiveNotes';
-import Masonry from 'react-masonry-component';
 
 
 const theme = createMuiTheme({
@@ -52,12 +50,53 @@ class Dashboard extends Component {
       refreshIcon: true,
       settingIcon: false,
       imagelogo: false,
-      note: true,
+      notes: true,
       noteOpen: true,
-      reminder: false
-     
+      reminder: false,
+      trash:false,
+      reminder: false,
+      trash: false,
+      label: false,
+      archive: false
     }
   }
+
+  handlenotes=()=>
+{
+  console.log("In notes ",this.state.notes);
+this.setState({
+      notes: true,
+      reminder:false,
+      trash: false,
+      label: false,
+      archive: false
+})
+}
+
+handletrash=async()=>
+{
+  
+ await this.setState({
+      notes: false,
+      reminder:false,
+      trash: true,
+      label: false,
+      archive: false
+})
+console.log("In trash ",this.state.trash);
+}
+handlearchive=()=>
+{
+  console.log( 'In archive',this.state.archive );
+  this.setState({
+    notes: false,
+    reminder:false,
+    trash: false,
+    label: false,
+    archive: true
+})
+}
+
 
   handleImageLogo = () => {
     this.setState({ note: !this.state.note });
@@ -87,16 +126,37 @@ class Dashboard extends Component {
 
 
   render() {
+   
+    const trash=this.state.trash;
+    const notes=this.state.notes;
+    const archive=this.state.archive;
+    let button;
+
+       if(trash==='true')
+        {
+          button= <DisplayTrashNotes />
+        }
+        else if(archive==='true')
+        {
+          button= <DisplayAllArchiveNotes />
+        }
+        else if(notes==='true')
+        {
+          button=<DisplayAllNotes notes={this.props.notes}/>
+        }
+
     return (
       <div>
         <div className="appBar">
           <MuiThemeProvider theme={theme}>
             <AppBar position="fixed" color="default" className="onlyAppBar">
               <Toolbar>
-                
                 <Drawer2 open={this.state.open} 
-                // clickedEvent={this.clickedEventHandle}
-                />
+                        handleTrash={this.handletrash}
+                        handleArchived={this.handlearchive} 
+                        handleNotes={this.handlenotes} 
+                        props={this.props} />
+
                 <IconButton edge="start" color="inherit" onClick={() => this.handleDrawerOpen()} >
                   <Tooltip title="Drawer">
                     <MenuIcon />
@@ -131,9 +191,8 @@ class Dashboard extends Component {
                 <div className="dragHandleIcon">
                   <Tooltip title="View">
                     <IconButton onClick={this.handleListView} >
-                     
+
                         {this.state.list === true ? <DragHandleIcon /> : <DragIndicatorSharpIcon />}
-                  
                     </IconButton>
                   </Tooltip>
                 </div>
@@ -155,7 +214,6 @@ class Dashboard extends Component {
                     </IconButton>
                   </Tooltip>
                 </div>
-
                 <div className="accountCircle">
                   <ImageLogo props={this.props} />
                 </div>
@@ -171,29 +229,24 @@ class Dashboard extends Component {
             <MuiThemeProvider theme={theme}>
               <TakeANote />
               <br />
-              {/* {
-               demo ? <DisplayAllNotes reminder={this.state.reminder}/> : <Reminder reminder={this.state.reminder}/>
-             }  */}
-             <Masonry>
-              <DisplayAllNotes notes={this.props.notes}
-              //  func={this.handleNoteOpen} 
-                />
-                </Masonry>
-            <h5>trash</h5>
-            <Masonry>
-              <DisplayTrashNotes trash={this.props.trash}/>
-              </Masonry>
 
+                    {button}
+
+              {/* <DisplayAllNotes notes={this.props.notes} noteClick={this.props.noteClick}/> */}
+
+               {/* //  func={this.handleNoteOpen} 
+              //   /> */}
+               
+              {/* <h5>trash</h5>
+              <DisplayTrashNotes trash={this.props.trash}/>
               <h5>Archive</h5>
-              <Masonry>
-              <DisplayAllArchiveNotes archive={this.props.archive} />
-              </Masonry>
-              
+              <DisplayAllArchiveNotes archive={this.props.archive} /> */}
+
             </MuiThemeProvider>
           </div>
         </div>
       </div>
-    )
+    ) 
   }
 }
 export default Dashboard;

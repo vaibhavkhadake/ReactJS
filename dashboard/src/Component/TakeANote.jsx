@@ -31,7 +31,6 @@ class TakeANote extends Component {
                 {!this.state.open   ?
                     <div className="noteMain">
                         <Paper >
-                            
                                 <InputBase placeholder="Take a note" style={{ padding: "10px" }} onClick={this.handleClick}>
                                 </InputBase>
                                 <Tooltip title="Add image"  style={{ float: "right" }}>

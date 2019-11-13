@@ -58,7 +58,7 @@ class GooglePassword extends Component
                 console.log(token);
                 localStorage.setItem('token',token);
                 this.setState({snackbaropen:true ,snackbarmessage:'success'})
-                this.props.history.push('/')
+                this.props.history.push('/dashboard')
             })
             .catch(err=>
                 {

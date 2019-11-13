@@ -19,7 +19,6 @@ class ArchiveNote extends Component
         this.setState({ archieveButton: !this.state.archieveButton })
 
         let loginToken = localStorage.getItem('token');
-
         console.log("Archived Note Id=->",this.props.archiveNoteId);
         let noteObject={}
         
@@ -34,7 +33,6 @@ class ArchiveNote extends Component
         })
         .catch(err=>{
             console.log("Archieve note ERROR==>",err);
-            
         })
     }
     render() {

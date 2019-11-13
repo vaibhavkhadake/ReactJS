@@ -11,7 +11,6 @@ export class NoteService extends Component {
                 'Authorization': token
             }
         })
-
     }
 }
 
@@ -58,7 +57,6 @@ export function getAllLabels()
         headers:
         {
             'Authorization': token
-
         }
     }
     )

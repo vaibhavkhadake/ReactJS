@@ -70,9 +70,10 @@ handleChangeNoteTitle = (event) => {
 };
 
 handleChangeNoteDescription=(event)=>{
+
     console.log("====>EDIT DESRIPTION",event.target.value);
-    
     this.setState({description:event.target.value})
+    
 }
 
 handleUpdateNote=()=>{

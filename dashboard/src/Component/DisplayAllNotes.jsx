@@ -11,7 +11,6 @@ import { Tooltip} from '@material-ui/core';
 import ColorPalette from './ColorPalette';
 import ArchiveNote from './ArchiveNote';
 import TrashNote from './TrashNote';
-
 const notesService = new NoteService()
 
 
@@ -22,6 +21,7 @@ class DisplayAllNotes extends Component {
         open: false,
         noteArray: [],
         uniqueNote:{},
+        isArchived:true
        
         }
     }
@@ -64,6 +64,7 @@ class DisplayAllNotes extends Component {
         
         return (
             <div className="allNotesMain">
+               
                 {this.state.noteArray.map((text) => (
                     <div className="allNotes">
                         <Card className="displayNotes" style={{backgroundColor:text.color}}>
@@ -99,17 +100,15 @@ class DisplayAllNotes extends Component {
                         </Tooltip>
                         <ArchiveNote archiveNoteId={text.id}/>
                         <More/>
-                        
                         <TrashNote trashNoteId={text.id} />
                        </div>        
-                            </div>
+                       </div>
                         </Card>
                         <br/>
+                        
                     </div>
                 ))}
-                 <DialogBox dialogOpen={this.state.open} singleNote={this.state.uniqueNote} dialogBoxClose={this.handleDialogBoxClose} />
-                
-                
+                 <DialogBox dialogOpen={this.state.open} singleNote={this.state.uniqueNote} dialogBoxClose={this.handleDialogBoxClose} /> 
             </div>
         )
     }

@@ -23,7 +23,7 @@ class Notes extends Component
             createNote:false,
             title:null,
             description:null,
-             getNotes:[]
+            getNotes:[]
         }
         this.onClickSubmit=this.onClickSubmit.bind(this);
     }
@@ -42,7 +42,7 @@ class Notes extends Component
                 this.setState({
                 createNote: true
                 })
-                 }
+                }
 
             handleChangeTitle=(event)=>
             {
@@ -73,7 +73,6 @@ class Notes extends Component
                 .catch(error=>{
                     console.log("created note Error",error);
                 })
-
             }
 
 render()
@@ -86,7 +85,6 @@ render()
                   !this.state.createNote ?
 
                <div className="noteMain">
-           
                <Paper>
                    
                    <InputBase placeholder="Title"
