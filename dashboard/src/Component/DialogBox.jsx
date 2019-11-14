@@ -79,7 +79,7 @@ handleChangeNoteDescription=(event)=>{
 handleUpdateNote=()=>{
     let loginToken = localStorage.getItem('token');
     let noteObject = {}
-    console.log("NOTE@@@@@@@@@@@@@@@@@@@",this.state.noteData.id);
+    console.log("NOTE",this.state.noteData.id);
     noteObject.noteId=this.state.noteData.id;
     noteObject.title = this.state.title;
     noteObject.description = this.state.description;
@@ -87,13 +87,11 @@ handleUpdateNote=()=>{
     UpdateNotes(noteObject, loginToken)
     .then(data => {
         console.log("update note data", data.data);
-
     })
     .catch(err => {
         console.log("update note ERRRR", err);
     })
      this.props.dialogBoxClose();
-    
 }
 
         render()
@@ -119,7 +117,6 @@ handleUpdateNote=()=>{
                             }}
                         />
                         <TextField
-                            
                             value={this.state.description}
                             onChange={this.handleChangeNoteDescription}
                             margin='normal'
@@ -130,7 +127,6 @@ handleUpdateNote=()=>{
                             }}
                         />
                         <Divider/>
-                           
                             <Button  onClick={this.handleUpdateNote}>Close</Button>
                     </Dialog>
 

@@ -4,8 +4,7 @@ class LifeCycle2  extends Component{
 
     componentWillMount()
     {
-        console.log("Welcome to component Will Mount method");
-        
+        console.log("Welcome to component Will Mount method");  
     }
     componentDidMount()
     {
@@ -25,19 +24,18 @@ class LifeCycle2  extends Component{
 
      componentWillUpdate(nextProps, nextState) 
      {
-
         console.log('Component Will Update before render method');
      }
 
      componentDidUpdate(prevProps, prevState)
       {
         console.log('Component Did update after render method')
-     }
+      }
 
      componentWillUnmount()
       {
         console.log('Component will unmount')
-     }
+      }
 
     render()
     {

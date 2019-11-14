@@ -21,8 +21,7 @@ class DisplayAllNotes extends Component {
         open: false,
         noteArray: [],
         uniqueNote:{},
-        isArchived:true
-       
+        isArchived:true                                                                                                                                   
         }
     }
     componentDidMount(){

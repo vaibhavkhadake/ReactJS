@@ -102,11 +102,11 @@
 .signoutButton
 {
     display: flex;
-   font-size: 15px;
-   margin-left: 20px;
+   /* font-size: 15px; */
+   /* margin-left: 20px;
    margin-top: 10px;
-   margin-bottom: 10px;
-   width: 120px;
+   margin-bottom: 10px; */
+   /* width: 120px; */
    justify-content: center;
 }
 .appIcon2

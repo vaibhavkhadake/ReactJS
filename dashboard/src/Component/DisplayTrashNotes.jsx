@@ -10,7 +10,7 @@ import ColorPalette from './ColorPalette';
 import ArchiveNote from './ArchiveNote';
 import TrashNote from './TrashNote';
 import DisplayAllNotes from './DisplayAllNotes';
-import './DisplayTrashNotes.css'
+// import './DisplayTrashNotes.css'
 
 class DisplayTrashNotes extends Component{
     constructor(props) {
@@ -62,9 +62,52 @@ class DisplayTrashNotes extends Component{
     render()
     {
         return(
-            <Fragment>
-             <DisplayAllNotes notes={this.props.noteArray} />
-             </Fragment>
+            // <Fragment>
+            //  <DisplayAllNotes notes={this.props.noteArray} />
+            //  </Fragment>
+             <div className="allNotesMain">
+             {this.state.noteArray.map((text) => (
+                 <div className="allNotes">
+                     <Card className="displayNotes" style={{backgroundColor:text.color}}>
+                         <div>
+                         <TextField  onClick={()=>this.handleNoteSave(text)}
+                             InputProps={{
+                                 disableUnderline: true
+                             }}
+                             value={text.title}
+                             margin='normal'
+                             placeholder='Title' 
+                         />
+                         <br/>
+                         <TextField onClick={()=>this.handleNoteSave(text)}
+                             InputProps={{
+                                 disableUnderline: true
+                             }}
+                             value={text.description}
+                             margin='normal'
+                             placeholder='Description'
+                         />
+                         </div>
+                         <div>
+                         <div className="noteLogo">
+                        <Reminder/>
+                     <Tooltip title="Change color">
+                      {/* Passing particular note id */}
+                     <ColorPalette
+                       colorNoteId={text.id}
+                      />
+                     </Tooltip>
+                     <ArchiveNote archiveNoteId={text.id}/>
+                     <More/>
+                     <TrashNote trashNoteId={text.id} />
+                    </div>        
+                         </div>
+                     </Card>
+                     <br/>
+                 </div>
+             ))}
+ 
+             </div>
         )
     }
 }

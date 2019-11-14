@@ -23,6 +23,8 @@ import DisplayAllNotes from './DisplayAllNotes';
 import DisplayTrashNotes from './DisplayTrashNotes';
 import DisplayAllArchiveNotes from './DisplayAllArchiveNotes';
 
+import AddLabel from './AddLabel';
+
 
 const theme = createMuiTheme({
   overrides: {
@@ -45,6 +47,7 @@ class Dashboard extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      noteArray:[],
       open: true,
       list: true,
       refreshIcon: true,
@@ -63,7 +66,7 @@ class Dashboard extends Component {
 
   handlenotes=()=>
 {
-  console.log("In notes ",this.state.notes);
+console.log("In notes ",this.state.notes);
 this.setState({
       notes: true,
       reminder:false,
@@ -75,7 +78,6 @@ this.setState({
 
 handletrash=async()=>
 {
-  
  await this.setState({
       notes: false,
       reminder:false,
@@ -85,6 +87,18 @@ handletrash=async()=>
 })
 console.log("In trash ",this.state.trash);
 }
+
+handlelabels=()=>
+{
+  this.setState({
+    notes: false,
+    reminder:false,
+    trash: false,
+    label: true,
+    archive: false
+})
+}
+
 handlearchive=()=>
 {
   console.log( 'In archive',this.state.archive );
@@ -127,23 +141,28 @@ handlearchive=()=>
 
   render() {
    
-    const trash=this.state.trash;
-    const notes=this.state.notes;
-    const archive=this.state.archive;
-    let button;
+    // const trash=this.state.trash;
+    // const notes=this.state.notes;
+    // const archive=this.state.archive;
 
-       if(trash==='true')
-        {
-          button= <DisplayTrashNotes />
-        }
-        else if(archive==='true')
-        {
-          button= <DisplayAllArchiveNotes />
-        }
-        else if(notes==='true')
-        {
-          button=<DisplayAllNotes notes={this.props.notes}/>
-        }
+    //  var button;
+
+    //    if(trash==='true')
+    //     {
+    //     return (button= <DisplayTrashNotes />);
+    //     }
+    //     else if(archive==='true')
+    //     {
+    //       return ( button=<DisplayAllArchiveNotes />);
+    //     }
+    //     else if(notes==='true')
+    //     {
+    //       return (button=<DisplayAllNotes 
+    //          notes={this.props.notes}
+    //         />);
+    //     }
+       
+    
 
     return (
       <div>
@@ -155,6 +174,7 @@ handlearchive=()=>
                         handleTrash={this.handletrash}
                         handleArchived={this.handlearchive} 
                         handleNotes={this.handlenotes} 
+                        handleLabels={this.handlelabels}
                         props={this.props} />
 
                 <IconButton edge="start" color="inherit" onClick={() => this.handleDrawerOpen()} >
@@ -173,7 +193,6 @@ handlearchive=()=>
                   <div className="search">
                     <div className="searchIcon">
                       <SearchIcon className="searchIcon" style={{paddingLeft:'15px'}}/>
-                     
                       <InputBase placeholder="search" style={{paddingLeft:'15px'}}/>
                     </div>
                   </div>
@@ -191,7 +210,6 @@ handlearchive=()=>
                 <div className="dragHandleIcon">
                   <Tooltip title="View">
                     <IconButton onClick={this.handleListView} >
-
                         {this.state.list === true ? <DragHandleIcon /> : <DragIndicatorSharpIcon />}
                     </IconButton>
                   </Tooltip>
@@ -230,18 +248,13 @@ handlearchive=()=>
               <TakeANote />
               <br />
 
-                    {button}
-
-              {/* <DisplayAllNotes notes={this.props.notes} noteClick={this.props.noteClick}/> */}
-
-               {/* //  func={this.handleNoteOpen} 
-              //   /> */}
-               
-              {/* <h5>trash</h5>
-              <DisplayTrashNotes trash={this.props.trash}/>
-              <h5>Archive</h5>
-              <DisplayAllArchiveNotes archive={this.props.archive} /> */}
-
+                    {/* {button} */}
+                    {this.state.notes ?  <DisplayAllNotes/>  : null}
+                    {this.state.archive ? <DisplayAllArchiveNotes/>:null}
+                    {this.state.trash ? <DisplayTrashNotes/>:null}
+                    {this.state.label ? <AddLabel/> : null}
+              
+             
             </MuiThemeProvider>
           </div>
         </div>

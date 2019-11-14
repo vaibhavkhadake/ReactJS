@@ -92,19 +92,7 @@ class Drawer2 extends Component {
   }
 
   handleLabel = () => {
-    console.log("Notes", this.state.notes,
-      "Reminder", this.state.reminder,
-      "Trash", this.state.trash,
-      "Archive", this.state.archive,
-      "label", this.state.label);
-
-    this.setState({
-      label: true,
-      reminder: false,
-      trash: false,
-      archive: false,
-      notes: false
-    });
+    this.props.handleLabels()
   }
 
   render() {
@@ -158,10 +146,8 @@ class Drawer2 extends Component {
                 <ListItemText> Archive </ListItemText>
               </ListItem>
             </List>
-
-
             <List>
-              <ListItem button onClick={this.handleTrash} trashStatus={this.state.trash}>
+              <ListItem button onClick={this.handleTrash} >
                 <ListItemIcon >
                   <DeleteForeverIcon />
                 </ListItemIcon>

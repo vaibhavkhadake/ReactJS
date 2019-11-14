@@ -43,11 +43,6 @@ class GooglePassword extends Component
             let field = {};
             field["username"]="";
             field["password"] = "";
-            // this.setState({ field: field })
-        //  let data=      {
-        //         "username":"vaibhav",
-        //         "password":"Vaibhav@1234"
-        //         }
                 
             console.log(this.state.field);
             axios
@@ -63,7 +58,7 @@ class GooglePassword extends Component
             .catch(err=>
                 {
                     console.log("Error in login",err);
-                    this.setState({snackbaropen:true ,snackbarmessage:'Login Failed '})
+                    this.setState({snackbaropen:true ,snackbarmessage:' Login Failed '})
                 })
 
         }

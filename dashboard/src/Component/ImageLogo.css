@@ -21,3 +21,13 @@
     justify-content: center;
     flex-direction: column;
 }
+.signoutButton
+ {
+   display: flex;
+   font-size: 15px; 
+   margin-left: 20px;
+   margin-top: 10px;
+   margin-bottom: 10px; 
+    width: 120px;
+   justify-content: center;
+}

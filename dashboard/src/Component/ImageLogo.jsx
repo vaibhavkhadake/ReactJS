@@ -7,7 +7,7 @@ import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Divider from '@material-ui/core/Divider';
 import './ImageLogo.css';
-import { Tooltip } from '@material-ui/core';
+import { Tooltip, Button } from '@material-ui/core';
 import Keep from "./keep_48dp.png";
 
 class ImageLogo extends Component{
@@ -70,7 +70,7 @@ render()
                                     <h4 style={{textAlign:'center'}}> Vaibhav Khadake </h4>
                                     <p style={{textAlign:'center'}}> vaibhavkhadake12@gmail.com </p>
                                     <Divider/>
-                                    <button className="signoutButton"  onClick={this.onClickSubmit} > Signout </button>
+                                    <Button   className="signoutButton"  onClick={this.onClickSubmit} > Signout </Button>
                           
                             </Paper>
                             </div>
