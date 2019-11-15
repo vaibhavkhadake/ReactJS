@@ -24,7 +24,6 @@ class TakeANote extends Component {
         console.log("note state clicked", this.state.open);
     }
 
-
     render() {
         return (
             <div>
@@ -33,7 +32,7 @@ class TakeANote extends Component {
                         <Paper >
                                 <InputBase placeholder="Take a note" style={{ padding: "10px" }} onClick={this.handleClick}>
                                 </InputBase>
-                                <Tooltip title="Add image"  style={{ float: "right" }}>
+                                {/* <Tooltip title="Add image"  style={{ float: "right" }}>
                                     <IconButton>
                                         <ImageIcon />
                                     </IconButton>
@@ -47,7 +46,7 @@ class TakeANote extends Component {
                                     <IconButton>
                                         <AddBoxIcon />
                                     </IconButton>
-                                </Tooltip>
+                                </Tooltip> */}
                             
                         </Paper>
                     </div> : (

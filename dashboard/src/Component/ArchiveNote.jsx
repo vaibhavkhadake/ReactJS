@@ -23,10 +23,11 @@ class ArchiveNote extends Component
         let noteObject={}
         
         //noteObject.id=this.props.archieveNoteId;
-
+        
         noteObject.noteIdList = [this.props.archiveNoteId];
         noteObject.isArchived=true;
-        
+        noteObject.notes=true;
+
        ArchiveNotes(noteObject,loginToken)
         .then(data=>{
             console.log("ArchieveNote DATA==>",data);

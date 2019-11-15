@@ -4,10 +4,9 @@ import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
 import Card from '@material-ui/core/Card';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Divider from '@material-ui/core/Divider';
 import './ImageLogo.css';
-import { Tooltip, Button } from '@material-ui/core';
+import { Tooltip, Button, DialogContent } from '@material-ui/core';
 import Keep from "./keep_48dp.png";
 
 class ImageLogo extends Component{
@@ -47,18 +46,18 @@ render()
         < ClickAwayListener onClickAway = {
             () => this.onOutsideclick()
           } >
-          <div>
+          <div className="mainImageLogo" >
              
                     <IconButton onClick={(event)=>this.handleClick(event)}>
                         <Tooltip title='ProfilePic'>
                         <img src={Keep} alt="smiely face " />
-                    {/* <AccountCircleIcon /> */}
                     </Tooltip>
                     </IconButton>
                     <Card>
                     <Popper open={this.state.open} anchorEl={this.state.anchorEl}>
                     <div className="imageLogo">
                             <Paper>
+                            <DialogContent>
                                 <div className="profilePic">
                                         <IconButton style={{justifyContent:'center'}} onClick={(event)=>this.handleClick(event)}>
                                         <Tooltip title='ProfilePic'>
@@ -70,7 +69,11 @@ render()
                                     <h4 style={{textAlign:'center'}}> Vaibhav Khadake </h4>
                                     <p style={{textAlign:'center'}}> vaibhavkhadake12@gmail.com </p>
                                     <Divider/>
-                                    <Button   className="signoutButton"  onClick={this.onClickSubmit} > Signout </Button>
+                                    <div style={{margin:'0px auto ', width:'100px'}}>
+                                    <Button  onClick={this.onClickSubmit} > Signout </Button>
+                                    </div>
+                                  
+                                    </DialogContent>
                           
                             </Paper>
                             </div>

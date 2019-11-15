@@ -26,6 +26,7 @@ import DisplayAllArchiveNotes from './DisplayAllArchiveNotes';
 import AddLabel from './AddLabel';
 
 
+
 const theme = createMuiTheme({
   overrides: {
     MuiExpansionPanelSummary: {
@@ -54,11 +55,9 @@ class Dashboard extends Component {
       settingIcon: false,
       imagelogo: false,
       notes: true,
-      noteOpen: true,
-      reminder: false,
+      noteOpen: true, 
       trash:false,
       reminder: false,
-      trash: false,
       label: false,
       archive: false
     }
@@ -170,12 +169,12 @@ handlearchive=()=>
           <MuiThemeProvider theme={theme}>
             <AppBar position="fixed" color="default" className="onlyAppBar">
               <Toolbar>
-                <Drawer2 open={this.state.open} 
+                {/* <Drawer2 open={this.state.open} 
                         handleTrash={this.handletrash}
                         handleArchived={this.handlearchive} 
                         handleNotes={this.handlenotes} 
                         handleLabels={this.handlelabels}
-                        props={this.props} />
+                        props={this.props} /> */}
 
                 <IconButton edge="start" color="inherit" onClick={() => this.handleDrawerOpen()} >
                   <Tooltip title="Drawer">
@@ -244,7 +243,14 @@ handlearchive=()=>
           </MuiThemeProvider>
 
           <div className="search2">
+            <div className="handledrawer">
             <MuiThemeProvider theme={theme}>
+            <Drawer2 open={this.state.open} 
+                        handleTrash={this.handletrash}
+                        handleArchived={this.handlearchive} 
+                        handleNotes={this.handlenotes} 
+                        handleLabels={this.handlelabels}
+                        props={this.props} />
               <TakeANote />
               <br />
 
@@ -253,9 +259,10 @@ handlearchive=()=>
                     {this.state.archive ? <DisplayAllArchiveNotes/>:null}
                     {this.state.trash ? <DisplayTrashNotes/>:null}
                     {this.state.label ? <AddLabel/> : null}
-              
-             
+                    {/* {this.state.label ? <DisplayLabels/> : null} */}
+            
             </MuiThemeProvider>
+            </div>
           </div>
         </div>
       </div>

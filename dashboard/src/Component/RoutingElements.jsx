@@ -12,7 +12,6 @@ import DisplayAllNotes from './DisplayAllNotes';
 import DisplayTrashNotes from './DisplayTrashNotes'
 import TrashNote from './TrashNote';
 import Drawer2 from './Drawer2';
-import MainDashboard from './MainDashboard';
 import DisplayAllArchiveNotes from './DisplayAllArchiveNotes';
 
 function RoutingElements() {
@@ -32,8 +31,8 @@ function RoutingElements() {
            <Route path="/DisplayAllNotes" component={DisplayAllNotes}/>
            <Route path="/dashboard/TrashNotes" component={DisplayTrashNotes}/>
            <Route path="/dashboard/ArchiveNotes" component={DisplayAllArchiveNotes}/>
-           {/* <Route path="/dashboard" component={MainDashboard}/> */}
-           {/* <Route path="TrashNote" component={TrashNote}/> */}
+          
+           <Route path="TrashNote" component={TrashNote}/>
            <Route path="Drawer2" component={Drawer2}/>
           </Switch>
         </div> 

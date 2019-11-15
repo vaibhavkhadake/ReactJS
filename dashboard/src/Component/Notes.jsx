@@ -23,7 +23,7 @@ class Notes extends Component
             createNote:false,
             title:null,
             description:null,
-            getNotes:[]
+            // getNotes:[]
         }
         this.onClickSubmit=this.onClickSubmit.bind(this);
     }

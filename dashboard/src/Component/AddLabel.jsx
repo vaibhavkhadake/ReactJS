@@ -1,16 +1,19 @@
 import React, { Component } from 'react'
-import { InputBase, Paper } from '@material-ui/core';
 import Dialog from '@material-ui/core/Dialog';
-import CloseOutlinedIcon from '@material-ui/icons/CloseOutlined';
-import DoneOutlinedIcon from '@material-ui/icons/DoneOutlined';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import { createMuiTheme, MuiThemeProvider, Divider } from "@material-ui/core";
+import { createMuiTheme, MuiThemeProvider } from "@material-ui/core";
 import { creteLabel } from '../UserServices/noteService';
 
 import DialogTitle from '@material-ui/core/DialogTitle';
+import DisplayLabels from './DisplayLabels';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
 
 
 const theme = createMuiTheme({
@@ -36,13 +39,11 @@ class AddLabel extends Component{
         super(props)
         this.state={
             label:null,
-            open:true
+            open:true,
+            userId:'5dc3a7a464e5a5001e933327'
         }
     }
-    handleClickOpen = () => {
-        
-      };
-    
+   
     handleClose = () => {
         this.setState({ open:!this.state.open})
       };
@@ -54,14 +55,17 @@ class AddLabel extends Component{
     };
 
     handleDoneLabel=()=>{
-        let loginToken = localStorage.getItem('token');
-        let labelObject = {}
-     
-        labelObject.label = this.state.label;
 
-        creteLabel(labelObject, loginToken)
+        let token= localStorage.getItem('token');
+        let labelObject = {}
+        
+        labelObject.label = this.state.label;
+        labelObject.isDeleted=false;
+        labelObject.userId=this.state.userId;
+       
+        creteLabel(labelObject, token)
             .then(data => {
-                console.log(" Label created sucessfully ", data.data);
+                console.log(" Label created sucessfully ", data);
             })
             .catch(err => {
                 console.log("Error in label create", err);
@@ -79,7 +83,7 @@ class AddLabel extends Component{
                <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle>Add Label</DialogTitle>
              <DialogContent>
-
+             
           <TextField
             value={this.state.label}
             onChange={this.handleEditLabel}
@@ -88,6 +92,12 @@ class AddLabel extends Component{
             label="Label Name"
             fullWidth
           />
+          <FormControlLabel
+                        value="end"
+                        control={<Checkbox color="primary" />}
+                        labelPlacement="end"
+                        />
+          <DisplayLabels/>
          
         </DialogContent>
         <DialogActions>
@@ -96,13 +106,7 @@ class AddLabel extends Component{
           </Button>
         </DialogActions>
       </Dialog>
-                    
 
-
-                
-                      
-
-                
             </div>
             </MuiThemeProvider>
         )

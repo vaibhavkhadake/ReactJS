@@ -2,7 +2,7 @@
 {
     display: flex;
     flex-direction: column;
-    width:100%;
+    /* width:100%; */
     color: silver;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     padding: 10px;

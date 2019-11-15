@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { getAllTrashNotes  } from '../UserServices/noteService'
 import Card from '@material-ui/core/Card';
 import TextField from '@material-ui/core/TextField';
@@ -9,8 +9,7 @@ import { Tooltip} from '@material-ui/core';
 import ColorPalette from './ColorPalette';
 import ArchiveNote from './ArchiveNote';
 import TrashNote from './TrashNote';
-import DisplayAllNotes from './DisplayAllNotes';
-// import './DisplayTrashNotes.css'
+
 
 class DisplayTrashNotes extends Component{
     constructor(props) {
@@ -45,8 +44,7 @@ class DisplayTrashNotes extends Component{
                 // console.log(response);
                  this.noteArray = response.data.data.data;
                 console.log(" note array ", this.noteArray);
-                 this.setState({ noteArray: this.noteArray
-                })
+                 this.setState({ noteArray: this.noteArray })
             })
             .catch(err => {
                 console.log("ERROR NOTE DATA =========>", err);
@@ -62,9 +60,7 @@ class DisplayTrashNotes extends Component{
     render()
     {
         return(
-            // <Fragment>
-            //  <DisplayAllNotes notes={this.props.noteArray} />
-            //  </Fragment>
+          
              <div className="allNotesMain">
              {this.state.noteArray.map((text) => (
                  <div className="allNotes">

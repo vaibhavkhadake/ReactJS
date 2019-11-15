@@ -7,7 +7,7 @@ import Reminder from './Reminder';
 import More from './More';
 import DialogBox from './DialogBox'
 import { Tooltip} from '@material-ui/core';
-//  import Archive from './Archive';
+
 import ColorPalette from './ColorPalette';
 import ArchiveNote from './ArchiveNote';
 import TrashNote from './TrashNote';
@@ -24,7 +24,8 @@ class DisplayAllNotes extends Component {
         isArchived:true                                                                                                                                   
         }
     }
-    componentDidMount(){
+    componentDidMount()
+    {
         this.handleNote()
     }
 
@@ -45,9 +46,12 @@ class DisplayAllNotes extends Component {
          notesService.getAllNoteService()
             .then(response => {
                 // console.log(response);
+                
                  this.noteArray = response.data.data.data;
                 console.log(" note array ", this.noteArray);
-                 this.setState({ noteArray: this.noteArray })
+                console.log(" is archive in display notes ", response.data.data.data);
+                 this.setState({ noteArray: this.noteArray,
+                     })
             })
             .catch(err => {
                 console.log("ERROR NOTE DATA =========>", err);
@@ -104,7 +108,6 @@ class DisplayAllNotes extends Component {
                        </div>
                         </Card>
                         <br/>
-                        
                     </div>
                 ))}
                  <DialogBox dialogOpen={this.state.open} singleNote={this.state.uniqueNote} dialogBoxClose={this.handleDialogBoxClose} /> 
