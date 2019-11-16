@@ -99,6 +99,18 @@
     margin-right:100px ;
     /* padding:20px; */
 }
+.hideDrawer{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    font-size: 12px;
+    margin-top: 125px;
+    margin-left:200px ;
+    margin-right:100px ;
+    /* padding:20px; */
+}
+
+
 .signoutButton
 {
     display: flex;

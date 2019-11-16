@@ -8,7 +8,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { createMuiTheme } from '@material-ui/core/styles';
 import './Drawer2.css';
-import DisplayLabels from './DisplayLabels';
+import DisplayLabelsInDrawer from './DisplayLabelsInDrawer';
 
 
 const theme = createMuiTheme({
@@ -60,21 +60,7 @@ class Drawer2 extends Component {
     this.props.handleNotes()
   }
 
-  handletReminder = () => {
-    console.log("Notes", this.state.notes,
-      "Reminder", this.state.reminder,
-      "Trash", this.state.trash,
-      "Archive", this.state.archive,
-      "label", this.state.label);
-
-    this.setState({
-      reminder: true,
-      notes: false,
-      trash: false,
-      label: false,
-      archive: false
-    });
-  }
+  
   handleTrash = () => {
 
     console.log(" propes in trash ", this.props);
@@ -87,6 +73,10 @@ class Drawer2 extends Component {
 
   handleLabel = () => {
     this.props.handleLabels()
+  }
+  handleReminder=()=>
+  {
+    this.props.handleReminder()
   }
 
   render() {
@@ -109,8 +99,8 @@ class Drawer2 extends Component {
 
             <List>
               <ListItem button
-                value={this.state.reminder}
-                onClick={this.handletReminder}>
+                
+                onClick={this.handleReminder}>
                 <ListItemIcon >
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="gb_Tc"><path d="M18 17v-6c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v6H4v2h16v-2h-2zm-2 0H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6zm-4 5c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2z"></path></svg>
                 </ListItemIcon>
@@ -123,7 +113,8 @@ class Drawer2 extends Component {
             <label style={{ fontSize: '15px', color: 'silver', marginLeft: '15px' }}>
                 Labels
           </label>
-          <DisplayLabels />
+          <DisplayLabelsInDrawer/>
+          {/* <DisplayLabels /> */}
           <ListItem button onClick={this.handleLabel}  >
                 <ListItemIcon >
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="gb_Tc"><path d="M20.41 4.94l-1.35-1.35c-.78-.78-2.05-.78-2.83 0L13.4 6.41 3 16.82V21h4.18l10.46-10.46 2.77-2.77c.79-.78.79-2.05 0-2.83zm-14 14.12L5 19v-1.36l9.82-9.82 1.41 1.41-9.82 9.83z"></path></svg>

@@ -6,6 +6,11 @@ import TextField from "@material-ui/core/TextField";
 import Dialog from '@material-ui/core/Dialog';
 import { Button } from '@material-ui/core';
 import { UpdateNotes } from '../UserServices/noteService'
+import Reminder from './Reminder';
+import ColorPalette from './ColorPalette';
+import ArchiveNote from './ArchiveNote';
+import More from './More';
+import TrashNote from './TrashNote';
 // import { Tooltip, IconButton } from '@material-ui/core';
 
 // import PaletteIcon from '@material-ui/icons/Palette';
@@ -43,8 +48,6 @@ export class DialogBox extends Component
 }
 
 componentWillReceiveProps(nextProps) {
-    
-   
     this.setState({
         title: nextProps.singleNote.title,
         description: nextProps.singleNote.description,
@@ -80,6 +83,7 @@ handleUpdateNote=()=>{
     let loginToken = localStorage.getItem('token');
     let noteObject = {}
     console.log("NOTE",this.state.noteData.id);
+
     noteObject.noteId=this.state.noteData.id;
     noteObject.title = this.state.title;
     noteObject.description = this.state.description;
@@ -127,7 +131,14 @@ handleUpdateNote=()=>{
                             }}
                         />
                         <Divider/>
+                        <div style={{display:'flex',flexDirection:'row'}}>
+                        <Reminder />
+                        <ColorPalette />
+                        <ArchiveNote/>
+                        <More/>
+                        <TrashNote  />
                             <Button  onClick={this.handleUpdateNote}>Close</Button>
+                            </div>
                     </Dialog>
 
                 </div>

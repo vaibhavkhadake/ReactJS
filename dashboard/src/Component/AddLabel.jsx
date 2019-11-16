@@ -9,11 +9,7 @@ import { creteLabel } from '../UserServices/noteService';
 
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DisplayLabels from './DisplayLabels';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
+
 
 
 const theme = createMuiTheme({
@@ -92,11 +88,7 @@ class AddLabel extends Component{
             label="Label Name"
             fullWidth
           />
-          <FormControlLabel
-                        value="end"
-                        control={<Checkbox color="primary" />}
-                        labelPlacement="end"
-                        />
+         
           <DisplayLabels/>
          
         </DialogContent>

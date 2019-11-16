@@ -4,13 +4,6 @@ import TextField from '@material-ui/core/TextField';
 import { ListItemIcon, ListItem, ListItemText } from '@material-ui/core';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { MuiThemeProvider } from '@material-ui/core';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-
-
-
-
-
 const theme = createMuiTheme({
     overrides: {
 MuiInputBase:{
@@ -33,7 +26,7 @@ MuiListItem:{
     })
 
 
-class DisplayLabels extends Component {
+class DisplayLabelsInDrawer extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -86,11 +79,7 @@ class DisplayLabels extends Component {
                    
                      <ListItem button >
                     <ListItemIcon >
-                    <FormControlLabel
-                        value="end"
-                        control={<Checkbox color="primary" />}
-                        labelPlacement="end"
-                        />
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="gb_Tc"><path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16zM16 17H5V7h11l3.55 5L16 17z"></path></svg>
                     </ListItemIcon>
                     <ListItemText style={{fontFamily:'Google Sans, Roboto, Arial, sans-serif',fontSize:'12px'}} >
                     <TextField onClick={() => this.handleNoteSave(text)} 
@@ -106,8 +95,6 @@ class DisplayLabels extends Component {
                     </ListItem>
                
                 ))}
-                
-                
                 </MuiThemeProvider>
             </div>
 
@@ -118,4 +105,4 @@ class DisplayLabels extends Component {
 }
 
 
-export default DisplayLabels
+export default DisplayLabelsInDrawer

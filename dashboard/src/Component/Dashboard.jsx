@@ -22,8 +22,8 @@ import TakeANote from './TakeANote';
 import DisplayAllNotes from './DisplayAllNotes';
 import DisplayTrashNotes from './DisplayTrashNotes';
 import DisplayAllArchiveNotes from './DisplayAllArchiveNotes';
-
 import AddLabel from './AddLabel';
+import ReminderMain from './ReminderMain';
 
 
 
@@ -50,7 +50,6 @@ class Dashboard extends Component {
     this.state = {
       noteArray:[],
       open: true,
-      list: true,
       refreshIcon: true,
       settingIcon: false,
       imagelogo: false,
@@ -59,9 +58,20 @@ class Dashboard extends Component {
       trash:false,
       reminder: false,
       label: false,
-      archive: false
+      archive: false,
+      gridView:true  ,
+      listView:true  
     }
   }
+
+handleView=()=>{
+  console.log("view in list ",this.state.listView)
+  console.log("view in grid ",this.state.gridView)
+  this.setState( {listView:! this.state.listView,
+    gridView:! this.state.gridView
+  })
+}
+
 
   handlenotes=()=>
 {
@@ -69,6 +79,18 @@ console.log("In notes ",this.state.notes);
 this.setState({
       notes: true,
       reminder:false,
+      trash: false,
+      label: false,
+      archive: false
+})
+}
+
+handlereminder=()=>
+{
+console.log("In notes ",this.state.reminder);
+this.setState({
+      notes: false,
+      reminder:true,
       trash: false,
       label: false,
       archive: false
@@ -118,15 +140,16 @@ handlearchive=()=>
 
     this.setState({ refreshIcon: !this.state.refreshIcon });
   }
-  handleListView = () => {
+  // handleListView = () => {
 
-    this.setState({ list: !this.state.list });
+  //   this.setState({ list: !this.state.list });
 
-  }
+  // }
   handlesettingIcon = () => {
     console.log("dashbpard setting");
     this.setState({ settingIcon: !this.state.settingIcon });
   }
+
 
   handleDrawerOpen() {
     this.setState({ open: !this.state.open });
@@ -139,7 +162,9 @@ handlearchive=()=>
 
 
   render() {
-   
+
+    let drawer= !this.state.open ? "hideDrawer" : "search2";
+
     // const trash=this.state.trash;
     // const notes=this.state.notes;
     // const archive=this.state.archive;
@@ -169,13 +194,6 @@ handlearchive=()=>
           <MuiThemeProvider theme={theme}>
             <AppBar position="fixed" color="default" className="onlyAppBar">
               <Toolbar>
-                {/* <Drawer2 open={this.state.open} 
-                        handleTrash={this.handletrash}
-                        handleArchived={this.handlearchive} 
-                        handleNotes={this.handlenotes} 
-                        handleLabels={this.handlelabels}
-                        props={this.props} /> */}
-
                 <IconButton edge="start" color="inherit" onClick={() => this.handleDrawerOpen()} >
                   <Tooltip title="Drawer">
                     <MenuIcon />
@@ -208,22 +226,13 @@ handlearchive=()=>
 
                 <div className="dragHandleIcon">
                   <Tooltip title="View">
-                    <IconButton onClick={this.handleListView} >
-                        {this.state.list === true ? <DragHandleIcon /> : <DragIndicatorSharpIcon />}
+                    <IconButton onClick={this.handleView} >
+                        {this.state.listView === true ? <DragHandleIcon /> : <DragIndicatorSharpIcon />}
                     </IconButton>
                   </Tooltip>
                 </div>
-
-                <div className="settingsIcon">
-
-                  {/* <SettingsIcon /> */}
-
-                  {/* <SettingDrawer settingIcon={this.state.settingIcon}/>
-                        <IconButton edge="start"  color="inherit" aria-label="menu" onClick={()=>this.handlesettingIcon()} >
-                        <SettingsIcon />
-                    </IconButton> */}
-
-                </div>
+                
+              
                 <div className="appsIcon">
                   <Tooltip title="Applications">
                     <IconButton  >
@@ -242,28 +251,36 @@ handlearchive=()=>
             </AppBar>
           </MuiThemeProvider>
 
-          <div className="search2">
-            <div className="handledrawer">
-            <MuiThemeProvider theme={theme}>
-            <Drawer2 open={this.state.open} 
-                        handleTrash={this.handletrash}
-                        handleArchived={this.handlearchive} 
-                        handleNotes={this.handlenotes} 
-                        handleLabels={this.handlelabels}
-                        props={this.props} />
-              <TakeANote />
-              <br />
 
-                    {/* {button} */}
-                    {this.state.notes ?  <DisplayAllNotes/>  : null}
-                    {this.state.archive ? <DisplayAllArchiveNotes/>:null}
-                    {this.state.trash ? <DisplayTrashNotes/>:null}
-                    {this.state.label ? <AddLabel/> : null}
-                    {/* {this.state.label ? <DisplayLabels/> : null} */}
-            
-            </MuiThemeProvider>
+          <div>
+           
+              <div className={drawer}>
+              <div className="handledrawer">
+              <MuiThemeProvider theme={theme}>
+              <Drawer2 open={this.state.open} 
+                          handleReminder={this.handlereminder}
+                          handleTrash={this.handletrash}
+                          handleArchived={this.handlearchive} 
+                          handleNotes={this.handlenotes} 
+                          handleLabels={this.handlelabels}
+                          props={this.props} />
+  
+                <div style={{width:'600px'}}>
+                    <TakeANote />
+                </div>
+                      {/* {button} */}
+                      {this.state.notes ?  <DisplayAllNotes view={this.state.gridView}/>  : null}
+                      {this.state.trash ? <DisplayTrashNotes/>:null}
+                      {this.state.label ? <AddLabel/> : null}
+                      {this.state.reminder ? <ReminderMain/> : null}
+                      {this.state.archive ? <DisplayAllArchiveNotes/> : null}
+              
+              </MuiThemeProvider>
+              </div>
             </div>
-          </div>
+         </div>
+
+
         </div>
       </div>
     ) 

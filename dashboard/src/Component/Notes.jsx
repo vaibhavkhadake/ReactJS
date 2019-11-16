@@ -23,11 +23,12 @@ class Notes extends Component
             createNote:false,
             title:null,
             description:null,
-            // getNotes:[]
+           
         }
         this.onClickSubmit=this.onClickSubmit.bind(this);
+        
     }
-
+    
     onClickSubmit=(event)=>{
         event.preventDefault();
          this.setState({ createNote: !this.state.createNote });
@@ -63,7 +64,8 @@ class Notes extends Component
                 let loginToken=localStorage.getItem('token');
                 let nodeObject={};
                 nodeObject.title=this.state.title;
-                nodeObject.description=this.state.description;   
+                nodeObject.description=this.state.description; 
+                nodeObject.isArchived=false;  
 
                 creteNoteService(nodeObject,loginToken)
                 .then(data=>{
@@ -96,10 +98,12 @@ render()
                    
                    <br/>
                    <InputBase placeholder="Description"
+                   
                    style={{ paddingLeft: "15px" }}
                    name="description"
                    value={this.state.description}
                    onChange={this.handleChangeDescription}
+                   
                    />
                    <br/>
                        <div className="noteLogo">
