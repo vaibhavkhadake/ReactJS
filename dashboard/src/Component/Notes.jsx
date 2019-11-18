@@ -13,7 +13,6 @@ import More from './More';
 import TakeANote from './TakeANote';
 import { creteNoteService } from '../UserServices/UserServices';
 
-
 class Notes extends Component
 {
     constructor(props)
@@ -23,10 +22,8 @@ class Notes extends Component
             createNote:false,
             title:null,
             description:null,
-           
         }
-        this.onClickSubmit=this.onClickSubmit.bind(this);
-        
+        this.onClickSubmit=this.onClickSubmit.bind(this); 
     }
     
     onClickSubmit=(event)=>{
@@ -37,7 +34,6 @@ class Notes extends Component
         noteData.description="";
         console.log("close button event",noteData);
     }
-
                 onOutsideclick()
                 {
                 this.setState({
@@ -60,12 +56,11 @@ class Notes extends Component
             handleCreateNote=()=>
             {
                 this.setState({ createNote: !this.state.createNote });
-                
                 let loginToken=localStorage.getItem('token');
                 let nodeObject={};
                 nodeObject.title=this.state.title;
                 nodeObject.description=this.state.description; 
-                nodeObject.isArchived=false;  
+                nodeObject.isArchived=false;
 
                 creteNoteService(nodeObject,loginToken)
                 .then(data=>{
@@ -75,8 +70,9 @@ class Notes extends Component
                 .catch(error=>{
                     console.log("created note Error",error);
                 })
-            }
 
+            }
+            
 render()
 {
     return(
@@ -85,25 +81,21 @@ render()
           } >
               {
                   !this.state.createNote ?
-
                <div className="noteMain">
                <Paper>
-                   
                    <InputBase placeholder="Title"
                    style={{ paddingLeft: "15px" }}
                    name="title"
                    value={this.state.title}
                    onChange={this.handleChangeTitle}
                    />    
-                   
                    <br/>
+
                    <InputBase placeholder="Description"
-                   
                    style={{ paddingLeft: "15px" }}
                    name="description"
                    value={this.state.description}
                    onChange={this.handleChangeDescription}
-                   
                    />
                    <br/>
                        <div className="noteLogo">
@@ -131,12 +123,12 @@ render()
                            </IconButton>
                         </Tooltip> 
                        
-                       <Button variant="text"  onClick={this.handleCreateNote}>
+                       <Button variant="text" onClick={this.handleCreateNote}>
                          Close
                        </Button>
                        </div>
                </Paper>
-               </div> : <TakeANote/>
+               </div> : <TakeANote />
 
               }
         </ ClickAwayListener>

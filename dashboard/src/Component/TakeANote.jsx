@@ -3,24 +3,22 @@ import './Notes.css';
 import { Paper, InputBase, IconButton } from '@material-ui/core'
 import Tooltip from '@material-ui/core/Tooltip';
 import ImageIcon from '@material-ui/icons/Image';
-// import ListItemIcon from '@material-ui/core/ListItemIcon';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import BrushIcon from '@material-ui/icons/Brush';
 import Notes from './Notes';
-
-
 
 class TakeANote extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            open: false
+            open: false,
+            noteArray:[]
         }
       
     }
 
-    handleClick = () => {
-
+    handleClick = () => 
+    {
         this.setState({ open: !this.state.open });
         console.log("note state clicked", this.state.open);
     }

@@ -24,6 +24,9 @@ import DisplayTrashNotes from './DisplayTrashNotes';
 import DisplayAllArchiveNotes from './DisplayAllArchiveNotes';
 import AddLabel from './AddLabel';
 import ReminderMain from './ReminderMain';
+import TrashNote from './TrashNote';
+// import { NoteService } from '../UserServices/noteService';
+// const notesService = new NoteService()
 
 
 
@@ -60,7 +63,7 @@ class Dashboard extends Component {
       label: false,
       archive: false,
       gridView:true  ,
-      listView:true  
+      listView:true  ,
     }
   }
 
@@ -140,11 +143,7 @@ handlearchive=()=>
 
     this.setState({ refreshIcon: !this.state.refreshIcon });
   }
-  // handleListView = () => {
-
-  //   this.setState({ list: !this.state.list });
-
-  // }
+  
   handlesettingIcon = () => {
     console.log("dashbpard setting");
     this.setState({ settingIcon: !this.state.settingIcon });
@@ -160,8 +159,8 @@ handlearchive=()=>
     this.setState({ noteOpen: !this.state.noteOpen });
   }
 
-
-  render() {
+  
+ render() {
 
     let drawer= !this.state.open ? "hideDrawer" : "search2";
 
@@ -253,7 +252,6 @@ handlearchive=()=>
 
 
           <div>
-           
               <div className={drawer}>
               <div className="handledrawer">
               <MuiThemeProvider theme={theme}>
@@ -266,7 +264,7 @@ handlearchive=()=>
                           props={this.props} />
   
                 <div style={{width:'600px'}}>
-                    <TakeANote />
+                    <TakeANote  />
                 </div>
                       {/* {button} */}
                       {this.state.notes ?  <DisplayAllNotes view={this.state.gridView}/>  : null}

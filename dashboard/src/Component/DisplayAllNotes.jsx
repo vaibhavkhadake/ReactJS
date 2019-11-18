@@ -28,6 +28,7 @@ class DisplayAllNotes extends Component {
     componentDidMount()
     {
         this.handleNote()
+       
     }
 
     handleDialog = (note) => {
@@ -45,12 +46,12 @@ class DisplayAllNotes extends Component {
     
          handleNote = () => {
          notesService.getAllNoteService()
-            .then(response => {
-              
-                 this.noteArray = response.data.data.data;
+            .then(response =>
+                 {
+                this.noteArray = response.data.data.data;
                 console.log(" note array ", this.noteArray);
                 console.log(" is archive in display notes ", response.data.data.data.title);
-                 this.setState({ noteArray: this.noteArray,
+                this.setState({ noteArray: this.noteArray,
                      })
             })
             .catch(err => {
@@ -70,7 +71,6 @@ class DisplayAllNotes extends Component {
         return (
             <div>
                  <div className={classes}>
-               
                {this.state.noteArray.map((text) => (
                    <div className="allNotes" >
                        <Card className="displayNotes" style={{backgroundColor:text.color}}  > 
@@ -106,7 +106,7 @@ class DisplayAllNotes extends Component {
                        </Tooltip>
                        <ArchiveNote archiveNoteId={text.id}/>
                        <More/>
-                       <TrashNote trashNoteId={text.id} />
+                       {/* <TrashNote trashNoteId={text.id} /> */}
                       </div>        
                       </div>
                        </Card>
@@ -115,8 +115,7 @@ class DisplayAllNotes extends Component {
                ))}
                 <DialogBox dialogOpen={this.state.open} singleNote={this.state.uniqueNote} dialogBoxClose={this.handleDialogBoxClose} /> 
            </div>
-              
-            
+           
             </div>
         )
     }

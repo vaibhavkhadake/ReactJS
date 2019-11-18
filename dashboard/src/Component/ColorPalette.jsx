@@ -100,7 +100,7 @@ class ColorPalette extends Component {
         ChangeColorNotes(noteObject, loginToken)
             .then(data => {
                 console.log("Added color successfully",data);
-                //After selecting color popover of color should close
+               
                 this.setState({ colorOpen: !this.state.colorOpen })
             })
             .catch(err => {

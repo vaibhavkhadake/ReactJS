@@ -133,7 +133,7 @@ handleUpdateNote=()=>{
                         <Divider/>
                         <div style={{display:'flex',flexDirection:'row'}}>
                         <Reminder />
-                        <ColorPalette />
+                        <ColorPalette  />
                         <ArchiveNote/>
                         <More/>
                         <TrashNote  />

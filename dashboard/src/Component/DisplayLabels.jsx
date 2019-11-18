@@ -75,15 +75,11 @@ class DisplayLabels extends Component {
             uniqueNote: note
         })
     }
-
     render() {
         return (
             <div>
                   <MuiThemeProvider theme={theme}>
-                
                 {this.state.labelArray.map((text) => (
-                    
-                   
                      <ListItem button >
                     <ListItemIcon >
                     <FormControlLabel
@@ -106,8 +102,7 @@ class DisplayLabels extends Component {
                     </ListItem>
                
                 ))}
-                
-                
+               
                 </MuiThemeProvider>
             </div>
 

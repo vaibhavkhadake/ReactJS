@@ -73,6 +73,7 @@ class DisplayTrashNotes extends Component{
                              value={text.title}
                              margin='normal'
                              placeholder='Title' 
+                             style={{ paddingLeft: "15px" }}
                          />
                          <br/>
                          <TextField onClick={()=>this.handleNoteSave(text)}
@@ -82,6 +83,7 @@ class DisplayTrashNotes extends Component{
                              value={text.description}
                              margin='normal'
                              placeholder='Description'
+                             style={{ paddingLeft: "15px" }}
                          />
                          </div>
                          <div>
@@ -95,7 +97,7 @@ class DisplayTrashNotes extends Component{
                      </Tooltip>
                      <ArchiveNote archiveNoteId={text.id}/>
                      <More/>
-                     <TrashNote trashNoteId={text.id} />
+                     {/* <TrashNote trashNoteId={text.id} /> */}
                     </div>        
                          </div>
                      </Card>

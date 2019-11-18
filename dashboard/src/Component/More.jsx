@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { Popper,Card,IconButton, List, ListItem, ClickAwayListener} from '@material-ui/core'
 import Tooltip from '@material-ui/core/Tooltip';
+import DisplayLabels from './DisplayLabels';
 
 class More extends Component
 {
@@ -31,7 +32,10 @@ class More extends Component
 }
 handleAddLabel=()=>
 {
-// label:this.sta
+    this.setState(({
+        label: !this.state.label
+    }));
+    // this.props.history.push('/DisplayLabels');
 }
 
 render()
@@ -48,15 +52,17 @@ render()
             </Tooltip>
             </IconButton>
                     <Popper open={this.state.open} anchorEl={this.state.anchorEl}>
-                    <Card style={{height:'100px' ,width:'100px'}}>
+                    <Card  >
+                    {/* style={{height:'100px' ,width:'100px'}} */}
                     <List>
-                         <ListItem button style={{fontSize:'12px'}}>Add Label</ListItem>
+                         <ListItem button onClick={this.handleAddLabel} style={{fontSize:'12px'}}>Add Label</ListItem>
+                         <ListItem button style={{fontSize:'12px'}}>Delete Note</ListItem>
                         </List> 
                         </Card>
             </Popper>
-
-            
+            {/* {this.state.label ? <DisplayLabels/>: null} */}
         </div>
+      
         </ ClickAwayListener>
     )
 }

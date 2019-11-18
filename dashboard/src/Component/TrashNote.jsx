@@ -31,8 +31,7 @@ class TrashNote extends Component
             console.log("Trashed Note DATA==>",data);
         })
         .catch(err=>{
-            console.log("Trashed note ERROR==>",err);
-            
+            console.log("Trashed note ERROR==>",err); 
         })
     }
 
