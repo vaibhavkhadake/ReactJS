@@ -1,5 +1,5 @@
 
-class person
+class Person
 {
     constructor()
     {
@@ -9,39 +9,41 @@ class person
         this.mobileNumber=""
     }
 
-    setFirstName()
+    setFirstName(firstName)
     {
         this.firstName=firstName
     }
     getFirstName()
     {
-        return firstName
+        return this.firstName
     }
 
-    setLastName()
+    setLastName(lastName)
     {
         this.lastName=lastName
     }
-    getFirstName()
+    getLastName()
     {
-        return lastName
+        return this.lastName
     }
 
-    setAddress()
+    setAddress(address)
     {
         this.address=address
     }
     getAddress()
     {
-        return address
+        return this.address
     }
 
-    setMobileNumber()
+    setMobileNumber(mobileNumber)
     {
-        this.MobileNumber=mobileNumber
+        this.mobileNumber=mobileNumber
     }
     getMobileNumber()
     {
-        return MobileNumber
+        return this.mobileNumber
     }
 }
+
+module.exports={Person}
