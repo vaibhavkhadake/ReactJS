@@ -1,1 +1,1 @@
-[]
+[{"DoctorName":"aa","DoctorId":2,"DoctorAvailability":"AM","DoctorSpecialization":"brain","PatientSize":2},{"DoctorName":"bb","DoctorId":3,"DoctorAvailability":"PM","DoctorSpecialization":"heart","PatientSize":1},{"DoctorName":"cc","DoctorId":44,"DoctorAvailability":"PM","DoctorSpecialization":"skin","PatientSize":1}]
