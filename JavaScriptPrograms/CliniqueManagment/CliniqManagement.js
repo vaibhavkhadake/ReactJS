@@ -276,7 +276,6 @@ class CliniqueManagement {
         fs.writeFileSync('doctor.json', JSON.stringify(doctorData))
     }
 
-
     deletePatient(patientData) {
         console.log("Enter patient name to delete");
         let patientName = readline.question();
@@ -294,7 +293,6 @@ class CliniqueManagement {
     displayDoctor(doctorData) {
         for (let i = 0; i < doctorData.length; i++) {
             console.log(doctorData[i]);
-
         }
     }
 
@@ -303,8 +301,6 @@ class CliniqueManagement {
             console.log(patientData[i]);
         }
     }
-
-
 }
 
 module.exports = {
