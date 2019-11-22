@@ -14,7 +14,7 @@ class LinkedList {
 
     sizeOfList()
     {
-        console.log("size : ",this.size);
+        console.log(" size of linked list : ",this.size);
     }
 
     //Add element at first in list
@@ -79,25 +79,35 @@ class LinkedList {
         this.size--;
     }
 
-    // delete first element in list
+    //delete end element in list
 
-    deleteAtEnd() {
-        let currentNode = this.head;
-        let previousNode;
-
-        while (currentNode.next) {
+     deleteAtEnd() {
+        let  currentNode = this.head;
+        if(this.size===0)
+        {
+         console.log(" Stack is empty");
+        }
+        if(this.size==1)
+        {
+            this.head=null;
+            this.size=0;
+            return currentNode
+        }
+        let previousNode=currentNode;
+        while(currentNode.next!==null)
+        {
             previousNode = currentNode
             currentNode = currentNode.next
         }
-        previousNode.next = null
-        this.size--
+        previousNode.next=null
+        this.size--;
     }
 
-
      //delete element at index position
+
      deleteAtPosition(index) {
         if (index > 0 && index > this.size) {
-            console.log("Index is out of range");
+            console.log(" Index is out of range");
             return -1
         }
         else {
@@ -143,7 +153,6 @@ class LinkedList {
             previous = currentElement;
             currentElement = currentElement.next;
             // console.log("currentElement ", currentElement);
-
         }
         //element not found then return 
         return -1;
@@ -158,13 +167,12 @@ class LinkedList {
         {
             if(currentElement.data === data)
             {
-                console.log("element found",currentElement.data);
+                console.log(" element found ", currentElement.data);
                 return currentElement
             }
-            currentElement=currentElement.next;
-           
-        }
-        console.log("element not found");
+            currentElement = currentElement.next;
+        } 
+        console.log(" element not found ");
     }
 
     //Display elements in list 
@@ -174,12 +182,10 @@ class LinkedList {
         let tempString = " ";
         while (currentElement) {
             tempString = tempString + currentElement.data + " ";
-
             currentElement = currentElement.next;
         }
         console.log(tempString);
     }
-
 }
 
 

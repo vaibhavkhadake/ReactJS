@@ -53,5 +53,4 @@ let addressData = JSON.parse(address)
 
 }
 
-
 module.exports = manager()

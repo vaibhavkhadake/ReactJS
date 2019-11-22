@@ -19,14 +19,14 @@ manage = () => {
     for (let i = 1; i < 10; i++) {
         if (play == 1) {
             console.log("Player1 ='X'");
-            let position = readline.question();
+            let position = readline.questionInt();
             obj.displayMatrix(matrix, position, player1);
             obj.show(matrix)
             play = 2;
         }
         else {
             console.log("Player2 ='O'");
-            let position = readline.question();
+            let position = readline.questionInt();
             obj.displayMatrix(matrix, position, player2);
             obj.show(matrix)
             play = 1;

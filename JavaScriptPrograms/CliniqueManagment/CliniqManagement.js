@@ -2,7 +2,7 @@ let readline = require('readline-sync');
 let fs = require('fs');
 
 class CliniqueManagement {
-    addDoctor(doctorData) {
+    addDoctor (doctorData) {
         console.log("Enter Doctor name");
         let doctorName = readline.question();
 
@@ -160,7 +160,6 @@ class CliniqueManagement {
                         console.log("Patient name", patientData[i].PatientName);
                         console.log("Patient mobile Number", patientData[i].PatientMobileNumber);
                         console.log("Patient age", patientData[i].PatientAge);
-
                         return patientData[i].PatientName
                     }
                 }
@@ -179,13 +178,10 @@ class CliniqueManagement {
 
                         return patientData[i].PatientName
                     }
-                }
-
+                }                                           
                 break;
             default:
                 console.log("You entered wrong choice");
-
-
         }
         //if patient is found then return -1 and check in takeAppointment method  
         return -1
@@ -258,7 +254,6 @@ class CliniqueManagement {
                 break;
             default:
                 console.log("You enter wrong choice")
-
         }
 
     }

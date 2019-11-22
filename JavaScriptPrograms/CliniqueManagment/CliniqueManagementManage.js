@@ -14,7 +14,7 @@ let appoinmentData = JSON.parse(appoinmentInfo);
 let util = require('./CliniqManagement');
 let objClinique = new util.CliniqueManagement();
 
-function cliniqueManage() {
+ cliniqueManage=()=> {
     let choice = 0;
     do {
 

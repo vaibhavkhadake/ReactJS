@@ -14,6 +14,8 @@ function managePrime()
     let primeArray=objPrime.displayPrime(start,end);
 
     let anagram=objPrime.displayAnagram(primeArray)
+    console.log("Anagram numbers");
+    
     console.log(anagram);
     
     for(let i=0;i<anagram[0].length;i++)
@@ -26,7 +28,6 @@ function managePrime()
         anagramStack[j]=objLinked.deleteAtEnd()
         j++
     }
-    console.log(anagramStack);
-
+    console.log("Anagram stack",anagramStack);
 }
 module.exports=managePrime()
