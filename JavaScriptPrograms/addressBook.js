@@ -7,27 +7,38 @@ let obPerson = new util.Person()
 class AddressBook 
 {
     addPerson(addressData) {
+        let format=/^[a-zA-Z]*$/;
+        let numberFormat=/^\d{10,10}$/;
+        let numbercodeFormat=/^\d{6,6}$/;
+
+        try{
         console.log("Enter First Name");
         let firstName = readline.question();
+        if(format.test(firstName)==false) throw "Input should be string"
 
         console.log("Enter Last Name");
         let lastName = readline.question();
+        if(format.test(lastName)==false) throw "Input should be string"
 
         console.log("Enter Address");
         let address = readline.question();
+        if(format.test(address)==false) throw "Input should be string"
 
         console.log("Enter City name");
         let city = readline.question();
+        if(format.test(city)==false) throw "Input should be string"
 
         console.log("Enter state name");
         let state = readline.question();
+        if(format.test(state)==false) throw "Input should be string"
 
         console.log("Enter Zip code");
         let zipcode = readline.questionInt();
-
+        if(numbercodeFormat.test(zipcode)==false)throw "Input should be 6 digit"
+        
         console.log("Enter Mobile Number");
         let mobileNumber = readline.questionInt();
-
+        if(numberFormat.test(mobileNumber)==false)throw "Input should be 10 digit"
 
         addressData.push(
             {
@@ -42,8 +53,12 @@ class AddressBook
         )
         this.saveFile(addressData);
         return [firstName, lastName, address, city, state, zipcode, mobileNumber]
+        }
+        catch(error)
+        {
+         console.log(error);
+        }
     }
-
 
     // Edit person
     editInfo(addressData) {
@@ -161,6 +176,7 @@ class AddressBook
             console.log("Record is not found which you want to delete")
             return flagid
         }
+        
         //calling display method to display record
         this.display(addressData, flagid)
 

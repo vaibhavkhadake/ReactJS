@@ -18,9 +18,8 @@ let addressData = JSON.parse(address)
 
         switch (choice) {
             case 1:
-
                 bookMethod.addPerson(addressData)
-                console.log("Adding person details");
+                // console.log("Adding person details");
                 break;
 
             case 2:

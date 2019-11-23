@@ -16,7 +16,7 @@ class LinkedList {
     {
         console.log(" size of linked list : ",this.size);
     }
-
+    
     //Add element at first in list
 
     addElementAtFirst(data) {
@@ -46,7 +46,6 @@ class LinkedList {
         this.size++;
     }
    
-
     //Add element at position in list
     insertAtPosition(data, index) {
         if (index > 0 && index > this.size) {
@@ -80,7 +79,7 @@ class LinkedList {
     }
 
     //delete end element in list
-
+    
      deleteAtEnd() {
         let  currentNode = this.head;
         if(this.size===0)
@@ -113,7 +112,7 @@ class LinkedList {
         else {
             let currentElement, previousElement;
             let count = 0;
-            currentElement=this.head
+            currentElement=this.head;
             previousElement = currentElement;
 
             if (index === 0) {
@@ -129,11 +128,9 @@ class LinkedList {
             }
             this.size--
         }
-
     }
 
     //delete particular element
-
     deleteParticularElement(data) {
         let currentElement = this.head;
         let previous = null;
@@ -148,7 +145,6 @@ class LinkedList {
                 }
                 this.size--;
                 // return currentElement.data
-
             }
             previous = currentElement;
             currentElement = currentElement.next;
@@ -184,7 +180,7 @@ class LinkedList {
             tempString = tempString + currentElement.data + " ";
             currentElement = currentElement.next;
         }
-        console.log(tempString);
+        console.log("List :",tempString);
     }
 }
 

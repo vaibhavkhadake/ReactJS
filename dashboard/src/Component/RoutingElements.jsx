@@ -19,8 +19,7 @@ import DisplayLabelsInDrawer from './DisplayLabelsInDrawer';
 function RoutingElements() {
     return (
 
-        <div>
-            <Router>
+       
         <div>
            <Switch>
            <Route path="/dashboard" component={Dashboard}  exact={true} />
@@ -38,9 +37,7 @@ function RoutingElements() {
            <Route path="DisplayLabels" component={DisplayLabels}/>
            <Route path="DisplayLabelsInDrawer" component={DisplayLabelsInDrawer}/>
           </Switch>
-        </div> 
-  </Router>
-
+       
         </div>
     );
 }

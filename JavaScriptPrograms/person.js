@@ -1,12 +1,14 @@
 
-class Person
+let util=require('./address.js')
+class Person 
 {
     constructor()
     {
         this.firstName="",
         this.lastName="",
         this.address="",
-        this.mobileNumber=""
+        this.mobileNumber="",
+        this.addressDetails=new util.Address()
     }
 
     setFirstName(firstName)
@@ -36,8 +38,6 @@ class Person
         return this.address
     }
 
-    
-
     setMobileNumber(mobileNumber)
     {
         this.mobileNumber=mobileNumber
@@ -45,6 +45,18 @@ class Person
     getMobileNumber()
     {
         return this.mobileNumber
+    }
+    // setDetails()
+    // {
+    //     this.addressDetails.setCityName();
+    //     this.addressDetails.setStateName();
+    //     this.addressDetails.setZipcode();
+    // }
+    getDetails()
+    {
+        this.addressDetails.getCityName();
+        this.addressDetails.getStateName();
+        this.addressDetails.getZipcode();
     }
 }
 
