@@ -1,4 +1,21 @@
-@media all and (min-width: 768px) 
+
+@media screen and (min-width: 320px) and (max-width: 480px){
+    .search{
+
+        display: none;
+        visibility: hidden;
+       
+     }  
+     .appIcon2
+{
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+}
+
+}
+
+@media (min-width: 768px) 
 {
     .onlyAppBar{
 
@@ -44,16 +61,18 @@
 
 .refreshIcon
 {
+    align-items: center;
     display: flex;
     justify-content: center;
-    margin-left: 200px;
+    margin-left: 150px;
     margin-right: 20px;  
 } 
 .dragHandleIcon
 {
+    align-items: center;
     display: flex;
     justify-content: space-between;
-    margin-right: 10px;  
+     margin-right: 10px;  
     margin-left: 20px; 
        
  }
@@ -63,6 +82,7 @@
  } */
   .appsIcon{
     display: flex;
+    align-items: center;
     justify-content:space-between;
      margin-left: 20px;
      margin-right: 20px;
@@ -70,8 +90,9 @@
 
  .accountCircle{
     display: flex;
+    float: right;
     justify-content: space-between;
-    margin-left:0px ;
+    /* margin-left:0px ; */
 } 
 
  .lebels
@@ -124,7 +145,8 @@
 .appIcon2
 {
     display: flex;
-    justify-content: flex-end;  
+   
+    flex-direction: row;
 }
 
 .handledrawer{
@@ -136,6 +158,4 @@
 
 
 }
-
-
 

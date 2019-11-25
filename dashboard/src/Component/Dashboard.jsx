@@ -36,7 +36,7 @@ const theme = createMuiTheme({
       content: {
         margin: '0',
         padding: '0',
-        color: 'silver'
+        color: 'ffff00'
       }
     },
     MuiAppBar: {
@@ -51,89 +51,85 @@ class Dashboard extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      noteArray:[],
+      noteArray: [],
       open: true,
       refreshIcon: true,
       settingIcon: false,
       imagelogo: false,
       notes: true,
-      noteOpen: true, 
-      trash:false,
+      noteOpen: true,
+      trash: false,
       reminder: false,
       label: false,
       archive: false,
-      gridView:true  ,
-      listView:true  ,
+      gridView: true,
+      listView: true,
     }
   }
 
-handleView=()=>{
-  console.log("view in list ",this.state.listView)
-  console.log("view in grid ",this.state.gridView)
-  this.setState( {listView:! this.state.listView,
-    gridView:! this.state.gridView
-  })
-}
+  handleView = () => {
+    console.log("view in list ", this.state.listView)
+    console.log("view in grid ", this.state.gridView)
+    this.setState({
+      listView: !this.state.listView,
+      gridView: !this.state.gridView
+    })
+  }
 
 
-  handlenotes=()=>
-{
-console.log("In notes ",this.state.notes);
-this.setState({
+  handlenotes = () => {
+    console.log("In notes ", this.state.notes);
+    this.setState({
       notes: true,
-      reminder:false,
+      reminder: false,
       trash: false,
       label: false,
       archive: false
-})
-}
+    })
+  }
 
-handlereminder=()=>
-{
-console.log("In notes ",this.state.reminder);
-this.setState({
+  handlereminder = () => {
+    console.log("In notes ", this.state.reminder);
+    this.setState({
       notes: false,
-      reminder:true,
+      reminder: true,
       trash: false,
       label: false,
       archive: false
-})
-}
+    })
+  }
 
-handletrash=async()=>
-{
- await this.setState({
+  handletrash = async () => {
+    await this.setState({
       notes: false,
-      reminder:false,
+      reminder: false,
       trash: true,
       label: false,
       archive: false
-})
-console.log("In trash ",this.state.trash);
-}
+    })
+    console.log("In trash ", this.state.trash);
+  }
 
-handlelabels=()=>
-{
-  this.setState({
-    notes: false,
-    reminder:false,
-    trash: false,
-    label: true,
-    archive: false
-})
-}
+  handlelabels = () => {
+    this.setState({
+      notes: false,
+      reminder: false,
+      trash: false,
+      label: true,
+      archive: false
+    })
+  }
 
-handlearchive=()=>
-{
-  console.log( 'In archive',this.state.archive );
-  this.setState({
-    notes: false,
-    reminder:false,
-    trash: false,
-    label: false,
-    archive: true
-})
-}
+  handlearchive = () => {
+    console.log('In archive', this.state.archive);
+    this.setState({
+      notes: false,
+      reminder: false,
+      trash: false,
+      label: false,
+      archive: true
+    })
+  }
 
 
   handleImageLogo = () => {
@@ -143,7 +139,7 @@ handlearchive=()=>
 
     this.setState({ refreshIcon: !this.state.refreshIcon });
   }
-  
+
   handlesettingIcon = () => {
     console.log("dashbpard setting");
     this.setState({ settingIcon: !this.state.settingIcon });
@@ -159,10 +155,10 @@ handlearchive=()=>
     this.setState({ noteOpen: !this.state.noteOpen });
   }
 
-  
- render() {
 
-    let drawer= !this.state.open ? "hideDrawer" : "search2";
+  render() {
+
+    let drawer = !this.state.open ? "hideDrawer" : "search2";
 
     // const trash=this.state.trash;
     // const notes=this.state.notes;
@@ -184,8 +180,8 @@ handlearchive=()=>
     //          notes={this.props.notes}
     //         />);
     //     }
-       
-    
+
+
 
     return (
       <div>
@@ -208,42 +204,48 @@ handlearchive=()=>
                 <Paper >
                   <div className="search">
                     <div className="searchIcon">
-                      <SearchIcon className="searchIcon" style={{paddingLeft:'15px'}}/>
-                      <InputBase placeholder="search" style={{paddingLeft:'15px'}}/>
+                      <SearchIcon className="searchIcon" style={{ paddingLeft: '15px' }} />
+                      <InputBase placeholder="search" style={{ paddingLeft: '15px' }} />
                     </div>
                   </div>
                 </Paper>
 
                 <div className="appIcon2">
-                <div className="refreshIcon">
-                  <Tooltip title="Refresh">
+                  <div className="refreshIcon">
+
                     <IconButton onClick={this.handleRefreshIcon} >
-                     {this.state.refreshIcon === true ? <RefreshIcon /> : <CloudDoneIcon />}
+                      <Tooltip title="Refresh">
+                        {this.state.refreshIcon === true ? <RefreshIcon /> : <CloudDoneIcon />}
+                      </Tooltip>
                     </IconButton>
-                  </Tooltip>
+
+                  </div>
+
+                  <div className="dragHandleIcon">
+
+                    <IconButton onClick={this.handleView}   >
+                      <Tooltip title="View">
+                        {this.state.listView === true ? <DragHandleIcon /> : <DragIndicatorSharpIcon />}
+                      </Tooltip>
+                    </IconButton>
+
+                  </div>
+
+
+                  <div className="appsIcon">
+
+                    <IconButton  >
+                      <Tooltip title="Applications">
+                        <AppsIcon />
+                      </Tooltip>
+                    </IconButton>
+
+                  </div>
+                  <div className="accountCircle">
+                    <ImageLogo props={this.props} />
+                  </div>
                 </div>
 
-                <div className="dragHandleIcon">
-                  <Tooltip title="View">
-                    <IconButton onClick={this.handleView} >
-                        {this.state.listView === true ? <DragHandleIcon /> : <DragIndicatorSharpIcon />}
-                    </IconButton>
-                  </Tooltip>
-                </div>
-                
-              
-                <div className="appsIcon">
-                  <Tooltip title="Applications">
-                    <IconButton  >
-                      <AppsIcon />
-                    </IconButton>
-                  </Tooltip>
-                </div>
-                <div className="accountCircle">
-                  <ImageLogo props={this.props} />
-                </div>
-                </div>
-              
 
               </Toolbar>
 
@@ -252,36 +254,36 @@ handlearchive=()=>
 
 
           <div>
-              <div className={drawer}>
+            <div className={drawer}>
               <div className="handledrawer">
-              <MuiThemeProvider theme={theme}>
-              <Drawer2 open={this.state.open} 
-                          handleReminder={this.handlereminder}
-                          handleTrash={this.handletrash}
-                          handleArchived={this.handlearchive} 
-                          handleNotes={this.handlenotes} 
-                          handleLabels={this.handlelabels}
-                          props={this.props} />
-  
-                <div style={{width:'600px'}}>
-                    <TakeANote  />
-                </div>
-                      {/* {button} */}
-                      {this.state.notes ?  <DisplayAllNotes view={this.state.gridView}/>  : null}
-                      {this.state.trash ? <DisplayTrashNotes/>:null}
-                      {this.state.label ? <AddLabel/> : null}
-                      {this.state.reminder ? <ReminderMain/> : null}
-                      {this.state.archive ? <DisplayAllArchiveNotes/> : null}
-              
-              </MuiThemeProvider>
+                <MuiThemeProvider theme={theme}>
+                  <Drawer2 open={this.state.open}
+                    handleReminder={this.handlereminder}
+                    handleTrash={this.handletrash}
+                    handleArchived={this.handlearchive}
+                    handleNotes={this.handlenotes}
+                    handleLabels={this.handlelabels}
+                    props={this.props} />
+
+                  <div style={{ width: '600px' }}>
+                    <TakeANote />
+                  </div>
+                  {/* {button} */}
+                  {this.state.notes ? <DisplayAllNotes view={this.state.gridView} /> : null}
+                  {this.state.trash ? <DisplayTrashNotes /> : null}
+                  {this.state.label ? <AddLabel /> : null}
+                  {this.state.reminder ? <ReminderMain /> : null}
+                  {this.state.archive ? <DisplayAllArchiveNotes /> : null}
+
+                </MuiThemeProvider>
               </div>
             </div>
-         </div>
+          </div>
 
 
         </div>
       </div>
-    ) 
+    )
   }
 }
 export default Dashboard;

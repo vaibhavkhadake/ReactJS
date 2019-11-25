@@ -105,8 +105,9 @@ class DisplayAllNotes extends Component {
                         />
                        </Tooltip>
                        <ArchiveNote archiveNoteId={text.id}/>
+                       
+                       <TrashNote trashNoteId={text.id} />
                        <More/>
-                       {/* <TrashNote trashNoteId={text.id} /> */}
                       </div>        
                       </div>
                        </Card>

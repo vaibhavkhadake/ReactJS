@@ -1,0 +1,49 @@
+
+.mainContainerR {
+    display: flex;
+    justify-content: center;
+  }
+  .paperR {
+    display: flex;
+    justify-content: center;
+    padding: 5%;
+    margin: 10%;
+    padding-top: 0%;
+  }.containerRegister
+{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+}
+.firstNameR
+{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.lastNameR
+{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.emailR
+{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.passwordR
+{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.buttonsR
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;   
+}

@@ -21,6 +21,7 @@ function RoutingElements() {
 
        
         <div>
+           <Router>
            <Switch>
            <Route path="/dashboard" component={Dashboard}  exact={true} />
            <Route path="/dashboard/Notes" component={Notes}/>
@@ -37,7 +38,7 @@ function RoutingElements() {
            <Route path="DisplayLabels" component={DisplayLabels}/>
            <Route path="DisplayLabelsInDrawer" component={DisplayLabelsInDrawer}/>
           </Switch>
-       
+          </Router>
         </div>
     );
 }

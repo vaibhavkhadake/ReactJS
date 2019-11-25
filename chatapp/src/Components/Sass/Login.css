@@ -1,0 +1,38 @@
+.mainContainerL {
+  display: flex;
+  justify-content: center;
+}
+.paperL {
+  display: flex;
+  justify-content: center;
+  padding: 5%;
+  margin: 10%;
+  padding-top: 0%;
+}
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+}
+.emailL {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.passwordL {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.buttonsL {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.forgetPasswordLink {
+  text-decoration: none;
+  text-align: center;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+}
