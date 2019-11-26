@@ -1,25 +1,37 @@
 .mainContainerL {
   display: flex;
   justify-content: center;
+  flex-direction: column;
 }
-.paperL {
+/* .paperL {
   display: flex;
   justify-content: center;
   padding: 5%;
   margin: 10%;
   padding-top: 0%;
-}
-.container {
+} */
+.containerL {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
   justify-content: center;
+  padding: 5%;
+  margin: 10%;
+  border: 2px solid #020003;
+  border-radius: 5px;
+}
+#ii {
+  width: 40%;
+  height: 25px;
+  border: 1px solid #020003;
+  border-radius: 5px;
 }
 .emailL {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
+
 .passwordL {
   display: flex;
   flex-wrap: wrap;
@@ -29,10 +41,11 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: center;
 }
 .forgetPasswordLink {
   text-decoration: none;
   text-align: center;
+  font-size: 12px;
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
 }
