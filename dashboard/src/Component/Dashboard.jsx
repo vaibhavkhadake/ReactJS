@@ -24,7 +24,7 @@ import DisplayTrashNotes from './DisplayTrashNotes';
 import DisplayAllArchiveNotes from './DisplayAllArchiveNotes';
 import AddLabel from './AddLabel';
 import ReminderMain from './ReminderMain';
-import TrashNote from './TrashNote';
+// import TrashNote from './TrashNote';
 // import { NoteService } from '../UserServices/noteService';
 // const notesService = new NoteService()
 

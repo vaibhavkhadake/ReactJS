@@ -9,7 +9,7 @@ import More from './More';
 //import Archive from './Archive';
 import ColorPalette from './ColorPalette';
 import ArchiveNote from './ArchiveNote';
-import TrashNote from './TrashNote';
+// import TrashNote from './TrashNote';
 
 
 class DisplayAllArchiveNotes extends Component{

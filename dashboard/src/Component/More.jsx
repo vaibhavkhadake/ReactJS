@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { Popper,Card,IconButton, List, ListItem, ClickAwayListener} from '@material-ui/core'
 import Tooltip from '@material-ui/core/Tooltip';
-import DisplayLabels from './DisplayLabels';
+// import DisplayLabels from './DisplayLabels';
 
 class More extends Component
 {

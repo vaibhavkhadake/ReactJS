@@ -8,7 +8,7 @@ import More from './More';
 import { Tooltip} from '@material-ui/core';
 import ColorPalette from './ColorPalette';
 import ArchiveNote from './ArchiveNote';
-import TrashNote from './TrashNote';
+// import TrashNote from './TrashNote';
 
 
 class DisplayTrashNotes extends Component{
