@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-let bcrypt = require("bcryptjs");
 let schema = mongoose.Schema;
 let utility = require("../util/utility");
 let token = require("../util/tokenGen");
@@ -32,13 +31,6 @@ const userSchema = new schema(
   }
 );
 
-//creating function to encrypt password
-function passwordEncrypt(password) {
-  let saltRounds = 10;
-  let salt = bcrypt.genSaltSync(saltRounds);
-  let encrptedPass = bcrypt.hashSync(password, salt);
-  return encrptedPass;
-}
 
 var users = mongoose.model("users", userSchema);
 
@@ -84,13 +76,14 @@ class UserModel {
       }
     });
   }
+
   // verify email
   verifyUser(body, callback) {
     console.log("In model verify user method", body);
     console.log("Body id", body._id);
     let tokenValue = token.tokenGenerator(body);
     console.log("token value", tokenValue);
-    let address = "http://localhost:3005/resetPassword/" + tokenValue;
+    let address = "http://localhost:3006/resetPassword/" + tokenValue;
     nodemailer.mailer(body, address, (err, res) => {
       if (err) {
         callback(err);
@@ -100,6 +93,7 @@ class UserModel {
       }
     });
   }
+
   //change the password
   changePassword(body, id, callback) {
     console.log("In model change password method");

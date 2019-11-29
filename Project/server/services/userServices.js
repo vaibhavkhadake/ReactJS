@@ -8,6 +8,7 @@ class UserServices {
   //register user services
   //check emailid is available or not
   //if not available then add new user
+
   registerUser(body, callback) {
     console.log(" request in create service ");
     let mail = { email: body.email };
@@ -54,8 +55,8 @@ class UserServices {
           );
 
           if (bcrypt.compareSync(body.password, result.password)) {
-            console.log("value of body in if", body);
-            console.log("value of result in if", result);
+            console.log("value of body ", body);
+            console.log("value of result ", result);
 
             let tokenvalue = token.tokenGenerator(result);
             tokenn = tokenvalue;
@@ -79,7 +80,7 @@ class UserServices {
     }
   }
   // forgotPassword services
-  forgotPasswordUser() {
+  forgotPasswordUser(body, callback) {
     console.log("In services forgot password method");
     userModelObj.findUser(body, (err, result) => {
       if (err) {
@@ -102,6 +103,8 @@ class UserServices {
       }
     });
   }
+
+  //reset password
   resetPasswordUser(userNewPassword, userNew_Id, callback) {
     console.log("In services reset password ");
     console.log("User new password", userNewPassword);
@@ -131,7 +134,25 @@ class UserServices {
       }
     });
   }
+  //get all user in service
+
+  getAllUser(userBody, callback) {
+    console.log("In service getAllUser method");
+    console.log("Userbody", userBody);
+    userModelObj.getAll((err, data) => {
+      if (err) {
+        callback(err);
+      } else {
+        if (!data) {
+          callback({ message: "User not found" });
+        } else {
+          callback(null, data);
+        }
+      }
+    });
+  }
 }
+
 module.exports = {
   UserServices
 };

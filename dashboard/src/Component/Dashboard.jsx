@@ -186,6 +186,7 @@ class Dashboard extends Component {
     return (
       <div>
         <div className="appBar">
+          <div>
           <MuiThemeProvider theme={theme}>
             <AppBar position="fixed" color="default" className="onlyAppBar">
               <Toolbar>
@@ -250,7 +251,8 @@ class Dashboard extends Component {
               </Toolbar>
 
             </AppBar>
-          </MuiThemeProvider>
+            </MuiThemeProvider>
+            </div>
 
 
           <div>

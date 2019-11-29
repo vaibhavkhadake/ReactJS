@@ -1,51 +1,49 @@
 .mainContainerL {
   display: flex;
-  justify-content: center;
   flex-direction: column;
-}
-/* .paperL {
-  display: flex;
-  justify-content: center;
+  font-family: Arial, Helvetica, sans-serif;
+  border: 3px solid #f1f1f1;
+  margin: 10% 30%;
   padding: 5%;
-  margin: 10%;
-  padding-top: 0%;
-} */
-.containerL {
+  background-color: silver;
+}
+.container {
   display: flex;
-  flex-wrap: wrap;
   flex-direction: column;
-  justify-content: center;
-  padding: 5%;
-  margin: 10%;
-  border: 2px solid #020003;
-  border-radius: 5px;
-}
-#ii {
-  width: 40%;
-  height: 25px;
-  border: 1px solid #020003;
-  border-radius: 5px;
-}
-.emailL {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  padding: 16px;
 }
 
-.passwordL {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
 }
-.buttonsL {
+
+.loginButton {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
+  width: auto;
+  padding: 10px 50px;
+  background-color: #36def4;
+  border: none;
+}
+.registerButton {
+  display: flex;
+  width: auto;
+  padding: 10px 50px;
+  background-color: #f436e4;
+  border: none;
+}
+.buttonss {
+  display: flex;
+  justify-content: space-evenly;
 }
 .forgetPasswordLink {
   text-decoration: none;
   text-align: center;
-  font-size: 12px;
+  font-size: 14px;
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
 }

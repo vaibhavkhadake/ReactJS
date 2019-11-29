@@ -1,49 +1,42 @@
-
 .mainContainerR {
-    display: flex;
-    justify-content: center;
-  }
-  .paperR {
-    display: flex;
-    justify-content: center;
-    padding: 5%;
-    margin: 10%;
-    padding-top: 0%;
-  }.containerRegister
-{
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  font-family: Arial, Helvetica, sans-serif;
+  border: 3px solid #f1f1f1;
+  margin: 5% 30%;
+  padding: 5%;
+  background-color: silver;
 }
-.firstNameR
-{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+.containerR {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
 }
-.lastNameR
-{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
 }
-.emailR
-{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+.registerButtonR {
+  display: flex;
+  width: auto;
+  padding: 10px 50px;
+  background-color: #3682f4;
+  border: none;
 }
-.passwordR
-{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+.buttonssR {
+  display: flex;
+  justify-content: center;
 }
-.buttonsR
-{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;   
+.alreadyRegister{
+    text-decoration: none;
+  text-align: center;
+  font-size: 14px;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
 }

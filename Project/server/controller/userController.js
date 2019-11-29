@@ -77,15 +77,16 @@ class userController {
       if (err) {
         response.status = false;
         response.message = err.message;
-        req.status(500).send(response);
+        res.status(500).send(response);
       } else {
         response.status = true;
         response.message =
           "Set password link sent to you registered email, please check. ";
-        req.status(200).send(response);
+        res.status(200).send(response);
       }
     });
   }
+  //reset password
   resetPassword(req, res) {
     console.log("In controller reset password");
     console.log("request body", req.body);
@@ -96,9 +97,9 @@ class userController {
       response.status = false;
       response.message = "Validate error";
       response.data = errors;
-      req.status(500).send(response);
+      res.status(500).send(response);
     } else {
-      console.log("request body", req.body);
+      console.log("request body in else part", req.body);
       console.log("request decoded", req.decoded);
       var userNewPassword = { password: req.body.password };
       var user_Id = { _id: req.decoded._id };
@@ -106,14 +107,32 @@ class userController {
         if (err) {
           response.status = false;
           response.message = "Not able to reset Password";
-          req.status(500).send(response);
+          res.status(500).send(response);
         } else {
           response.status = true;
           response.message = "Password reset successfully";
-          req.status(200).send(response);
+          res.status(200).send(response);
         }
       });
     }
+  }
+  //get all users
+  getAllUsers(req, res) {
+    console.log("In controller get all user method");
+    console.log("request body", req.body);
+    let response = {};
+    let userBody = req.body;
+    serviceObj.getAllUser(userBody, (err, result) => {
+      if (err) {
+        response.status = false;
+        response.message = "User not in database";
+        res.status(500).send(response);
+      } else {
+        response.status = true;
+        response.message = "User found in database";
+        res.status(200).send(response);
+      }
+    });
   }
 }
 

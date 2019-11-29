@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
-import "./Sass/Register.css";
-import { Paper } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import "./Sass/Register.css";
+import { register } from "../services/userServices";
 
 class Register extends Component {
   state = {
@@ -39,73 +37,82 @@ class Register extends Component {
   };
 
   handleRegister = () => {
-    this.props.history.push("/");
+    let registerData = {};
+    registerData.firstName = this.state.firstName;
+    registerData.lastName = this.state.lastName;
+    registerData.email = this.state.email;
+    registerData.password = this.state.password;
+
+    register(registerData)
+      .then(response => {
+        console.log("response ", response);
+        console.log("Register Successfull", response.data);
+        this.props.history.push("/");
+      })
+      .catch(err => {
+        console.log("register unsuccessfull", err);
+        this.props.history.push("/Register");
+      });
   };
 
   render() {
     return (
       <div className="mainContainerR">
-        <Paper className="paperR ">
-          <div className="containerRegister">
-            <h2>Registration Page</h2>
-            <div className="firstNameR">
-              <TextField
-                label="First name"
-                name="firstName"
-                value={this.state.firstName}
-                onChange={this.handleChangeFirstName}
-                margin="normal"
-                variant="outlined"
-              />
-            </div>
-            <div className="lastNameR">
-              <TextField
-                label="Last name"
-                name="lastName"
-                value={this.state.lastName}
-                onChange={this.handleChangeLastName}
-                margin="normal"
-                variant="outlined"
-              />
-            </div>
-            <div className="emailR">
-              <TextField
-                label="Email"
-                name="email"
-                value={this.state.email}
-                onChange={this.handleChangeEmail}
-                margin="normal"
-                variant="outlined"
-              />
-            </div>
-
-            <div className="passwordR">
-              <TextField
-                label="Password"
-                name="password"
-                value={this.state.password}
-                onChange={this.handleChangePassword}
-                margin="normal"
-                variant="outlined"
-                type="password"
-              />
-            </div>
-            <div className="buttonsR">
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={this.handleRegister}
-              >
-                Register
-              </Button>
-                    </div>
-                    <br/>
-            <div style={{textAlign:'center'}} >
-              {<Link to={"/"}>Back to Login </Link>}
-            </div>
-            <br />
-          </div>
-        </Paper>
+        <div className="containerR">
+          <label>
+            <b>First Name </b>
+          </label>
+          <input
+            type="text"
+            placeholder="Enter your first name"
+            required
+            name="firstName"
+            value={this.state.firstName}
+            onChange={this.handleChangeFirstName}
+          />
+          <label>
+            <b>Last Name </b>
+          </label>
+          <input
+            type="text"
+            placeholder="Enter your last name"
+            required
+            name="lastName"
+            value={this.state.lastName}
+            onChange={this.handleChangeLastName}
+          />
+          <label>
+            <b>Email Address </b>
+          </label>
+          <input
+            type="email"
+            placeholder="Enter your email address"
+            required
+            name="email"
+            value={this.state.email}
+            onChange={this.handleChangeEmail}
+          />
+          <label>
+            <b>Password </b>
+          </label>
+          <input
+            type="password"
+            placeholder="Enter your password"
+            required
+            name="password"
+            value={this.state.password}
+            onChange={this.handleChangePassword}
+          />
+        </div>
+        <div className="buttonssR">
+          <button className="registerButtonR" onClick={this.handleRegister}>
+            Register
+          </button>
+        </div>
+        <br />
+        <div className="alreadyRegister">
+          {<Link to={"/"}>Already Register</Link>}
+        </div>
       </div>
     );
   }

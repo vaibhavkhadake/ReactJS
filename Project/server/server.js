@@ -2,21 +2,23 @@ const express = require("express");
 const bodyParser = require("body-parser");
 var route = require("./routes/routes.js");
 let expressValidator = require("express-validator");
+let cors=require('cors')
+
 // create express app
 var app = express();
 // Configuring the database
 const dbConfig = require("./config/database.config.js");
 const mongoose = require("mongoose");
-
+app.use(cors());
 mongoose.Promise = global.Promise;
 
 // Connecting to the database
 mongoose
   .connect(dbConfig.url, {
     useNewUrlParser: true,
-		useUnifiedTopology: true,
-		useCreateIndex: true,
-		useFindAndModify: false
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
   })
   .then(() => {
     console.log("Successfully connected to the database");
