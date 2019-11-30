@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import { TextField } from "@material-ui/core";
-import Button from "@material-ui/core/Button";
-import { Paper } from "@material-ui/core";
-import "./Sass/ForgotPassword.css";
+import "./css/ForgotPassword.css";
+import { forgotPassword } from "../services/userServices";
 class ForgotPassword extends Component {
   constructor(props) {
     super(props);
@@ -17,32 +15,41 @@ class ForgotPassword extends Component {
   };
 
   handleSubmit = () => {
-    this.props.history.push("/ResetPassword");
+    let data = {};
+    data.email = this.state.email;
+    forgotPassword(data)
+      .then(response => {
+        console.log("response", response);
+        console.log(" Link sent to your mail please check", response.data);
+        this.props.history.push("/Notification");
+      })
+      .catch(err => {
+        console.log("Please enter registered email", err);
+        this.props.history.push("/ForgotPassword");
+      });
   };
 
   render() {
     return (
-      <div className="mainContainerForgot">
-        <Paper className="paperForgot">
-          <h2> Forgot Password </h2>
-          <TextField
-            label="Enter Email-Address"
-            name="email"
-            value={this.state.email}
-            onChange={this.handleChangeName}
-            margin="normal"
-            variant="outlined"
-          />
-          <div className="buttonForgot">
-            <Button
-              variant="contained"
-              color="secondary"
-              onClick={this.handleSubmit}
-            >
-              Verify
-            </Button>
+      <div className="topContainerF">
+        <div className="mainContainerForgot">
+          <div className="containerF">
+            <label>Email Address</label>
+            <input
+              type="email"
+              placeholder="Enter your email address"
+              required
+              name="email"
+              value={this.state.email}
+              onChange={this.handleChangeName}
+            />
+            <div className="verifyButtonss">
+              <button className="verifyButton" onClick={this.handleSubmit}>
+                Verify
+              </button>
+            </div>
           </div>
-        </Paper>
+        </div>
       </div>
     );
   }

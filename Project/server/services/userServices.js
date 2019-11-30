@@ -70,15 +70,6 @@ class UserServices {
     });
   }
 
-  // checking user login status
-
-  loggedUser(body, callback) {
-    if (body) {
-      callback(null, body);
-    } else {
-      callback(err);
-    }
-  }
   // forgotPassword services
   forgotPasswordUser(body, callback) {
     console.log("In services forgot password method");

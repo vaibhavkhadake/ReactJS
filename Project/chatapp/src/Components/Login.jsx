@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./Sass/Login.css";
+import "./css/Login.css";
 import { Link } from "react-router-dom";
 import { loginUser } from "../services/userServices";
 
@@ -47,12 +47,10 @@ class Login extends Component {
 
   render() {
     return (
-      <div>
+      <div className="topContainerL">
         <div className="mainContainerL">
           <div className="container">
-            <label>
-              <b>Email Address </b>
-            </label>
+            <label>Email</label>
             <input
               type="email"
               placeholder="Enter your email address"
@@ -61,9 +59,7 @@ class Login extends Component {
               value={this.state.email}
               onChange={this.handleChangeName}
             />
-            <label>
-              <b>Password </b>
-            </label>
+            <label>Password</label>
             <input
               type="password"
               placeholder="Enter your password"
@@ -74,7 +70,11 @@ class Login extends Component {
             />
           </div>
           <div className="forgetPasswordLink">
-            {<Link to={"/ForgotPassword"}>Forgot Password?</Link>}
+            {
+              <Link style={{ color: "white" }} to={"/ForgotPassword"}>
+                Forgot Password?
+              </Link>
+            }
           </div>
           <br />
           <div className="buttonss">

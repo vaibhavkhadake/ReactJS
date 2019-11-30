@@ -1,11 +1,20 @@
 import axios from "axios";
-import { func } from "prop-types";
-var address = "http://localhost:3005";
 
-export function loginUser(loginData) {
-  return axios.post(address + "/users/login", loginData);
+var url = "http://localhost:3005";
+
+export function loginUser(data) {
+  return axios.post(url + "/users/login", data);
 }
-export function register(regData)
-{
-  return axios.post(address + "/users/register", regData);
+export function register(data) {
+  return axios.post(url + "/users/register", data);
+}
+export function forgotPassword(data) {
+  return axios.post(url + "/users/forgotPassword", data);
+}
+export function resetPassword(data, token) {
+  return axios.post(url + "/users/resetPassword", data, {
+    headers: {
+      token: token
+    }
+  });
 }

@@ -31,7 +31,6 @@ const userSchema = new schema(
   }
 );
 
-
 var users = mongoose.model("users", userSchema);
 
 class UserModel {
@@ -83,7 +82,7 @@ class UserModel {
     console.log("Body id", body._id);
     let tokenValue = token.tokenGenerator(body);
     console.log("token value", tokenValue);
-    let address = "http://localhost:3006/resetPassword/" + tokenValue;
+    let address = "http://localhost:3000/resetPassword/" + tokenValue;
     nodemailer.mailer(body, address, (err, res) => {
       if (err) {
         callback(err);
@@ -94,7 +93,7 @@ class UserModel {
     });
   }
 
-  //change the password
+  //reset  password
   changePassword(body, id, callback) {
     console.log("In model change password method");
     console.log("user Id", id);

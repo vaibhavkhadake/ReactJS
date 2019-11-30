@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import { TextField } from "@material-ui/core";
-import Button from "@material-ui/core/Button";
-import { Paper } from "@material-ui/core";
-import "./Sass/ResetPassword.css";
+import "./css/ResetPassword.css";
+import { resetPassword } from "../services/userServices";
+
 
 class ResetPassword extends Component {
   constructor(props) {
@@ -16,37 +15,44 @@ class ResetPassword extends Component {
     console.log(event.target.value);
   };
   handleSubmit = () => {
-    this.props.history.push("/");
+    let data = {};
+    data.password = this.state.password;
+    let token = this.props.match.params.token;
+    resetPassword(data,token).then(response => {
+      console.log("Response ", response);
+      console.log("Response data", response.data);
+      this.props.history.push("/");
+    })
+      .catch(err=> {
+        console.log("Error in new password setting", err);
+        this.props.history.push('/ResetPassword')
+    })
+   
   };
 
   render() {
     return (
-      <div className="mainContainerReset">
-        <Paper className="paperReset">
-          <div>
-            <div>
-              <h2>Reset Password</h2>
-            </div>
-            <TextField
-              label="Enter new Password"
+      <div className="topContainerRR">
+        <div className="mainContainerReset">
+          <div className="containerRR">
+            <label>
+            Password 
+            </label>
+            <input
+              type="password"
+              placeholder="Enter Password"
+              required
               name="password"
               value={this.state.password}
               onChange={this.handleChangePassword}
-              margin="normal"
-              variant="outlined"
-              type="password"
             />
+            <div className="verifyButtonssRR">
+              <button className="verifyButtonRR" onClick={this.handleSubmit}>
+                Submit
+              </button>
+            </div>
           </div>
-          <div>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={this.handleSubmit}
-            >
-              Submit
-            </Button>
-          </div>
-        </Paper>
+        </div>
       </div>
     );
   }

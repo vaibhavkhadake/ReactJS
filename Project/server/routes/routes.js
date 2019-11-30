@@ -1,7 +1,6 @@
 var express = require("express");
 let usersRoute = require("../controller/userController");
 let verify=require("../util/tokenVerify")
-
 let router = express.Router();
 console.log("in route");
 //API
