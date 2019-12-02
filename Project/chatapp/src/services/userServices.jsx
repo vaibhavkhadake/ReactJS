@@ -18,3 +18,10 @@ export function resetPassword(data, token) {
     }
   });
 }
+export function getAllUser(token) {
+  return axios.post(url + "/users/allUsers", {
+    headers: {
+      'Authorization': token
+    }
+  })
+}

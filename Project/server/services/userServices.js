@@ -92,7 +92,7 @@ class UserServices {
           });
         }
       }
-    });
+    });    
   }
 
   //reset password

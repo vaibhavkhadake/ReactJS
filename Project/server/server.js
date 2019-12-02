@@ -3,7 +3,6 @@ const bodyParser = require("body-parser");
 var route = require("./routes/routes.js");
 let expressValidator = require("express-validator");
 let cors=require('cors')
-
 // create express app
 var app = express();
 // Configuring the database
@@ -38,6 +37,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Express Validator Middleware
+
 app.use(
   expressValidator({
     errorFormatter: function(param, msg, value) {

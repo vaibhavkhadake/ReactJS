@@ -69,8 +69,10 @@ class UserModel {
   getAll(callback) {
     users.find({}, (err, usersinfo) => {
       if (err) {
+        console.log("Array");
         callback(err);
       } else {
+        console.log("Array user data",usersinfo);
         callback(null, usersinfo);
       }
     });

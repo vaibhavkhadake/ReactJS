@@ -8,9 +8,9 @@ class userController {
 
     let response = {};
     req
-      .checkBody("firstName", "firstName should not be null")
-      .not()
-      .isEmpty();
+      .checkBody("firstName", "firstName should not be null").isAlpha();
+      // .not()
+      // .isEmpty();
     req
       .checkBody("lastName", "LastName should not be null")
       .not()

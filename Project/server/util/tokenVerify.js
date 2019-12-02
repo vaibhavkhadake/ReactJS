@@ -11,7 +11,6 @@ module.exports = {
 				console.log("\nvalue of skey", sKey);
 				console.log("\nvalue of decoded", decoded);
 				console.log("\n value of request",req.body);			
-
 				req.decoded = decoded;
 				next();
 			}
