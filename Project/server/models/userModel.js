@@ -65,6 +65,7 @@ class UserModel {
       }
     });
   }
+  
   //get All user
   getAll(callback) {
     users.find({}, (err, usersinfo) => {

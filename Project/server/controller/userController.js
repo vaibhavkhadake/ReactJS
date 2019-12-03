@@ -130,6 +130,7 @@ class userController {
       } else {
         response.status = true;
         response.message = "User found in database";
+        response.result = result;
         res.status(200).send(response);
       }
     });

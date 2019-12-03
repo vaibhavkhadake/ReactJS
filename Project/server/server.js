@@ -1,8 +1,9 @@
 const express = require("express");
+const socket = require("socket.io");
 const bodyParser = require("body-parser");
 var route = require("./routes/routes.js");
 let expressValidator = require("express-validator");
-let cors=require('cors')
+let cors = require("cors");
 // create express app
 var app = express();
 // Configuring the database
@@ -31,13 +32,12 @@ app.get("/", (request, response) => {
   response.json({ message: "Welcome to chat app" });
 });
 
-// parse requests of content-type - application/json
-app.use(bodyParser.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
+// parse requests of content-type - application/json
+app.use(bodyParser.json());
 
 // Express Validator Middleware
-
 app.use(
   expressValidator({
     errorFormatter: function(param, msg, value) {
@@ -61,6 +61,12 @@ app.use(
 app.use("/", route);
 
 // listen for requests
-app.listen(3005, () => {
+var server = app.listen(3005, () => {
   console.log("Server in 3005 port");
+});
+
+app.use(express.static("public"));
+var io = socket(server);
+io.on("connection", (socket) => {
+  console.log("New user connected", socket);
 });

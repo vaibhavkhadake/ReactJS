@@ -18,10 +18,14 @@ export function resetPassword(data, token) {
     }
   });
 }
-export function getAllUser(token) {
-  return axios.post(url + "/users/allUsers", {
-    headers: {
-      'Authorization': token
+export function getAllUser() {
+  let token = localStorage.getItem("token");
+  return axios.get(
+    url + "/users/allUsers",
+    {
+      headers: {
+        token: token
+      }
     }
-  })
+  );
 }

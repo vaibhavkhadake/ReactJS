@@ -9,10 +9,7 @@ module.exports = {
     console.log("\nvalue of payload", payload);
     let token = jwt.sign(payload, sKey);
     console.log("\nvalue of token after generation", token);
-    console.log(
-      "value of token after reconversion",
-      jwt.verify(token, sKey)._id
-    );
+    
     return token;
   }
 };
