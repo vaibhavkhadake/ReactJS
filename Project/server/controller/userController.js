@@ -7,10 +7,9 @@ class userController {
     console.log("request in controller creating user method");
 
     let response = {};
-    req
-      .checkBody("firstName", "firstName should not be null").isAlpha();
-      // .not()
-      // .isEmpty();
+    req.checkBody("firstName", "firstName should not be null").isAlpha();
+    // .not()
+    // .isEmpty();
     req
       .checkBody("lastName", "LastName should not be null")
       .not()

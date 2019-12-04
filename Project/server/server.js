@@ -1,5 +1,6 @@
 const express = require("express");
-const socket = require("socket.io");
+const socketIO = require("socket.io");
+const http = require("http");
 const bodyParser = require("body-parser");
 var route = require("./routes/routes.js");
 let expressValidator = require("express-validator");
@@ -65,8 +66,14 @@ var server = app.listen(3005, () => {
   console.log("Server in 3005 port");
 });
 
-app.use(express.static("public"));
-var io = socket(server);
-io.on("connection", (socket) => {
-  console.log("New user connected", socket);
+var io = socketIO(server);
+io.on("connection", socket => {
+  console.log("New user connected");
+  socket.on("change color", (color) => {
+    console.log("change color", color);
+    io.sockets.emit('change color',color)
+  })
+  socket.on("Disconnected",() => {
+    console.log("Disconnected");
+  });
 });

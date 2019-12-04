@@ -7,6 +7,8 @@ import ForgotPassword from "./Components/ForgotPassword";
 import ResetPassword from "./Components/ResetPassword";
 import Welcome from "./Components/Welcome";
 import Notification from "./Components/Notification";
+import Chat from './Components/chat';
+import ChatBoard from './Components/ChatBoard';
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
         <Route path="/ResetPassword/:token" component={ResetPassword} />
         <Route path="/Notification" component={Notification} />
         <Route path="/Welcome" component={Welcome} />
+        <Route path="/Chat" component={Chat} />
+        <Route path="/ChatBoard" component={ChatBoard}/>
       </Switch>
     </Router>
   );
