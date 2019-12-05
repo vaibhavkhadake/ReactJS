@@ -2,7 +2,7 @@ const messageService = require("../services/messageServices").MessageServices;
 const messageServiceObject = new messageService();
 
 class MessageController {
-  getAllUser(req, res) {
+  getAllUserChat(req, res) {
     console.log("In message controller get all chat method", req.body);
     let response = {};
     let userBody = req.body;
@@ -21,9 +21,10 @@ class MessageController {
   }
 
   saveMessages(req, res) {
-    console.log("In message contriller save message  ", req.body);
+    console.log("In message controller save message  ", req);
     let response = {};
     let userBody = req.body;
+    console.log("In message controller save message  userBody ", userBody);
     messageServiceObject.saveMessageService(userBody, (err, result) => {
       if (err) {
         response.status = false;
@@ -32,6 +33,7 @@ class MessageController {
       } else {
         response.status = true;
         response.message = "message saved in database";
+        response.senderId = result._id;
         response.result = result;
         res.status(200).send(response);
       }

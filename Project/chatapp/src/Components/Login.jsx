@@ -30,8 +30,10 @@ class Login extends Component {
     console.log("object", loginData.email);
     loginUser(loginData)
       .then(response => {
-        console.log("In login data request", response.data);
-        console.log("login successfull", response.data.token);
+        console.log("In login  Successfull => data request", response.data);
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("loggedUser", response.data.result);
+        localStorage.setItem("senderId", response.data.senderId);
         if (response.data.status) {
           this.props.history.push("/Welcome");
         }

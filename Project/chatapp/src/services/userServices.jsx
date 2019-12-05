@@ -18,6 +18,7 @@ export function resetPassword(data, token) {
     }
   });
 }
+
 export function getAllUser() {
   let token = localStorage.getItem("token");
   return axios.get(
@@ -29,3 +30,5 @@ export function getAllUser() {
     }
   );
 }
+
+

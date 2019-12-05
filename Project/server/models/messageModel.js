@@ -31,12 +31,13 @@ let messageSchema = new schema(
 var messages = mongoose.model("messages", messageSchema);
 
 class MessageModel {
-  getAllMessages(body, callback) {
-    messages.find(body, (err, data) => {
+  getAllMessages( callback) {
+    messages.find({}, (err, data) => {
       if (err) {
         callback(err);
-        console.log("object", err);
+        console.log("errr", err);
       } else {
+        console.log("get all messages ",data);
         callback(null, data);
       }
     });
@@ -51,11 +52,12 @@ class MessageModel {
       receiver: body.receiver,
       message: body.message
     });
-    newMessages.save((err, result) => {
+    newMessages.save(body,(err, result) => {
       if (err) {
         callback(err);
+        console.log("error in save", err);
       } else {
-        console.log("saving message in model");
+        console.log("saving message in model", result);
         callback(null, result);
       }
     });

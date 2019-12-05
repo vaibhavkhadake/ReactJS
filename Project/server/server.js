@@ -1,6 +1,6 @@
 const express = require("express");
 const socketIO = require("socket.io");
-const http = require("http");
+const messageController = require("./controller/messageController");
 const bodyParser = require("body-parser");
 var route = require("./routes/routes.js");
 let expressValidator = require("express-validator");
@@ -69,11 +69,18 @@ var server = app.listen(3005, () => {
 var io = socketIO(server);
 io.on("connection", socket => {
   console.log("New user connected");
-  socket.on("change color", (color) => {
-    console.log("change color", color);
-    io.sockets.emit('change color',color)
-  })
-  socket.on("Disconnected",() => {
+  socket.on("messaged", message => {
+    console.log("message in socket connection", message);
+    messageController.saveMessages(message, (err, data) => {
+      if (err) {
+        console.log("err in socket ", err);
+      } else {
+        console.log("message saved", data);
+        io.sockets.emit("readMessage", data);
+      }
+    });
+  });
+  socket.on("Disconnect", () => {
     console.log("Disconnected");
   });
 });

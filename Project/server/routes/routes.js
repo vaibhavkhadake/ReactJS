@@ -10,7 +10,8 @@ router.post("/users/login", usersRoute.login);
 router.post("/users/forgotPassword", usersRoute.forgotPassword);
 router.post("/users/resetPassword", verify.tokenVerifyer, usersRoute.resetPassword);
 router.get("/users/allUsers", verify.tokenVerifyer, usersRoute.getAllUsers);
+
 router.post("users/savemessages", verify.tokenVerifyer, messageRoute.saveMessages);
-router.get("/users/messages", verify.tokenVerifyer, messageRoute.getAllUser);
+router.get("/users/messages", verify.tokenVerifyer, messageRoute.getAllUserChat);
 
 module.exports = router;
