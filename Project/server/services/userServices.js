@@ -10,7 +10,7 @@ class UserServices {
   //if not available then add new user
 
   registerUser(body, callback) {
-    console.log(" request in create service ");
+    console.log(" request in create service body ",body);
     let mail = { email: body.email };
     userModelObj.findUser(mail, (err, result) => {
       if (err) {

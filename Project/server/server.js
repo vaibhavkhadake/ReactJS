@@ -70,13 +70,13 @@ var io = socketIO(server);
 io.on("connection", socket => {
   console.log("New user connected");
   socket.on("messaged", message => {
-    console.log("message in socket connection", message);
+    console.log("message in server socket connection", message);
     messageController.saveMessages(message, (err, data) => {
       if (err) {
         console.log("err in socket ", err);
       } else {
         console.log("message saved", data);
-        io.sockets.emit("readMessage", data);
+        socket.emit("readMessage", data);
       }
     });
   });

@@ -9,8 +9,9 @@
   flex-direction: column;
   font-family: Arial, Helvetica, sans-serif;
   margin: 2% 30%;
-  padding: 5%;
+  padding: 3%;
   background-color: rgba(66, 66, 66, 0.5);
+  border-radius: 15px;
   
 }
 .containerR {
@@ -53,4 +54,16 @@ input[type="password"] {
   text-align: center;
   font-size: 16px;
   font-family: "Pacifico", cursive;
+}
+.ErrorMessage{
+  font-size: 12px;
+  color: red;
+  /* text-align: center; */
+  font-family: monospace;
+  /* background-color: #ffffff; */
+  width: fit-content;
+  border-radius: 5px;
+  align-self: center;
+  padding: 2px 5px ;
+  text-shadow: 1px 1px #f1f1f1
 }

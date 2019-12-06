@@ -10,33 +10,38 @@ class Welcome extends Component {
     this.state = {
       users: [],
       chatBoard: false,
-      loggedUser: undefined,
-      loggedUserId: undefined,
-      receiver: undefined,
-      receiverId: undefined,
+      loggedUser: "",
+      loggedUserId: "",
+      receiver: "",
+      receiverId: "",
       messageSent: " ",
-      endpoint:"http://localhost:3005"
+      endpoint: "http://localhost:3005/"
     };
   }
   handleSent = () => {
     const socket = io(this.state.endpoint);
-    socket.emit("messaged",this.state.messageSent);
-   console.log("message",this.state.messageSent);
+    socket.emit("messaged", this.state.messageSent);
+    console.log("message", this.state.messageSent);
+    socket.on("readMessage", data => {
+      localChatHistory.push(data);
+      console.log("data in localchathistory==> ", localChatHistory);
+    });
   };
+
   handleReceiver = receiver => {
     console.log("Receved id", receiver._id);
+    console.log("sender  id", this.state.loggedUserId);
+    console.log("sender  ", this.state.loggedUser);
     console.log("receiver name", receiver.firstName + receiver.lastName);
     this.setState({
       chatBoard: !this.state.chatBoard,
+      senderId: this.state.loggedUserId,
+      sender: this.state.loggedUser,
       receiverId: receiver._id,
       receiver: receiver.firstName + receiver.lastName
     });
   };
-  // handleUser = () => {
-  //   this.setState({
-  //     chatBoard: !this.state.chatBoard
-  //   });
-  // };
+
   handleLogout = () => {
     this.props.history.push("/");
   };
@@ -57,16 +62,11 @@ class Welcome extends Component {
         });
       })
       .catch(err => {
-        console.log("Error in get all user method ", err);
+        console.log("Error in get all user method in welcome page ", err);
       });
   }
 
   render() {
-    const socket=io(this.state.endpoint)
-    socket.on("readMessage", data => {
-      localChatHistory.push(data);
-      console.log("data in localchathistory==> ", localChatHistory);
-    });
     const users = this.state.users;
     const usersAvailabe = users.filter(
       user => user._id !== this.state.loggedUserId
@@ -104,19 +104,21 @@ class Welcome extends Component {
           </div>
           {this.state.chatBoard !== false ? (
             <div className="main">
-              <div className="chatscreen">{this.state.receiver}{this.state.messageSent}</div>
+              <div className="chatscreen">
+                {this.state.receiver}
+                {this.state.messageSent}
+              </div>
               <div>
                 <textarea
                   placeholder="Type message.."
                   name="messageSent"
                   value={this.state.messageSent}
-                  onChange={this.handleInput}
+                  onChange={event => this.handleInput(event)}
                   required
                 ></textarea>
               </div>
-
               <div>
-                <button className="buttonChatBoard" onClick={(event)=>this.handleSent(event)}>
+                <button className="buttonChatBoard" onClick={this.handleSent}>
                   Send
                 </button>
               </div>

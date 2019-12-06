@@ -1,6 +1,6 @@
 var express = require("express");
 let usersRoute = require("../controller/userController");
-let messageRoute=require('../controller/messageController')
+let messageRoute = require("../controller/messageController");
 let verify=require("../util/tokenVerify")
 let router = express.Router();
 console.log("in route");
@@ -11,7 +11,7 @@ router.post("/users/forgotPassword", usersRoute.forgotPassword);
 router.post("/users/resetPassword", verify.tokenVerifyer, usersRoute.resetPassword);
 router.get("/users/allUsers", verify.tokenVerifyer, usersRoute.getAllUsers);
 
-router.post("users/savemessages", verify.tokenVerifyer, messageRoute.saveMessages);
+router.post("users/messages", verify.tokenVerifyer, messageRoute.saveMessages);
 router.get("/users/messages", verify.tokenVerifyer, messageRoute.getAllUserChat);
 
 module.exports = router;

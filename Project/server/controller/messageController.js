@@ -33,7 +33,7 @@ class MessageController {
       } else {
         response.status = true;
         response.message = "message saved in database";
-        response.senderId = result._id;
+        // response.senderId = result._id;
         response.result = result;
         res.status(200).send(response);
       }

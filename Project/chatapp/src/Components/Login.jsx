@@ -6,7 +6,8 @@ import { loginUser } from "../services/userServices";
 class Login extends Component {
   state = {
     email: "",
-    password: ""
+    password: "",
+    error:{}
   };
 
   handleChangeName = event => {
@@ -23,25 +24,68 @@ class Login extends Component {
     console.log(event.target.value);
   };
 
-  handleLogin = () => {
-    let loginData = {};
-    loginData.email = this.state.email;
-    loginData.password = this.state.password;
-    console.log("object", loginData.email);
-    loginUser(loginData)
-      .then(response => {
-        console.log("In login  Successfull => data request", response.data);
-        localStorage.setItem("token", response.data.token);
-        localStorage.setItem("loggedUser", response.data.result);
-        localStorage.setItem("senderId", response.data.senderId);
-        if (response.data.status) {
-          this.props.history.push("/Welcome");
-        }
-      })
-      .catch(err => {
-        console.log("Login Unsuccessfull.....", err);
-        this.props.history.push("/");
-      });
+  isValid() {
+    let error = {};
+    let isVal = true;
+
+    if (!this.state.email) {
+      isVal = false;
+      error["email"] = "Please enter email ";
+    }
+    if (!this.state.email !== "undefined") {
+      if (
+        !this.state.email.match(
+          /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
+        )
+      ) {
+        isVal = false;
+        error["email"] = "Please enter valid  email";
+      }
+    }
+
+    if (!this.state.password) {
+      isVal = false;
+      error["password"] = "Please enter Password";
+    }
+    if (!this.state.password !== "undefined") {
+      if (!this.state.password.match(/^.{8,20}$/)) {
+        isVal = false;
+        error["password"] = "Please enter password more than 8 digit";
+      }
+    }
+    this.setState({
+      error: error
+    });
+    return isVal;
+  }
+
+  handleLogin = (event) => {
+    event.preventDefault();
+    if (this.isValid()) {
+      let field = {};
+      field["email"] = "";
+      field["password"] = "";
+      this.setState({ field: field });
+
+      let loginData = {};
+      loginData.email = this.state.email;
+      loginData.password = this.state.password;
+      console.log("object", loginData.email);
+      loginUser(loginData)
+        .then(response => {
+          console.log("In login  Successfull => data request", response.data);
+          localStorage.setItem("token", response.data.token);
+          localStorage.setItem("loggedUser", response.data.result);
+          localStorage.setItem("senderId", response.data.senderId);
+          if (response.data.status) {
+            this.props.history.push("/Welcome");
+          }
+        })
+        .catch(err => {
+          console.log("Login Unsuccessfull.....", err);
+          this.props.history.push("/");
+        });
+    }
   };
   handleRegister = () => {
     this.props.history.push("/Register");
@@ -61,6 +105,7 @@ class Login extends Component {
               value={this.state.email}
               onChange={this.handleChangeName}
             />
+            <span className="ErrorMessage">{this.state.error.email}</span>
             <label>Password</label>
             <input
               type="password"
@@ -70,6 +115,7 @@ class Login extends Component {
               value={this.state.password}
               onChange={this.handleChangePassword}
             />
+            <span className="ErrorMessage">{this.state.error.password}</span>
           </div>
           <div className="forgetPasswordLink">
             {

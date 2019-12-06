@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-let schema = mongoose.Schema;
+var schema = mongoose.Schema;
 
 let messageSchema = new schema(
   {
@@ -31,8 +31,8 @@ let messageSchema = new schema(
 var messages = mongoose.model("messages", messageSchema);
 
 class MessageModel {
-  getAllMessages( callback) {
-    messages.find({}, (err, data) => {
+  getAllMessages( body,callback) {
+    messages.find(body, (err, data) => {
       if (err) {
         callback(err);
         console.log("errr", err);
@@ -52,7 +52,7 @@ class MessageModel {
       receiver: body.receiver,
       message: body.message
     });
-    newMessages.save(body,(err, result) => {
+    newMessages.save((err, result) => {
       if (err) {
         callback(err);
         console.log("error in save", err);
