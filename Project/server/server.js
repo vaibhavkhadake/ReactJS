@@ -76,7 +76,8 @@ io.on("connection", socket => {
         console.log("err in socket ", err);
       } else {
         console.log("message saved", data);
-        socket.emit("readMessage", data);
+        // socket.emit("readMessage", data);
+        io.sockets.emit("readMessage", data);
       }
     });
   });

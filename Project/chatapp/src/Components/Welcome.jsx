@@ -3,6 +3,7 @@ import { getAllUser } from "../services/userServices";
 import "../Components/css/Welcome.css";
 import io from "socket.io-client";
 var localChatHistory = [];
+var socket;
 
 class Welcome extends Component {
   constructor(props) {
@@ -15,14 +16,35 @@ class Welcome extends Component {
       receiver: "",
       receiverId: "",
       messageSent: " ",
-      endpoint: "http://localhost:3005/"
+      endpoint: "http://localhost:3005/",
+      currentMessage: "",
+      allMessage: []
     };
   }
+
   handleSent = () => {
-    const socket = io(this.state.endpoint);
-    socket.emit("messaged", this.state.messageSent);
+    var alldata = {
+      senderId: this.state.loggedUserId,
+      sender: this.state.loggedUser,
+      receiverId: this.state.receiverId,
+      receiver: this.state.receiver,
+      message: this.state.messageSent
+    };
+    socket = io(this.state.endpoint);
+    socket.emit("messaged", alldata);
     console.log("message", this.state.messageSent);
     socket.on("readMessage", data => {
+      console.log("data message", data);
+      this.setState({
+        currentMessage: data.result.message
+      });
+      let arr = [];
+      arr.push(this.state.currentMessage);
+      console.log("arr", arr);
+
+      this.state.allMessage.push(arr);
+      console.log("all messages", this.state.allMessage);
+      console.log(this.state.currentMessage);
       localChatHistory.push(data);
       console.log("data in localchathistory==> ", localChatHistory);
     });
@@ -31,14 +53,15 @@ class Welcome extends Component {
   handleReceiver = receiver => {
     console.log("Receved id", receiver._id);
     console.log("sender  id", this.state.loggedUserId);
-    console.log("sender  ", this.state.loggedUser);
-    console.log("receiver name", receiver.firstName + receiver.lastName);
+    console.log("sender ", this.state.loggedUser);
+    console.log("receiver ", receiver.firstName + receiver.lastName);
     this.setState({
       chatBoard: !this.state.chatBoard,
       senderId: this.state.loggedUserId,
       sender: this.state.loggedUser,
       receiverId: receiver._id,
-      receiver: receiver.firstName + receiver.lastName
+      receiver: receiver.firstName + receiver.lastName,
+      message: this.state.messageSent
     });
   };
 
@@ -46,7 +69,6 @@ class Welcome extends Component {
     this.props.history.push("/");
   };
   handleInput = event => {
-    event.preventDefault();
     this.setState({
       [event.target.name]: event.target.value
     });
@@ -54,7 +76,7 @@ class Welcome extends Component {
   componentDidMount() {
     getAllUser()
       .then(response => {
-        console.log("response is in get all users  ", response.data);
+        console.log("response is in get all users ==>  ", response.data.result);
         this.setState({
           users: response.data.result,
           loggedUser: localStorage.getItem("loggedUser"),
@@ -67,6 +89,10 @@ class Welcome extends Component {
   }
 
   render() {
+    console.log("current message", this.state.currentMessage);
+    var mess = this.state.allMessage.map(res => {
+      return res;
+    });
     const users = this.state.users;
     const usersAvailabe = users.filter(
       user => user._id !== this.state.loggedUserId
@@ -104,10 +130,15 @@ class Welcome extends Component {
           </div>
           {this.state.chatBoard !== false ? (
             <div className="main">
-              <div className="chatscreen">
-                {this.state.receiver}
-                {this.state.messageSent}
-              </div>
+              {typeof this.state.currentMessage !== "undefined" ? (
+                <div className="chatscreen">
+                  {this.state.receiver}
+                  <label>{mess}</label>
+                </div>
+              ) : (
+                <div className="chatscreen">{this.state.receiver} </div>
+              )}
+
               <div>
                 <textarea
                   placeholder="Type message.."

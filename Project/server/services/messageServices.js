@@ -20,12 +20,14 @@ class MessageServices {
     console.log("In message service save message", body);
     messageModelObject.saveMessages(body, (err, result) => {
       if (err) {
-        callback(err);
+        console.log("in result service err",err);
+       return callback(err);
       } else {
         if (!result) {
-          callback({ message: "no information in save message service" });
+         return callback({ message: "no information in save message service" });
         } else {
-          callback(null, result);
+          console.log("in result service",result);
+          return callback(null, result);
         }
       }
     });

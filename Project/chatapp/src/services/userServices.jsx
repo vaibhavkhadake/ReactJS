@@ -19,18 +19,32 @@ export function resetPassword(data, token) {
   });
 }
 
-export function getAllUser(data) {
+export function getAllUser() {
   let token = localStorage.getItem("token");
-  
-  return axios.get(
-    url + "/users/allUsers",
-    {
-      headers: {
-        token: token
-      }
+  return axios.get(url + "/users/allUsers", {
+    headers: {
+      token: token
     }
-    ,data
-  );
+  });
 }
+// export function saveChat(data) {
+//   let token = localStorage.getItem("token");
+//   console.log(data);
+// let dadaa={senderID:"vv"}
+//   return axios.post(url + "/users/messages",dadaa, {
+//     headers: {
+//       token: token
+//     }
+    
+//   });
+// }
+// export function getChat() {
+//   let token = localStorage.getItem("token");
+//   console.log(token);
 
-
+//   return axios.get(url + "/users/messages", {
+//     headers: {
+//       token: token
+//     }
+//   });
+// }

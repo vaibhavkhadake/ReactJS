@@ -56,7 +56,7 @@ class UserModel {
   }
 
   //find the user
-  findUser(body, callback) {
+    findUser(body, callback) {
     users.findOne(body, (err, data) => {
       if (err) {
         callback(err);

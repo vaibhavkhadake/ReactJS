@@ -4,24 +4,19 @@ var schema = mongoose.Schema;
 let messageSchema = new schema(
   {
     senderId: {
-      type: String,
-      trim: true
+      type: String
     },
     receiverId: {
-      type: String,
-      trim: true
+      type: String
     },
     sender: {
-      type: String,
-      trim: true
+      type: String
     },
     receiver: {
-      type: String,
-      trim: true
+      type: String
     },
     message: {
-      type: String,
-      trim: true
+      type: String
     }
   },
   {
@@ -31,13 +26,13 @@ let messageSchema = new schema(
 var messages = mongoose.model("messages", messageSchema);
 
 class MessageModel {
-  getAllMessages( body,callback) {
+  getAllMessages(body, callback) {
     messages.find(body, (err, data) => {
       if (err) {
         callback(err);
         console.log("errr", err);
       } else {
-        console.log("get all messages ",data);
+        console.log("get all messages ", data);
         callback(null, data);
       }
     });
@@ -54,11 +49,13 @@ class MessageModel {
     });
     newMessages.save((err, result) => {
       if (err) {
-        callback(err);
         console.log("error in save", err);
+
+        return callback(err);
       } else {
         console.log("saving message in model", result);
-        callback(null, result);
+
+        return callback(null, result);
       }
     });
   }
