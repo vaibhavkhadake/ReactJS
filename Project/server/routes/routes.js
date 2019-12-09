@@ -12,6 +12,6 @@ router.post("/users/resetPassword", verify.tokenVerifyer, usersRoute.resetPasswo
 router.get("/users/allUsers", verify.tokenVerifyer, usersRoute.getAllUsers);
 
 router.get("/users/messages", verify.tokenVerifyer, messageRoute.getAllUserChat);
-router.post("/users/messages", verify.tokenVerifyer, messageRoute.saveMessages);
+router.post("/users/messagess", verify.tokenVerifyer, messageRoute.saveMessages);
 
 module.exports = router;

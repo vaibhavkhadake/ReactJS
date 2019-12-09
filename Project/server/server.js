@@ -69,6 +69,10 @@ var server = app.listen(3005, () => {
 var io = socketIO(server);
 io.on("connection", socket => {
   console.log("New user connected");
+  // socket.userName = "Anonymous";
+  // socket.on("ChangeUserName", data => {
+  //   socket.userName = data.userName;
+  // })
   socket.on("messaged", message => {
     console.log("message in server socket connection", message);
     messageController.saveMessages(message, (err, data) => {

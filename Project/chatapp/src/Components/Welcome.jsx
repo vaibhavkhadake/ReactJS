@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { getAllUser } from "../services/userServices";
+import { getAllUser, getChat } from "../services/userServices";
 import "../Components/css/Welcome.css";
 import io from "socket.io-client";
 var localChatHistory = [];
 var socket;
-
+var alldata={}
 class Welcome extends Component {
   constructor(props) {
     super(props);
@@ -21,34 +21,6 @@ class Welcome extends Component {
       allMessage: []
     };
   }
-
-  handleSent = () => {
-    var alldata = {
-      senderId: this.state.loggedUserId,
-      sender: this.state.loggedUser,
-      receiverId: this.state.receiverId,
-      receiver: this.state.receiver,
-      message: this.state.messageSent
-    };
-    socket = io(this.state.endpoint);
-    socket.emit("messaged", alldata);
-    console.log("message", this.state.messageSent);
-    socket.on("readMessage", data => {
-      console.log("data message", data);
-      this.setState({
-        currentMessage: data.result.message
-      });
-      let arr = [];
-      arr.push(this.state.currentMessage);
-      console.log("arr", arr);
-
-      this.state.allMessage.push(arr);
-      console.log("all messages", this.state.allMessage);
-      console.log(this.state.currentMessage);
-      localChatHistory.push(data);
-      console.log("data in localchathistory==> ", localChatHistory);
-    });
-  };
 
   handleReceiver = receiver => {
     console.log("Receved id", receiver._id);
@@ -86,17 +58,57 @@ class Welcome extends Component {
       .catch(err => {
         console.log("Error in get all user method in welcome page ", err);
       });
+
+    getChat()
+      .then(response => {
+        console.log("response in get chat app", response.data);
+      })
+      .catch(err => {
+        console.log("error", err);
+      });
   }
+
+  handleSent = () => {
+     alldata = {
+      senderId: this.state.loggedUserId,
+      sender: this.state.loggedUser,
+      receiverId: this.state.receiverId,
+      receiver: this.state.receiver,
+      message: this.state.messageSent
+    };
+    socket = io(this.state.endpoint);
+    socket.emit("messaged", alldata);
+    // console.log("message", this.state.messageSent);
+    socket.on("readMessage", data => {
+      console.log("data message", data);
+      this.setState({
+        currentMessage: data.result.message,
+        messageSent: " "
+      });
+
+      var arr = [];
+      arr.push(this.state.currentMessage);
+      console.log("arr", arr);
+      this.state.allMessage.push(arr);
+      console.log("all messages", this.state.allMessage);
+      console.log(this.state.currentMessage);
+      // localChatHistory.push(data);
+      // console.log("data in localchathistory==> ", localChatHistory);
+    });
+  };
 
   render() {
     console.log("current message", this.state.currentMessage);
     var mess = this.state.allMessage.map(res => {
-      return res;
+      return <div> {res}</div>;
     });
+
     const users = this.state.users;
     const usersAvailabe = users.filter(
       user => user._id !== this.state.loggedUserId
     );
+
+   
     return (
       <div className="topContainerW">
         <div className="appbar">
@@ -133,7 +145,7 @@ class Welcome extends Component {
               {typeof this.state.currentMessage !== "undefined" ? (
                 <div className="chatscreen">
                   {this.state.receiver}
-                  <label>{mess}</label>
+                  <div>{mess}</div>
                 </div>
               ) : (
                 <div className="chatscreen">{this.state.receiver} </div>

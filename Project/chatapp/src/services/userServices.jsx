@@ -35,16 +35,17 @@ export function getAllUser() {
 //     headers: {
 //       token: token
 //     }
-    
-//   });
-// }
-// export function getChat() {
-//   let token = localStorage.getItem("token");
-//   console.log(token);
 
-//   return axios.get(url + "/users/messages", {
-//     headers: {
-//       token: token
-//     }
 //   });
 // }
+export function getChat() {
+  let token = localStorage.getItem("token");
+  // console.log(token);
+  console.log("In get all chat api");
+
+  return axios.get(url + "/users/messages", {
+    headers: {
+      token: token
+    }
+  });
+}
