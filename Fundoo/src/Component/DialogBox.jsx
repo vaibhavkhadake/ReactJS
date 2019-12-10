@@ -11,8 +11,8 @@ import ColorPalette from './ColorPalette';
 import ArchiveNote from './ArchiveNote';
 import More from './More';
 import TrashNote from './TrashNote';
-// import { Tooltip, IconButton } from '@material-ui/core';
 
+// import { Tooltip, IconButton } from '@material-ui/core';
 // import PaletteIcon from '@material-ui/icons/Palette';
 // import ColorPalette from './ColorPalette';
 // import Reminder from './Reminder';
@@ -47,7 +47,7 @@ export class DialogBox extends Component
     }
 }
 
-componentWillReceiveProps(nextProps) {
+UNSAFE_componentWillReceiveProps(nextProps) {
     this.setState({
         title: nextProps.singleNote.title,
         description: nextProps.singleNote.description,
@@ -83,11 +83,9 @@ handleUpdateNote=()=>{
     let loginToken = localStorage.getItem('token');
     let noteObject = {}
     console.log("NOTE",this.state.noteData.id);
-
     noteObject.noteId=this.state.noteData.id;
     noteObject.title = this.state.title;
     noteObject.description = this.state.description;
-
     UpdateNotes(noteObject, loginToken)
     .then(data => {
         console.log("update note data", data.data);
@@ -110,7 +108,8 @@ handleUpdateNote=()=>{
                         aria-describedby="alert-dialog-description"
                         style={{paddingLeft:'15px'}}
                     >
-                        <TextField
+                            <TextField
+                            multiline
                             value={this.state.title}
                             onChange={this.handleChangeNoteTitle}
                             margin='normal'
@@ -120,7 +119,8 @@ handleUpdateNote=()=>{
                                 disableUnderline: true
                             }}
                         />
-                        <TextField
+                            <TextField
+                            multiline
                             value={this.state.description}
                             onChange={this.handleChangeNoteDescription}
                             margin='normal'

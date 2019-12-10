@@ -19,9 +19,9 @@ const theme = createMuiTheme({
                 display: "flex",
                 flexDirection: "column",
                 marginTop: "15%",
-                width: '30%',
+                // width: '30%',
                 minHeight: "30px",
-                margin: '80px auto',
+                // margin: '80px auto',
                 paddingBottom: '20px',
             }
         },
@@ -36,7 +36,8 @@ class AddLabel extends Component{
         this.state={
             label:null,
             open:true,
-            userId:'5dc3a7a464e5a5001e933327'
+            // userId: '5dc3a7a464e5a5001e933327',
+           
         }
     }
    
@@ -57,8 +58,7 @@ class AddLabel extends Component{
         
         labelObject.label = this.state.label;
         labelObject.isDeleted=false;
-        labelObject.userId=this.state.userId;
-       
+        labelObject.userId=localStorage.getItem('userId');
         creteLabel(labelObject, token)
             .then(data => {
                 console.log(" Label created sucessfully ", data);
@@ -69,8 +69,6 @@ class AddLabel extends Component{
             this.setState({ open:!this.state.open})
     }
 
-
-    
     render()
     {
     return(
@@ -88,9 +86,7 @@ class AddLabel extends Component{
             label="Label Name"
             fullWidth
           />
-         
           <DisplayLabels/>
-         
         </DialogContent>
         <DialogActions>
           <Button onClick={this.handleDoneLabel} color="inherit">

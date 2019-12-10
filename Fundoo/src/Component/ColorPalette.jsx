@@ -135,7 +135,7 @@ class ColorPalette extends Component {
                         style={{ width: '25%'}}
                     >
                         {colorsPallete.map((color, index) => (
-                            <IconButton style={{ backgroundColor: color.colorCode }} 
+                            <IconButton key={index} style={{ backgroundColor: color.colorCode }} 
                             onClick={() => this.handleAddColor(color)}></IconButton>
                         ))}
                     </Popover>

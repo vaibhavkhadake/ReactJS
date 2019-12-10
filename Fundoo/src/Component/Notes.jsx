@@ -21,7 +21,8 @@ class Notes extends Component
         this.state={
             createNote:false,
             title:null,
-            description:null,
+            description: null,
+            noteArray:[]
         }
         this.onClickSubmit=this.onClickSubmit.bind(this); 
     }
@@ -63,15 +64,16 @@ class Notes extends Component
                 nodeObject.isArchived=false;
 
                 creteNoteService(nodeObject,loginToken)
-                .then(data=>{
-                    console.log("created note data",data.data);
-                }
+                    .then(data => {
+                        console.log("created note data", data.data);
+                    }
                     )
                 .catch(error=>{
                     console.log("created note Error",error);
                 })
 
             }
+          
             
 render()
 {
@@ -83,7 +85,9 @@ render()
                   !this.state.createNote ?
                <div className="noteMain">
                <Paper>
-                   <InputBase placeholder="Title"
+                            <InputBase placeholder="Title"
+                                multiline
+                                autoFocus
                    style={{ paddingLeft: "15px" }}
                    name="title"
                    value={this.state.title}
@@ -91,7 +95,9 @@ render()
                    />    
                    <br/>
 
-                   <InputBase placeholder="Description"
+                            <InputBase placeholder="Description"
+                                multiline
+                               
                    style={{ paddingLeft: "15px" }}
                    name="description"
                    value={this.state.description}

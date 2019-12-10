@@ -3,13 +3,16 @@ import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
 import ArchiveIcon from '@material-ui/icons/Archive';
 import { ArchiveNotes } from '../UserServices/noteService'
+import { NoteService } from '../UserServices/noteService';
+const notesService = new NoteService()
 
 class ArchiveNote extends Component
 {
     constructor(props) {
         super(props)
         this.state = {
-            archieveButton: false
+            archieveButton: false,
+            noteArray:[]
         }
     }
    
@@ -21,12 +24,10 @@ class ArchiveNote extends Component
         let loginToken = localStorage.getItem('token');
         console.log("Archived Note Id=->",this.props.archiveNoteId);
         let noteObject={}
-        
-        //noteObject.id=this.props.archieveNoteId;
-        
+       
         noteObject.noteIdList = [this.props.archiveNoteId];
-        noteObject.isArchived=true;
-        noteObject.notes=true;
+        noteObject.isArchived=this.state.archieveButton;
+        // noteObject.notes=true;
 
        ArchiveNotes(noteObject,loginToken)
         .then(data=>{
@@ -35,6 +36,21 @@ class ArchiveNote extends Component
         .catch(err=>{
             console.log("Archieve note ERROR==>",err);
         })
+    }
+    componentDidMount()
+    {
+            notesService.getAllNoteService()
+               .then(response =>
+                    {
+                   this.noteArray = response.data.data.data;
+                   console.log(" note array ", this.noteArray);
+                   console.log(" is archive in display notes ", response.data.data.data.title);
+                   this.setState({ noteArray: this.noteArray,
+                        })
+               })
+               .catch(err => {
+                   console.log("ERROR NOTE DATA =========>", err);
+               })
     }
     render() {
         return (

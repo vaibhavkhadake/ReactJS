@@ -24,7 +24,7 @@ class TrashNote extends Component
         let noteObject={}
         //noteObject.id=this.props.archieveNoteId;
         noteObject.noteIdList = [this.props.trashNoteId];
-        noteObject.isDeleted=true;
+        noteObject.isDeleted=this.state.deleteButton;
         
        TrashNotes(noteObject,loginToken)
         .then(data=>{

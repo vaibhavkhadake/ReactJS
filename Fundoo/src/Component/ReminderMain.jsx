@@ -14,8 +14,8 @@ render()
     
     return(
         <div>
-            {this.state.noteArray.map((text) => (
-            <Card>
+            {this.state.noteArray.map((text ,index) => (
+            <Card key={index}>
             <div>
                             <TextField
                                 disabled

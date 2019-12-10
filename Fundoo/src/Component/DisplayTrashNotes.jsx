@@ -3,12 +3,13 @@ import { getAllTrashNotes  } from '../UserServices/noteService'
 import Card from '@material-ui/core/Card';
 import TextField from '@material-ui/core/TextField';
 import './DisplayAllNotes.css';
+
 import Reminder from './Reminder';
 import More from './More';
 import { Tooltip} from '@material-ui/core';
 import ColorPalette from './ColorPalette';
-import ArchiveNote from './ArchiveNote';
-// import TrashNote from './TrashNote';
+// import ArchiveNote from './ArchiveNote';
+import TrashNote from './TrashNote';
 
 
 class DisplayTrashNotes extends Component{
@@ -59,11 +60,12 @@ class DisplayTrashNotes extends Component{
 
     render()
     {
+        let classes = this.props.view ? "allNotesMain" : "allNotesMainColumn";
         return(
           
-             <div className="allNotesMain">
-             {this.state.noteArray.map((text) => (
-                 <div className="allNotes">
+             <div className={classes}>
+             {this.state.noteArray.map((text,index) => (
+                 <div className="allNotes" key={index}>
                      <Card className="displayNotes" style={{backgroundColor:text.color}}>
                          <div>
                          <TextField  onClick={()=>this.handleNoteSave(text)}
@@ -95,9 +97,10 @@ class DisplayTrashNotes extends Component{
                        colorNoteId={text.id}
                       />
                      </Tooltip>
-                     <ArchiveNote archiveNoteId={text.id}/>
+                     <TrashNote trashNoteId={text.id} /> 
+                    {/*   <ArchiveNote archiveNoteId={text.id}/>*/}
                      <More/>
-                     {/* <TrashNote trashNoteId={text.id} /> */}
+                      
                     </div>        
                          </div>
                      </Card>

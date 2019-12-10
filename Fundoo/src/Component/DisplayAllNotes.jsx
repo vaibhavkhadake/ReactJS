@@ -25,16 +25,27 @@ class DisplayAllNotes extends Component {
         listView:true                                                                                                                            
         }
     }
+    
     componentDidMount()
     {
         this.handleNote()
-       
+        notesService.getAllNoteService()
+            .then(response =>
+                 {
+                this.noteArray = response.data.data.data;
+                console.log(" note array ", this.noteArray);
+                console.log(" is archive in display notes ", response.data.data.data.title);
+                this.setState({ noteArray: this.noteArray,
+                     })
+            })
+            .catch(err => {
+                console.log("ERROR NOTE DATA =========>", err);
+            })
     }
 
     handleDialog = (note) => {
         console.log("dialog cliked", this.state.open);
         console.log("UNIQUE NOTE VALUE NOTE",this.state.uniqueNote );
-        
         this.setState({ open: !this.state.open,
                         uniqueNote:note
                     })
@@ -67,12 +78,13 @@ class DisplayAllNotes extends Component {
     render() {
          
          let classes= this.props.view ? "allNotesMain": "allNotesMainColumn";
-
+        var data = this.state.noteArray;
+        var allData=data.filter(user=> user.isArchived!==true && user.isDeleted!==true)
         return (
             <div>
                  <div className={classes}>
-               {this.state.noteArray.map((text) => (
-                   <div className="allNotes" >
+               {allData.map((text,index) => (
+                   <div className="allNotes" key={index} >
                        <Card className="displayNotes" style={{backgroundColor:text.color}}  > 
                            <div>
                            <TextField  onClick={()=>this.handleNoteSave(text)}
@@ -104,7 +116,7 @@ class DisplayAllNotes extends Component {
                          colorNoteId={text.id}
                         />
                        </Tooltip>
-                       <ArchiveNote archiveNoteId={text.id}/>
+                                   <ArchiveNote archiveNoteId={text.id} />
                        
                        <TrashNote trashNoteId={text.id} />
                        <More/>
@@ -116,7 +128,6 @@ class DisplayAllNotes extends Component {
                ))}
                 <DialogBox dialogOpen={this.state.open} singleNote={this.state.uniqueNote} dialogBoxClose={this.handleDialogBoxClose} /> 
            </div>
-           
             </div>
         )
     }

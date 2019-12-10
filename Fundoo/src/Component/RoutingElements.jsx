@@ -1,5 +1,4 @@
 import React from 'react';
-
 import Dashboard from './Dashboard';
 import Logout from './Logout';
 import { Route ,Switch, BrowserRouter as Router } from 'react-router-dom'
@@ -15,6 +14,9 @@ import Drawer2 from './Drawer2';
 import DisplayAllArchiveNotes from './DisplayAllArchiveNotes';
 import DisplayLabels from './DisplayLabels';
 import DisplayLabelsInDrawer from './DisplayLabelsInDrawer';
+import AddLabelNote from './AddLabelNote';
+import More from './More';
+
 
 function RoutingElements() {
     return (
@@ -22,7 +24,7 @@ function RoutingElements() {
        
         <div>
            <Router>
-           <Switch>
+                <Switch>
            <Route path="/dashboard" component={Dashboard}  exact={true} />
            <Route path="/dashboard/Notes" component={Notes}/>
            <Route path="/Logout" component={Logout}/>
@@ -33,10 +35,12 @@ function RoutingElements() {
            <Route path="/DisplayAllNotes" component={DisplayAllNotes}/>
            <Route path="/dashboard/TrashNotes" component={DisplayTrashNotes}/>
            <Route path="/dashboard/ArchiveNotes" component={DisplayAllArchiveNotes}/>
-           <Route path="TrashNote" component={TrashNote}/>
-           <Route path="Drawer2" component={Drawer2}/>
-           <Route path="DisplayLabels" component={DisplayLabels}/>
-           <Route path="DisplayLabelsInDrawer" component={DisplayLabelsInDrawer}/>
+           <Route path="/TrashNote" component={TrashNote}/>
+           <Route path="/Drawer2" component={Drawer2}/>
+           <Route path="/DisplayLabels" component={DisplayLabels}/>
+           <Route path="/DisplayLabelsInDrawer" component={DisplayLabelsInDrawer}/>
+           <Route path="/AddLabelNote" component={AddLabelNote}/>
+           <Route path="/More" component={More} />
           </Switch>
           </Router>
         </div>

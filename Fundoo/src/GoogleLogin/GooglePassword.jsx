@@ -49,9 +49,12 @@ class GooglePassword extends Component
             .post('http://fundoonotes.incubation.bridgelabz.com/api/user/login',this.state.field)
             .then(response=>{
                 console.log(response);
+                console.log(response.data.userId);
                 let token = response.data.id;
                 console.log(token);
-                localStorage.setItem('token',token);
+                localStorage.setItem('token', token);
+                localStorage.setItem('userId',response.data.userId);
+                
                 this.setState({snackbaropen:true ,snackbarmessage:'success'})
                 this.props.history.push('/dashboard')
             })
