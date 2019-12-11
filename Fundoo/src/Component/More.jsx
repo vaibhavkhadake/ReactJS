@@ -35,7 +35,7 @@ class More extends Component {
   }
   handleAddLabel = () => {
     this.setState({
-      label: !this.state.label
+      label: this.state.label
     });
     this.props.history.push("/AddLabelNotes");
   };

@@ -1,0 +1,13 @@
+.loginForm {
+  display: flex;
+  flex-direction: column;
+}
+.main {
+  
+  justify-content: center;
+  padding: 100px 420px;
+}
+.logoutButton{
+    display: flex;
+   
+}

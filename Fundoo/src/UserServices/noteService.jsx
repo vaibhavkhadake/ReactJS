@@ -104,6 +104,23 @@ export function UpdateNotes(data,token)
         )
     }
 
+    export function DeleteNotesLabel(data)
+    {
+        console.log("data and token ",data);
+        return axios.delete('http://http://fundoonotes.incubation.bridgelabz.com/explorer/#!/noteLabel/noteLabel_deleteNoteLabel',data,
+        {
+            headers:
+            {
+                'Content-type': 'application/json; charset=utf-8',
+                'Authorization':token
+            }
+        }
+        )
+
+    }
+
+
+
     export function ArchiveNotes(data,token)
     {
         console.log("data and token ",data,token);
@@ -116,7 +133,6 @@ export function UpdateNotes(data,token)
             }
         }
         )
-
     }
 
 

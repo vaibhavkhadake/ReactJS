@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-import { getAllLabels } from "../UserServices/noteService";
+import { getAllLabels, DeleteNotesLabel } from "../UserServices/noteService";
 import TextField from "@material-ui/core/TextField";
 import { ListItemIcon, ListItem, ListItemText } from "@material-ui/core";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { MuiThemeProvider } from "@material-ui/core";
+import DeleteIcon from "@material-ui/icons/Delete";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormGroup from "@material-ui/core/FormGroup";
-
 const theme = createMuiTheme({
   overrides: {
     MuiInputBase: {
@@ -25,6 +25,22 @@ const theme = createMuiTheme({
     }
   }
 });
+// <FormGroup>
+// <FormControlLabel
+//   value="end"
+//   control={
+//     <Checkbox
+//       value="checkedA"
+//           style={{ padding: "0px",fontSize:"small"  }}
+//       color="primary"
+//       //   checked={this.state.checkedA}
+//       onChange={this.handleChange("checkedA")}
+//       //   value="checkedA"
+//     />
+//   }
+//   labelPlacement="end"
+// />
+// </FormGroup>
 
 class DisplayLabels extends Component {
   constructor(props) {
@@ -32,7 +48,8 @@ class DisplayLabels extends Component {
     this.state = {
       open: false,
       labelArray: [],
-      checkedA: false
+      checkedA: false,
+      id: ""
     };
   }
   componentDidMount() {
@@ -48,8 +65,7 @@ class DisplayLabels extends Component {
   handleNote = () => {
     getAllLabels()
       .then(response => {
-        //  console.log("GEWT ALLLL==response",response);
-        console.log("GEt==response from USER", response.data.data.details);
+        console.log("Get==response from USER", response.data.data.details);
         this.labelArray = response.data.data.details;
         console.log(" note array ", this.labelArray);
         this.setState({
@@ -61,9 +77,22 @@ class DisplayLabels extends Component {
       });
   };
 
-  handleNoteSave = note => {
+  handleDeleteNote = () => {
+    let labelId = {};
+    labelId.id = this.state.id;
+    console.log("labelid", labelId.id);
+    DeleteNotesLabel(labelId)
+      .then(response => {
+        console.log("response in delete label", response);
+      })
+      .catch(err => {
+        console.log("Delete label error", err);
+      });
+  };
+
+  handleNoteSave = note   => {
     this.setState({
-      open: !this.state.open,
+      open:!this.state.open,
       uniqueNote: note
     });
   };
@@ -79,25 +108,7 @@ class DisplayLabels extends Component {
               <ListItemIcon
                 style={{ padding: "0px", width: "fit-content", margin: "0px" }}
               >
-                <FormGroup>
-                  <FormControlLabel
-                    value="end"
-                    control={
-                      <Checkbox
-                        value="checkedA"
-                            style={{ padding: "0px",fontSize:"small"  }}
-                           
-                        //   inputProps={{ 'aria-label': 'Checkbox A' } }
-                        //   key={index}
-                        color="primary"
-                        //   checked={this.state.checkedA}
-                        onChange={this.handleChange("checkedA")}
-                        //   value="checkedA"
-                      />
-                    }
-                    labelPlacement="end"
-                  />
-                </FormGroup>
+                <DeleteIcon onClick={this.handleDeleteNote} />
               </ListItemIcon>
               <ListItemText
                 style={{

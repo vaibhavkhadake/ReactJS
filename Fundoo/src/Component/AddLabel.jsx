@@ -58,7 +58,8 @@ class AddLabel extends Component{
         
         labelObject.label = this.state.label;
         labelObject.isDeleted=false;
-        labelObject.userId=localStorage.getItem('userId');
+        labelObject.userId = localStorage.getItem('userId');
+      
         creteLabel(labelObject, token)
             .then(data => {
                 console.log(" Label created sucessfully ", data);
