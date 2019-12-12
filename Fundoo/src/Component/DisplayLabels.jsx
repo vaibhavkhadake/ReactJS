@@ -5,9 +5,9 @@ import { ListItemIcon, ListItem, ListItemText } from "@material-ui/core";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { MuiThemeProvider } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
-import Checkbox from "@material-ui/core/Checkbox";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormGroup from "@material-ui/core/FormGroup";
+// import Checkbox from "@material-ui/core/Checkbox";
+// import FormControlLabel from "@material-ui/core/FormControlLabel";
+// import FormGroup from "@material-ui/core/FormGroup";
 const theme = createMuiTheme({
   overrides: {
     MuiInputBase: {
@@ -48,8 +48,9 @@ class DisplayLabels extends Component {
     this.state = {
       open: false,
       labelArray: [],
+      labelArrayId:[],
       checkedA: false,
-      id: ""
+      
     };
   }
   componentDidMount() {
@@ -67,9 +68,11 @@ class DisplayLabels extends Component {
       .then(response => {
         console.log("Get==response from USER", response.data.data.details);
         this.labelArray = response.data.data.details;
+       
         console.log(" note array ", this.labelArray);
         this.setState({
-          labelArray: this.labelArray
+          labelArray: this.labelArray,
+        labelArrayId:this.state.labelArrayId
         });
       })
       .catch(err => {
@@ -78,10 +81,17 @@ class DisplayLabels extends Component {
   };
 
   handleDeleteNote = () => {
+    let token= localStorage.getItem('token');
     let labelId = {};
-    labelId.id = this.state.id;
-    console.log("labelid", labelId.id);
-    DeleteNotesLabel(labelId)
+    var datalabel;
+    let data=
+      this.state.labelArray.map((data, index) => {
+     datalabel=data.id
+      console.log("data.id", data.id);
+    })
+    labelId.id = datalabel;
+    console.log("data",datalabel);
+    DeleteNotesLabel(labelId,token)
       .then(response => {
         console.log("response in delete label", response);
       })
@@ -90,9 +100,9 @@ class DisplayLabels extends Component {
       });
   };
 
-  handleNoteSave = note   => {
+  handleNoteSave = note => {
     this.setState({
-      open:!this.state.open,
+      open: !this.state.open,
       uniqueNote: note
     });
   };

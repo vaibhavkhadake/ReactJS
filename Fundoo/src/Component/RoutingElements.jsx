@@ -21,6 +21,7 @@ function RoutingElements() {
   return (
     <div>
       <Router>
+     
         <Switch>
           <Route path="/dashboard" component={Dashboard} exact={true} />
           <Route path="/dashboard/Notes" component={Notes} />
@@ -42,7 +43,7 @@ function RoutingElements() {
             path="/DisplayLabelsInDrawer"
             component={DisplayLabelsInDrawer}
           />
-          <Route path="/AddLabelNote" component={AddLabelNote} />
+          <Route path="/dashboard/AddLabelNote" component={AddLabelNote} />
           <Route path="/More" component={More} />
         </Switch>
       </Router>

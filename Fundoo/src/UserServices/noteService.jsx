@@ -104,10 +104,10 @@ export function UpdateNotes(data,token)
         )
     }
 
-    export function DeleteNotesLabel(data)
+    export function DeleteNotesLabel(data,token)
     {
-        console.log("data and token ",data);
-        return axios.delete('http://http://fundoonotes.incubation.bridgelabz.com/explorer/#!/noteLabel/noteLabel_deleteNoteLabel',data,
+        console.log("data and token ",data,token);
+        return axios.delete("http://fundoonotes.incubation.bridgelabz.com/api/noteLabels/"+data+"/deleteNoteLabel",
         {
             headers:
             {

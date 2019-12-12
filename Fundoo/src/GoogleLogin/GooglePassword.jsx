@@ -50,10 +50,12 @@ class GooglePassword extends Component
             .then(response=>{
                 console.log(response);
                 console.log(response.data.userId);
+                // console.log("label id",response.data.id);
                 let token = response.data.id;
                 console.log(token);
                 localStorage.setItem('token', token);
-                localStorage.setItem('userId',response.data.userId);
+                localStorage.setItem('userId', response.data.userId);
+                // localStorage.setItem('id',response.data.id);
                 
                 this.setState({snackbaropen:true ,snackbarmessage:'success'})
                 this.props.history.push('/dashboard')
