@@ -23,6 +23,7 @@ const columns = [
     text: "Last Name"
   },
   {
+    
     dataField: "email",
     text: "Email"
   },

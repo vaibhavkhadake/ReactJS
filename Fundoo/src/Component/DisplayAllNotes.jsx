@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { NoteService } from "../UserServices/noteService";
+
 import Card from "@material-ui/core/Card";
 import TextField from "@material-ui/core/TextField";
 import "./DisplayAllNotes.css";
@@ -10,6 +10,8 @@ import { Tooltip } from "@material-ui/core";
 import ColorPalette from "./ColorPalette";
 import ArchiveNote from "./ArchiveNote";
 import TrashNote from "./TrashNote";
+import Collaborator from "./Collaborator";
+import { NoteService } from "../UserServices/noteService";
 const notesService = new NoteService();
 
 class DisplayAllNotes extends Component {
@@ -114,6 +116,7 @@ class DisplayAllNotes extends Component {
                 <div>
                   <div className="noteLogo">
                     <Reminder />
+                    <Collaborator />
                     <Tooltip title="Change color">
                       {/* Passing particular note id */}
                       <ColorPalette colorNoteId={text.id} />

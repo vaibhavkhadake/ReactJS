@@ -21,14 +21,13 @@ function RoutingElements() {
   return (
     <div>
       <Router>
-     
         <Switch>
-          <Route path="/dashboard" component={Dashboard} exact={true} />
+          <Route path="/dashboard" component={Dashboard} />
           <Route path="/dashboard/Notes" component={Notes} />
           <Route path="/Logout" component={Logout} />
           <Route path="/TakeANode" component={TakeANode} />
           <Route path="/GoogleLogin" component={GoogleLogin} />
-          <Route path="/GooglePassword" component={GooglePassword} />
+          <Route path="/GooglePassword" exact component={GooglePassword} />
           <Route path="/CreateAccount" component={CreateAccount} />
           <Route path="/DisplayAllNotes" component={DisplayAllNotes} />
           <Route path="/dashboard/TrashNotes" component={DisplayTrashNotes} />

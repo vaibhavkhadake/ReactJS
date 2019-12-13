@@ -39,7 +39,8 @@ class TakeANote extends Component {
                                     <IconButton>
                                         <ImageIcon />
                                     </IconButton>
-                                </Tooltip>
+                            </Tooltip>
+                            
                                 <Tooltip title="Drawing" style={{ float: "right" }}>
                                     <IconButton>
                                         <BrushIcon />

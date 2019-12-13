@@ -1,152 +1,175 @@
-import  { Component } from 'react'
-import axios from 'axios'
-const token = localStorage.getItem('token')
+import { Component } from "react";
+import axios from "axios";
+const token = localStorage.getItem("token");
+
 export class NoteService extends Component {
+  getAllNoteService() {
+    console.log(" service called ");
 
-    getAllNoteService() {
-        console.log(" service called ");
-
-        return axios.get(`http://fundoonotes.incubation.bridgelabz.com/api/notes/getNotesList`, {
-            headers: {
-                'Authorization': token
-            }
-        })
-    }
+    return axios.get(
+      `http://fundoonotes.incubation.bridgelabz.com/api/notes/getNotesList`,
+      {
+        headers: {
+          Authorization: token
+        }
+      }
+    );
+  }
 }
 
-export function creteLabel(data,token)
+export function creteLabel(data, token) {
+  console.log("data and token ", data, token);
+  return axios.post(
+    "http://fundoonotes.incubation.bridgelabz.com/api/noteLabels",
+    data,
     {
-        console.log("data and token ",data,token);
-        return axios.post('http://fundoonotes.incubation.bridgelabz.com/api/noteLabels',data,
-        {
-            headers:
-            {
-                'Content-type': 'application/json; charset=utf-8',
-                'Authorization':token
-            }
-        }
-        )
+      headers: {
+        "Content-type": "application/json; charset=utf-8",
+        Authorization: token
+      }
     }
-export function getAllTrashNotes()
-{
-    return axios.get(`http://fundoonotes.incubation.bridgelabz.com/api/notes/getTrashNotesList`,
+  );
+}
+export function getAllTrashNotes() {
+  return axios.get(
+    `http://fundoonotes.incubation.bridgelabz.com/api/notes/getTrashNotesList`,
     {
-        headers:
-        {
-            'Authorization': token
-        }
-    })
+      headers: {
+        Authorization: token
+      }
+    }
+  );
 }
 
-export function getAllArchiveNotes()
-{
-    return axios.get(`http://fundoonotes.incubation.bridgelabz.com/api/notes/getArchiveNotesList`,
+export function getAllArchiveNotes() {
+  return axios.get(
+    `http://fundoonotes.incubation.bridgelabz.com/api/notes/getArchiveNotesList`,
     {
-        headers:
-        {
-            'Authorization': token
-        }
-    })
+      headers: {
+        Authorization: token
+      }
+    }
+  );
 }
 
-
-export function getAllLabels()
-{
-    return axios.get(`http://fundoonotes.incubation.bridgelabz.com/api/noteLabels/getNoteLabelList`,
+export function getAllLabels() {
+  return axios.get(
+    `http://fundoonotes.incubation.bridgelabz.com/api/noteLabels/getNoteLabelList`,
     {
-        headers:
-        {
-            'Authorization': token
-        }
+      headers: {
+        Authorization: token
+      }
     }
-    )
+  );
 }
 
-export function UpdateNotes(data,token)
+export function UpdateNotes(data, token) {
+  console.log("data and token ", data, token);
+  return axios.post(
+    "http://fundoonotes.incubation.bridgelabz.com/api/notes/updateNotes",
+    data,
     {
-        console.log("data and token ",data,token);
-        return axios.post('http://fundoonotes.incubation.bridgelabz.com/api/notes/updateNotes',data,
-        {
-            headers:
-            {
-                'Content-type': 'application/json; charset=utf-8',
-                'Authorization':token
-            }
-        }
-        )
+      headers: {
+        "Content-type": "application/json; charset=utf-8",
+        Authorization: token
+      }
     }
+  );
+}
 
-    export function TrashNotes(data,token)
+export function TrashNotes(data, token) {
+  console.log("data and token ", data, token);
+  return axios.post(
+    "http://fundoonotes.incubation.bridgelabz.com/api/notes/trashNotes",
+    data,
     {
-        console.log("data and token ",data,token);
-        return axios.post('http://fundoonotes.incubation.bridgelabz.com/api/notes/trashNotes',data,
-        {
-            headers:
-            {
-                'Content-type': 'application/json; charset=utf-8',
-                'Authorization':token
-            }
-        }
-        )
+      headers: {
+        "Content-type": "application/json; charset=utf-8",
+        Authorization: token
+      }
     }
+  );
+}
 
-    export function ChangeColorNotes(data,token)
+export function ChangeColorNotes(data, token) {
+  console.log("data and token ", data, token);
+  return axios.post(
+    "http://fundoonotes.incubation.bridgelabz.com/api/notes/changesColorNotes",
+    data,
     {
-        console.log("data and token ",data,token);
-        return axios.post('http://fundoonotes.incubation.bridgelabz.com/api/notes/changesColorNotes',data,
-        {
-            headers:
-            {
-                'Content-type': 'application/json; charset=utf-8',
-                'Authorization':token
-            }
-        }
-        )
+      headers: {
+        "Content-type": "application/json; charset=utf-8",
+        Authorization: token
+      }
     }
+  );
+}
 
-    export function DeleteNotesLabel(data,token)
+export function DeleteNotesLabel(data, token) {
+  console.log("data and token ", data, token);
+  return axios.delete(
+    "http://fundoonotes.incubation.bridgelabz.com/api/noteLabels/" +
+      data +
+      "/deleteNoteLabel",
     {
-        console.log("data and token ",data,token);
-        return axios.delete("http://fundoonotes.incubation.bridgelabz.com/api/noteLabels/"+data+"/deleteNoteLabel",
-        {
-            headers:
-            {
-                'Content-type': 'application/json; charset=utf-8',
-                'Authorization':token
-            }
-        }
-        )
-
+      headers: {
+        "Content-type": "application/json; charset=utf-8",
+        Authorization: token
+      }
     }
+  );
+}
 
-
-
-    export function ArchiveNotes(data,token)
+export function ArchiveNotes(data, token) {
+  console.log("data and token ", data, token);
+  return axios.post(
+    "http://fundoonotes.incubation.bridgelabz.com/api/notes/archiveNotes",
+    data,
     {
-        console.log("data and token ",data,token);
-        return axios.post('http://fundoonotes.incubation.bridgelabz.com/api/notes/archiveNotes',data,
-        {
-            headers:
-            {
-                'Content-type': 'application/json; charset=utf-8',
-                'Authorization':token
-            }
-        }
-        )
+      headers: {
+        "Content-type": "application/json; charset=utf-8",
+        Authorization: token
+      }
     }
+  );
+}
 
-
-    export function ProfilePic(data,token)
+export function getAllUserList(data) {
+  return axios.post(
+    `http://fundoonotes.incubation.bridgelabz.com/api/user/searchUserList`,
+    data,
     {
-        console.log("data and token ",data,token);
-        return axios.post('http://fundoonotes.incubation.bridgelabz.com/api/user/uploadProfileImage',data,
-        {
-            headers:
-            {
-                'Content-type': 'application/json; charset=utf-8',
-                'Authorization':token
-            }
-        }
-        )
-        
+      headers: {
+        "Content-type": "application/json; charset=utf-8",
+        Authorization: token
+      }
     }
+  );
+}
+export function AddCollaborator(data, token) {
+  console.log("data and token ", data, token);
+  return axios.post(
+    "http://fundoonotes.incubation.bridgelabz.com/api/user/uploadProfileImage",
+    data,
+    {
+      headers: {
+        "Content-type": "application/json; charset=utf-8",
+        Authorization: token
+      }
+    }
+  );
+}
+
+export function ProfilePic(data, token) {
+  console.log("data and token ", data, token);
+  return axios.post(
+    "http://fundoonotes.incubation.bridgelabz.com/api/user/uploadProfileImage",
+    data,
+    {
+      headers: {
+        "Content-type": "application/json; charset=utf-8",
+        Authorization: token
+      }
+    }
+  );
+}

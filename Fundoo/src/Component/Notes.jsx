@@ -17,6 +17,7 @@ import Archive from "./Archive";
 import More from "./More";
 import TakeANote from "./TakeANote";
 import { creteNoteService } from "../UserServices/UserServices";
+import Collaborator from "./Collaborator";
 
 class Notes extends Component {
   constructor(props) {
@@ -99,6 +100,7 @@ class Notes extends Component {
               <br />
               <div className="noteLogo">
                 <Reminder />
+                <Collaborator/>
                 <Tooltip title="Change color">
                   <IconButton>
                     <PaletteIcon />

@@ -16,6 +16,7 @@ import ColorPalette from "./ColorPalette";
 import ArchiveNote from "./ArchiveNote";
 import More from "./More";
 import TrashNote from "./TrashNote";
+import Collaborator from "./Collaborator";
 
 // import { Tooltip, IconButton } from '@material-ui/core';
 // import PaletteIcon from '@material-ui/icons/Palette';
@@ -136,6 +137,7 @@ export class DialogBox extends Component {
               <Divider />
               <div style={{ display: "flex", flexDirection: "row" }}>
                 <Reminder />
+                <Collaborator/>
                 <ColorPalette />
                 <ArchiveNote />
                 <More />

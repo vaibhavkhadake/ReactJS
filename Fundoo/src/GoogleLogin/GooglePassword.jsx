@@ -18,6 +18,7 @@ class GooglePassword extends Component
         this.state = {
             field: {},
             error: {},
+            userData:[],
             snackbaropen:false,
             snackbarmessage:''
         }
@@ -49,10 +50,15 @@ class GooglePassword extends Component
             .post('http://fundoonotes.incubation.bridgelabz.com/api/user/login',this.state.field)
             .then(response=>{
                 console.log(response);
+                this.userData = response.data.data;
                 console.log(response.data.userId);
+                console.log(response.data.email);
                 // console.log("label id",response.data.id);
                 let token = response.data.id;
                 console.log(token);
+                localStorage.setItem('firstName', response.data.firstName);
+                localStorage.setItem('lastName', response.data.lastName);
+                localStorage.setItem('email', response.data.email);
                 localStorage.setItem('token', token);
                 localStorage.setItem('userId', response.data.userId);
                 // localStorage.setItem('id',response.data.id);
@@ -63,7 +69,7 @@ class GooglePassword extends Component
             .catch(err=>
                 {
                     console.log("Error in login",err);
-                    this.setState({snackbaropen:true ,snackbarmessage:' Login Failed '})
+                    this.setState({snackbaropen:true ,snackbarmessage:' Login Failed ',userData:this.state.userData})
                 })
 
         }

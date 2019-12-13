@@ -48,9 +48,8 @@ class DisplayLabels extends Component {
     this.state = {
       open: false,
       labelArray: [],
-      labelArrayId:[],
-      checkedA: false,
-      
+      labelArrayId: [],
+      checkedA: false
     };
   }
   componentDidMount() {
@@ -68,11 +67,11 @@ class DisplayLabels extends Component {
       .then(response => {
         console.log("Get==response from USER", response.data.data.details);
         this.labelArray = response.data.data.details;
-       
+
         console.log(" note array ", this.labelArray);
         this.setState({
           labelArray: this.labelArray,
-        labelArrayId:this.state.labelArrayId
+          labelArrayId: this.state.labelArrayId
         });
       })
       .catch(err => {
@@ -81,17 +80,16 @@ class DisplayLabels extends Component {
   };
 
   handleDeleteNote = () => {
-    let token= localStorage.getItem('token');
+    let token = localStorage.getItem("token");
     let labelId = {};
     var datalabel;
-    let data=
-      this.state.labelArray.map((data, index) => {
-     datalabel=data.id
-      console.log("data.id", data.id);
-    })
+
+    this.state.labelArray.map((data, index) => {
+      return (datalabel = data.id);
+    });
     labelId.id = datalabel;
-    console.log("data",datalabel);
-    DeleteNotesLabel(labelId,token)
+    console.log("data", datalabel);
+    DeleteNotesLabel(labelId, token)
       .then(response => {
         console.log("response in delete label", response);
       })

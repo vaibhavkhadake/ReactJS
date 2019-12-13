@@ -7,17 +7,17 @@ import {
   Card,
   IconButton,
   List,
-  ListItem,
-  ClickAwayListener
+  ListItem
 } from "@material-ui/core";
-import DisplayLabels from "./DisplayLabels";
+// import DisplayLabels from "./DisplayLabels";
 import Tooltip from "@material-ui/core/Tooltip";
 class More extends Component {
   constructor(props) {
     super(props);
     this.state = {
       anchorEl: null,
-      open: false
+      open: false,
+      popper: false
     };
   }
 
@@ -29,11 +29,12 @@ class More extends Component {
     this.setState({ anchorEl: null });
   };
   handleClickLabel = event => {
-    const { currentTarget } = event;
+    // const { currentTarget } = event;
     console.log("in more click");
     this.setState(state => ({
-      anchorEl: currentTarget,
-      open: !this.state.open
+      anchorEl: null,
+      open: !this.state.open,
+      popper: !this.state.popper
     }));
   };
   render() {
@@ -56,7 +57,7 @@ class More extends Component {
           </MenuItem>
           <MenuItem onClick={this.handleClose}>Delete Label</MenuItem>
         </Menu>
-        <Popper open={this.state.open} anchorEl={this.state.anchorEl}>
+        <Popper open={this.state.open} popper={this.state.popper}>
           <Card>
             {/* style={{height:'100px' ,width:'100px'}} */}
             <List>
