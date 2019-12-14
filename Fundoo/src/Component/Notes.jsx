@@ -62,6 +62,7 @@ class Notes extends Component {
     nodeObject.title = this.state.title;
     nodeObject.description = this.state.description;
     nodeObject.isArchived = false;
+    
 
     creteNoteService(nodeObject, loginToken)
       .then(data => {

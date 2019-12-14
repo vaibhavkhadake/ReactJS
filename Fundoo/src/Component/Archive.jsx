@@ -31,11 +31,10 @@ class Archive extends Component{
          <div>
 
                     <Tooltip title="Archive">
-                            {/* <IconButton onClick={this.handleClick}> */}
-                                 {/* <ArchiveIcon/> */}
+                            
                                  <ArchiveNote />
                                 
-                            {/* </IconButton> */}
+                          
                          </Tooltip> 
 
                 <Snackbar open={this.state.open}

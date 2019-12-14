@@ -29,20 +29,17 @@ class DisplayAllNotes extends Component {
 
   componentDidMount() {
     this.handleNote();
-    notesService
-      .getAllNoteService()
-      .then(response => {
-        this.noteArray = response.data.data.data;
-        console.log(" note array ", this.noteArray);
-        console.log(
-          " is archive in display notes ",
-          response.data.data.data.title
-        );
-        this.setState({ noteArray: this.noteArray });
-      })
-      .catch(err => {
-        console.log("ERROR NOTE DATA =========>", err);
-      });
+    //   notesService
+    //     .getAllNoteService()
+    //     .then(response => {
+    //       this.noteArray = response.data.data.data;
+    //       console.log(" note array ", this.noteArray);
+
+    //       this.setState({ noteArray: this.noteArray });
+    //     })
+    //     .catch(err => {
+    //       console.log("ERROR NOTE DATA =========>", err);
+    //     });
   }
 
   handleDialog = note => {
@@ -60,11 +57,9 @@ class DisplayAllNotes extends Component {
       .getAllNoteService()
       .then(response => {
         this.noteArray = response.data.data.data;
+        console.log("Note id",response.data.data.data.id);
         console.log(" note array ", this.noteArray);
-        console.log(
-          " is archive in display notes ",
-          response.data.data.data.title
-        );
+        console.log(" note array id ", response.data.data.data.id);
         this.setState({ noteArray: this.noteArray });
       })
       .catch(err => {
@@ -116,7 +111,7 @@ class DisplayAllNotes extends Component {
                 <div>
                   <div className="noteLogo">
                     <Reminder />
-                    <Collaborator />
+                    <Collaborator collaboratorId={text.id}  />
                     <Tooltip title="Change color">
                       {/* Passing particular note id */}
                       <ColorPalette colorNoteId={text.id} />

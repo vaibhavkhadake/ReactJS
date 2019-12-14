@@ -39,7 +39,8 @@ class DisplayAllArchiveNotes extends Component {
     getAllArchiveNotes()
       .then(response => {
         this.noteArray = response.data.data.data;
-        console.log(" note array ", this.noteArray);
+        
+        console.log(" note array in archive note", this.noteArray);
         this.setState({ noteArray: this.noteArray });
       })
       .catch(err => {

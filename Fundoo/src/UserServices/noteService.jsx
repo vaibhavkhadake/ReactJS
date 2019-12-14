@@ -146,11 +146,10 @@ export function getAllUserList(data) {
     }
   );
 }
-export function AddCollaborator(data, token) {
-  console.log("data and token ", data, token);
+export function AddCollaborator(data) {
+  console.log("data and token ", data);
   return axios.post(
-    "http://fundoonotes.incubation.bridgelabz.com/api/user/uploadProfileImage",
-    data,
+    "http://fundoonotes.incubation.bridgelabz.com/api/notes/"+data.id+"/AddcollaboratorsNotes",data,
     {
       headers: {
         "Content-type": "application/json; charset=utf-8",

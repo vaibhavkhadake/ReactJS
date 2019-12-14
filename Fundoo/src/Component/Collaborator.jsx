@@ -4,15 +4,12 @@ import {
   MuiThemeProvider,
   IconButton,
   Divider,
-  Card,
-  Popper,
   ListItem,
-  List,
-  ListItemText
+  MenuList,
+  InputBase
 } from "@material-ui/core";
 import Tooltip from "@material-ui/core/Tooltip";
 import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -21,7 +18,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import PersonAddOutlinedIcon from "@material-ui/icons/PersonAddOutlined";
 import PersonOutlineTwoToneIcon from "@material-ui/icons/PersonOutlineTwoTone";
 
-import { getAllUserList } from "../UserServices/noteService";
+import { getAllUserList, AddCollaborator } from "../UserServices/noteService";
 
 const theme = createMuiTheme({
   overrides: {
@@ -51,6 +48,7 @@ const theme2 = createMuiTheme({
     }
   }
 });
+var collaboratorsList;
 
 class Collaborator extends Component {
   constructor(props) {
@@ -66,27 +64,17 @@ class Collaborator extends Component {
       anchorEl: null
     };
   }
-//     handleOnChange = event => {
-//         console.log("In handle on change");
-//     this.setState({
-//       anchorEl:  event.currentTarget,
-//       popper: !this.state.popper
-//     });
-//   };
+
   handleClickOpen = () => {
     this.setState({ open: true });
   };
 
-  handleClose = () => {
-    this.setState({ open: false });
-  };
-
   handleCollaborator = event => {
-      this.setState({
-          [event.target.name]: event.target.value
-      });
+    this.setState({
+      [event.target.name]: event.target.value
+    });
 
-    let data = {
+    var data = {
       searchWord: this.state.data
     };
 
@@ -96,8 +84,8 @@ class Collaborator extends Component {
           "response in collaborator get user list",
           response.data.data.details
         );
-
-        this.setState({ userList: response.data.data.details });
+        var list = response.data.data.details;
+        this.setState({ userList: list });
       })
       .catch(err => {
         console.log("ERROR collaborator DATA =========>", err);
@@ -105,23 +93,51 @@ class Collaborator extends Component {
 
     if (this.state.data.length > 1) {
       this.setState(
-          {
-          anchorEl:  event.currentTarget,
+        {
+          anchorEl: event.currentTarget,
           popper: true
         },
         () => {
-          console.log("poper state ", this.state.popper);
+          console.log("popper state ", this.state.popper);
         }
       );
     }
   };
 
+  handleClose = () => {
+    this.setState({ open: false });
+    let nodeObject = {};
+    nodeObject.id = this.props.collaboratorId;
+    nodeObject.email = this.state.data;
+
+    AddCollaborator(nodeObject)
+      .then(data => {
+        console.log("collaborator data", data.data);
+      })
+      .catch(error => {
+        console.log("collaborator Error", error);
+      });
+  };
   render() {
     let email = this.state.email;
     let fullName = this.state.firstName + " " + this.state.lastName;
 
-    let userlist = this.state.userList;
-    let filterlist = userlist.filter(list => list.email === this.state.data);
+    collaboratorsList = this.state.userList.map(item => {
+      return (
+        <div>
+          <ListItem
+            style={{ border: "none" }}
+            button
+            onClick={this.handleClose()}
+          >
+           
+            {item.email}
+          </ListItem>
+        </div>
+      );
+    });
+    console.log("user list", collaboratorsList);
+
     return (
       <div>
         <MuiThemeProvider theme={theme}>
@@ -156,7 +172,7 @@ class Collaborator extends Component {
                     <PersonOutlineTwoToneIcon />
                   </IconButton>
                   <div style={{ marginLeft: "20px" }}>
-                    <TextField
+                    <InputBase
                       autoFocus
                       margin="dense"
                       name="data"
@@ -168,31 +184,26 @@ class Collaborator extends Component {
                     />
                   </div>
                 </div>
+                <div>
+                  <MenuList
+                    open={this.state.popper}
+                    anchorEl={this.state.anchorEl}
+                    style={{ zIndex: "4000", border: "none" }}
+                  >
+                    {collaboratorsList}
+                  </MenuList>
+                </div>
               </DialogContent>
+
               <DialogActions>
                 <Button onClick={this.handleClose} color="primary">
                   Save
                 </Button>
               </DialogActions>
-                    </MuiThemeProvider>
-                    <Popper
-                    open={this.state.popper}
-                    anchorEl={this.state.anchorEl}
-                    style={{ zIndex: "10000" }}
-                  >
-                    <Card>
-                      <List>
-                        {filterlist.map((text, index) => (
-                          <ListItem key={index}>
-                            <ListItemText>{text.email}</ListItemText>
-                          </ListItem>
-                        ))}
-                      </List>
-                    </Card>
-                  </Popper>
+            </MuiThemeProvider>
+            <div></div>
           </Dialog>
         </MuiThemeProvider>
-       
       </div>
     );
   }
