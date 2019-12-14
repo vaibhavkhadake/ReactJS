@@ -57,10 +57,10 @@ class DisplayAllNotes extends Component {
       .getAllNoteService()
       .then(response => {
         this.noteArray = response.data.data.data;
-        console.log("Note id",response.data.data.data.id);
+       
         console.log(" note array ", this.noteArray);
-        console.log(" note array id ", response.data.data.data.id);
-        this.setState({ noteArray: this.noteArray });
+        
+        this.setState({ noteArray: this.noteArray  });
       })
       .catch(err => {
         console.log("ERROR NOTE DATA =========>", err);

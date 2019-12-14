@@ -48,7 +48,7 @@ const theme2 = createMuiTheme({
     }
   }
 });
-var collaboratorsList;
+
 
 class Collaborator extends Component {
   constructor(props) {
@@ -122,15 +122,14 @@ class Collaborator extends Component {
     let email = this.state.email;
     let fullName = this.state.firstName + " " + this.state.lastName;
 
-    collaboratorsList = this.state.userList.map(item => {
+    var collaboratorsList = this.state.userList.map(item => {
       return (
         <div>
           <ListItem
             style={{ border: "none" }}
             button
-            onClick={this.handleClose()}
+            onClick={this.handleClose}
           >
-           
             {item.email}
           </ListItem>
         </div>

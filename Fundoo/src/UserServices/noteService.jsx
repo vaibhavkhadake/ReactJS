@@ -147,7 +147,7 @@ export function getAllUserList(data) {
   );
 }
 export function AddCollaborator(data) {
-  console.log("data and token ", data);
+  
   return axios.post(
     "http://fundoonotes.incubation.bridgelabz.com/api/notes/"+data.id+"/AddcollaboratorsNotes",data,
     {

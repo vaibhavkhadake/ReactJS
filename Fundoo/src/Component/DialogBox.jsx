@@ -42,7 +42,7 @@ const theme = createMuiTheme({
   }
 });
 
-export class DialogBox extends Component {
+export default class DialogBox extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -137,7 +137,7 @@ export class DialogBox extends Component {
               <Divider />
               <div style={{ display: "flex", flexDirection: "row" }}>
                 <Reminder />
-                <Collaborator/>
+                <Collaborator />
                 <ColorPalette />
                 <ArchiveNote />
                 <More />
@@ -151,4 +151,3 @@ export class DialogBox extends Component {
     );
   }
 }
-export default DialogBox;
