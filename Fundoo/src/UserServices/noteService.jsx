@@ -147,9 +147,25 @@ export function getAllUserList(data) {
   );
 }
 export function AddCollaborator(data) {
-  
   return axios.post(
-    "http://fundoonotes.incubation.bridgelabz.com/api/notes/"+data.id+"/AddcollaboratorsNotes",data,
+    "http://fundoonotes.incubation.bridgelabz.com/api/notes/" +
+      data.id +
+      "/AddcollaboratorsNotes",
+    data,
+    {
+      headers: {
+        "Content-type": "application/json; charset=utf-8",
+        Authorization: token
+      }
+    }
+  );
+}
+export function DeleteCollaborator(data) {
+  return axios.delete(
+    "http://fundoonotes.incubation.bridgelabz.com/api/notes/" +
+      data.id +
+      "/removeCollaboratorsNotes/" +
+      data.collaboratorUserId,
     {
       headers: {
         "Content-type": "application/json; charset=utf-8",

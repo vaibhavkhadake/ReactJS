@@ -62,8 +62,6 @@ class Notes extends Component {
     nodeObject.title = this.state.title;
     nodeObject.description = this.state.description;
     nodeObject.isArchived = false;
-    
-
     creteNoteService(nodeObject, loginToken)
       .then(data => {
         console.log("created note data", data.data);
@@ -101,7 +99,7 @@ class Notes extends Component {
               <br />
               <div className="noteLogo">
                 <Reminder />
-                <Collaborator/>
+                <Collaborator />
                 <Tooltip title="Change color">
                   <IconButton>
                     <PaletteIcon />

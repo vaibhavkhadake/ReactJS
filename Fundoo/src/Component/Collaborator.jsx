@@ -17,8 +17,13 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import PersonAddOutlinedIcon from "@material-ui/icons/PersonAddOutlined";
 import PersonOutlineTwoToneIcon from "@material-ui/icons/PersonOutlineTwoTone";
-
-import { getAllUserList, AddCollaborator } from "../UserServices/noteService";
+import CloseOutlinedIcon from "@material-ui/icons/CloseOutlined";
+// import update from "immutability-helper";
+import {
+  getAllUserList,
+  AddCollaborator,
+  DeleteCollaborator
+} from "../UserServices/noteService";
 
 const theme = createMuiTheme({
   overrides: {
@@ -26,7 +31,6 @@ const theme = createMuiTheme({
       root: {
         display: "flex",
         flexDirection: "column",
-
         width: "100%",
         minHeight: "30px"
       }
@@ -49,7 +53,6 @@ const theme2 = createMuiTheme({
   }
 });
 
-
 class Collaborator extends Component {
   constructor(props) {
     super(props);
@@ -61,7 +64,8 @@ class Collaborator extends Component {
       data: "",
       userList: [],
       popper: false,
-      anchorEl: null
+      anchorEl: null,
+      collaboratorList: []
     };
   }
 
@@ -84,6 +88,7 @@ class Collaborator extends Component {
           "response in collaborator get user list",
           response.data.data.details
         );
+
         var list = response.data.data.details;
         this.setState({ userList: list });
       })
@@ -104,13 +109,34 @@ class Collaborator extends Component {
     }
   };
 
-  handleClose = () => {
-    this.setState({ open: false });
-    let nodeObject = {};
-    nodeObject.id = this.props.collaboratorId;
-    nodeObject.email = this.state.data;
+  deleteCollaborator = (event, item) => {
+    var collaboratorObject = { ...item };
+    collaboratorObject.id = this.props.collaboratorId;
+    collaboratorObject.collaboratorUserId = item.userId;
+    console.log("delete collaborator");
+    DeleteCollaborator(collaboratorObject)
+      .then(data => {
+        console.log("collaborator data", data.data);
+      })
+      .catch(error => {
+        console.log("collaborator Error", error);
+      });
+  };
+  componentDidMount() {
+    this.setState({ collaboratorList: this.props.collaborators }, () => {
+      console.log("value in state collb", this.state.collaboratorList);
+    });
+    console.log("value in collaborator state", this.props.collaborators);
+  }
 
-    AddCollaborator(nodeObject)
+  handleClose = (event, item) => {
+    event.preventDefault();
+    this.setState({ anchorEl: null, open: false, data: "", popper: false });
+    var collaboratorObject = { ...item };
+    console.log("value in collaboratorObject", collaboratorObject);
+    collaboratorObject.id = this.props.collaboratorId;
+    console.log("collaborator list", this.props.collaborators);
+    AddCollaborator(collaboratorObject)
       .then(data => {
         console.log("collaborator data", data.data);
       })
@@ -121,22 +147,42 @@ class Collaborator extends Component {
   render() {
     let email = this.state.email;
     let fullName = this.state.firstName + " " + this.state.lastName;
-
     var collaboratorsList = this.state.userList.map(item => {
       return (
         <div>
           <ListItem
             style={{ border: "none" }}
             button
-            onClick={this.handleClose}
+            onClick={event => this.handleClose(event, item)}
           >
             {item.email}
           </ListItem>
         </div>
       );
     });
-    console.log("user list", collaboratorsList);
+    var collaboratorNoteList = this.state.collaboratorList.map(item => {
+      return (
+        <div style={{ display: "flex", flexDirection: "row" }}>
+          <MuiThemeProvider theme={theme}>
+            <IconButton>
+              <PersonOutlineTwoToneIcon />
+            </IconButton>
+            <ListItem
+              style={{ border: "none" }}
+              button
+              onClick={event => this.handleClose(event, item)}
+            >
+              {item.email}
+            </ListItem>
 
+            <IconButton onClick={event => this.deleteCollaborator(event, item)}>
+              <CloseOutlinedIcon />
+            </IconButton>
+          </MuiThemeProvider>
+        </div>
+      );
+    });
+    // console.log("user list", collaboratorsList);
     return (
       <div>
         <MuiThemeProvider theme={theme}>
@@ -166,6 +212,8 @@ class Collaborator extends Component {
                     <DialogContentText>{email}</DialogContentText>
                   </div>
                 </div>
+                <div>{collaboratorNoteList}</div>
+
                 <div style={{ display: "flex", flexDirection: "row" }}>
                   <IconButton>
                     <PersonOutlineTwoToneIcon />

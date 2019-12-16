@@ -4,7 +4,7 @@ import Card from "@material-ui/core/Card";
 import TextField from "@material-ui/core/TextField";
 import "./DisplayAllNotes.css";
 import Reminder from "./Reminder";
-import More from "./More";
+// import More from "./More";
 import DialogBox from "./DialogBox";
 import { Tooltip } from "@material-ui/core";
 import ColorPalette from "./ColorPalette";
@@ -57,10 +57,10 @@ class DisplayAllNotes extends Component {
       .getAllNoteService()
       .then(response => {
         this.noteArray = response.data.data.data;
-       
-        console.log(" note array ", this.noteArray);
-        
-        this.setState({ noteArray: this.noteArray  });
+
+        console.log(" note array in display all notes ", this.noteArray);
+
+        this.setState({ noteArray: this.noteArray });
       })
       .catch(err => {
         console.log("ERROR NOTE DATA =========>", err);
@@ -111,14 +111,17 @@ class DisplayAllNotes extends Component {
                 <div>
                   <div className="noteLogo">
                     <Reminder />
-                    <Collaborator collaboratorId={text.id}  />
+                    <Collaborator
+                      collaboratorId={text.id}
+                      collaborators={text.collaborators}
+                    />
                     <Tooltip title="Change color">
                       {/* Passing particular note id */}
                       <ColorPalette colorNoteId={text.id} />
                     </Tooltip>
                     <ArchiveNote archiveNoteId={text.id} />
                     <TrashNote trashNoteId={text.id} />
-                    <More />
+                    {/*  <More /> */}
                   </div>
                 </div>
               </Card>
