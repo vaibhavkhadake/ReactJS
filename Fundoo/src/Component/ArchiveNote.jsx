@@ -30,6 +30,7 @@ class ArchiveNote extends Component {
     ArchiveNotes(noteObject, loginToken)
       .then(data => {
         console.log("ArchieveNote DATA==>", data);
+        this.props.onSave();
       })
       .catch(err => {
         console.log("Archieve note ERROR==>", err);

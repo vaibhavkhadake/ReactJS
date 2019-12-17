@@ -136,17 +136,17 @@ class GooglePassword extends Component {
               ]}
             />
             <h3>
-              <span style={{ color: "blue" }}>G</span>
+              <span style={{ color: "blue" }}>F</span>
+              <span style={{ color: "red" }}>u</span>
+              <span style={{ color: "goldenrod" }}>n</span>
+              <span style={{ color: "blue" }}>d</span>
+              <span style={{ color: "green" }}>o</span>
               <span style={{ color: "red" }}>o</span>
-              <span style={{ color: "goldenrod" }}>o</span>
-              <span style={{ color: "blue" }}>g</span>
-              <span style={{ color: "green" }}>l</span>
-              <span style={{ color: "red" }}>e</span>
             </h3>
 
             <p className="h2class">Sign In</p>
 
-            <p>Use your Google Account</p>
+            <p>Use your Fundoo Account</p>
             <div className="mnumber">
               <TextField
                 name="username"
@@ -180,7 +180,7 @@ class GooglePassword extends Component {
 
             {
               <Link to={"/LearnMore"} className="nav-link">
-                Forget Mobile Number?{" "}
+                Forget email ?{" "}
               </Link>
             }
             <br />

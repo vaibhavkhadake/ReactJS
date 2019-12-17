@@ -11,8 +11,8 @@ import ColorPalette from "./ColorPalette";
 import ArchiveNote from "./ArchiveNote";
 import TrashNote from "./TrashNote";
 import Collaborator from "./Collaborator";
-import { NoteService } from "../UserServices/noteService";
-const notesService = new NoteService();
+// import { NoteService } from "../UserServices/noteService";
+// const notesService = new NoteService();
 
 class DisplayAllNotes extends Component {
   constructor(props) {
@@ -27,21 +27,6 @@ class DisplayAllNotes extends Component {
     };
   }
 
-  componentDidMount() {
-    this.handleNote();
-    //   notesService
-    //     .getAllNoteService()
-    //     .then(response => {
-    //       this.noteArray = response.data.data.data;
-    //       console.log(" note array ", this.noteArray);
-
-    //       this.setState({ noteArray: this.noteArray });
-    //     })
-    //     .catch(err => {
-    //       console.log("ERROR NOTE DATA =========>", err);
-    //     });
-  }
-
   handleDialog = note => {
     console.log("dialog cliked", this.state.open);
     console.log("UNIQUE NOTE VALUE NOTE", this.state.uniqueNote);
@@ -52,27 +37,46 @@ class DisplayAllNotes extends Component {
     this.setState({ open: !this.state.open });
   };
 
-  handleNote = () => {
-    notesService
-      .getAllNoteService()
-      .then(response => {
-        this.noteArray = response.data.data.data;
+  // handleNote = () => {
+  //   notesService
+  //     .getAllNoteService()
+  //     .then(response => {
+  //       this.noteArray = response.data.data.data;
 
-        console.log(" note array in display all notes ", this.noteArray);
+  //       console.log(" note array in display all notes ", this.noteArray);
 
-        this.setState({ noteArray: this.noteArray });
-      })
-      .catch(err => {
-        console.log("ERROR NOTE DATA =========>", err);
-      });
+  //       this.setState({ noteArray: this.noteArray });
+  //     })
+  //     .catch(err => {
+  //       console.log("ERROR NOTE DATA =========>", err);
+  //     });
+  //   // console.log("in display all notes");
+  //   // this.props.displayAllNotes();
+  // };
+  // componentDidMount() {
+  // this.handleNote();
+  //   notesService
+  //     .getAllNoteService()
+  //     .then(response => {
+  //       this.noteArray = response.data.data.data;
+  //       console.log(" note array ", this.noteArray);
+  //       this.setState({ noteArray: this.noteArray });
+  //     })
+  //     .catch(err => {
+  //       console.log("ERROR NOTE DATA =========>", err);
+  //     });
+  // }
+
+  handleApiHit = () => {
+    this.props.hitapi();
   };
-
   handleNoteSave = note => {
     this.setState({ open: !this.state.open, uniqueNote: note });
   };
   render() {
     let classes = this.props.view ? "allNotesMain" : "allNotesMainColumn";
-    var data = this.state.noteArray;
+    // console.log("object", this.props.displayAllNotes);
+    var data = this.props.displayAllNotes;
     var allData = data.filter(
       user => user.isArchived !== true && user.isDeleted !== true
     );
@@ -114,13 +118,24 @@ class DisplayAllNotes extends Component {
                     <Collaborator
                       collaboratorId={text.id}
                       collaborators={text.collaborators}
+                      displayAllNotes={this.props.displayAllNotes}
+                      onSave={this.handleApiHit}
                     />
                     <Tooltip title="Change color">
                       {/* Passing particular note id */}
-                      <ColorPalette colorNoteId={text.id} />
+                      <ColorPalette
+                        colorNoteId={text.id}
+                        onSave={this.handleApiHit}
+                      />
                     </Tooltip>
-                    <ArchiveNote archiveNoteId={text.id} />
-                    <TrashNote trashNoteId={text.id} />
+                    <ArchiveNote
+                      archiveNoteId={text.id}
+                      onSave={this.handleApiHit}
+                    />
+                    <TrashNote
+                      trashNoteId={text.id}
+                      onSave={this.handleApiHit}
+                    />
                     {/*  <More /> */}
                   </div>
                 </div>

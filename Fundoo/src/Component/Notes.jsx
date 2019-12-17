@@ -10,14 +10,14 @@ import Tooltip from "@material-ui/core/Tooltip";
 import ImageIcon from "@material-ui/icons/Image";
 import UndoIcon from "@material-ui/icons/Undo";
 import RedoIcon from "@material-ui/icons/Redo";
-import PaletteIcon from "@material-ui/icons/Palette";
 import Button from "@material-ui/core/Button";
 import Reminder from "./Reminder";
 import Archive from "./Archive";
 import More from "./More";
 import TakeANote from "./TakeANote";
 import { creteNoteService } from "../UserServices/UserServices";
-import Collaborator from "./Collaborator";
+import ColorPalette from "./ColorPalette";
+// import Collaborator from "./Collaborator";
 
 class Notes extends Component {
   constructor(props) {
@@ -30,6 +30,11 @@ class Notes extends Component {
     };
     this.onClickSubmit = this.onClickSubmit.bind(this);
   }
+  handleSave = event => {
+    event.preventDefault();
+    this.setState({ open: false });
+    this.props.onSave();
+  };
 
   onClickSubmit = event => {
     event.preventDefault();
@@ -65,10 +70,15 @@ class Notes extends Component {
     creteNoteService(nodeObject, loginToken)
       .then(data => {
         console.log("created note data", data.data);
+        this.props.onSave();
       })
       .catch(error => {
         console.log("created note Error", error);
       });
+  };
+
+  handleSave = () => {
+    this.props.onSave();
   };
 
   render() {
@@ -79,8 +89,8 @@ class Notes extends Component {
             <Paper>
               <InputBase
                 placeholder="Title"
-                multiline
                 autoFocus
+                multiline
                 style={{ paddingLeft: "15px" }}
                 name="title"
                 value={this.state.title}
@@ -99,11 +109,9 @@ class Notes extends Component {
               <br />
               <div className="noteLogo">
                 <Reminder />
-                <Collaborator />
+                {/*  <Collaborator />*/}
                 <Tooltip title="Change color">
-                  <IconButton>
-                    <PaletteIcon />
-                  </IconButton>
+                  <ColorPalette onSave={this.handleSave} />
                 </Tooltip>
                 <Tooltip title="Add image">
                   <IconButton>

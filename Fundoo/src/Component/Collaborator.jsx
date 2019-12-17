@@ -18,12 +18,12 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import PersonAddOutlinedIcon from "@material-ui/icons/PersonAddOutlined";
 import PersonOutlineTwoToneIcon from "@material-ui/icons/PersonOutlineTwoTone";
 import CloseOutlinedIcon from "@material-ui/icons/CloseOutlined";
-// import update from "immutability-helper";
 import {
   getAllUserList,
   AddCollaborator,
   DeleteCollaborator
 } from "../UserServices/noteService";
+import update from "immutability-helper";
 
 const theme = createMuiTheme({
   overrides: {
@@ -64,7 +64,7 @@ class Collaborator extends Component {
       data: "",
       userList: [],
       popper: false,
-      anchorEl: null,
+      // anchorEl: null,
       collaboratorList: []
     };
   }
@@ -88,7 +88,6 @@ class Collaborator extends Component {
           "response in collaborator get user list",
           response.data.data.details
         );
-
         var list = response.data.data.details;
         this.setState({ userList: list });
       })
@@ -99,7 +98,7 @@ class Collaborator extends Component {
     if (this.state.data.length > 1) {
       this.setState(
         {
-          anchorEl: event.currentTarget,
+          // anchorEl: event.currentTarget,
           popper: true
         },
         () => {
@@ -122,78 +121,96 @@ class Collaborator extends Component {
         console.log("collaborator Error", error);
       });
   };
-  componentDidMount() {
-    this.setState({ collaboratorList: this.props.collaborators }, () => {
-      console.log("value in state collb", this.state.collaboratorList);
-    });
-    console.log("value in collaborator state", this.props.collaborators);
-  }
-
-  handleClose = (event, item) => {
+  handleSave = event => {
     event.preventDefault();
-    this.setState({ anchorEl: null, open: false, data: "", popper: false });
+    this.setState({ open: false });
+    this.props.onSave();
+  };
+
+  handleAddCollaborator = (event, item) => {
+    event.preventDefault();
+    console.log("object", this.state.collaboratorsList);
+    this.setState({ data: "", popper: false });
     var collaboratorObject = { ...item };
-    console.log("value in collaboratorObject", collaboratorObject);
     collaboratorObject.id = this.props.collaboratorId;
     console.log("collaborator list", this.props.collaborators);
     AddCollaborator(collaboratorObject)
       .then(data => {
         console.log("collaborator data", data.data);
+        this.getAllUserList(data);
       })
       .catch(error => {
         console.log("collaborator Error", error);
       });
+    this.setState({
+      collaboratorList: update(this.props.collaborators, {
+        $push: [item]
+      })
+    });
   };
+  componentDidMount() {
+    this.setState({ collaboratorList: this.props.collaborators }, () => {
+      console.log("value in state collb", this.state.collaboratorList);
+    });
+
+    // console.log("value in collaborator state", this.props.collaborators);
+  }
   render() {
     let email = this.state.email;
     let fullName = this.state.firstName + " " + this.state.lastName;
-    var collaboratorsList = this.state.userList.map(item => {
+    // console.log("in collaborator", this.props.displayAllNotes);
+
+    var collaboratorsList = this.state.userList.map((item, index) => {
       return (
-        <div>
+        <div key={index}>
           <ListItem
             style={{ border: "none" }}
             button
-            onClick={event => this.handleClose(event, item)}
+            onClick={event => this.handleAddCollaborator(event, item)}
           >
             {item.email}
           </ListItem>
         </div>
       );
     });
-    var collaboratorNoteList = this.state.collaboratorList.map(item => {
-      return (
-        <div style={{ display: "flex", flexDirection: "row" }}>
-          <MuiThemeProvider theme={theme}>
-            <IconButton>
-              <PersonOutlineTwoToneIcon />
-            </IconButton>
-            <ListItem
-              style={{ border: "none" }}
-              button
-              onClick={event => this.handleClose(event, item)}
-            >
-              {item.email}
-            </ListItem>
 
-            <IconButton onClick={event => this.deleteCollaborator(event, item)}>
-              <CloseOutlinedIcon />
-            </IconButton>
-          </MuiThemeProvider>
-        </div>
-      );
-    });
+    var collaboratorNoteList = this.state.collaboratorList.map(
+      (item, index) => {
+        return (
+          <div key={index} style={{ display: "flex", flexDirection: "row" }}>
+            <MuiThemeProvider theme={theme}>
+              <IconButton>
+                <PersonOutlineTwoToneIcon />
+              </IconButton>
+              <ListItem
+                style={{ border: "none" }}
+                button
+                onClick={event => this.handleAddCollaborator(event, item)}
+              >
+                {item.email}
+              </ListItem>
+              <IconButton
+                onClick={event => this.deleteCollaborator(event, item)}
+              >
+                <CloseOutlinedIcon />
+              </IconButton>
+            </MuiThemeProvider>
+          </div>
+        );
+      }
+    );
     // console.log("user list", collaboratorsList);
     return (
       <div>
         <MuiThemeProvider theme={theme}>
           <Tooltip title="Collaborator">
-            <IconButton>
-              <PersonAddOutlinedIcon onClick={this.handleClickOpen} />
+            <IconButton onClick={this.handleClickOpen}>
+              <PersonAddOutlinedIcon />
             </IconButton>
           </Tooltip>
           <Dialog
             open={this.state.open}
-            onClose={this.handleClose}
+            onClose={this.handleAddCollaborator}
             aria-labelledby="form-dialog-title"
           >
             <MuiThemeProvider theme={theme2}>
@@ -221,6 +238,7 @@ class Collaborator extends Component {
                   <div style={{ marginLeft: "20px" }}>
                     <InputBase
                       autoFocus
+                      autoComplete="off"
                       margin="dense"
                       name="data"
                       value={this.state.data}
@@ -234,7 +252,7 @@ class Collaborator extends Component {
                 <div>
                   <MenuList
                     open={this.state.popper}
-                    anchorEl={this.state.anchorEl}
+                    // anchorEl={this.state.anchorEl}
                     style={{ zIndex: "4000", border: "none" }}
                   >
                     {collaboratorsList}
@@ -243,12 +261,14 @@ class Collaborator extends Component {
               </DialogContent>
 
               <DialogActions>
-                <Button onClick={this.handleClose} color="primary">
+                <Button
+                  onClick={event => this.handleSave(event)}
+                  color="primary"
+                >
                   Save
                 </Button>
               </DialogActions>
             </MuiThemeProvider>
-            <div></div>
           </Dialog>
         </MuiThemeProvider>
       </div>

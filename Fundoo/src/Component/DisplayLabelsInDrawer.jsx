@@ -40,10 +40,8 @@ class DisplayLabelsInDrawer extends Component {
   handleNote = () => {
     getAllLabels()
       .then(response => {
-        //  console.log("GEWT ALLLL==response",response);
-        console.log("GEt==response from USER", response.data.data.details);
         this.labelArray = response.data.data.details;
-        console.log(" note array ", this.labelArray);
+        console.log(" label array ", this.labelArray);
         this.setState({
           labelArray: this.labelArray
         });

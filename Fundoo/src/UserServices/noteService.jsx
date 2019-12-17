@@ -4,7 +4,7 @@ const token = localStorage.getItem("token");
 
 export class NoteService extends Component {
   getAllNoteService() {
-    console.log(" service called ");
+    console.log("  getAllNote service called ");
 
     return axios.get(
       `http://fundoonotes.incubation.bridgelabz.com/api/notes/getNotesList`,

@@ -24,9 +24,9 @@ import DisplayTrashNotes from "./DisplayTrashNotes";
 import DisplayAllArchiveNotes from "./DisplayAllArchiveNotes";
 import AddLabel from "./AddLabel";
 import ReminderMain from "./ReminderMain";
+import { NoteService } from "../UserServices/noteService";
+const notesService = new NoteService();
 // import TrashNote from './TrashNote';
-// import { NoteService } from '../UserServices/noteService';
-// const notesService = new NoteService()
 
 const theme = createMuiTheme({
   overrides: {
@@ -149,9 +149,25 @@ class Dashboard extends Component {
     this.setState({ noteOpen: !this.state.noteOpen });
   };
 
+  handleNote = () => {
+    notesService
+      .getAllNoteService()
+      .then(response => {
+        this.noteArray = response.data.data.data;
+        console.log(" note array in Dashboard ", this.noteArray);
+
+        this.setState({ noteArray: this.noteArray });
+      })
+      .catch(err => {
+        console.log("ERROR NOTE DATA =========>", err);
+      });
+  };
+
+  UNSAFE_componentWillMount() {
+    this.handleNote();
+  }
   render() {
     let drawer = !this.state.open ? "hideDrawer" : "search2";
-
     // const trash=this.state.trash;
     // const notes=this.state.notes;
     // const archive=this.state.archive;
@@ -269,11 +285,15 @@ class Dashboard extends Component {
                   />
 
                   <div style={{ width: "600px" }}>
-                    <TakeANote />
+                    <TakeANote hitapi={this.handleNote} />
                   </div>
 
                   {this.state.notes ? (
-                    <DisplayAllNotes view={this.state.gridView} />
+                    <DisplayAllNotes
+                      view={this.state.gridView}
+                      displayAllNotes={this.state.noteArray}
+                      hitapi={this.handleNote}
+                    />
                   ) : null}
                   {this.state.trash ? (
                     <DisplayTrashNotes view={this.state.gridView} />
