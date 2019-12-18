@@ -37,10 +37,6 @@ class TrashNote extends Component {
   render() {
     return (
       <div>
-        {/* <ListItem button onClick={this.handleTrash}>
-                   <DeleteForeverIcon  /> 
-           </ListItem> */}
-
         <Tooltip title="Delete">
           <IconButton onClick={this.handleTrash}>
             <DeleteForeverIcon />

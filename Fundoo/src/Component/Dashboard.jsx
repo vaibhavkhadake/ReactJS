@@ -26,7 +26,6 @@ import AddLabel from "./AddLabel";
 import ReminderMain from "./ReminderMain";
 import { NoteService } from "../UserServices/noteService";
 const notesService = new NoteService();
-// import TrashNote from './TrashNote';
 
 const theme = createMuiTheme({
   overrides: {
@@ -74,9 +73,9 @@ class Dashboard extends Component {
     });
   };
 
-  handlenotes = () => {
+  handlenotes = async () => {
     console.log("In notes ", this.state.notes);
-    this.setState({
+    await this.setState({
       notes: true,
       reminder: false,
       trash: false,
@@ -85,9 +84,9 @@ class Dashboard extends Component {
     });
   };
 
-  handlereminder = () => {
+  handlereminder = async () => {
     console.log("In notes ", this.state.reminder);
-    this.setState({
+    await this.setState({
       notes: false,
       reminder: true,
       trash: false,
@@ -107,8 +106,8 @@ class Dashboard extends Component {
     console.log("In trash ", this.state.trash);
   };
 
-  handlelabels = () => {
-    this.setState({
+  handlelabels = async () => {
+    await this.setState({
       notes: false,
       reminder: false,
       trash: false,
@@ -117,9 +116,9 @@ class Dashboard extends Component {
     });
   };
 
-  handlearchive = () => {
+  handlearchive = async () => {
     console.log("In archive", this.state.archive);
-    this.setState({
+    await this.setState({
       notes: false,
       reminder: false,
       trash: false,
@@ -296,7 +295,10 @@ class Dashboard extends Component {
                     />
                   ) : null}
                   {this.state.trash ? (
-                    <DisplayTrashNotes view={this.state.gridView} />
+                    <DisplayTrashNotes
+                      view={this.state.gridView}
+                      hitapi={this.handleNote}
+                    />
                   ) : null}
                   {this.state.label ? <AddLabel /> : null}
                   {this.state.reminder ? <ReminderMain /> : null}

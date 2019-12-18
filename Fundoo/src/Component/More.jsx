@@ -2,14 +2,9 @@ import React, { Component } from "react";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import {
-  Popper,
-  Card,
-  IconButton,
-  List,
-  ListItem
-} from "@material-ui/core";
-// import DisplayLabels from "./DisplayLabels";
+import { IconButton } from "@material-ui/core";
+import { TrashNotes } from "../UserServices/noteService";
+
 import Tooltip from "@material-ui/core/Tooltip";
 class More extends Component {
   constructor(props) {
@@ -17,7 +12,8 @@ class More extends Component {
     this.state = {
       anchorEl: null,
       open: false,
-      popper: false
+      popper: false,
+      deleteButton: false
     };
   }
 
@@ -28,14 +24,43 @@ class More extends Component {
   handleClose = () => {
     this.setState({ anchorEl: null });
   };
-  handleClickLabel = event => {
-    // const { currentTarget } = event;
-    console.log("in more click");
-    this.setState(state => ({
+  handleDeleteNote = async event => {
+    await this.setState({
       anchorEl: null,
-      open: !this.state.open,
-      popper: !this.state.popper
-    }));
+      deleteButton: !this.state.deleteButton
+    });
+
+    let loginToken = localStorage.getItem("token");
+    console.log("delete Note Id=->", this.props.trashNoteId);
+    let noteObject = {};
+    noteObject.noteIdList = [this.props.trashNoteId];
+    noteObject.isDeleted = this.state.deleteButton;
+
+    TrashNotes(noteObject, loginToken)
+      .then(data => {
+        console.log("Trashed Note DATA==>", data);
+        this.props.onSave();
+      })
+      .catch(err => {
+        console.log("Trashed note ERROR==>", err);
+      });
+  };
+  // handleClickLabel = event => {
+  //   // const { currentTarget } = event;
+  //   console.log("in more click");
+  //   this.setState(state => ({
+  //     anchorEl: null,
+  //     open: !this.state.open,
+  //     popper: !this.state.popper
+  //   }));
+  // };
+  handleQuestionAnswer = async event => {
+    event.preventDefault();
+    console.log("object");
+    await this.setState({
+      anchorEl: null
+    });
+    this.props.history.push("/QuestionAnswer");
   };
   render() {
     const { anchorEl } = this.state;
@@ -52,15 +77,20 @@ class More extends Component {
           open={Boolean(anchorEl)}
           onClose={this.handleClose}
         >
-          <MenuItem onClick={event => this.handleClickLabel(event)}>
-            Add Label
+          <MenuItem onClick={event => this.handleDeleteNote(event)}>
+            Delete Label
           </MenuItem>
-          <MenuItem onClick={this.handleClose}>Delete Label</MenuItem>
+          <MenuItem onClick={event => this.handleQuestionAnswer(event)}>
+            Ask a question
+          </MenuItem>
         </Menu>
-        <Popper open={this.state.open} popper={this.state.popper}>
+        {/* <Popper open={this.state.open} popper={this.state.popper}>
           <Card>
-            {/* style={{height:'100px' ,width:'100px'}} */}
+           
             <List>
+              <ListItem button style={{ fontSize: "12px" }}>
+                Delete Note
+              </ListItem>
               <ListItem
                 button
                 onClick={event => this.handleClickLabel(event)}
@@ -68,12 +98,10 @@ class More extends Component {
               >
                 Add Label
               </ListItem>
-              <ListItem button style={{ fontSize: "12px" }}>
-                Delete Note
-              </ListItem>
             </List>
           </Card>
-        </Popper>
+        </Popper >
+    */}
       </div>
     );
   }

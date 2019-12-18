@@ -6,10 +6,17 @@ import "./DisplayAllNotes.css";
 import Reminder from "./Reminder";
 import More from "./More";
 import { Tooltip } from "@material-ui/core";
-//import Archive from './Archive';
 import ColorPalette from "./ColorPalette";
 import ArchiveNote from "./ArchiveNote";
-// import TrashNote from './TrashNote';
+import Masonry from "react-masonry-css";
+import "./Masonry.css";
+
+const breakpointColumnsObj = {
+  default: 3,
+  1100: 3,
+  700: 2,
+  500: 1
+};
 
 class DisplayAllArchiveNotes extends Component {
   constructor(props) {
@@ -39,7 +46,7 @@ class DisplayAllArchiveNotes extends Component {
     getAllArchiveNotes()
       .then(response => {
         this.noteArray = response.data.data.data;
-        
+
         console.log(" note array in archive note", this.noteArray);
         this.setState({ noteArray: this.noteArray });
       })
@@ -58,51 +65,54 @@ class DisplayAllArchiveNotes extends Component {
     var allData = data.filter(user => user.isArchived === true);
     return (
       <div className={classes}>
-        {allData.map((text, index) => (
-          <div className="allNotes" key={index}>
-            <Card
-              className="displayNotes"
-              style={{ backgroundColor: text.color }}
-            >
-              <div>
-                <TextField
-                  onClick={() => this.handleNoteSave(text)}
-                  InputProps={{
-                    disableUnderline: true
-                  }}
-                  value={text.title}
-                  margin="normal"
-                  placeholder="Title"
-                  style={{ paddingLeft: "15px" }}
-                />
-                <br />
-                <TextField
-                  onClick={() => this.handleNoteSave(text)}
-                  InputProps={{
-                    disableUnderline: true
-                  }}
-                  value={text.description}
-                  margin="normal"
-                  placeholder="Description"
-                  style={{ paddingLeft: "15px" }}
-                />
-              </div>
-              <div>
-                <div className="noteLogo">
-                  <Reminder />
-                  <Tooltip title="Change color">
-                    {/* Passing particular note id */}
-                    <ColorPalette colorNoteId={text.id} />
-                  </Tooltip>
-                  <ArchiveNote archiveNoteId={text.id} />
-                  <More />
-                  {/* <TrashNote trashNoteId={text.id} /> */}
+        <Masonry
+          breakpointCols={breakpointColumnsObj}
+          className="my-masonry-grid"
+          columnClassName="my-masonry-grid_column"
+        >
+          {allData.map((text, index) => (
+            <div className="allNotes" key={index}>
+              <Card
+                className="displayNotes"
+                style={{ backgroundColor: text.color }}
+              >
+                <div>
+                  <TextField
+                    onClick={() => this.handleNoteSave(text)}
+                    InputProps={{
+                      disableUnderline: true
+                    }}
+                    value={text.title}
+                    placeholder="Title"
+                    style={{ paddingLeft: "15px" }}
+                  />
+                  <br />
+                  <TextField
+                    onClick={() => this.handleNoteSave(text)}
+                    InputProps={{
+                      disableUnderline: true
+                    }}
+                    value={text.description}
+                    placeholder="Description"
+                    style={{ paddingLeft: "15px" }}
+                  />
                 </div>
-              </div>
-            </Card>
-            <br />
-          </div>
-        ))}
+                <div>
+                  <div className="noteLogo">
+                    <Reminder />
+                    <Tooltip title="Change color">
+                      {/* Passing particular note id */}
+                      <ColorPalette colorNoteId={text.id} />
+                    </Tooltip>
+                    <ArchiveNote archiveNoteId={text.id} />
+                    <More />
+                  </div>
+                </div>
+              </Card>
+              <br />
+            </div>
+          ))}
+        </Masonry>
       </div>
     );
   }

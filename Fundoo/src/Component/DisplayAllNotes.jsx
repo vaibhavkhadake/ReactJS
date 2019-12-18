@@ -1,19 +1,24 @@
 import React, { Component } from "react";
-
 import Card from "@material-ui/core/Card";
 import TextField from "@material-ui/core/TextField";
 import "./DisplayAllNotes.css";
 import Reminder from "./Reminder";
-// import More from "./More";
+import More from "./More";
 import DialogBox from "./DialogBox";
 import { Tooltip } from "@material-ui/core";
 import ColorPalette from "./ColorPalette";
 import ArchiveNote from "./ArchiveNote";
-import TrashNote from "./TrashNote";
 import Collaborator from "./Collaborator";
-// import { NoteService } from "../UserServices/noteService";
-// const notesService = new NoteService();
+import AccountCircleOutlinedIcon from "@material-ui/icons/AccountCircleOutlined";
+import Masonry from "react-masonry-css";
+import "./Masonry.css";
 
+const breakpointColumnsObj = {
+  default: 3,
+  1100: 3,
+  700: 2,
+  500: 1
+};
 class DisplayAllNotes extends Component {
   constructor(props) {
     super(props);
@@ -37,36 +42,6 @@ class DisplayAllNotes extends Component {
     this.setState({ open: !this.state.open });
   };
 
-  // handleNote = () => {
-  //   notesService
-  //     .getAllNoteService()
-  //     .then(response => {
-  //       this.noteArray = response.data.data.data;
-
-  //       console.log(" note array in display all notes ", this.noteArray);
-
-  //       this.setState({ noteArray: this.noteArray });
-  //     })
-  //     .catch(err => {
-  //       console.log("ERROR NOTE DATA =========>", err);
-  //     });
-  //   // console.log("in display all notes");
-  //   // this.props.displayAllNotes();
-  // };
-  // componentDidMount() {
-  // this.handleNote();
-  //   notesService
-  //     .getAllNoteService()
-  //     .then(response => {
-  //       this.noteArray = response.data.data.data;
-  //       console.log(" note array ", this.noteArray);
-  //       this.setState({ noteArray: this.noteArray });
-  //     })
-  //     .catch(err => {
-  //       console.log("ERROR NOTE DATA =========>", err);
-  //     });
-  // }
-
   handleApiHit = () => {
     this.props.hitapi();
   };
@@ -75,78 +50,90 @@ class DisplayAllNotes extends Component {
   };
   render() {
     let classes = this.props.view ? "allNotesMain" : "allNotesMainColumn";
-    // console.log("object", this.props.displayAllNotes);
     var data = this.props.displayAllNotes;
     var allData = data.filter(
       user => user.isArchived !== true && user.isDeleted !== true
     );
+
     return (
       <div>
         <div className={classes}>
-          {allData.map((text, index) => (
-            <div className="allNotes" key={index}>
-              <Card
-                className="displayNotes"
-                style={{ backgroundColor: text.color }}
-              >
-                <div>
-                  <TextField
-                    onClick={() => this.handleNoteSave(text)}
-                    InputProps={{
-                      disableUnderline: true
-                    }}
-                    value={text.title}
-                    margin="normal"
-                    placeholder="Title"
-                    style={{ paddingLeft: "15px" }}
-                  />
-                  <br />
-                  <TextField
-                    onClick={() => this.handleNoteSave(text)}
-                    InputProps={{
-                      disableUnderline: true
-                    }}
-                    value={text.description}
-                    margin="normal"
-                    placeholder="Description"
-                    style={{ paddingLeft: "15px" }}
-                  />
-                </div>
-                <div>
-                  <div className="noteLogo">
-                    <Reminder />
-                    <Collaborator
-                      collaboratorId={text.id}
-                      collaborators={text.collaborators}
-                      displayAllNotes={this.props.displayAllNotes}
-                      onSave={this.handleApiHit}
+          <Masonry
+            breakpointCols={breakpointColumnsObj}
+            className="my-masonry-grid"
+            columnClassName="my-masonry-grid_column"
+          >
+            {allData.map((text, index) => (
+              <div className="allNotes" key={index}>
+                <Card
+                  className="displayNotes"
+                  style={{ backgroundColor: text.color }}
+                >
+                  <div>
+                    <TextField
+                      onClick={() => this.handleNoteSave(text)}
+                      InputProps={{
+                        disableUnderline: true
+                      }}
+                      value={text.title}
+                      multiline
+                      placeholder="Title"
+                      style={{ paddingLeft: "15px" }}
                     />
-                    <Tooltip title="Change color">
-                      {/* Passing particular note id */}
-                      <ColorPalette
-                        colorNoteId={text.id}
+                    <br />
+                    <TextField
+                      onClick={() => this.handleNoteSave(text)}
+                      InputProps={{
+                        disableUnderline: true
+                      }}
+                      multiline
+                      value={text.description}
+                      placeholder="Description"
+                      style={{ paddingLeft: "15px" }}
+                    />
+                  </div>
+
+                  <div style={{ padding: "0px 15px", margin: "none" }}>
+                    {text.collaborators.map(colabN => (
+                      <Tooltip key={colabN.email} title={colabN.email}>
+                        <AccountCircleOutlinedIcon />
+                      </Tooltip>
+                    ))}
+                  </div>
+                  <div style={{ fontSize: "small" }}>
+                    <div className="noteLogo">
+                      <Reminder />
+                      <Collaborator
+                        collaboratorId={text.id}
+                        collaborators={text.collaborators}
+                        displayAllNotes={this.props.displayAllNotes}
                         onSave={this.handleApiHit}
                       />
-                    </Tooltip>
-                    <ArchiveNote
-                      archiveNoteId={text.id}
-                      onSave={this.handleApiHit}
-                    />
-                    <TrashNote
-                      trashNoteId={text.id}
-                      onSave={this.handleApiHit}
-                    />
-                    {/*  <More /> */}
+                      <Tooltip title="Change color">
+                        <ColorPalette
+                          colorNoteId={text.id}
+                          onSave={this.handleApiHit}
+                        />
+                      </Tooltip>
+                      <ArchiveNote
+                        archiveNoteId={text.id}
+                        onSave={this.handleApiHit}
+                      />
+                      <More trashNoteId={text.id} onSave={this.handleApiHit} />
+                    </div>
                   </div>
-                </div>
-              </Card>
-              <br />
-            </div>
-          ))}
+                </Card>
+
+                <br />
+              </div>
+            ))}
+          </Masonry>
+
           <DialogBox
             dialogOpen={this.state.open}
             singleNote={this.state.uniqueNote}
             dialogBoxClose={this.handleDialogBoxClose}
+            onSave={this.handleApiHit}
           />
         </div>
       </div>

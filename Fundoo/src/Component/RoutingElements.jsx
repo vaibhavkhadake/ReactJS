@@ -16,6 +16,7 @@ import DisplayLabels from "./DisplayLabels";
 import DisplayLabelsInDrawer from "./DisplayLabelsInDrawer";
 import AddLabelNote from "./AddLabelNote";
 import More from "./More";
+import QuestionAnswer from "./QuestionAnswer";
 
 function RoutingElements() {
   return (
@@ -27,7 +28,11 @@ function RoutingElements() {
           <Route path="/Logout" component={Logout} />
           <Route path="/TakeANode" component={TakeANode} />
           <Route path="/GoogleLogin" component={GoogleLogin} />
-          <Route path="/GooglePassword" exact component={GooglePassword} />
+          <Route
+            path="/GooglePassword"
+            exact={true}
+            component={GooglePassword}
+          />
           <Route path="/CreateAccount" component={CreateAccount} />
           <Route path="/DisplayAllNotes" component={DisplayAllNotes} />
           <Route path="/dashboard/TrashNotes" component={DisplayTrashNotes} />
@@ -44,6 +49,7 @@ function RoutingElements() {
           />
           <Route path="/dashboard/AddLabelNote" component={AddLabelNote} />
           <Route path="/More" component={More} />
+          <Route path="/QuestionAnswer" component={QuestionAnswer} />
         </Switch>
       </Router>
     </div>

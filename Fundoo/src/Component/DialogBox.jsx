@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import Card from "@material-ui/core/Card";
 import {
   createMuiTheme,
   MuiThemeProvider,
@@ -7,7 +6,6 @@ import {
   Paper
 } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
-
 import Dialog from "@material-ui/core/Dialog";
 import { Button } from "@material-ui/core";
 import { UpdateNotes } from "../UserServices/noteService";
@@ -15,28 +13,12 @@ import Reminder from "./Reminder";
 import ColorPalette from "./ColorPalette";
 import ArchiveNote from "./ArchiveNote";
 import More from "./More";
-import TrashNote from "./TrashNote";
-import Collaborator from "./Collaborator";
-
-// import { Tooltip, IconButton } from '@material-ui/core';
-// import PaletteIcon from '@material-ui/icons/Palette';
-// import ColorPalette from './ColorPalette';
-// import Reminder from './Reminder';
-// import More from './More';
-
 const theme = createMuiTheme({
   overrides: {
     MuiPaper: {
       root: {
         display: "flex",
         flexDirection: "column"
-        // justifyContent: "space-between",
-        // marginTop: "15%",
-        // width: '30%',
-        // minHeight: "30px",
-        // margin: '80px auto',
-        // paddingBottom: '20px',
-        // backgroundColor:'this.state.color'
       }
     }
   }
@@ -99,6 +81,7 @@ export default class DialogBox extends Component {
       .catch(err => {
         console.log("update note ERRRR", err);
       });
+    this.props.onSave();
     this.props.dialogBoxClose();
   };
   render() {
@@ -137,11 +120,11 @@ export default class DialogBox extends Component {
               <Divider />
               <div style={{ display: "flex", flexDirection: "row" }}>
                 <Reminder />
-                <Collaborator />
-                <ColorPalette />
-                <ArchiveNote />
+                {/*<Collaborator />*/}
+                <ColorPalette onClick={this.handleUpdateNote} />
+                <ArchiveNote onClick={this.handleUpdateNote} />
                 <More />
-                <TrashNote />
+
                 <Button onClick={this.handleUpdateNote}>Close</Button>
               </div>
             </Paper>

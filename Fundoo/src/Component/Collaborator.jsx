@@ -72,6 +72,9 @@ class Collaborator extends Component {
   handleClickOpen = () => {
     this.setState({ open: true });
   };
+  handleClose = () => {
+    this.setState({ open: false });
+  };
 
   handleCollaborator = event => {
     this.setState({
@@ -120,6 +123,12 @@ class Collaborator extends Component {
       .catch(error => {
         console.log("collaborator Error", error);
       });
+
+    this.setState({
+      collaboratorList: update(this.props.collaborators, {
+        $splice: [[item, 1]]
+      })
+    });
   };
   handleSave = event => {
     event.preventDefault();
@@ -129,7 +138,7 @@ class Collaborator extends Component {
 
   handleAddCollaborator = (event, item) => {
     event.preventDefault();
-    console.log("object", this.state.collaboratorsList);
+    // console.log("object", this.state.collaboratorsList);
     this.setState({ data: "", popper: false });
     var collaboratorObject = { ...item };
     collaboratorObject.id = this.props.collaboratorId;
@@ -137,7 +146,7 @@ class Collaborator extends Component {
     AddCollaborator(collaboratorObject)
       .then(data => {
         console.log("collaborator data", data.data);
-        this.getAllUserList(data);
+        // this.getAllUserList(data);
       })
       .catch(error => {
         console.log("collaborator Error", error);
@@ -210,7 +219,7 @@ class Collaborator extends Component {
           </Tooltip>
           <Dialog
             open={this.state.open}
-            onClose={this.handleAddCollaborator}
+            onClose={this.handleClose}
             aria-labelledby="form-dialog-title"
           >
             <MuiThemeProvider theme={theme2}>
@@ -237,7 +246,7 @@ class Collaborator extends Component {
                   </IconButton>
                   <div style={{ marginLeft: "20px" }}>
                     <InputBase
-                      autoFocus
+                      // autoFocus
                       autoComplete="off"
                       margin="dense"
                       name="data"
