@@ -119,7 +119,12 @@ class DisplayAllNotes extends Component {
                         archiveNoteId={text.id}
                         onSave={this.handleApiHit}
                       />
-                      <More trashNoteId={text.id} onSave={this.handleApiHit} />
+                      <More
+                        trashNoteId={text.id}
+                        onSave={this.handleApiHit}
+                        displayAllNotes={this.props.displayAllNotes}
+                        props={this.props.props}
+                      />
                     </div>
                   </div>
                 </Card>

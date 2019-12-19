@@ -1,0 +1,41 @@
+.mainImageLogo{
+    
+    display: flex;
+     flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+}
+.imageLogo
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    /* top:70px; */
+    margin:20px;
+    /* padding:50px;  */
+    border: 2px;
+}
+.accountCircleLogo
+{
+    justify-content: center;
+}
+.profilePic{
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+/* .signoutButton
+ {
+   display: flex;
+   font-size: 15px; 
+   margin-left: 20px;
+   margin-top: 10px;
+   margin-bottom: 10px; 
+    width: 120px;
+   justify-content: center;
+} */

@@ -4,7 +4,6 @@ import MenuItem from "@material-ui/core/MenuItem";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { IconButton } from "@material-ui/core";
 import { TrashNotes } from "../UserServices/noteService";
-
 import Tooltip from "@material-ui/core/Tooltip";
 class More extends Component {
   constructor(props) {
@@ -31,11 +30,10 @@ class More extends Component {
     });
 
     let loginToken = localStorage.getItem("token");
-    console.log("delete Note Id=->", this.props.trashNoteId);
+    // console.log("delete Note Id=->", this.props.trashNoteId);
     let noteObject = {};
     noteObject.noteIdList = [this.props.trashNoteId];
     noteObject.isDeleted = this.state.deleteButton;
-
     TrashNotes(noteObject, loginToken)
       .then(data => {
         console.log("Trashed Note DATA==>", data);
@@ -56,11 +54,22 @@ class More extends Component {
   // };
   handleQuestionAnswer = async event => {
     event.preventDefault();
-    console.log("object");
+
     await this.setState({
       anchorEl: null
     });
-    this.props.history.push("/QuestionAnswer");
+    // let noteObject = {};
+    // noteObject.noteIdList = this.props.trashNoteId;
+    // getNoteDetails(this.props.trashNoteId)
+    //   .then(data => {
+    //     console.log("More question Note DATA==>", data);
+
+    //     this.props.onSave();
+    //   })
+    //   .catch(err => {
+    //     console.log("More note ERROR==>", err);
+    //   });
+    this.props.props.history.push("/QuestionAnswer/" + this.props.trashNoteId);
   };
   render() {
     const { anchorEl } = this.state;
@@ -71,14 +80,13 @@ class More extends Component {
             <MoreVertIcon />
           </Tooltip>
         </IconButton>
-
         <Menu
           anchorEl={anchorEl}
           open={Boolean(anchorEl)}
           onClose={this.handleClose}
         >
           <MenuItem onClick={event => this.handleDeleteNote(event)}>
-            Delete Label
+            Delete Note
           </MenuItem>
           <MenuItem onClick={event => this.handleQuestionAnswer(event)}>
             Ask a question

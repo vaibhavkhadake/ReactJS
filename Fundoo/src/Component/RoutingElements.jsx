@@ -1,10 +1,10 @@
 import React from "react";
 import Dashboard from "./Dashboard";
 import Logout from "./Logout";
-import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
+import { Route, BrowserRouter as Router } from "react-router-dom";
 import Notes from "./Notes";
 import TakeANode from "./TakeANote";
-import GoogleLogin from "../GoogleLogin/GoogleLogin";
+// import GoogleLogin from "../GoogleLogin/GoogleLogin";
 import GooglePassword from "../GoogleLogin/GooglePassword";
 import CreateAccount from "../GoogleLogin/CreateAccount";
 import DisplayAllNotes from "./DisplayAllNotes";
@@ -22,35 +22,29 @@ function RoutingElements() {
   return (
     <div>
       <Router>
-        <Switch>
-          <Route path="/dashboard" component={Dashboard} />
-          <Route path="/dashboard/Notes" component={Notes} />
-          <Route path="/Logout" component={Logout} />
-          <Route path="/TakeANode" component={TakeANode} />
-          <Route path="/GoogleLogin" component={GoogleLogin} />
-          <Route
-            path="/GooglePassword"
-            exact={true}
-            component={GooglePassword}
-          />
-          <Route path="/CreateAccount" component={CreateAccount} />
-          <Route path="/DisplayAllNotes" component={DisplayAllNotes} />
-          <Route path="/dashboard/TrashNotes" component={DisplayTrashNotes} />
-          <Route
-            path="/dashboard/ArchiveNotes"
-            component={DisplayAllArchiveNotes}
-          />
-          <Route path="/TrashNote" component={TrashNote} />
-          <Route path="/Drawer2" component={Drawer2} />
-          <Route path="/DisplayLabels" component={DisplayLabels} />
-          <Route
-            path="/DisplayLabelsInDrawer"
-            component={DisplayLabelsInDrawer}
-          />
-          <Route path="/dashboard/AddLabelNote" component={AddLabelNote} />
-          <Route path="/More" component={More} />
-          <Route path="/QuestionAnswer" component={QuestionAnswer} />
-        </Switch>
+        {/**<Route path="/GoogleLogin" component={GoogleLogin} /> */}
+        <Route path="/" exact={true} component={GooglePassword} />
+        <Route path="/dashboard" component={Dashboard} />
+        <Route path="/dashboard/Notes" component={Notes} />
+        <Route path="/Logout" component={Logout} />
+        <Route path="/TakeANode" component={TakeANode} />
+        <Route path="/CreateAccount" component={CreateAccount} />
+        <Route path="/DisplayAllNotes" component={DisplayAllNotes} />
+        <Route path="/dashboard/TrashNotes" component={DisplayTrashNotes} />
+        <Route
+          path="/dashboard/ArchiveNotes"
+          component={DisplayAllArchiveNotes}
+        />
+        <Route path="/TrashNote" component={TrashNote} />
+        <Route path="/Drawer2" component={Drawer2} />
+        <Route path="/DisplayLabels" component={DisplayLabels} />
+        <Route
+          path="/DisplayLabelsInDrawer"
+          component={DisplayLabelsInDrawer}
+        />
+        <Route path="/dashboard/AddLabelNote" component={AddLabelNote} />
+        <Route path="/More" component={More} />
+        <Route path="/QuestionAnswer/:id" component={QuestionAnswer} />
       </Router>
     </div>
   );

@@ -167,27 +167,6 @@ class Dashboard extends Component {
   }
   render() {
     let drawer = !this.state.open ? "hideDrawer" : "search2";
-    // const trash=this.state.trash;
-    // const notes=this.state.notes;
-    // const archive=this.state.archive;
-
-    //  var button;
-
-    //    if(trash==='true')
-    //     {
-    //     return (button= <DisplayTrashNotes />);
-    //     }
-    //     else if(archive==='true')
-    //     {
-    //       return ( button=<DisplayAllArchiveNotes />);
-    //     }
-    //     else if(notes==='true')
-    //     {
-    //       return (button=<DisplayAllNotes
-    //          notes={this.props.notes}
-    //         />);
-    //     }
-
     return (
       <div>
         <div className="appBar">
@@ -292,6 +271,7 @@ class Dashboard extends Component {
                       view={this.state.gridView}
                       displayAllNotes={this.state.noteArray}
                       hitapi={this.handleNote}
+                      props={this.props}
                     />
                   ) : null}
                   {this.state.trash ? (

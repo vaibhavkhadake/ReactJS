@@ -16,7 +16,18 @@ export class NoteService extends Component {
     );
   }
 }
-
+export function getNoteDetails(data) {
+  console.log("data in more get details ", data);
+  return axios.get(
+    "http://fundoonotes.incubation.bridgelabz.com/api/notes/getNotesDetail/" +
+      data,
+    {
+      headers: {
+        Authorization: token
+      }
+    }
+  );
+}
 export function creteLabel(data, token) {
   console.log("data and token ", data, token);
   return axios.post(

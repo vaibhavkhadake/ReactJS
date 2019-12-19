@@ -142,11 +142,10 @@ class Collaborator extends Component {
     this.setState({ data: "", popper: false });
     var collaboratorObject = { ...item };
     collaboratorObject.id = this.props.collaboratorId;
-    console.log("collaborator list", this.props.collaborators);
+    // console.log("collaborator list", this.props.collaborators);
     AddCollaborator(collaboratorObject)
       .then(data => {
         console.log("collaborator data", data.data);
-        // this.getAllUserList(data);
       })
       .catch(error => {
         console.log("collaborator Error", error);
@@ -159,16 +158,13 @@ class Collaborator extends Component {
   };
   componentDidMount() {
     this.setState({ collaboratorList: this.props.collaborators }, () => {
-      console.log("value in state collb", this.state.collaboratorList);
+      // console.log("value in state collb", this.state.collaboratorList);
     });
-
-    // console.log("value in collaborator state", this.props.collaborators);
   }
   render() {
     let email = this.state.email;
     let fullName = this.state.firstName + " " + this.state.lastName;
     // console.log("in collaborator", this.props.displayAllNotes);
-
     var collaboratorsList = this.state.userList.map((item, index) => {
       return (
         <div key={index}>
@@ -208,7 +204,6 @@ class Collaborator extends Component {
         );
       }
     );
-    // console.log("user list", collaboratorsList);
     return (
       <div>
         <MuiThemeProvider theme={theme}>
@@ -246,7 +241,6 @@ class Collaborator extends Component {
                   </IconButton>
                   <div style={{ marginLeft: "20px" }}>
                     <InputBase
-                      // autoFocus
                       autoComplete="off"
                       margin="dense"
                       name="data"
@@ -261,7 +255,6 @@ class Collaborator extends Component {
                 <div>
                   <MenuList
                     open={this.state.popper}
-                    // anchorEl={this.state.anchorEl}
                     style={{ zIndex: "4000", border: "none" }}
                   >
                     {collaboratorsList}

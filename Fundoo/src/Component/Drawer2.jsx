@@ -84,6 +84,7 @@ class Drawer2 extends Component {
   };
 
   render() {
+    // console.log("props in drawer", this.props.props);
     return (
       <div className="drawerName">
         <MuiThemeProvider theme={theme}>

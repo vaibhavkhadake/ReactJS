@@ -1,0 +1,145 @@
+@media screen and (min-width: 220px) and (max-width: 600px) {
+  .search {
+    display: none;
+    visibility: hidden;
+  }
+  .refreshIcon {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin-left: 100px;
+    margin-right: 20px;
+  }
+  .appIcon2 {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
+}
+
+@media (min-width: 600px) {
+  .onlyAppBar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    flex-direction: row;
+  }
+
+  .appBar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    flex-direction: column;
+  }
+  .keepimage {
+    padding: 5px;
+    padding-right: 10px;
+  }
+  .textkeep {
+    margin-right: 70px;
+  }
+
+  .searchIcon {
+    justify-content: center;
+    float: left;
+  }
+  .search {
+    display: flex;
+    align-content: center;
+    background-color: "silver";
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    width: 500px;
+    border: 2px silver;
+    height: 45px;
+    padding-top: 5px;
+  }
+
+  .refreshIcon {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin-left: 150px;
+    margin-right: 20px;
+  }
+  .dragHandleIcon {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 10px;
+    margin-left: 20px;
+  }
+  /* .settingsIcon
+ {
+    margin-left: 10px;
+ } */
+  .appsIcon {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .accountCircle {
+    display: flex;
+    float: right;
+    justify-content: space-between;
+    /* margin-left:0px ; */
+  }
+
+  .lebels {
+    display: flex;
+    padding: 20px;
+    float: left;
+  }
+
+  .drawer {
+    margin: 50px;
+    padding: 50px;
+    top: 50px;
+    width: 500px;
+    display: flex;
+  }
+  .search2 {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    font-size: 12px;
+    margin-top: 125px;
+    margin-left: 350px;
+    margin-right: 100px;
+    /* padding:20px; */
+  }
+  .hideDrawer {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    font-size: 12px;
+    margin-top: 125px;
+    margin-left: 200px;
+    margin-right: 100px;
+    /* padding:20px; */
+  }
+
+  .signoutButton {
+    display: flex;
+    /* font-size: 15px; */
+    /* margin-left: 20px;
+   margin-top: 10px;
+   margin-bottom: 10px; */
+    /* width: 120px; */
+    justify-content: center;
+  }
+  .appIcon2 {
+    display: flex;
+
+    flex-direction: row;
+  }
+
+  .handledrawer {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+}

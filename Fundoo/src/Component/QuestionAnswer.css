@@ -1,0 +1,46 @@
+h2 {
+  padding-left: 20px;
+}
+p {
+  padding: 0px 20px;
+}
+.questionPaper {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 5%;
+  padding-left: 10%;
+}
+.titleQuestion {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0px 20px;
+}
+.descriptionQuestion {
+  display: flex;
+  flex-direction: row;
+  padding: 0px 20px;
+}
+.submitQuestion {
+  display: flex;
+  flex-direction: column;
+  float: right;
+  padding: 10px 20px;
+}
+.closeButton {
+  display: flex;
+  flex-direction: column;
+  float: right;
+  padding: 10px 30px;
+}
+.froalaEditor {
+  padding: 20px;
+}
+.reply {
+  display: flex;
+  flex-direction: column;
+  float: right;
+  padding: 10px 30px;
+}
