@@ -101,7 +101,6 @@ class Collaborator extends Component {
     if (this.state.data.length > 1) {
       this.setState(
         {
-          // anchorEl: event.currentTarget,
           popper: true
         },
         () => {
@@ -164,7 +163,6 @@ class Collaborator extends Component {
   render() {
     let email = this.state.email;
     let fullName = this.state.firstName + " " + this.state.lastName;
-    // console.log("in collaborator", this.props.displayAllNotes);
     var collaboratorsList = this.state.userList.map((item, index) => {
       return (
         <div key={index}>

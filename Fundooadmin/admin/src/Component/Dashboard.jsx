@@ -1,17 +1,14 @@
 import React, { Component } from "react";
 import Button from "react-bootstrap/Button";
-// import Table from "react-bootstrap/Table";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import Card from "react-bootstrap/Card";
-// import Row from "react-bootstrap/Row";
-// import Col from "react-bootstrap/Col";
 import axios from "axios";
-// import Pagination from "react-bootstrap/Pagination";
 import "react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import BootstrapTable from "react-bootstrap-table-next";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
+import TextField from "@material-ui/core/TextField";
 const { SearchBar } = Search;
 const columns = [
   {
@@ -23,7 +20,6 @@ const columns = [
     text: "Last Name"
   },
   {
-    
     dataField: "email",
     text: "Email"
   },
@@ -39,7 +35,10 @@ class Dashboard extends Component {
     this.state = {
       userArray: [],
       basicCount: "",
-      advanceCount: ""
+      advanceCount: "",
+      approveAnswer: true,
+      message: "",
+      answer: []
     };
   }
 
@@ -50,7 +49,6 @@ class Dashboard extends Component {
 
   handleUserListCount = () => {
     const token = localStorage.getItem("token");
-    console.log("token", token);
     return axios
       .get(
         "http://fundoonotes.incubation.bridgelabz.com/api/user/UserStatics",
@@ -83,7 +81,6 @@ class Dashboard extends Component {
 
   handleUserList = () => {
     const token = localStorage.getItem("token");
-    console.log("token", token);
     return axios
       .get(
         "http://fundoonotes.incubation.bridgelabz.com/api/user/getAdminUserList",
@@ -103,13 +100,84 @@ class Dashboard extends Component {
       });
   };
 
+  handleAnswer = () => {
+    this.setState({ approveAnswer: !this.state.approveAnswer });
+    const token = localStorage.getItem("token");
+
+    return axios
+      .get(
+        "http://fundoonotes.incubation.bridgelabz.com/api/questionAndAnswerNotes/getUnApprovedAnswer",
+        {
+          headers: {
+            Authorization: token
+          }
+        }
+      )
+      .then(response => {
+        console.log("aprrove answer", response.data.data);
+        this.setState({ answer: response.data.data });
+        this.acceptAnswer();
+      })
+      .catch(err => {
+        console.log("err aprrove answer", err);
+      });
+  };
+
+  acceptAnswer = (event, data) => {
+    event.preventDefault();
+    const token = localStorage.getItem("token");
+    console.log("data", data.id);
+    let approveId = {};
+    approveId.parentId = data.id;
+    return axios
+      .post(
+        "http://fundoonotes.incubation.bridgelabz.com/api/questionAndAnswerNotes/approve/" +
+          approveId.parentId,
+        data,
+        {
+          headers: {
+            "Content-type": "application/json; charset=utf-8",
+            Authorization: token
+          }
+        }
+      )
+      .then(response => {
+        console.log("response in accept answer", response);
+      })
+      .catch(err => {
+        console.log("err in accept answer", err);
+      });
+  };
+
+  rejectAnswer = (event, data) => {
+    event.preventDefault();
+    const token = localStorage.getItem("token");
+    console.log("data in reject", data);
+    return axios
+      .post(
+        "http://fundoonotes.incubation.bridgelabz.com/api/questionAndAnswerNotes/reject/" +
+          data.id,
+        data,
+        {
+          headers: {
+            "Content-type": "application/json; charset=utf-8",
+            Authorization: token
+          }
+        }
+      )
+      .then(response => {
+        console.log("response in reject answer", response);
+      })
+      .catch(err => {
+        console.log("err in reject answer", err);
+      });
+  };
+
   handleClick = () => {
     this.props.history.push("/");
   };
   render() {
     let product = this.state.userArray;
-    // let basic = product.filter(basicuser => basicuser.service === "basic");
-    // console.log("user array in render", this.state.userArray);
     return (
       <div>
         <ToolkitProvider
@@ -121,9 +189,6 @@ class Dashboard extends Component {
           {props => (
             <div>
               <Navbar
-                // fixed-top
-                // bg="dark"
-                // variant="dark"
                 style={{
                   display: "flex",
                   justifyContent: "space-between",
@@ -132,6 +197,9 @@ class Dashboard extends Component {
                 }}
               >
                 <Navbar.Brand>Fundoo Admin</Navbar.Brand>
+                <Button onClick={this.handleAnswer}>
+                  Get UnApproved Answers
+                </Button>
                 <Button className="logoutButton" onClick={this.handleClick}>
                   Logout
                 </Button>
@@ -147,12 +215,15 @@ class Dashboard extends Component {
               >
                 <Card
                   style={{
-                    padding: "20px",
+                    padding: "20px 30px",
                     margin: "20px",
                     backgroundColor: "#aeccd8c7"
                   }}
                 >
-                  <b>Basic {this.state.basicCount} </b>
+                  <b>
+                    Basic
+                    <br /> {this.state.basicCount}{" "}
+                  </b>
                 </Card>
                 <Card
                   style={{
@@ -161,8 +232,41 @@ class Dashboard extends Component {
                     backgroundColor: "#aeccd8c7"
                   }}
                 >
-                  <b>Advance {this.state.advanceCount}</b>
+                  <b>
+                    Advance
+                    <br /> {this.state.advanceCount}
+                  </b>
                 </Card>
+              </div>
+              <div>
+                {!this.state.approveAnswer ? (
+                  <Container>
+                    {this.state.answer.map((data, index) => (
+                      <Card key={index}>
+                        <TextField
+                          InputProps={{
+                            disableUnderline: true
+                          }}
+                          value={data.message}
+                          multiline
+                          style={{ paddingLeft: "15px" }}
+                        />
+                        <div>
+                          <Button
+                            onClick={event => this.acceptAnswer(event, data)}
+                          >
+                            Accept
+                          </Button>
+                          <Button
+                            onClick={event => this.rejectAnswer(event, data)}
+                          >
+                            Reject
+                          </Button>
+                        </div>
+                      </Card>
+                    ))}
+                  </Container>
+                ) : null}
               </div>
               <Container>
                 <SearchBar {...props.searchProps} />
@@ -174,34 +278,8 @@ class Dashboard extends Component {
             </div>
           )}
         </ToolkitProvider>
-
-        {/*
-              <BootstrapTable keyField='firstName' data={ product } columns={ columns } pagination={ paginationFactory() } />
-            <Pagination>
-            <Table responsive striped bordered hover>
-              <thead>
-                <tr>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>EmailId</th>
-                  <th>Services</th>
-                </tr>
-              </thead>
-              <tbody>
-                {this.state.userArray.map((user, index) => (
-                  <tr key={index}>
-                    <td>{user.firstName}</td>
-                    <td>{user.lastName}</td>
-                    <td>{user.email}</td>
-                    <td>{user.service}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </Table>
-                </Pagination>*/}
       </div>
     );
   }
 }
-
 export default Dashboard;

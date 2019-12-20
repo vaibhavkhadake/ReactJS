@@ -16,6 +16,7 @@ export class NoteService extends Component {
     );
   }
 }
+
 export function getNoteDetails(data) {
   console.log("data in more get details ", data);
   return axios.get(
@@ -190,6 +191,20 @@ export function ProfilePic(data, token) {
   console.log("data and token ", data, token);
   return axios.post(
     "http://fundoonotes.incubation.bridgelabz.com/api/user/uploadProfileImage",
+    data,
+    {
+      headers: {
+        "Content-type": "application/json; charset=utf-8",
+        Authorization: token
+      }
+    }
+  );
+}
+
+export function AddQuesion(data) {
+  console.log("data and token ", data);
+  return axios.post(
+    "http://fundoonotes.incubation.bridgelabz.com/api/questionAndAnswerNotes/addQuestionAndAnswer",
     data,
     {
       headers: {

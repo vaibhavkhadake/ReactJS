@@ -1,21 +1,19 @@
-.allNotesMain
-{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
+.allNotesMain {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
-.allNote
-{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap; 
+.allNote {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
-.allNotesMainColumn
-{
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: space-around;
+.allNotesMainColumn {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 100%;
 }

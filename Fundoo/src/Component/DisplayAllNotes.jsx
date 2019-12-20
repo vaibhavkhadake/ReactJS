@@ -19,6 +19,12 @@ const breakpointColumnsObj = {
   700: 2,
   500: 1
 };
+const breakpointRowObj = {
+  default: 1,
+  1100: 1,
+  700: 1,
+  500: 1
+};
 class DisplayAllNotes extends Component {
   constructor(props) {
     super(props);
@@ -50,6 +56,9 @@ class DisplayAllNotes extends Component {
   };
   render() {
     let classes = this.props.view ? "allNotesMain" : "allNotesMainColumn";
+    let listGridView = this.props.view
+      ? breakpointColumnsObj
+      : breakpointRowObj;
     var data = this.props.displayAllNotes;
     var allData = data.filter(
       user => user.isArchived !== true && user.isDeleted !== true
@@ -59,7 +68,7 @@ class DisplayAllNotes extends Component {
       <div>
         <div className={classes}>
           <Masonry
-            breakpointCols={breakpointColumnsObj}
+            breakpointCols={listGridView}
             className="my-masonry-grid"
             columnClassName="my-masonry-grid_column"
           >
@@ -100,6 +109,7 @@ class DisplayAllNotes extends Component {
                       </Tooltip>
                     ))}
                   </div>
+
                   <div style={{ fontSize: "small" }}>
                     <div className="noteLogo">
                       <Reminder />
@@ -126,6 +136,14 @@ class DisplayAllNotes extends Component {
                         props={this.props.props}
                       />
                     </div>
+                  </div>
+                  <div>
+                    {text.questionAndAnswerNotes.map((colabN, index) => (
+                      <div
+                        key={index}
+                        dangerouslySetInnerHTML={{ __html: colabN.message }}
+                      />
+                    ))}
                   </div>
                 </Card>
 
