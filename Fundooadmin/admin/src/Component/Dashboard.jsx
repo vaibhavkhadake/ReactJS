@@ -8,7 +8,6 @@ import "react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.m
 import paginationFactory from "react-bootstrap-table2-paginator";
 import BootstrapTable from "react-bootstrap-table-next";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
-import TextField from "@material-ui/core/TextField";
 const { SearchBar } = Search;
 const columns = [
   {
@@ -243,13 +242,10 @@ class Dashboard extends Component {
                   <Container>
                     {this.state.answer.map((data, index) => (
                       <Card key={index}>
-                        <TextField
-                          InputProps={{
-                            disableUnderline: true
+                        <div
+                          dangerouslySetInnerHTML={{
+                            __html: data.message
                           }}
-                          value={data.message}
-                          multiline
-                          style={{ paddingLeft: "15px" }}
                         />
                         <div>
                           <Button

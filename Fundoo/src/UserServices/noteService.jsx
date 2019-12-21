@@ -21,7 +21,7 @@ export function getNoteDetails(data) {
   console.log("data in more get details ", data);
   return axios.get(
     "http://fundoonotes.incubation.bridgelabz.com/api/notes/getNotesDetail/" +
-      data,
+      data.id,
     {
       headers: {
         Authorization: token
@@ -206,6 +206,22 @@ export function AddQuesion(data) {
   return axios.post(
     "http://fundoonotes.incubation.bridgelabz.com/api/questionAndAnswerNotes/addQuestionAndAnswer",
     data,
+
+    {
+      headers: {
+        "Content-type": "application/json; charset=utf-8",
+        Authorization: token
+      }
+    }
+  );
+}
+export function ReplyQuesion(data) {
+  console.log("data and token ", data);
+  return axios.post(
+    "http://fundoonotes.incubation.bridgelabz.com/api/questionAndAnswerNotes/reply/" +
+      data.id,
+    data,
+
     {
       headers: {
         "Content-type": "application/json; charset=utf-8",
