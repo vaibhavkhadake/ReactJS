@@ -72,38 +72,38 @@ class DisplayAllNotes extends Component {
             className="my-masonry-grid"
             columnClassName="my-masonry-grid_column"
           >
-            {allData.map((text, index) => (
+            {allData.map((note, index) => (
               <div className="allNotes" key={index}>
                 <Card
                   className="displayNotes"
-                  style={{ backgroundColor: text.color }}
+                  style={{ backgroundColor: note.color }}
                 >
                   <div>
                     <TextField
-                      onClick={() => this.handleNoteSave(text)}
+                      onClick={() => this.handleNoteSave(note)}
                       InputProps={{
                         disableUnderline: true
                       }}
-                      value={text.title}
+                      value={note.title}
                       multiline
                       placeholder="Title"
                       style={{ paddingLeft: "15px" }}
                     />
                     <br />
                     <TextField
-                      onClick={() => this.handleNoteSave(text)}
+                      onClick={() => this.handleNoteSave(note)}
                       InputProps={{
                         disableUnderline: true
                       }}
                       multiline
-                      value={text.description}
+                      value={note.description}
                       placeholder="Description"
                       style={{ paddingLeft: "15px" }}
                     />
                   </div>
 
                   <div style={{ padding: "0px 15px", margin: "none" }}>
-                    {text.collaborators.map(colabN => (
+                    {note.collaborators.map(colabN => (
                       <Tooltip key={colabN.email} title={colabN.email}>
                         <AccountCircleOutlinedIcon />
                       </Tooltip>
@@ -114,37 +114,40 @@ class DisplayAllNotes extends Component {
                     <div className="noteLogo">
                       <Reminder />
                       <Collaborator
-                        collaboratorId={text.id}
-                        collaborators={text.collaborators}
+                        collaboratorId={note.id}
+                        collaborators={note.collaborators}
                         displayAllNotes={this.props.displayAllNotes}
                         onSave={this.handleApiHit}
                       />
                       <Tooltip title="Change color">
                         <ColorPalette
-                          colorNoteId={text.id}
+                          colorNoteId={note.id}
                           onSave={this.handleApiHit}
                         />
                       </Tooltip>
                       <ArchiveNote
-                        archiveNoteId={text.id}
+                        archiveNoteId={note.id}
                         onSave={this.handleApiHit}
                       />
                       <More
-                        trashNoteId={text.id}
+                        trashNoteId={note.id}
                         onSave={this.handleApiHit}
                         displayAllNotes={this.props.displayAllNotes}
                         props={this.props.props}
                       />
                     </div>
                   </div>
-                  <div>
-                    {text.questionAndAnswerNotes.map((colabN, index) => (
+
+                  {note.questionAndAnswerNotes.length > 0 ? (
+                    <React.Fragment>
+                      <h4 style={{ margin: "10px" }}>Asked Question</h4>
                       <div
-                        key={index}
-                        dangerouslySetInnerHTML={{ __html: colabN.message }}
-                      />
-                    ))}
-                  </div>
+                        dangerouslySetInnerHTML={{
+                          __html: note.questionAndAnswerNotes[0].message
+                        }}
+                      ></div>
+                    </React.Fragment>
+                  ) : null}
                 </Card>
 
                 <br />
@@ -157,6 +160,7 @@ class DisplayAllNotes extends Component {
             singleNote={this.state.uniqueNote}
             dialogBoxClose={this.handleDialogBoxClose}
             onSave={this.handleApiHit}
+            displayAllNotes={this.props.displayAllNotes}
           />
         </div>
       </div>

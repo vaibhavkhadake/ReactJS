@@ -8,8 +8,8 @@ import {
 } from "@material-ui/core";
 import Tooltip from "@material-ui/core/Tooltip";
 import ImageIcon from "@material-ui/icons/Image";
-import UndoIcon from "@material-ui/icons/Undo";
-import RedoIcon from "@material-ui/icons/Redo";
+// import UndoIcon from "@material-ui/icons/Undo";
+// import RedoIcon from "@material-ui/icons/Redo";
 import Button from "@material-ui/core/Button";
 import Reminder from "./Reminder";
 import Archive from "./Archive";
@@ -120,7 +120,7 @@ class Notes extends Component {
                 </Tooltip>
                 <Archive />
                 <More />
-                <Tooltip title="Undo">
+                {/**<Tooltip title="Undo">
                   <IconButton>
                     <UndoIcon />
                   </IconButton>
@@ -130,7 +130,7 @@ class Notes extends Component {
                     <RedoIcon />
                   </IconButton>
                 </Tooltip>
-
+                */}
                 <Button variant="text" onClick={this.handleCreateNote}>
                   Close
                 </Button>

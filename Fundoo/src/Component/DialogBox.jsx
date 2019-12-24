@@ -13,6 +13,8 @@ import Reminder from "./Reminder";
 import ColorPalette from "./ColorPalette";
 import ArchiveNote from "./ArchiveNote";
 import More from "./More";
+import { ChangeColorNotes } from "../UserServices/noteService";
+// import Collaborator from "./Collaborator";
 const theme = createMuiTheme({
   overrides: {
     MuiPaper: {
@@ -44,13 +46,30 @@ export default class DialogBox extends Component {
       noteData: nextProps.singleNote
     });
   }
+  handleAddColor = color => {
+    console.log(" color in handle ", color.colorCode);
+    console.log("Note 97 info==============>", this.props.colorNoteId);
+    this.setState({ open: !this.state.open });
+    let loginToken = localStorage.getItem("token");
+    let noteObject = {};
+    noteObject.noteIdList = [this.state.noteData.id];
+    noteObject.color = color.colorCode;
+
+    ChangeColorNotes(noteObject, loginToken)
+      .then(data => {
+        console.log("Added color successfully", data);
+
+        this.setState({ colorOpen: !this.state.colorOpen });
+        this.props.onSave();
+      })
+      .catch(err => {
+        console.log(" error in response");
+        console.log("Error in Adding color", err);
+      });
+  };
 
   handleDialogBox = () => {
     this.props.dialogBoxClose();
-  };
-  handleColor = () => {
-    console.log("color in dialog box");
-    this.setState({ open: !this.state.open });
   };
 
   handleChangeNoteTitle = event => {
@@ -120,11 +139,10 @@ export default class DialogBox extends Component {
               <Divider />
               <div style={{ display: "flex", flexDirection: "row" }}>
                 <Reminder />
-                {/*<Collaborator />*/}
-                <ColorPalette onClick={this.handleUpdateNote} />
+                {/**    <Collaborator /> */}
+                <ColorPalette onClick={this.handleAddColor} />
                 <ArchiveNote onClick={this.handleUpdateNote} />
-                <More />
-
+                <More onClick={this.handleUpdateNote} />
                 <Button onClick={this.handleUpdateNote}>Close</Button>
               </div>
             </Paper>

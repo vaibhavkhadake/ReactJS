@@ -232,7 +232,6 @@ class Collaborator extends Component {
                   </div>
                 </div>
                 <div>{collaboratorNoteList}</div>
-
                 <div style={{ display: "flex", flexDirection: "row" }}>
                   <IconButton>
                     <PersonOutlineTwoToneIcon />

@@ -156,7 +156,7 @@ class GooglePassword extends Component {
                 onChange={this.handleChange}
                 margin="dense"
                 variant="outlined"
-                fullWidth="10px"
+                fullWidth
               />
             </div>
             <div className="ErrorMessage">{this.state.error.username}</div>
@@ -172,7 +172,7 @@ class GooglePassword extends Component {
                 onChange={this.handleChange}
                 margin="dense"
                 variant="outlined"
-                fullWidth="10px"
+                fullWidth
               />
             </div>
             <div className="ErrorMessage">{this.state.error.password}</div>

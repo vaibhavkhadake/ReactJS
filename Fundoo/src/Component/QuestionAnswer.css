@@ -42,6 +42,6 @@ p {
 .reply {
   display: flex;
   flex-direction: column;
-  padding: 10px 30px;
+  padding: 0px 30px;
   /* justify-content: flex-start; */
 }

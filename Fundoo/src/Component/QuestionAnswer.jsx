@@ -29,16 +29,31 @@ class QuestionAnswer extends Component {
       answerArr: [],
       answerArray: "",
       FroalaEditor: true,
-      idArrays: []
+      idArrays: [],
+      replyButton2: true
     };
   }
-  handleReplyButtonMain = () => {
-    this.setState({ replyButtonMain: !this.state.replyButtonMain });
+  handleReplyButtonMain = async () => {
+    await this.setState(
+      { replyButtonMain: !this.state.replyButtonMain },
+      () => {
+        console.log("In reply Main button");
+      }
+    );
   };
 
-  handleReplyButton = () => {
-    this.setState({ replyButton: !this.state.replyButton, message: " " });
+  handleReplyButton = async () => {
+    await this.setState({ replyButton: !this.state.replyButton, message: " " });
+    console.log("In reply button");
   };
+  handleReplyButton2 = async () => {
+    await this.setState({
+      replyButton2: !this.state.replyButton2,
+      message: " "
+    });
+    console.log("In reply button 2");
+  };
+
   componentDidMount() {
     let id = this.props.match.params;
     getNoteDetails(id)
@@ -50,13 +65,17 @@ class QuestionAnswer extends Component {
         // );
         await this.setState({
           title: response.data.data.data[0].title,
-          description: response.data.data.data[0].description
-          // answer: response.data.data.data[0].questionAndAnswerNotes
+          description: response.data.data.data[0].description,
+          answer: response.data.data.data[0].questionAndAnswerNotes
         });
         await this.setState({
-          questionArrays:
-            response.data.data.data[0].questionAndAnswerNotes[0].message
+          questionArrays: this.state.answer[0].message
         });
+        console.log("question array in getdetails", this.state.questionArrays);
+        // await this.setState({
+        //   questionArrays:
+        //     response.data.data.data[0].questionAndAnswerNotes[0].message
+        // });
         await this.setState({
           answerArr:
             response.data.data.data[0].questionAndAnswerNotes[0].message
@@ -64,6 +83,17 @@ class QuestionAnswer extends Component {
         await this.setState({
           idArrays: response.data.data.data[0].questionAndAnswerNotes[0].id
         });
+
+        var arr = [];
+        arr = this.state.answer.slice(1, this.state.answer.length);
+        // console.log("Spliced array", arr);
+        this.setState({ answer: arr });
+        var array = this.state.answer.filter(res => res.isApproved === true);
+
+        // console.log("Array of question and answer", this.state.answer);
+        this.setState({ answer: array });
+
+        console.log("question and answer", this.state.answer);
 
         // await this.setState({
         //   answerArray:
@@ -101,7 +131,8 @@ class QuestionAnswer extends Component {
         console.log("error in add question ", error);
       });
   };
-  handleReplyAnswer = () => {
+
+  handleReplyAnswer = id => {
     console.log("messageAnswer", this.state.message);
     this.setState({
       message: this.state.message,
@@ -109,22 +140,24 @@ class QuestionAnswer extends Component {
     });
     var data = {
       message: this.state.message,
-      id: this.state.idArrays
+      // id: this.state.idArrays
+      id: id
     };
     // console.log("object this.state.idArrays", this.state.idArrays);
     ReplyQuesion(data)
       .then(async response => {
-        await this.setState({
-          que: response.data.data.details,
-          message: this.state.message
-        });
-        console.log("response in add question ", response);
+        // await this.setState({
+        //   que: response.data.data.details,
+        //   message: this.state.message
+        // });
+        console.log("response in reply answer ", response);
       })
       .catch(error => {
-        console.log("error in add question ", error);
+        console.log("error in reply answer ", error);
       });
   };
 
+  handleReplyAnswerToAnswer = () => {};
   handleReply = () => {
     this.setState({ reply: !this.state.reply });
   };
@@ -132,6 +165,12 @@ class QuestionAnswer extends Component {
     this.props.history.push("/dashboard");
   };
   render() {
+    // this.state.answer.map(
+    //   id => (
+    //     console.log("Parent id map", id.parentId),
+    //     console.log(" noteid map", id.notesId)
+    //   )
+    // );
     return (
       <div className="questionPaper">
         <Paper>
@@ -163,11 +202,12 @@ class QuestionAnswer extends Component {
           </div>
           <Divider />
           <div>
-            <h2>Ask a Question </h2>
+            <h4 style={{ paddingLeft: "20px" }}>Ask a Question </h4>
           </div>
           <div>
+            {/**if already question asked */}
             {this.state.questionArrays.length ? (
-              <div>
+              <div style={{ fontSize: "small" }}>
                 <IconButton>
                   <PersonOutlineTwoToneIcon />
                 </IconButton>
@@ -175,17 +215,18 @@ class QuestionAnswer extends Component {
                   " " +
                   localStorage.getItem("lastName")}
                 <IconButton onClick={this.handleReplyButtonMain}>
-                  <ReplyIcon style={{ marginLeft: "2%" }} />
+                  <ReplyIcon />
                 </IconButton>
                 <div style={{ display: "flex", flexDirection: "row" }}>
                   <ArrowRightIcon fontSize="large" />
                   <div
+                    style={{ color: "red" }}
                     dangerouslySetInnerHTML={{
                       __html: this.state.questionArrays
                     }}
                   />
                 </div>
-                <div style={{ padding: "15px" }}>
+                <div>
                   {this.state.replyButtonMain ? null : (
                     <div>
                       <FroalaEditor
@@ -195,7 +236,11 @@ class QuestionAnswer extends Component {
                         onModelChange={this.handleModelChange}
                       />
                       <div>
-                        <Button onClick={this.handleReplyAnswer}>
+                        <Button
+                          onClick={() =>
+                            this.handleReplyAnswer(this.state.idArrays)
+                          }
+                        >
                           Submit-Answer
                         </Button>
                       </div>
@@ -205,6 +250,7 @@ class QuestionAnswer extends Component {
               </div>
             ) : (
               <div>
+                {/**if new question ask  */}
                 {this.state.FroalaEditor ? (
                   <div style={{ padding: "15px" }}>
                     <FroalaEditor
@@ -229,7 +275,7 @@ class QuestionAnswer extends Component {
               ) : (
                 <div>
                   <div>
-                    {this.state.questionArrays.length ? (
+                    {this.state.answer.length ? (
                       <div>
                         <div
                           style={{
@@ -237,49 +283,184 @@ class QuestionAnswer extends Component {
                             flexDirection: "row",
                             justifyContent: "space-between"
                           }}
+                        ></div>
+
+                        <div
+                          style={{ display: "flex", flexDirection: "column" }}
                         >
-                          <div>
-                            <IconButton>
-                              <PersonOutlineTwoToneIcon />
-                            </IconButton>
-                            {localStorage.getItem("firstName") +
-                              " " +
-                              localStorage.getItem("lastName")}
-                            <IconButton onClick={this.handleReplyButton}>
-                              <ReplyIcon style={{ marginLeft: "2%" }} />
-                            </IconButton>
-                          </div>
-                          <div>
+                          {this.state.answer.map(ans =>
+                            this.state.idArrays === ans.parentId ? (
+                              <div key={ans.id}>
+                                <div style={{ fontSize: "small" }}>
+                                  <IconButton>
+                                    <PersonOutlineTwoToneIcon />
+                                  </IconButton>
+                                  {localStorage.getItem("firstName") +
+                                    " " +
+                                    localStorage.getItem("lastName")}
+                                  <IconButton onClick={this.handleReplyButton}>
+                                    <ReplyIcon style={{ marginLeft: "2%" }} />
+                                  </IconButton>
+                                </div>
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    justifyContent: "space-between"
+                                  }}
+                                >
+                                  <div
+                                    style={{ fontSize: "small" }}
+                                    dangerouslySetInnerHTML={{
+                                      __html: ans.message
+                                    }}
+                                  />
+
+                                  <Button onClick={this.handleReplyButton}>
+                                    show reply
+                                  </Button>
+                                </div>
+                                <div>
+                                  {this.state.replyButton ? null : (
+                                    <div style={{ paddingLeft: "30px" }}>
+                                      <div>
+                                        {this.state.answer.map(ans2 =>
+                                          ans.id === ans2.parentId ? (
+                                            <div key={ans2.id}>
+                                              <div
+                                                style={{ fontSize: "small" }}
+                                              >
+                                                <IconButton>
+                                                  <PersonOutlineTwoToneIcon />
+                                                </IconButton>
+                                                {localStorage.getItem(
+                                                  "firstName"
+                                                ) +
+                                                  " " +
+                                                  localStorage.getItem(
+                                                    "lastName"
+                                                  )}
+                                                <IconButton
+                                                  onClick={
+                                                    this.handleReplyButton2
+                                                  }
+                                                >
+                                                  <ReplyIcon
+                                                    style={{ marginLeft: "2%" }}
+                                                  />
+                                                </IconButton>
+                                              </div>
+                                              <div
+                                                style={{ fontSize: "small" }}
+                                                dangerouslySetInnerHTML={{
+                                                  __html: ans2.message
+                                                }}
+                                              />
+
+                                              <div>
+                                                <div>
+                                                  {this.state
+                                                    .replyButton2 ? null : (
+                                                    <div>
+                                                      <FroalaEditor
+                                                        tag="textarea"
+                                                        config={this.config}
+                                                        model={
+                                                          this.state.message
+                                                        }
+                                                        onModelChange={
+                                                          this.handleModelChange
+                                                        }
+                                                      />
+
+                                                      <div className="submitQuestion">
+                                                        <Button
+                                                          onClick={() =>
+                                                            this.handleReplyAnswer(
+                                                              ans2.id
+                                                            )
+                                                          }
+                                                        >
+                                                          Submit-Answer
+                                                        </Button>
+                                                      </div>
+                                                    </div>
+                                                  )}
+                                                </div>
+                                                {this.state.answer.map(ans3 =>
+                                                  ans2.id === ans3.parentId ? (
+                                                    <div
+                                                      key={ans3.id}
+                                                      style={{
+                                                        paddingLeft: "40px"
+                                                      }}
+                                                    >
+                                                      <div
+                                                        style={{
+                                                          paddingLeft: "15px",
+                                                          fontSize: "small"
+                                                        }}
+                                                      >
+                                                        <IconButton>
+                                                          <PersonOutlineTwoToneIcon />
+                                                        </IconButton>
+                                                        {localStorage.getItem(
+                                                          "firstName"
+                                                        ) +
+                                                          " " +
+                                                          localStorage.getItem(
+                                                            "lastName"
+                                                          )}
+                                                      </div>
+                                                      <div
+                                                        style={{
+                                                          paddingLeft: "15px",
+                                                          fontSize: "small"
+                                                        }}
+                                                        dangerouslySetInnerHTML={{
+                                                          __html: ans3.message
+                                                        }}
+                                                      />
+                                                    </div>
+                                                  ) : null
+                                                )}
+                                              </div>
+                                            </div>
+                                          ) : null
+                                        )}
+                                        {/*<FroalaEditor
+                                          tag="textarea"
+                                          config={this.config}
+                                          model={this.state.message}
+                                          onModelChange={this.handleModelChange}
+                                        /> 
+                                      
+                                       <div className="submitQuestion">
+                                        <Button
+                                          onClick={() =>
+                                            this.handleReplyAnswer(ans.id)
+                                          }
+                                        >
+                                          Submit-Answer
+                                        </Button>
+                                      </div>*/}
+                                      </div>
+                                    </div>
+                                  )}
+                                </div>
+                              </div>
+                            ) : null
+                          )}
+
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "flex-end"
+                            }}
+                          >
                             <Button onClick={this.handleReply}>
                               Hide Reply
                             </Button>
                           </div>
-                        </div>
-
-                        <div style={{ display: "flex", flexDirection: "row" }}>
-                          <ArrowRightIcon fontSize="large" />
-                          <div
-                            dangerouslySetInnerHTML={{
-                              __html: this.state.answerArray
-                            }}
-                          />
-                        </div>
-                        <div style={{ padding: "15px" }}>
-                          {this.state.replyButton ? null : (
-                            <div>
-                              <FroalaEditor
-                                tag="textarea"
-                                config={this.config}
-                                model={this.state.message}
-                                onModelChange={this.handleModelChange}
-                              />
-                              <div className="submitQuestion">
-                                <Button onClick={this.handleReplyAnswer}>
-                                  Submit-Answer
-                                </Button>
-                              </div>
-                            </div>
-                          )}
                         </div>
                       </div>
                     ) : (
@@ -293,7 +474,11 @@ class QuestionAnswer extends Component {
                               onModelChange={this.handleModelChange}
                             />
                             <div>
-                              <Button onClick={this.handleReplyAnswer}>
+                              <Button
+                                onClick={() =>
+                                  this.handleReplyAnswer(this.state.idArrays)
+                                }
+                              >
                                 Submit-Answer
                               </Button>
                             </div>
@@ -311,5 +496,4 @@ class QuestionAnswer extends Component {
     );
   }
 }
-
 export default QuestionAnswer;
