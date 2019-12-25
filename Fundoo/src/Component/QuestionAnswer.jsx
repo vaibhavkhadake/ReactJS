@@ -214,9 +214,10 @@ class QuestionAnswer extends Component {
                 {localStorage.getItem("firstName") +
                   " " +
                   localStorage.getItem("lastName")}
-                <IconButton onClick={this.handleReplyButtonMain}>
+                {/** <IconButton onClick={this.handleReplyButtonMain}>
                   <ReplyIcon />
                 </IconButton>
+                */}
                 <div style={{ display: "flex", flexDirection: "row" }}>
                   <ArrowRightIcon fontSize="large" />
                   <div
@@ -298,7 +299,7 @@ class QuestionAnswer extends Component {
                                   {localStorage.getItem("firstName") +
                                     " " +
                                     localStorage.getItem("lastName")}
-                                  <IconButton onClick={this.handleReplyButton}>
+                                  <IconButton onClick={this.handleReplyButtonMain}>
                                     <ReplyIcon style={{ marginLeft: "2%" }} />
                                   </IconButton>
                                 </div>

@@ -25,6 +25,7 @@ import DisplayAllArchiveNotes from "./DisplayAllArchiveNotes";
 import AddLabel from "./AddLabel";
 import ReminderMain from "./ReminderMain";
 import { NoteService } from "../UserServices/noteService";
+import SearchNote from "./SearchNote";
 const notesService = new NoteService();
 
 const theme = createMuiTheme({
@@ -60,7 +61,8 @@ class Dashboard extends Component {
       label: false,
       archive: false,
       gridView: true,
-      listView: true
+      listView: true,
+      search: ""
     };
   }
 
@@ -147,6 +149,13 @@ class Dashboard extends Component {
     console.log("note open click", this.state.noteOpen);
     this.setState({ noteOpen: !this.state.noteOpen });
   };
+  handleSearch = async event => {
+    event.preventDefault();
+
+    await this.setState({ search: event.currentTarget.value });
+    // this.state.typedText(this.state.search);
+    console.log("searched:==>", this.state.search);
+  };
 
   handleNote = () => {
     notesService
@@ -200,7 +209,10 @@ class Dashboard extends Component {
                           <InputBase
                             placeholder="search"
                             multiline
+                            value={this.state.search}
+                            onChange={event => this.handleSearch(event)}
                             style={{ paddingLeft: "15px" }}
+                            variant="outlined"
                           />
                         </div>
                       </div>
@@ -261,30 +273,45 @@ class Dashboard extends Component {
                     handleLabels={this.handlelabels}
                     props={this.props}
                   />
+                  {this.state.search.length > 0 ? (
+                    <div>
+                      {this.state.noteArray
+                        .filter(
+                          notedata =>
+                            notedata.title.includes(this.state.search) ||
+                            notedata.description.includes(this.state.search)
+                        )
+                        .map(data => (
+                          <SearchNote data={data} />
+                        ))}
+                    </div>
+                  ) : (
+                    <div>
+                      <div style={{ width: "600px" }}>
+                        <TakeANote hitapi={this.handleNote} />
+                      </div>
 
-                  <div style={{ width: "600px" }}>
-                    <TakeANote hitapi={this.handleNote} />
-                  </div>
-
-                  {this.state.notes ? (
-                    <DisplayAllNotes
-                      view={this.state.gridView}
-                      displayAllNotes={this.state.noteArray}
-                      hitapi={this.handleNote}
-                      props={this.props}
-                    />
-                  ) : null}
-                  {this.state.trash ? (
-                    <DisplayTrashNotes
-                      view={this.state.gridView}
-                      hitapi={this.handleNote}
-                    />
-                  ) : null}
-                  {this.state.label ? <AddLabel /> : null}
-                  {this.state.reminder ? <ReminderMain /> : null}
-                  {this.state.archive ? (
-                    <DisplayAllArchiveNotes view={this.state.gridView} />
-                  ) : null}
+                      {this.state.notes ? (
+                        <DisplayAllNotes
+                          view={this.state.gridView}
+                          displayAllNotes={this.state.noteArray}
+                          hitapi={this.handleNote}
+                          props={this.props}
+                        />
+                      ) : null}
+                      {this.state.trash ? (
+                        <DisplayTrashNotes
+                          view={this.state.gridView}
+                          hitapi={this.handleNote}
+                        />
+                      ) : null}
+                      {this.state.label ? <AddLabel /> : null}
+                      {this.state.reminder ? <ReminderMain /> : null}
+                      {this.state.archive ? (
+                        <DisplayAllArchiveNotes view={this.state.gridView} />
+                      ) : null}
+                    </div>
+                  )}
                 </MuiThemeProvider>
               </div>
             </div>

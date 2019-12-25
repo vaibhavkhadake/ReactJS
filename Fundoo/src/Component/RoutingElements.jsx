@@ -18,11 +18,14 @@ import AddLabelNote from "./AddLabelNote";
 import More from "./More";
 import QuestionAnswer from "./QuestionAnswer";
 
+import Cards from "./Card";
+
 function RoutingElements() {
   return (
     <div>
       <Router>
         {/**<Route path="/GoogleLogin" component={GoogleLogin} /> */}
+        <Route path="/Card" component={Cards} />
         <Route path="/" exact={true} component={GooglePassword} />
         <Route path="/dashboard" component={Dashboard} />
         <Route path="/dashboard/Notes" component={Notes} />
