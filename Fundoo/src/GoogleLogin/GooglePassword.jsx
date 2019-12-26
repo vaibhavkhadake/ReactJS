@@ -34,6 +34,9 @@ class GooglePassword extends Component {
     field[event.target.name] = event.target.value;
     this.setState({ field });
   }
+  handleCard = () => {
+    this.props.history.push("/Card");
+  };
 
   submitForm(event) {
     event.preventDefault();
@@ -118,8 +121,11 @@ class GooglePassword extends Component {
       <Card>
         <Paper>
           <div className="container1">
-            {/* <div className="container2"> */}
-            <br />
+            <div style={{ display: "flex", justifyContent: "flex-end" }}>
+              {" "}
+              <Button onClick={this.handleCard}>Go to card</Button>
+            </div>
+
             <Snackbar
               open={this.state.snackbaropen}
               anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
@@ -135,6 +141,7 @@ class GooglePassword extends Component {
                 />
               ]}
             />
+
             <h3>
               <span style={{ color: "blue" }}>F</span>
               <span style={{ color: "red" }}>u</span>
@@ -183,38 +190,40 @@ class GooglePassword extends Component {
                 Forget email ?{" "}
               </Link>
             }
-            <br />
-            <br />
 
+            <br />
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center"
+              }}
+            >
+              <br />
+
+              <Button
+                className="registerButton23"
+                variant="contained"
+                color="primary"
+                onClick={this.submitForm}
+              >
+                {" "}
+                Login{" "}
+              </Button>
+            </div>
+            {/*
+            
+             {
+                <Link to={"/CreateAccount"} className="createAccount">
+                  {" "}
+                  Create Account{" "}
+                </Link>
+              }
             <h5 className="h4class" style={{ color: "silver" }}>
               Not your computer? Use Guest mode to sign in privately.
             </h5>
-            <br />
-            <br />
-            {/* { <Link to={'/LearnMore'}  className="nav-link">Learn More </Link> }<br/><br/> */}
-
-            {
-              <Link to={"/CreateAccount"} className="createAccount">
-                {" "}
-                Create Account{" "}
-              </Link>
-            }
-            <br />
-            <br />
-            <br />
-
-            <Button
-              className="registerButton23"
-              variant="contained"
-              color="primary"
-              onClick={this.submitForm}
-            >
-              {" "}
-              Next{" "}
-            </Button>
-            <br />
-
-            {/* <h4><span style={{color:'blue'}}>G</span>
+              
+              <h4><span style={{color:'blue'}}>G</span>
                 <span style={{color:'red'}}>O</span>
                 <span style={{color:'goldenrod'}}>O</span>
                 <span style={{color:'blue'}}>G</span>

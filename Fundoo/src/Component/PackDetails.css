@@ -1,0 +1,10 @@
+.dialogHandle {
+  width: 50%;
+  height: 20%;
+}
+.endButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-bottom: 2%;
+}

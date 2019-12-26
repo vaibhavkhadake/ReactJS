@@ -1,0 +1,51 @@
+.mainDiv {
+  position: relative;
+}
+
+.messageDiv {
+  font-family: arial;
+  font-size: 21px;
+  font-weight: normal;
+}
+.cardMain {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.outerCard {
+  max-width: 320px;
+  min-width: 200px;
+
+  /* box-sizing: border-box; */
+}
+.backCard:hover {
+  background-color: orange;
+}
+.backCard {
+  position: absolute;
+  width: 240px;
+  height: 200px;
+  background-color: silver;
+}
+.card2 {
+  position: relative;
+  width: 230px;
+  height: 170px;
+  padding: 5%;
+  top: -30px;
+  left: -30px;
+  background-color: white;
+}
+.addtoCard {
+  margin-top: 72%;
+  padding-left: 25%;
+}
+.signInInsted {
+  display: flex;
+  justify-content: center;
+  margin-top: 2%;
+  color: blue;
+}
+.signInInsted:hover {
+  outline: none;
+}

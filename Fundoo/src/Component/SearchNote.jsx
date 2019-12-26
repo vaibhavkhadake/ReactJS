@@ -24,7 +24,7 @@ class SearchNote extends Component {
           <div>
             {this.state.data.map(data => (
               <div className="allNotes">
-                <Card style={{ width: "350px" }}>
+                <Card style={{ width: "350px", backgroundColor: data.color }}>
                   <div>
                     <TextField
                       value={data.title}
@@ -54,6 +54,7 @@ class SearchNote extends Component {
                     </div>
                   </div>
                 </Card>
+                <br />
               </div>
             ))}
           </div>

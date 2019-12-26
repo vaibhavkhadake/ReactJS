@@ -230,3 +230,29 @@ export function ReplyQuesion(data) {
     }
   );
 }
+
+export function getService() {
+  return axios.get(
+    `http://fundoonotes.incubation.bridgelabz.com/api/user/service`,
+    {
+      headers: {
+        Authorization: token
+      }
+    }
+  );
+}
+
+export function SelectService(data) {
+  console.log("data and token ", data);
+  return axios.post(
+    "http://fundoonotes.incubation.bridgelabz.com/api/productcarts/addToCart",
+    data,
+
+    {
+      headers: {
+        "Content-type": "application/json; charset=utf-8",
+        Authorization: token
+      }
+    }
+  );
+}
