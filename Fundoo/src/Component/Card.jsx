@@ -42,15 +42,16 @@ class Cards extends Component {
     super(props);
     this.state = {
       open: false,
-      serviceArray: []
+      serviceArray: [],
+      data: ""
     };
   }
   handleClick = () => {
     this.props.history.push("/");
   };
-  handleDialogBoxClose = () => {
+  handleDialogBoxClose = data => {
     console.log("button clicked");
-    this.setState({ open: !this.state.open });
+    this.setState({ open: !this.state.open, data: data });
   };
   handleService = () => {
     getService()
@@ -88,7 +89,7 @@ class Cards extends Component {
                   <MuiThemeProvider theme={theme2}>
                     <div
                       className="outerCard"
-                      onClick={this.handleDialogBoxClose}
+                      onClick={event => this.handleDialogBoxClose(data)}
                     >
                       <Card className="backCard">
                         <h4 className="addtoCard">ADD TO CARD</h4>
@@ -140,6 +141,7 @@ class Cards extends Component {
             dialogOpen={this.state.open}
             dialogBoxClose={this.handleDialogBoxClose}
             props={this.props}
+            serviceData={this.state.data}
             serviceArray={this.state.serviceArray}
           />
         </div>

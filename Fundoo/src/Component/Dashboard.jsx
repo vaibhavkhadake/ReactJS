@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+// import { connect } from "react-redux";
+// import { drawer, typedText, view } from "../Redux/Actions";
+// import compose from "recompose/compose";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
@@ -7,11 +10,10 @@ import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
 import Tooltip from "@material-ui/core/Tooltip";
 import AppsIcon from "@material-ui/icons/Apps";
-import RefreshIcon from "@material-ui/icons/Refresh";
+
 import { Paper } from "@material-ui/core";
 import DragHandleIcon from "@material-ui/icons/DragHandle";
 import DragIndicatorSharpIcon from "@material-ui/icons/DragIndicatorSharp";
-import CloudDoneIcon from "@material-ui/icons/CloudDone";
 import "./Dashboard.css";
 import Keep from "./keep_48dp.png";
 import Drawer2 from "./Drawer2";
@@ -24,6 +26,7 @@ import DisplayTrashNotes from "./DisplayTrashNotes";
 import DisplayAllArchiveNotes from "./DisplayAllArchiveNotes";
 import AddLabel from "./AddLabel";
 import ReminderMain from "./ReminderMain";
+import ShoppingCartTwoToneIcon from "@material-ui/icons/ShoppingCartTwoTone";
 import { NoteService } from "../UserServices/noteService";
 import SearchNote from "./SearchNote";
 const notesService = new NoteService();
@@ -221,12 +224,8 @@ class Dashboard extends Component {
                     <div className="appIcon2">
                       <div className="refreshIcon">
                         <IconButton onClick={this.handleRefreshIcon}>
-                          <Tooltip title="Refresh">
-                            {this.state.refreshIcon === true ? (
-                              <RefreshIcon />
-                            ) : (
-                              <CloudDoneIcon />
-                            )}
+                          <Tooltip title="Shopping Card">
+                            <ShoppingCartTwoToneIcon />
                           </Tooltip>
                         </IconButton>
                       </div>

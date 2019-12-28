@@ -10,6 +10,8 @@ import Tab from "@material-ui/core/Tab";
 import SwipeableViews from "react-swipeable-views";
 import "./PackDetails.css";
 import { SelectService } from "../UserServices/noteService";
+import { connect } from "react-redux";
+import { card } from "./Redux/Actions";
 
 function TabContainer({ children, dir }) {
   return (
@@ -40,7 +42,11 @@ class PackDetails extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: 0
+      value: 0,
+      serviceArray: "",
+      products: [],
+      serviceId1: "",
+      serviceId2: ""
     };
   }
   handleChange = (event, value) => {
@@ -55,20 +61,25 @@ class PackDetails extends Component {
     this.props.dialogBoxClose();
   };
 
-  getService = () => {
-    console.log("this.props.serviceArray", this.props.serviceArray);
-    var data = { productId: this.props.serviceArray.id };
-    localStorage.setItem("cardId", this.props.serviceArray.id);
+  getService = async () => {
+    await this.setState({ serviceArray: this.props.serviceArray });
+    this.props.card(this.state.serviceArray);
+    console.log("this.props.serviceArray", this.state.serviceArray);
+    var data = { productId: this.props.serviceData.id };
+    localStorage.setItem("cardId", this.props.serviceData.id);
     SelectService(data)
-      .then(response => console.log("Select service response", response))
+      .then(response => {
+        this.props.props.history.push("/");
+        console.log("Select service response", response);
+      })
       .catch(error => {
         console.log("Error", error);
       });
   };
-  handleClick = () => {
-    this.getService();
-    this.props.props.history.push("/");
-  };
+  // handleClick = () => {
+  //   this.getService();
+
+  // };
 
   render() {
     return (
@@ -113,8 +124,9 @@ class PackDetails extends Component {
               >
                 Remove
               </Button>
+
               <Button
-                onClick={this.handleClick}
+                onClick={event => this.getService(event)}
                 style={{ backgroundColor: "#0e89c2" }}
               >
                 Proceed to checkout
@@ -127,4 +139,13 @@ class PackDetails extends Component {
   }
 }
 
-export default PackDetails;
+const mapStateToProps = state => {
+  return {
+    cardStatus: state.serviceArray
+  };
+};
+const mapDispatchToProps = {
+  card
+};
+console.log("vbdnjsk", mapDispatchToProps);
+export default connect(mapStateToProps, mapDispatchToProps)(PackDetails);

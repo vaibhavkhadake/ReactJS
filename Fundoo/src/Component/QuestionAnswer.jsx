@@ -299,7 +299,9 @@ class QuestionAnswer extends Component {
                                   {localStorage.getItem("firstName") +
                                     " " +
                                     localStorage.getItem("lastName")}
-                                  <IconButton onClick={this.handleReplyButtonMain}>
+                                  <IconButton
+                                    onClick={this.handleReplyButtonMain}
+                                  >
                                     <ReplyIcon style={{ marginLeft: "2%" }} />
                                   </IconButton>
                                 </div>
@@ -321,7 +323,7 @@ class QuestionAnswer extends Component {
                                   </Button>
                                 </div>
                                 <div>
-                                  {this.state.replyButton ? null : (
+                                  {this.state.replyButton && (
                                     <div style={{ paddingLeft: "30px" }}>
                                       <div>
                                         {this.state.answer.map(ans2 =>

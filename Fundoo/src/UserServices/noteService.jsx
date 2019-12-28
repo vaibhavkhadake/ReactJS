@@ -242,6 +242,17 @@ export function getService() {
   );
 }
 
+// export function getCardDetails(data) {
+//   return axios.get(
+//     `http://fundoonotes.incubation.bridgelabz.com/api/productcarts/getCartDetails/`+data,
+//     {
+//       headers: {
+//         Authorization: token
+//       }
+//     }
+//   );
+// }
+
 export function SelectService(data) {
   console.log("data and token ", data);
   return axios.post(

@@ -1,72 +1,83 @@
-@media(min-width: 768px)
-{
-.container1
-{
-    
-    width: 250px;
+@media (min-width: 768px) {
+  .container1 {
+    /* min-width: 250px; */
     position: absolute;
     text-align: center;
     top: 10%;
-    left:30%;
+    left: 30%;
     background-color: white;
-    border: 1px silver ;
+    border: 1px silver;
     /* border: 1px solid silver; */
     border-radius: 15px;
-    height: 65%;
-    width:30%;
+    min-height: 40%;
+    min-width: 30%;
     border-style: groove;
-    padding: 25px;
-    padding-right: 35px;
-
-}
-.h4class
-{
+    padding: 45px;
+    /* padding-right: 35px; */
+  }
+  .h4class {
     float: left;
-}
-.h2class
-{
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }
+  .h2class {
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+      "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
     font-size: 20px;
     float: center;
-    
-}
-.nav-link{
-    color: royalblue  ;
+  }
+  .nav-link {
+    color: royalblue;
     text-decoration: none;
     font-size: 14px;
     font-weight: 500;
     text-align: left;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
     float: left;
-    
-}
-.createAccount
-{
+  }
+  .createAccount {
     float: left;
-    
+
     font-size: 20px;
     margin: 20px;
     padding: 10px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+      sans-serif;
     font-size: 15px;
-    color: '#1a73e8';
+    color: "#1a73e8";
     text-decoration: none;
     font-weight: 500;
-    letter-spacing: .25px;
-}
-.registerButton23
-{
-
+    letter-spacing: 0.25px;
+  }
+  .registerButton23 {
     float: right;
     right: 100px;
     font-size: 15px;
     margin: 10px;
     width: fit-content;
-}
-.mnumber
-{
+  }
+  .mnumber {
     display: flex;
-    
-   
-}
+  }
+  .cardMainLogin {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+  .backCardLogin:hover {
+    background-color: orange;
+  }
+  .backCardLogin {
+    position: absolute;
+    width: 150px;
+    height: 110px;
+    background-color: silver;
+  }
+  .card2Login {
+    position: relative;
+    width: 150px;
+    height: 85px;
+    padding: 5%;
+    top: -24px;
+    left: 20px;
+    background-color: white;
+  }
 }

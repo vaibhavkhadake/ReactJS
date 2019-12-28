@@ -1,25 +1,40 @@
 import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
+
 // import './GooglePassword.css'
 import "./GoogleLogin.css";
 import { Link } from "react-router-dom";
 import Snackbar from "@material-ui/core/Snackbar";
-// import SnackbarContent from '@material-ui/core/SnackbarContent';
+// import SnackbarContent from "@material-ui/core/SnackbarContent";
 // import WarningIcon from '@material-ui/icons/Warning';
 import IconButton from "@material-ui/core/IconButton";
 import axios from "axios";
-import { Paper, Card } from "@material-ui/core";
+import { Paper } from "@material-ui/core";
+import { connect } from "react-redux";
+import { createMuiTheme } from "@material-ui/core/styles";
+import { MuiThemeProvider, Button } from "@material-ui/core";
+import Card from "@material-ui/core/Card";
 
+const theme2 = createMuiTheme({
+  overrides: {
+    MuiPaper: {
+      root: {
+        backgroundColor: "none"
+      }
+    }
+  }
+});
 class GooglePassword extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      field: {},
+      field: { name: "" },
       error: {},
       userData: [],
       snackbaropen: false,
-      snackbarmessage: ""
+      snackbarmessage: "",
+      name: "",
+      serviceArray: this.props.cardStatus
     };
     this.handleChange = this.handleChange.bind(this);
     this.submitForm = this.submitForm.bind(this);
@@ -116,158 +131,166 @@ class GooglePassword extends Component {
     });
     return isVal;
   }
+  componentDidMount() {
+    console.log("redux#########", this.props.cardStatus);
+  }
   render() {
     return (
-      <Card>
-        <Paper>
-          <div className="container1">
-            <div style={{ display: "flex", justifyContent: "flex-end" }}>
-              {" "}
-              <Button onClick={this.handleCard}>Go to card</Button>
-            </div>
-
-            <Snackbar
-              open={this.state.snackbaropen}
-              anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-              autoHideDuration={4000}
-              onClose={this.snackbarclose}
-              message={<span>{this.state.snackbarmessage}</span>}
-              action={[
-                <IconButton
-                  key="close"
-                  arial-label="close"
-                  color="inherit"
-                  onClick={this.snackbarclose}
-                />
-              ]}
-            />
-
-            <h3>
-              <span style={{ color: "blue" }}>F</span>
-              <span style={{ color: "red" }}>u</span>
-              <span style={{ color: "goldenrod" }}>n</span>
-              <span style={{ color: "blue" }}>d</span>
-              <span style={{ color: "green" }}>o</span>
-              <span style={{ color: "red" }}>o</span>
-            </h3>
-
-            <p className="h2class">Sign In</p>
-
-            <p>Use your Fundoo Account</p>
-            <div className="mnumber">
-              <TextField
-                name="username"
-                label="User name"
-                placeholder="Enter User Name "
-                value={this.state.username}
-                onChange={this.handleChange}
-                margin="dense"
-                variant="outlined"
-                fullWidth
-              />
-            </div>
-            <div className="ErrorMessage">{this.state.error.username}</div>
-            <div>
-              <TextField
-                required
-                type="password"
-                label="Password"
-                placeholder="Enter Password"
-                autoComplete="current-password"
-                name="password"
-                value={this.state.field.password}
-                onChange={this.handleChange}
-                margin="dense"
-                variant="outlined"
-                fullWidth
-              />
-            </div>
-            <div className="ErrorMessage">{this.state.error.password}</div>
-            <div></div>
-
-            {
-              <Link to={"/LearnMore"} className="nav-link">
-                Forget email ?{" "}
-              </Link>
-            }
-
-            <br />
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "center"
-              }}
-            >
-              <br />
-
-              <Button
-                className="registerButton23"
-                variant="contained"
-                color="primary"
-                onClick={this.submitForm}
-              >
-                {" "}
-                Login{" "}
-              </Button>
-            </div>
-            {/*
-            
-             {
-                <Link to={"/CreateAccount"} className="createAccount">
-                  {" "}
-                  Create Account{" "}
-                </Link>
-              }
-            <h5 className="h4class" style={{ color: "silver" }}>
-              Not your computer? Use Guest mode to sign in privately.
-            </h5>
-              
-              <h4><span style={{color:'blue'}}>G</span>
-                <span style={{color:'red'}}>O</span>
-                <span style={{color:'goldenrod'}}>O</span>
-                <span style={{color:'blue'}}>G</span>
-                <span style={{color:'green'}}>L</span>
-                <span style={{color:'red'}}>E</span></h4>
-                
-                <br/>
-                <h1>Welcome</h1>
-                <br/>
-               
-                <div className="mnumber">
-                    < TextField
-                    name="username"
-                    placeholder="Enter UserName Number "
-                    value={this.state.username}
-                    onChange={this.handleChange}
-                    margin="dense"
-                    variant="outlined"
-                    fullWidth="10px"
-                    />
-             </div> 
-            <div className="ErrorMessage">{this.state.error.mobileNumber}</div>
-                <TextField required
-                        
-                        
-                        type="password"
-                        placeholder="Enter Password"
-                        autoComplete="current-password"
-                        name="password"
-                        value={this.state.field.password}
-                        onChange={this.handleChange}
-                        margin="dense"
-                        variant="outlined"
-                        fullWidth="10px"  
-                    />
-                    
-                     <div className="ErrorMessage">{this.state.error.password}</div>
-                    <br />
-                    { <Link to={'/GoogleForgetPassword'} className="nav-link" >Forget Password </Link> } <br /> <br />
-                     <Button className="registerButton"  variant="contained" color="primary" onClick={this.submitForm} > Next </Button> */}
+      <Paper>
+        <div className="container1">
+          <div style={{ display: "flex", justifyContent: "flex-end" }}>
+            <Button onClick={this.handleCard}>Go to card</Button>
           </div>
-        </Paper>
-      </Card>
+
+          <Snackbar
+            open={this.state.snackbaropen}
+            anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+            autoHideDuration={4000}
+            onClose={this.snackbarclose}
+            message={<span>{this.state.snackbarmessage}</span>}
+            action={[
+              <IconButton
+                key="close"
+                arial-label="close"
+                color="inherit"
+                onClick={this.snackbarclose}
+              />
+            ]}
+          />
+
+          <h3>
+            <span style={{ color: "blue" }}>F</span>
+            <span style={{ color: "red" }}>u</span>
+            <span style={{ color: "goldenrod" }}>n</span>
+            <span style={{ color: "blue" }}>d</span>
+            <span style={{ color: "green" }}>o</span>
+            <span style={{ color: "red" }}>o</span>
+          </h3>
+
+          <p className="h2class">Sign In</p>
+
+          <p>Use your Fundoo Account</p>
+          <div className="mnumber">
+            <TextField
+              name="username"
+              placeholder="Enter User Name "
+              margin="dense"
+              variant="outlined"
+              fullWidth
+              value={this.state.username}
+              onChange={this.handleChange}
+            />
+          </div>
+          <div className="ErrorMessage">{this.state.error.username}</div>
+          <div>
+            <TextField
+              required
+              type="password"
+              placeholder="Enter Password"
+              name="password"
+              margin="dense"
+              variant="outlined"
+              fullWidth
+              value={this.state.field.password}
+              onChange={this.handleChange}
+            />
+          </div>
+          <div className="ErrorMessage">{this.state.error.password}</div>
+          <div></div>
+
+          {
+            <Link to={"/LearnMore"} className="nav-link">
+              Forget email ?{" "}
+            </Link>
+          }
+
+          <br />
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "flex-end",
+              marginBottom: "12%"
+            }}
+          >
+            <br />
+
+            <Button
+              className="registerButton23"
+              variant="contained"
+              color="primary"
+              onClick={this.submitForm}
+            >
+              {" "}
+              Login{" "}
+            </Button>
+          </div>
+
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+              marginBottom: "12%"
+            }}
+          >
+            <div className="cardMainLogin">
+              {this.state.serviceArray.map(data => (
+                <div className="cardMainLogin" key={data.id}>
+                  <MuiThemeProvider theme={theme2}>
+                    <div
+                      className="outerCard"
+                      onClick={event => this.handleDialogBoxClose(data)}
+                    >
+                      <Card className="backCardLogin">
+                        <h4 className="addtoCardLogin">ADD TO CARD</h4>
+                      </Card>
+                      <Card className="card2Login">
+                        <span
+                          style={{
+                            fontFamily: "arial",
+                            fontSize: "14px",
+                            fontWeight: "600"
+                          }}
+                        >
+                          price: ${data.price} per month
+                        </span>
+                        <br />
+                        <span
+                          style={{
+                            fontFamily: "arial",
+                            fontSize: "10px",
+                            fontWeight: "normal",
+                            color: "blue"
+                          }}
+                        >
+                          {data.name}
+                        </span>
+                        <span
+                          style={{
+                            fontFamily: "arial",
+                            fontSize: "10px",
+                            fontWeight: "normal"
+                          }}
+                        >
+                          <li>${data.price}/month</li>
+                          <li>{data.description}</li>
+                        </span>
+                      </Card>
+                    </div>
+                  </MuiThemeProvider>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </Paper>
     );
   }
 }
-export default GooglePassword;
+const mapStateToProps = state => {
+  return {
+    cardStatus: state.cardData
+  };
+};
+export default connect(mapStateToProps)(GooglePassword);
