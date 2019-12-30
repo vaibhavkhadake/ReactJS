@@ -7,7 +7,7 @@ import { MuiThemeProvider, Button } from "@material-ui/core";
 import Card from "@material-ui/core/Card";
 import "./Card.css";
 import PackDetails from "./PackDetails";
-import { getService } from "../UserServices/noteService";
+import { getService, SelectService } from "../UserServices/noteService";
 const theme = createMuiTheme({
   overrides: {
     MuiExpansionPanelSummary: {
@@ -43,21 +43,19 @@ class Cards extends Component {
     this.state = {
       open: false,
       serviceArray: [],
-      data: ""
+      data: "",
+      data2: ""
     };
   }
   handleClick = () => {
     this.props.history.push("/");
   };
-  handleDialogBoxClose = data => {
-    console.log("button clicked");
-    this.setState({ open: !this.state.open, data: data });
-  };
+
   handleService = () => {
     getService()
-      .then(response => {
+      .then(async response => {
         console.log("service response", response.data.data.data);
-        this.setState({ serviceArray: response.data.data.data });
+        await this.setState({ serviceArray: response.data.data.data });
       })
       .catch(error => {
         console.log("Error in service", error);
@@ -67,6 +65,23 @@ class Cards extends Component {
     this.handleService();
   }
 
+  handleDialogBoxClose = async data => {
+    console.log("button clicked");
+    await this.setState({ open: !this.state.open, data: data });
+    console.log("data in card", this.state.data);
+    data = { productId: data.id };
+
+    localStorage.setItem("cardId", this.state.data.id);
+
+    SelectService(data)
+      .then(async response => {
+        console.log("Select service response", response.data.data.details);
+        await this.setState({ data2: response.data.data.details });
+      })
+      .catch(error => {
+        console.log("Error", error);
+      });
+  };
   render() {
     return (
       <div>
@@ -141,8 +156,9 @@ class Cards extends Component {
             dialogOpen={this.state.open}
             dialogBoxClose={this.handleDialogBoxClose}
             props={this.props}
-            serviceData={this.state.data}
+            serviceData={this.state.data2}
             serviceArray={this.state.serviceArray}
+            getServices={this.handleService}
           />
         </div>
       </div>

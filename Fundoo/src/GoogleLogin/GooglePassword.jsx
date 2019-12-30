@@ -19,7 +19,7 @@ const theme2 = createMuiTheme({
   overrides: {
     MuiPaper: {
       root: {
-        backgroundColor: "none"
+        // backgroundColor: "none"
       }
     }
   }
@@ -133,6 +133,7 @@ class GooglePassword extends Component {
   }
   componentDidMount() {
     console.log("redux#########", this.props.cardStatus);
+    console.log("local storage card id", localStorage.getItem("cardId"));
   }
   render() {
     return (
@@ -238,13 +239,20 @@ class GooglePassword extends Component {
               {this.state.serviceArray.map(data => (
                 <div className="cardMainLogin" key={data.id}>
                   <MuiThemeProvider theme={theme2}>
-                    <div
-                      className="outerCard"
-                      onClick={event => this.handleDialogBoxClose(data)}
-                    >
-                      <Card className="backCardLogin">
-                        <h4 className="addtoCardLogin">ADD TO CARD</h4>
-                      </Card>
+                    <div className="outerCard">
+                      {data.id === localStorage.getItem("cardId") ? (
+                        <Card
+                          className="backCardLogin"
+                          style={{ backgroundColor: "orange" }}
+                        >
+                          <h4 className="addtoCardLogin">Selected</h4>
+                        </Card>
+                      ) : (
+                        <Card className="backCardLogin">
+                          <h4 className="addtoCardLogin">ADD TO CARD</h4>
+                        </Card>
+                      )}
+
                       <Card className="card2Login">
                         <span
                           style={{
@@ -261,7 +269,9 @@ class GooglePassword extends Component {
                             fontFamily: "arial",
                             fontSize: "10px",
                             fontWeight: "normal",
-                            color: "blue"
+                            color: "blue",
+                            display: "flex",
+                            paddingLeft: "7px"
                           }}
                         >
                           {data.name}
@@ -270,12 +280,33 @@ class GooglePassword extends Component {
                           style={{
                             fontFamily: "arial",
                             fontSize: "10px",
-                            fontWeight: "normal"
+                            fontWeight: "normal",
+                            display: "flex",
+                            paddingLeft: "7px"
+                          }}
+                        ></span>
+                        <li
+                          style={{
+                            fontFamily: "arial",
+                            fontSize: "10px",
+                            fontWeight: "normal",
+                            textAlign: "start",
+                            paddingLeft: "7px"
                           }}
                         >
-                          <li>${data.price}/month</li>
-                          <li>{data.description}</li>
-                        </span>
+                          ${data.price}/month
+                        </li>
+                        <li
+                          style={{
+                            fontFamily: "arial",
+                            fontSize: "10px",
+                            fontWeight: "normal",
+                            textAlign: "start",
+                            paddingLeft: "7px"
+                          }}
+                        >
+                          {data.description}
+                        </li>
                       </Card>
                     </div>
                   </MuiThemeProvider>

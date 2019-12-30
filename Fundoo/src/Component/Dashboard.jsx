@@ -1,7 +1,4 @@
 import React, { Component } from "react";
-// import { connect } from "react-redux";
-// import { drawer, typedText, view } from "../Redux/Actions";
-// import compose from "recompose/compose";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
@@ -10,7 +7,6 @@ import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
 import Tooltip from "@material-ui/core/Tooltip";
 import AppsIcon from "@material-ui/icons/Apps";
-
 import { Paper } from "@material-ui/core";
 import DragHandleIcon from "@material-ui/icons/DragHandle";
 import DragIndicatorSharpIcon from "@material-ui/icons/DragIndicatorSharp";
@@ -159,6 +155,9 @@ class Dashboard extends Component {
     // this.state.typedText(this.state.search);
     console.log("searched:==>", this.state.search);
   };
+  handleShoppingCard = () => {
+    this.props.history.push("/ShoppingCard");
+  };
 
   handleNote = () => {
     notesService
@@ -225,7 +224,9 @@ class Dashboard extends Component {
                       <div className="refreshIcon">
                         <IconButton onClick={this.handleRefreshIcon}>
                           <Tooltip title="Shopping Card">
-                            <ShoppingCartTwoToneIcon />
+                            <ShoppingCartTwoToneIcon
+                              onClick={this.handleShoppingCard}
+                            />
                           </Tooltip>
                         </IconButton>
                       </div>

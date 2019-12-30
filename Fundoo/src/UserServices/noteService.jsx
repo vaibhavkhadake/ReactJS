@@ -242,9 +242,22 @@ export function getService() {
   );
 }
 
-// export function getCardDetails(data) {
+export function getCardDetails(data) {
+  return axios.get(
+    "http://fundoonotes.incubation.bridgelabz.com/api/productcarts/getCartDetails/" +
+      data.id,
+    {
+      headers: {
+        Authorization: token
+      }
+    }
+  );
+}
+
+// export function getCardService(data) {
 //   return axios.get(
-//     `http://fundoonotes.incubation.bridgelabz.com/api/productcarts/getCartDetails/`+data,
+//     `http://fundoonotes.incubation.bridgelabz.com/api/user/service`,
+//     data,
 //     {
 //       headers: {
 //         Authorization: token

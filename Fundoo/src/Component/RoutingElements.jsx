@@ -19,37 +19,36 @@ import More from "./More";
 import QuestionAnswer from "./QuestionAnswer";
 
 import Cards from "./Card";
+import ShoppingCard from "./ShoppingCard";
+import RegisterNew from "./RegisterNew";
 
 function RoutingElements() {
   return (
-    <div>
-      <Router>
-        {/**<Route path="/GoogleLogin" component={GoogleLogin} /> */}
-        <Route path="/Card" component={Cards} />
-        <Route path="/" exact={true} component={GooglePassword} />
-        <Route path="/dashboard" component={Dashboard} />
-        <Route path="/dashboard/Notes" component={Notes} />
-        <Route path="/Logout" component={Logout} />
-        <Route path="/TakeANode" component={TakeANode} />
-        <Route path="/CreateAccount" component={CreateAccount} />
-        <Route path="/DisplayAllNotes" component={DisplayAllNotes} />
-        <Route path="/dashboard/TrashNotes" component={DisplayTrashNotes} />
-        <Route
-          path="/dashboard/ArchiveNotes"
-          component={DisplayAllArchiveNotes}
-        />
-        <Route path="/TrashNote" component={TrashNote} />
-        <Route path="/Drawer2" component={Drawer2} />
-        <Route path="/DisplayLabels" component={DisplayLabels} />
-        <Route
-          path="/DisplayLabelsInDrawer"
-          component={DisplayLabelsInDrawer}
-        />
-        <Route path="/dashboard/AddLabelNote" component={AddLabelNote} />
-        <Route path="/More" component={More} />
-        <Route path="/QuestionAnswer/:id" component={QuestionAnswer} />
-      </Router>
-    </div>
+    <Router>
+      {/**<Route path="/GoogleLogin" component={GoogleLogin} /> */}
+      <Route path="/Card" component={Cards} />
+      <Route path="/" exact={true} component={GooglePassword} />
+      <Route path="/dashboard" component={Dashboard} />
+      <Route path="/dashboard/Notes" component={Notes} />
+      <Route path="/Logout" component={Logout} />
+      <Route path="/TakeANode" component={TakeANode} />
+      <Route path="/CreateAccount" component={CreateAccount} />
+      <Route path="/DisplayAllNotes" component={DisplayAllNotes} />
+      <Route path="/dashboard/TrashNotes" component={DisplayTrashNotes} />
+      <Route
+        path="/dashboard/ArchiveNotes"
+        component={DisplayAllArchiveNotes}
+      />
+      <Route path="/TrashNote" component={TrashNote} />
+      <Route path="/Drawer2" component={Drawer2} />
+      <Route path="/DisplayLabels" component={DisplayLabels} />
+      <Route path="/DisplayLabelsInDrawer" component={DisplayLabelsInDrawer} />
+      <Route path="/dashboard/AddLabelNote" component={AddLabelNote} />
+      <Route path="/More" component={More} />
+      <Route path="/QuestionAnswer/:id" component={QuestionAnswer} />
+      <Route path="/ShoppingCard" component={ShoppingCard} />
+      <Route path="/RegisterNew" component={RegisterNew} />
+    </Router>
   );
 }
 

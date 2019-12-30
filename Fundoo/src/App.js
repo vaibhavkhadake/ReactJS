@@ -6,12 +6,7 @@ import "froala-editor/css/froala_editor.pkgd.min.css";
 //  import LifeCycle from './Component/LifeCycle';
 import RoutingElements from "./Component/RoutingElements";
 function App() {
-  return (
-    <div>
-      <RoutingElements />
-      {/* <LifeCycle /> */}
-    </div>
-  );
+  return <RoutingElements />;
 }
 
 export default App;

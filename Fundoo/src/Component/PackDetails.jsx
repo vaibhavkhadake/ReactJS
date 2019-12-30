@@ -9,7 +9,7 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import SwipeableViews from "react-swipeable-views";
 import "./PackDetails.css";
-import { SelectService } from "../UserServices/noteService";
+import { getCardDetails } from "../UserServices/noteService";
 import { connect } from "react-redux";
 import { card } from "./Redux/Actions";
 
@@ -64,22 +64,17 @@ class PackDetails extends Component {
   getService = async () => {
     await this.setState({ serviceArray: this.props.serviceArray });
     this.props.card(this.state.serviceArray);
-    console.log("this.props.serviceArray", this.state.serviceArray);
-    var data = { productId: this.props.serviceData.id };
-    localStorage.setItem("cardId", this.props.serviceData.id);
-    SelectService(data)
+    this.props.getServices();
+    console.log("In card pack details", this.props.serviceData);
+    getCardDetails(this.props.serviceData)
       .then(response => {
-        this.props.props.history.push("/");
-        console.log("Select service response", response);
+        console.log("In get card details", response);
+        this.props.props.history.push("/RegisterNew");
       })
       .catch(error => {
-        console.log("Error", error);
+        console.log("in get card details error", error);
       });
   };
-  // handleClick = () => {
-  //   this.getService();
-
-  // };
 
   render() {
     return (
@@ -147,5 +142,5 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
   card
 };
-console.log("vbdnjsk", mapDispatchToProps);
+console.log("mapDispatchToProps", mapDispatchToProps);
 export default connect(mapStateToProps, mapDispatchToProps)(PackDetails);
