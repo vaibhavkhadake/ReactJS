@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
 import { connect } from "react-redux";
-import Account from "./account.svg";
+// import Account from "./account.svg";
 import axios from "axios";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { MuiThemeProvider, Button } from "@material-ui/core";

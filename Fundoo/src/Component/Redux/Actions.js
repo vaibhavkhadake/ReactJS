@@ -4,4 +4,10 @@ export function card(payload) {
     value: payload
   };
 }
+export function particularCard(payload) {
+  return {
+    type: "PARTICULARCARDARRAY",
+    value: payload
+  };
+}
 console.log("store value in action");

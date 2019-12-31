@@ -1,24 +1,21 @@
-.noteMain
-{
-    display: flex;
-    flex-direction: column;
-    /* width:100%; */
-    color: silver;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    padding: 10px;
-    margin: 10px;
-}
-.noteLogo
-{
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    justify-content:space-around;
-}
-.addNote
-{
-display: flex;
-flex-direction: row;
-flex-wrap: wrap;
+.noteMain {
+  display: flex;
+  flex-direction: column;
+  /* width:100%; */
+  color: silver;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 
+  padding: 10px 0px;
+  margin: 0px -75px 30px 72px;
+}
+.noteLogo {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-around;
+}
+.addNote {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }

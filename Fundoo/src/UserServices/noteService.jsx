@@ -280,3 +280,13 @@ export function SelectService(data) {
     }
   );
 }
+export function getMyCard() {
+  return axios.get(
+    `http://fundoonotes.incubation.bridgelabz.com/api/productcarts/myCart`,
+    {
+      headers: {
+        Authorization: token
+      }
+    }
+  );
+}

@@ -11,7 +11,7 @@ import SwipeableViews from "react-swipeable-views";
 import "./PackDetails.css";
 import { getCardDetails } from "../UserServices/noteService";
 import { connect } from "react-redux";
-import { card } from "./Redux/Actions";
+import { card, particularCard } from "./Redux/Actions";
 
 function TabContainer({ children, dir }) {
   return (
@@ -46,7 +46,8 @@ class PackDetails extends Component {
       serviceArray: "",
       products: [],
       serviceId1: "",
-      serviceId2: ""
+      serviceId2: "",
+      parArray: ""
     };
   }
   handleChange = (event, value) => {
@@ -62,8 +63,12 @@ class PackDetails extends Component {
   };
 
   getService = async () => {
-    await this.setState({ serviceArray: this.props.serviceArray });
+    await this.setState({
+      serviceArray: this.props.serviceArray,
+      parArray: this.props.serviceData
+    });
     this.props.card(this.state.serviceArray);
+    this.props.particularCard(this.state.parArray);
     this.props.getServices();
     console.log("In card pack details", this.props.serviceData);
     getCardDetails(this.props.serviceData)
@@ -136,11 +141,13 @@ class PackDetails extends Component {
 
 const mapStateToProps = state => {
   return {
-    cardStatus: state.serviceArray
+    cardStatus: state.serviceArray,
+    parcardStatus: state.parArray
   };
 };
 const mapDispatchToProps = {
-  card
+  card,
+  particularCard
 };
 console.log("mapDispatchToProps", mapDispatchToProps);
 export default connect(mapStateToProps, mapDispatchToProps)(PackDetails);
