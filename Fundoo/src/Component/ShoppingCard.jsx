@@ -2,41 +2,15 @@ import React, { Component } from "react";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
-import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import { getMyCard } from "../UserServices/noteService";
+import { getMyCard, placeOrder } from "../UserServices/noteService";
 import "./ShoppingCard.css";
-import { Divider } from "@material-ui/core";
+import { Divider, Button } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
-// const styles = theme => ({
-//   root: {
-//     width: "90%"
-//   },
-//   backButton: {
-//     marginRight: theme.spacing.unit
-//   },
-//   instructions: {
-//     marginTop: theme.spacing.unit,
-//     marginBottom: theme.spacing.unit
-//   }
-// });
 
 function getSteps() {
   return ["SignIn", "Review", "Completed"];
 }
-
-// function getStepContent(stepIndex) {
-//   switch (stepIndex) {
-//     case 0:
-//       return "Select campaign settings...";
-//     case 1:
-//       return "What is an ad group anyways?";
-//     case 2:
-//       return "This is the bit I really care about!";
-//     default:
-//       return "Unknown stepIndex";
-//   }
-// }
 
 class ShoppingCard extends Component {
   constructor(props) {
@@ -45,43 +19,75 @@ class ShoppingCard extends Component {
       activeStep: 0,
       cardData: "",
       description: "",
-      price: ""
+      price: "",
+      placeOrder: false,
+      address: "",
+      orderStatus: "",
+      id: ""
     };
   }
 
-  handleNext = () => {
-    this.setState(state => ({
-      activeStep: state.activeStep + 1
-    }));
+  handleChangeAddress = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+  handleOrder = () => {
+    this.setState({ placeOrder: true, activeStep: 1 });
   };
 
-  handleGetDetails = () => {
-    getMyCard()
-      .then(response => {
-        console.log("In response get my card", response.data.data[0].product);
-        this.setState({
+  handleGetDetails = async () => {
+    await getMyCard()
+      .then(async response => {
+        console.log("In response get my card", response.data.data);
+        await this.setState({
           cardData: response.data.data[0],
           description: response.data.data[0].product.description,
-          price: response.data.data[0].price
+          price: response.data.data[0].price,
+          orderStatus: response.data.data[0].isOrderPlaced,
+          id: response.data.data[0].id
         });
       })
       .catch(error => {
         console.log("In error get my card", error);
       });
   };
-
+  hitApi = () => {
+    this.setState({ address: this.state.address });
+    let data = {
+      cartId: this.state.id,
+      address: this.state.address
+    };
+    placeOrder(data)
+      .then(response => {
+        console.log("Response in order placed", response);
+      })
+      .catch(error => {
+        console.log("Error in order placed", error);
+      });
+  };
+  handleClose = () => {
+    this.props.history.push("/dashboard");
+  };
   UNSAFE_componentWillMount() {
     this.handleGetDetails();
   }
   render() {
-    // const { classes } = this.props;
+    console.log(this.props.parcardStatus);
     const steps = getSteps();
     const { activeStep } = this.state;
     return (
       <div className="shoppingCardPaper">
+        <div>
+          <Button style={{ float: "right" }} onClick={this.handleClose}>
+            Close
+          </Button>
+        </div>
         <div className="firstPart">
           <div className="fundooNotes">Fundoo Notes</div>
-          <Stepper activeStep={activeStep} alternativeLabel>
+          <Stepper
+            // style={{ backgroundColor: "silver" }}
+            activeStep={activeStep}
+            alternativeLabel
+          >
             {steps.map(label => (
               <Step key={label}>
                 <StepLabel>{label}</StepLabel>
@@ -92,30 +98,19 @@ class ShoppingCard extends Component {
             {this.state.activeStep === steps.length ? (
               <div>
                 <Typography>All steps completed</Typography>
-                <Button onClick={this.handleReset}>Reset</Button>
               </div>
-            ) : (
-              <div>
-                {/**  <Typography>{getStepContent(activeStep)}</Typography>
-             <div>
-                  <Button disabled={activeStep === 0} onClick={this.handleBack}>
-                    Back
-                  </Button>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={this.handleNext}
-                  >
-                    {activeStep === steps.length - 1 ? "Finish" : "Next"}
-                  </Button>
-                  </div>
-                   */}
-              </div>
-            )}
+            ) : null}
           </div>
         </div>
         <div className="secondPart">
-          <h4>Review Your Order</h4>
+          {this.state.placeOrder === false ? (
+            <h1 style={{ paddingLeft: "50px", justifyContent: "flex-start" }}>
+              Shopping Card
+            </h1>
+          ) : (
+            <h3 style={{ paddingLeft: "50px" }}>Review Your Order</h3>
+          )}
+
           <Divider />
           <div className="secondSubPart">
             <div className="secondPart1">
@@ -123,27 +118,63 @@ class ShoppingCard extends Component {
             </div>
             <div className="secondPart2">{this.state.description}</div>
             <div className="secondPart3">${this.state.price} per month</div>
-            <div className="secondPart4">
-              <div className="order">Place Your Order</div>
-              <div className="order2">SubTotal:${this.state.price}</div>
+            <div className="secondPart4" onClick={this.handleOrder}>
+              {this.state.placeOrder === false ? (
+                <div>
+                  {" "}
+                  <div className="order2">
+                    Subtotal (1 Item): {this.state.price}
+                  </div>
+                  <div className="order"> Proceed to Checkout </div>
+                </div>
+              ) : (
+                <div onClick={this.hitApi}>
+                  {" "}
+                  <div className="order">Place Your Order</div>
+                  <div className="order3">SubTotal:${this.state.price}</div>
+                </div>
+              )}
             </div>
           </div>
           <Divider />
           <div>
-            <div>
-              <TextField
-                id="filled-multiline-flexible"
-                label="Multiline"
-                multiline
-                rowsMax="4"
-                value={this.state.multiline}
-                onChange={this.handleChange("multiline")}
-                margin="normal"
-                helperText="hello"
-                variant="filled"
-              />
-            </div>
-            <div>Cash On Delivery</div>
+            {this.state.placeOrder === false ? (
+              <div
+                style={{
+                  paddingLeft: "10%",
+                  paddingTop: "10px",
+                  color: "blue",
+                  fontSize: "30px"
+                }}
+              >
+                SubTotal (1 Item ):${this.state.price}
+              </div>
+            ) : (
+              <div className="thirdPart">
+                <div
+                  style={{
+                    backgroundColor: "silver",
+                    paddingLeft: "15px"
+                  }}
+                >
+                  <TextField
+                    name="address"
+                    placeholder="Enter your address"
+                    multiline
+                    value={this.state.address}
+                    onChange={this.handleChangeAddress}
+                    margin="normal"
+                    InputProps={{
+                      disableUnderline: true
+                    }}
+                  />
+                </div>
+                <div>
+                  <h5>Payment Method</h5>
+                  <h3>Cash On Delivery</h3>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

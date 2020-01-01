@@ -4,12 +4,15 @@
   margin: 100px 400px;
   min-width: 400px;
   min-height: 500px;
-  background-color: silver;
+  border: 1px solid;
+  border-radius: 15px;
+  /* background-color: silver; */
 }
 .firstPart {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  margin: 50px;
 }
 .fundooNotes {
   display: flex;
@@ -20,6 +23,7 @@
   max-height: 50px;
   background-color: orange;
   border-radius: 15px;
+  padding: 20px;
 }
 .secondSubPart {
   display: flex;
@@ -43,22 +47,46 @@
 .secondPart4 {
   display: flex;
   flex-direction: column;
-  min-width: 200px;
-  min-height: 100px;
+  max-width: 300px;
+  max-height: 120px;
   border: 1px solid #a27272;
 }
 .order {
   display: flex;
   flex-direction: row;
   background-color: cornflowerblue;
-  margin: 10% 10%;
+  margin: 10% 22%;
   padding: 2%;
   height: fit-content;
 }
 .order2 {
   display: flex;
   flex-direction: row;
-
+  margin: 5% 0%;
+  padding: 2%;
   padding: 0% 20%;
   height: fit-content;
+}
+.order3 {
+  display: flex;
+  flex-direction: row;
+  margin: 4% 10%;
+  padding: 2%;
+  padding: 0% 20%;
+  height: fit-content;
+}
+.thirdPart {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 5%;
+}
+h5 {
+  padding: 0px;
+  margin: 0px;
+}
+h3 {
+  padding: 0px;
+  margin: 0px;
+  color: blue;
 }

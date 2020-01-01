@@ -290,3 +290,18 @@ export function getMyCard() {
     }
   );
 }
+
+export function placeOrder(data) {
+  console.log("data and token ", data);
+  return axios.post(
+    "http://fundoonotes.incubation.bridgelabz.com/api/productcarts/placeOrder",
+    data,
+
+    {
+      headers: {
+        "Content-type": "application/json; charset=utf-8",
+        Authorization: token
+      }
+    }
+  );
+}
