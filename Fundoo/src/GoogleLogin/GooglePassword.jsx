@@ -34,7 +34,8 @@ class GooglePassword extends Component {
       snackbaropen: false,
       snackbarmessage: "",
       name: "",
-      serviceArray: this.props.cardStatus
+      serviceArray: this.props.cardStatus,
+      token: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.submitForm = this.submitForm.bind(this);
@@ -53,7 +54,7 @@ class GooglePassword extends Component {
     this.props.history.push("/Card");
   };
 
-  submitForm(event) {
+  async submitForm(event) {
     event.preventDefault();
     if (this.isValid()) {
       let field = {};
@@ -61,16 +62,21 @@ class GooglePassword extends Component {
       field["password"] = "";
 
       console.log(this.state.field);
-      axios
+      let data = {};
+      data = this.state.field;
+      data.cardId = localStorage.getItem("cardId");
+
+      await axios
         .post(
           "http://fundoonotes.incubation.bridgelabz.com/api/user/login",
-          this.state.field
+          data
         )
         .then(response => {
           console.log(response);
           this.userData = response.data.data;
           console.log(response.data.userId);
           console.log(response.data.email);
+          this.setState({ token: response.data.id });
           // console.log("label id",response.data.id);
           let token = response.data.id;
           console.log(token);
@@ -79,6 +85,7 @@ class GooglePassword extends Component {
           localStorage.setItem("email", response.data.email);
           localStorage.setItem("token", token);
           localStorage.setItem("userId", response.data.userId);
+          localStorage.getItem("cardId");
           // localStorage.setItem('id',response.data.id);
 
           this.setState({ snackbaropen: true, snackbarmessage: "success" });
@@ -131,7 +138,8 @@ class GooglePassword extends Component {
     });
     return isVal;
   }
-  componentDidMount() {
+
+  UNSAFE_componentDidMount() {
     console.log("redux#########", this.props.cardStatus);
     console.log("local storage card id", localStorage.getItem("cardId"));
   }

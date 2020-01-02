@@ -23,6 +23,8 @@ class ImageLogo extends Component {
   }
   onClickSubmit() {
     this.props.props.history.push("/");
+    localStorage.removeItem("token");
+    localStorage.clear();
   }
 
   handleClick = event => {

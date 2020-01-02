@@ -1,9 +1,9 @@
 import { Component } from "react";
 import axios from "axios";
-const token = localStorage.getItem("token");
 
 export class NoteService extends Component {
   getAllNoteService() {
+    let token = localStorage.getItem("token");
     console.log("  getAllNote service called ");
 
     return axios.get(
@@ -18,6 +18,7 @@ export class NoteService extends Component {
 }
 
 export function getNoteDetails(data) {
+  let token = localStorage.getItem("token");
   console.log("data in more get details ", data);
   return axios.get(
     "http://fundoonotes.incubation.bridgelabz.com/api/notes/getNotesDetail/" +
@@ -30,6 +31,7 @@ export function getNoteDetails(data) {
   );
 }
 export function creteLabel(data, token) {
+  // let token = localStorage.getItem("token");
   console.log("data and token ", data, token);
   return axios.post(
     "http://fundoonotes.incubation.bridgelabz.com/api/noteLabels",
@@ -43,6 +45,8 @@ export function creteLabel(data, token) {
   );
 }
 export function getAllTrashNotes() {
+  let token = localStorage.getItem("token");
+
   return axios.get(
     `http://fundoonotes.incubation.bridgelabz.com/api/notes/getTrashNotesList`,
     {
@@ -54,6 +58,8 @@ export function getAllTrashNotes() {
 }
 
 export function getAllArchiveNotes() {
+  let token = localStorage.getItem("token");
+
   return axios.get(
     `http://fundoonotes.incubation.bridgelabz.com/api/notes/getArchiveNotesList`,
     {
@@ -65,6 +71,8 @@ export function getAllArchiveNotes() {
 }
 
 export function getAllLabels() {
+  let token = localStorage.getItem("token");
+
   return axios.get(
     `http://fundoonotes.incubation.bridgelabz.com/api/noteLabels/getNoteLabelList`,
     {
@@ -76,6 +84,8 @@ export function getAllLabels() {
 }
 
 export function UpdateNotes(data, token) {
+  // let token = localStorage.getItem("token");
+
   console.log("data and token ", data, token);
   return axios.post(
     "http://fundoonotes.incubation.bridgelabz.com/api/notes/updateNotes",
@@ -90,6 +100,8 @@ export function UpdateNotes(data, token) {
 }
 
 export function TrashNotes(data, token) {
+  // let token = localStorage.getItem("token");
+
   console.log("data and token ", data, token);
   return axios.post(
     "http://fundoonotes.incubation.bridgelabz.com/api/notes/trashNotes",
@@ -104,6 +116,8 @@ export function TrashNotes(data, token) {
 }
 
 export function ChangeColorNotes(data, token) {
+  // let token = localStorage.getItem("token");
+
   console.log("data and token ", data, token);
   return axios.post(
     "http://fundoonotes.incubation.bridgelabz.com/api/notes/changesColorNotes",
@@ -118,6 +132,8 @@ export function ChangeColorNotes(data, token) {
 }
 
 export function DeleteNotesLabel(data, token) {
+  // let token = localStorage.getItem("token");
+
   console.log("data and token ", data, token);
   return axios.delete(
     "http://fundoonotes.incubation.bridgelabz.com/api/noteLabels/" +
@@ -133,6 +149,8 @@ export function DeleteNotesLabel(data, token) {
 }
 
 export function ArchiveNotes(data, token) {
+  // let token = localStorage.getItem("token");
+
   console.log("data and token ", data, token);
   return axios.post(
     "http://fundoonotes.incubation.bridgelabz.com/api/notes/archiveNotes",
@@ -147,6 +165,8 @@ export function ArchiveNotes(data, token) {
 }
 
 export function getAllUserList(data) {
+  let token = localStorage.getItem("token");
+
   return axios.post(
     `http://fundoonotes.incubation.bridgelabz.com/api/user/searchUserList`,
     data,
@@ -159,6 +179,8 @@ export function getAllUserList(data) {
   );
 }
 export function AddCollaborator(data) {
+  let token = localStorage.getItem("token");
+
   return axios.post(
     "http://fundoonotes.incubation.bridgelabz.com/api/notes/" +
       data.id +
@@ -173,6 +195,8 @@ export function AddCollaborator(data) {
   );
 }
 export function DeleteCollaborator(data) {
+  let token = localStorage.getItem("token");
+
   return axios.delete(
     "http://fundoonotes.incubation.bridgelabz.com/api/notes/" +
       data.id +
@@ -188,6 +212,8 @@ export function DeleteCollaborator(data) {
 }
 
 export function ProfilePic(data, token) {
+  // let token = localStorage.getItem("token");
+
   console.log("data and token ", data, token);
   return axios.post(
     "http://fundoonotes.incubation.bridgelabz.com/api/user/uploadProfileImage",
@@ -202,6 +228,8 @@ export function ProfilePic(data, token) {
 }
 
 export function AddQuesion(data) {
+  let token = localStorage.getItem("token");
+
   console.log("data and token ", data);
   return axios.post(
     "http://fundoonotes.incubation.bridgelabz.com/api/questionAndAnswerNotes/addQuestionAndAnswer",
@@ -216,6 +244,7 @@ export function AddQuesion(data) {
   );
 }
 export function ReplyQuesion(data) {
+  let token = localStorage.getItem("token");
   console.log("data and token ", data);
   return axios.post(
     "http://fundoonotes.incubation.bridgelabz.com/api/questionAndAnswerNotes/reply/" +
@@ -232,6 +261,7 @@ export function ReplyQuesion(data) {
 }
 
 export function getService() {
+  let token = localStorage.getItem("token");
   return axios.get(
     `http://fundoonotes.incubation.bridgelabz.com/api/user/service`,
     {
@@ -243,6 +273,7 @@ export function getService() {
 }
 
 export function getCardDetails(data) {
+  let token = localStorage.getItem("token");
   return axios.get(
     "http://fundoonotes.incubation.bridgelabz.com/api/productcarts/getCartDetails/" +
       data.id,
@@ -267,6 +298,7 @@ export function getCardDetails(data) {
 // }
 
 export function SelectService(data) {
+  let token = localStorage.getItem("token");
   console.log("data and token ", data);
   return axios.post(
     "http://fundoonotes.incubation.bridgelabz.com/api/productcarts/addToCart",
@@ -281,6 +313,7 @@ export function SelectService(data) {
   );
 }
 export function getMyCard() {
+  let token = localStorage.getItem("token");
   return axios.get(
     `http://fundoonotes.incubation.bridgelabz.com/api/productcarts/myCart`,
     {
@@ -292,6 +325,7 @@ export function getMyCard() {
 }
 
 export function placeOrder(data) {
+  let token = localStorage.getItem("token");
   console.log("data and token ", data);
   return axios.post(
     "http://fundoonotes.incubation.bridgelabz.com/api/productcarts/placeOrder",

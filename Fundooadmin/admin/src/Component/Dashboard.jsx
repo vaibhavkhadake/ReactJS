@@ -37,7 +37,8 @@ class Dashboard extends Component {
       advanceCount: "",
       approveAnswer: true,
       message: "",
-      answer: []
+      answer: [],
+      product: true
     };
   }
 
@@ -122,6 +123,11 @@ class Dashboard extends Component {
       });
   };
 
+  handleProduct = () => {
+    this.setState({ product: !this.state.product });
+    this.props.history.push("/Product");
+  };
+
   acceptAnswer = (event, data) => {
     event.preventDefault();
     const token = localStorage.getItem("token");
@@ -199,6 +205,9 @@ class Dashboard extends Component {
                 <Button onClick={this.handleAnswer}>
                   Get UnApproved Answers
                 </Button>
+                <Button onClick={this.handleProduct}>
+                  Get UnApproved Product
+                </Button>
                 <Button className="logoutButton" onClick={this.handleClick}>
                   Logout
                 </Button>
@@ -243,11 +252,18 @@ class Dashboard extends Component {
                     {this.state.answer.map((data, index) => (
                       <Card key={index}>
                         <div
+                          style={{ paddingLeft: "50px" }}
                           dangerouslySetInnerHTML={{
                             __html: data.message
                           }}
                         />
-                        <div>
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            justifyContent: "space-around"
+                          }}
+                        >
                           <Button
                             onClick={event => this.acceptAnswer(event, data)}
                           >

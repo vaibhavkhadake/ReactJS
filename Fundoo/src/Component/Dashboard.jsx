@@ -162,9 +162,9 @@ class Dashboard extends Component {
   handleNote = () => {
     notesService
       .getAllNoteService()
-      .then(response => {
+      .then(async response => {
         this.noteArray = response.data.data.data;
-        console.log(" note array in Dashboard ", this.noteArray);
+        await console.log(" note array in Dashboard ", this.noteArray);
 
         this.setState({ noteArray: this.noteArray });
       })
