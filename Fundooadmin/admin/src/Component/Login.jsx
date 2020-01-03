@@ -10,7 +10,8 @@ class Login extends Component {
     super(props);
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      isLogined: false
     };
   }
   handleChangeName = event => {
@@ -27,18 +28,13 @@ class Login extends Component {
     console.log(event.target.value);
   };
 
-  handleLogin = event => {
-    event.preventDefault();
-
-    let field = {};
-    field["email"] = "";
-    field["password"] = "";
-    this.setState({ field: field });
+  handleLogin = async event => {
+    await event.preventDefault();
 
     let loginData = {};
     loginData.email = this.state.email;
     loginData.password = this.state.password;
-    console.log("object", loginData);
+    // console.log("object", loginData);
     axios
       .post(
         "http://fundoonotes.incubation.bridgelabz.com/api/user/adminLogin",
@@ -51,6 +47,7 @@ class Login extends Component {
         localStorage.setItem("token", token);
         localStorage.setItem("userId", response.data.userId);
         this.props.history.push("/Dashboard");
+        this.setState({ isLogined: true });
       })
       .catch(err => {
         console.log("Error in login", err);

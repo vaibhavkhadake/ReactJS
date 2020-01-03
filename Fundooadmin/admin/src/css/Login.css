@@ -3,11 +3,9 @@
   flex-direction: column;
 }
 .main {
-  
   justify-content: center;
-  padding: 100px 420px;
+  padding: 180px 550px;
 }
-.logoutButton{
-    display: flex;
-   
+.logoutButton {
+  display: flex;
 }

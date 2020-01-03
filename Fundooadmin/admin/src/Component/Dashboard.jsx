@@ -91,7 +91,7 @@ class Dashboard extends Component {
         }
       )
       .then(response => {
-        console.log("user list", response.data.data.data);
+        // console.log("user list", response.data.data.data);
         this.userArray = response.data.data.data;
         this.setState({ userArray: this.userArray });
       })
@@ -202,7 +202,7 @@ class Dashboard extends Component {
                 }}
               >
                 <Navbar.Brand>Fundoo Admin</Navbar.Brand>
-                <Button onClick={this.handleAnswer}>
+                <Button id="my-button-two" onClick={this.handleAnswer}>
                   Get UnApproved Answers
                 </Button>
                 <Button onClick={this.handleProduct}>
@@ -249,8 +249,8 @@ class Dashboard extends Component {
               <div>
                 {!this.state.approveAnswer ? (
                   <Container>
-                    {this.state.answer.map((data, index) => (
-                      <Card key={index}>
+                    {this.state.answer.map(data => (
+                      <Card key={data.id}>
                         <div
                           style={{ paddingLeft: "50px" }}
                           dangerouslySetInnerHTML={{

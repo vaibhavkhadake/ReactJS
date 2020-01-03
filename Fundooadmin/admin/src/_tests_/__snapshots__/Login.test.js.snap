@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login should be possible to activate button with Spacebar 1`] = `ReactWrapper {}`;
+
+exports[`Login should render correctly in "debug" mode  1`] = `ShallowWrapper {}`;
