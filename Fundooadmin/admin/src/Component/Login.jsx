@@ -18,14 +18,14 @@ class Login extends Component {
     this.setState({
       [event.target.name]: event.target.value
     });
-    console.log(event.target.value);
+    // console.log(event.target.value);
   };
 
   handleChangePassword = event => {
     this.setState({
       [event.target.name]: event.target.value
     });
-    console.log(event.target.value);
+    // console.log(event.target.value);
   };
 
   handleLogin = async event => {
@@ -56,15 +56,18 @@ class Login extends Component {
   };
 
   render() {
+    console.log("render method call");
+
     return (
       <div className="main">
         <Container>
           <Card style={{ width: "25rem" }}>
             <Card.Body>
               <Form className="loginForm">
-                <Form.Group controlId="formBasicEmail">
+                <Form.Group className="formBasicEmail">
                   <Form.Label>Email address</Form.Label>
                   <Form.Control
+                    id="email"
                     type="email"
                     placeholder="Enter email"
                     name="email"
@@ -73,9 +76,10 @@ class Login extends Component {
                   />
                 </Form.Group>
 
-                <Form.Group controlId="formBasicPassword">
+                <Form.Group className="formBasicPassword">
                   <Form.Label>Password</Form.Label>
                   <Form.Control
+                    id="password"
                     type="password"
                     placeholder="Password"
                     name="password"
@@ -89,7 +93,7 @@ class Login extends Component {
                   type="submit"
                   onClick={this.handleLogin}
                 >
-                  Login
+                  LOGIN
                 </Button>
               </Form>
             </Card.Body>

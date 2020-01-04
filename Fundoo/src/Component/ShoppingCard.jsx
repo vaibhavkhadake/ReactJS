@@ -23,7 +23,9 @@ class ShoppingCard extends Component {
       placeOrder: false,
       address: "",
       orderStatus: "",
-      id: ""
+      id: "",
+      success: "",
+      delivery: false
     };
   }
 
@@ -31,7 +33,7 @@ class ShoppingCard extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
   handleOrder = () => {
-    this.setState({ placeOrder: true, activeStep: 1 });
+    this.setState({ placeOrder: true, activeStep: 1, delivery: true });
   };
 
   handleGetDetails = async () => {
@@ -58,7 +60,8 @@ class ShoppingCard extends Component {
     };
     placeOrder(data)
       .then(response => {
-        console.log("Response in order placed", response);
+        console.log("Response in order placed", response.data.data.message);
+        this.setState({ success: response.data.data.message });
       })
       .catch(error => {
         console.log("Error in order placed", error);
@@ -164,6 +167,7 @@ class ShoppingCard extends Component {
                   </div>
                 ) : (
                   <div className="thirdPart">
+                    {this.state.delivery === true}
                     <div
                       style={{
                         backgroundColor: "silver",

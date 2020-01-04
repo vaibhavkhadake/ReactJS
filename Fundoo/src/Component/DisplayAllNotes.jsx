@@ -136,6 +136,7 @@ class DisplayAllNotes extends Component {
                         props={this.props.props}
                       />
                     </div>
+                    <div></div>
                   </div>
 
                   {note.questionAndAnswerNotes.length > 0 ? (

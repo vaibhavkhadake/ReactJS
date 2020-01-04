@@ -1,8 +1,8 @@
 import React from "react";
-import { shallow, mount } from "enzyme";
+import { shallow } from "enzyme";
 
 import Dashboard from "../Component/Dashboard";
-const clickFn = jest.fn();
+
 describe("Dashboard Component", () => {
   it("should render correctly in 'debug' mode ", () => {
     const wrapper = shallow(<Dashboard />);

@@ -78,6 +78,7 @@ class Cards extends Component {
         console.log("Select service response", response.data.data.details);
         await this.setState({ data2: response.data.data.details });
         localStorage.setItem("name", response.data.data.details.product.name);
+        localStorage.setItem("logincartId", response.data.data.details.id);
       })
       .catch(error => {
         console.log("Error", error);
