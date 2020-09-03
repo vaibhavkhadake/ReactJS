@@ -1,4 +1,4 @@
-/* import React from 'react';
+ import React from 'react';
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
 import Login from './Login';
 import Register from './Register'
@@ -24,35 +24,5 @@ function App() {
 
    );
 }
-export default App;*/
+export default App;
 
-
-[
-    {
-        "change": "1.6411886087220817",
-        "latdate": "2020-09-02",
-        "latnav": "19.0625",
-        "mf_cocode": "38442",
-        "mf_schcode": "38731",
-        "mo_sch_Name": "Motilal Oswal Nasdaq 100 FOF - Regular (G)",
-        "opt": "Growth 1"
-    },
-    {
-        "change": "1.6411886087220817",
-        "latdate": "2020-09-02",
-        "latnav": "19.0625",
-        "mf_cocode": "38442",
-        "mf_schcode": "38731",
-        "mo_sch_Name": "Motilal Oswal Nasdaq 100 FOF - Regular (G)",
-        "opt": "Growth 2"
-    },
-    {
-        "change": "1.6411886087220817",
-        "latdate": "2020-09-02",
-        "latnav": "19.0625",
-        "mf_cocode": "38442",
-        "mf_schcode": "38731",
-        "mo_sch_Name": "Motilal Oswal Nasdaq 100 FOF - Regular (G)",
-        "opt": "Growth 3"
-    }
-]
